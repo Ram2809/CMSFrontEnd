@@ -1,0 +1,83 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Student Registration Form</i></b></h3>
+    <form [formGroup]="AddStudentForm" (ngSubmit)="addStudent()">
+        <div class="boxed">
+            <div class="form-group">
+                <label class="required">Roll Number</label>
+                <input type="number" class="form-control" name="rollNo" formControlName="rollNo" placeholder="Enter the roll number">
+                <div *ngIf="rollNo?.invalid &&(rollNo?.dirty||rollNo?.touched)">
+                    <div class="error" *ngIf="rollNo?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">First Name</label>
+                <input type="text" class="form-control" name="firstName" formControlName="firstName" placeholder="Enter the first name">
+                <div *ngIf="firstName?.invalid &&(firstName?.dirty||firstName?.touched)">
+                    <div class="error" *ngIf="firstName?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="lastName" formControlName="lastName" placeholder="Enter the last name">
+            </div>
+            <div class="form-group">
+                <label class="required">Date of Birth</label>
+                <input type="date" class="form-control" name="dateOfBirth" formControlName="dateOfBirth" placeholder="Enter the date of birth">
+                <div *ngIf="dateOfBirth?.invalid &&(dateOfBirth?.dirty||dateOfBirth?.touched)">
+                    <div class="error" *ngIf="dateOfBirth?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Gender</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" formControlName="gender" name="gender" value="Male">
+                    <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" formControlName="gender" name="gender"  value="Female">
+                    <label class="form-check-label">Female</label>
+                </div>
+                <div *ngIf="gender?.invalid &&(gender?.dirty||gender?.touched)">
+                    <div class="error" *ngIf="gender?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Contact Number</label>
+                <input type="tel" class="form-control" name="contactNo" formControlName="contactNo" placeholder="Enter the contact number">
+                <div *ngIf="contactNo?.invalid &&(contactNo?.dirty||contactNo?.touched)">
+                    <div class="error" *ngIf="contactNo?.errors?.required">* This field is required</div>
+                    <div class="error" *ngIf="contactNo?.errors?.pattern">* Phone number only contains 10 digits</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Address</label>
+                <textarea class="form-control" rows="3" cols="20" name="address" formControlName="address" placeholder="Enter the address"></textarea>
+                <div *ngIf="address?.invalid &&(address?.dirty||address?.touched)">
+                    <div class="error" *ngIf="address?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" (change)="getSections()" name="standard" formControlName="standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Section</label>
+                <select class="custom-select" class="form-control" name="section" formControlName="section">
+                    <option value="" selected>Select the section</option>
+                    <option [value]="section" *ngFor="let section of sectionList">{{section}}</option>
+                </select>
+                <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                    <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit">Add Student</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        </div>
+    </form>
+</div>

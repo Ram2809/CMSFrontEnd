@@ -1,0 +1,25 @@
+<div class="container fluid mb-3">
+    <h3 class="title" style="text-align: center;"><b><i>Class Details</i></b></h3>
+    <form>
+    <table  class="table table-bordered">  
+        <thead class="thead-light">
+        <tr>
+            <th>Action</th>
+            <th>Room Number</th>
+            <th>Standard</th>
+            <th>Section</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let class of classList">
+                <td><input type="radio" name="option" value={{class.roomNo}} [(ngModel)]="roomNo"></td> 
+                <td>{{class.roomNo}}</td>
+                <td>{{class.standard}}</td>
+                <td>{{class.section}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="updateButton" class="btn btn-success" (click)="updateClass()" type="submit" [disabled]='roomNo==0'>Update</button>
+    <button id="deleteButton" class="btn btn-info"  type="submit"(click)="backToMain()">Back</button>
+</form>
+</div>

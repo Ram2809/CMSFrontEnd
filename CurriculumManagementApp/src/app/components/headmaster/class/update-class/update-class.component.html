@@ -1,0 +1,19 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Update Class Details</i></b></h3>
+    <form (ngSubmit)="updateClass()">
+        <div class="form-group">
+            <label>Room Number</label>
+            <input type="text" name="roomNo" class="form-control" [(ngModel)]="classDetail.roomNo" readonly="true">
+        </div>
+        <div class="form-group">
+            <label>Standard</label>
+            <input type="text" name="standard" class="form-control" [(ngModel)]="classDetail.standard" required>
+        </div>
+        <div class="form-group">
+            <label>Section</label>
+            <input type="text" name="section" class="form-control" [(ngModel)]="classDetail.section" required>
+        </div>
+        <button class="btn btn-success" style="margin-left: 13cm;" type="submit">Update</button>
+        <button class="btn btn-danger" style="margin-left:1cm" type="reset">Reset</button>
+    </form>
+</div>

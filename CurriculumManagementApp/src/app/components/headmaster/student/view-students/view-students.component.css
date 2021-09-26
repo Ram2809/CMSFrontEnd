@@ -1,0 +1,39 @@
+.title
+{
+    text-align: center;
+    color:rgb(22, 77, 160)  
+}
+/* table
+{
+        margin:50px 400px;
+        width:40%;
+}
+tr,td
+{
+        padding:5px;
+} */
+.required:after {
+    content:" *";
+    color: red;
+  }
+label{
+    font-weight:bold;
+}
+#submitButton{
+    margin-left: 13cm;
+}
+#resetButton
+{
+    margin-left: 0.5cm;
+}
+.error
+{
+    color: red;
+}
+#deleteButton
+{
+    margin-left: 28cm;
+}
+#backButton{
+    margin-left: 1cm;
+}

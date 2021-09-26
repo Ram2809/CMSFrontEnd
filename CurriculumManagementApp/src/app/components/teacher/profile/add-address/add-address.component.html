@@ -1,0 +1,59 @@
+<div class="container-fluid mb-3">
+<h3 class="title"><b><i>Add Address Form</i></b></h3>
+<form [formGroup]="AddAddressForm" (ngSubmit)="addAddress()">
+<div class="form-group">
+    <label>Staff Id</label>
+    <input type="number" class="form-control" name="id" formControlName="id" readonly="true" value={{staffId}}>
+</div>
+<div class="form-group">
+    <label class="required">Address Line</label>
+    <textarea rows="3" cols="50" class="form-control" name="addressLine" formControlName="addressLine" placeholder="Enter the flat or building number and street"></textarea>
+    <div *ngIf="addressLine?.invalid &&(addressLine?.touched||addressLine?.dirty)">
+        <div class="error" *ngIf="addressLine?.errors?.required">* This field is required</div>
+    </div>
+</div>
+<div class="form-group">
+    <label>City</label>
+    <input type="text" class="form-control" name="city" formControlName="city" placeholder="Enter the city">
+</div>
+<div class="form-group">
+    <label class="required">District</label>
+    <select class="custom-select" class="form-control" name="district" formControlName="district">
+        <option value="" selected>Select the district</option>
+        <option [value]="district" *ngFor="let district of sortedDistrictList">{{district}}</option>
+    </select>
+    <div *ngIf="district?.invalid &&(district?.touched||district?.dirty)">
+        <div class="error" *ngIf="district?.errors?.required">* This field is required</div>
+    </div>
+    or
+    <input type="text" class="form-control" name="district" formControlName="district" placeholder="Enter the district">
+    <div *ngIf="district?.invalid &&(district?.touched||district?.dirty)">
+        <div class="error" *ngIf="district?.errors?.required">* This field is required</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="required">State</label>
+    <input type="text" class="form-control" name="state" formControlName="state" value="Tamil Nadu" placeholder="Enter the state">
+    <div *ngIf="state?.invalid &&(state?.touched||state?.dirty)">
+        <div class="error" *ngIf="state?.errors?.required">* This field is required</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="required">Country</label>
+    <input type="text" class="form-control" name="country" formControlName="country" value="India" placeholder="Enter the country">
+    <div *ngIf="country?.invalid &&(country?.touched||country?.dirty)">
+        <div class="error" *ngIf="country?.errors?.required">* This field is required</div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="required">Pin code</label>
+    <input type="number" class="form-control" name="pinCode" formControlName="pinCode" placeholder="Enter the pin code">
+    <div *ngIf="pinCode?.invalid &&(pinCode?.dirty||pinCode?.touched)">
+        <div class="error" *ngIf="pinCode?.errors?.required">* This field is required</div>
+        <div class="error" *ngIf="pinCode?.errors?.pattern">* Pincode only contains 10 digits</div>
+    </div>
+</div>
+<button id="submitButton" class="btn btn-info" type="submit">Submit</button>
+<button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+</form>
+</div>
