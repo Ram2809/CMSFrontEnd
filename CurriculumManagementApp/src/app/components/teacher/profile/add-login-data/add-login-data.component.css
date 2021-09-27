@@ -1,0 +1,23 @@
+.title
+{
+    text-align: center;
+    color:rgb(22, 77, 160)  
+}
+.required:after {
+    content:" *";
+    color: red;
+  }
+label{
+    font-weight:bold;
+}
+#submitButton{
+    margin-left: 14cm;
+}
+#resetButton
+{
+    margin-left: 0.5cm;
+}
+.error
+{
+    color: red;
+}

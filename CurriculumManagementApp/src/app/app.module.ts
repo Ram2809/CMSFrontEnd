@@ -12,6 +12,7 @@ import { AddStudentComponent } from './components/headmaster/student/add-student
 import { ViewStudentsComponent } from './components/headmaster/student/view-students/view-students.component';
 import { TeacherSignupComponent } from './components/teacher/profile/teacher-signup/teacher-signup.component';
 import { AddAddressComponent } from './components/teacher/profile/add-address/add-address.component';
+import { AddLoginDataComponent } from './components/teacher/profile/add-login-data/add-login-data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { AddAddressComponent } from './components/teacher/profile/add-address/ad
     ViewStudentsComponent,
     TeacherSignupComponent,
     AddAddressComponent,
+    AddLoginDataComponent,
   ],
   imports: [
     BrowserModule,

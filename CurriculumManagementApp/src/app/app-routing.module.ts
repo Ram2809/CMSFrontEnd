@@ -7,6 +7,7 @@ import { ViewClassComponent } from './components/headmaster/class/view-class/vie
 import { AddStudentComponent } from './components/headmaster/student/add-student/add-student.component';
 import { ViewStudentsComponent } from './components/headmaster/student/view-students/view-students.component';
 import { AddAddressComponent } from './components/teacher/profile/add-address/add-address.component';
+import { AddLoginDataComponent } from './components/teacher/profile/add-login-data/add-login-data.component';
 import { TeacherSignupComponent } from './components/teacher/profile/teacher-signup/teacher-signup.component';
 
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'viewstudents',component:ViewStudentsComponent},
   {path:'teacher/signup',component:TeacherSignupComponent},
   {path:'teacher/addaddress/:id',component:AddAddressComponent},
+  {path:'teacher/addlogin/:id',component:AddLoginDataComponent},
 ];
 
 @NgModule({

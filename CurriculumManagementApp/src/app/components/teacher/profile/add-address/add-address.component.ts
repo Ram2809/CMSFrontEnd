@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'src/app/model/address';
 import { Teacher } from 'src/app/model/teacher';
 import { AddressService } from 'src/app/services/address.service';
@@ -16,7 +16,8 @@ export class AddAddressComponent implements OnInit {
   public response:Response=new Response();
   public sortedDistrictList:String[]=[];
   constructor(private route:ActivatedRoute,
-    private addressService:AddressService) { }
+    private addressService:AddressService,
+    private router:Router) { }
   AddAddressForm=new FormGroup({
     addressLine:new FormControl('',Validators.required),
     city:new FormControl(''),
@@ -45,6 +46,7 @@ export class AddAddressComponent implements OnInit {
       this.response=data;
       console.log(data);
       window.alert(this.response.message);
+      this.router.navigate(['teacher/addlogin',this.staffId])
     })
   }
   get addressLine()
