@@ -1,0 +1,32 @@
+.error
+{
+    color: red;
+}
+.info{
+    color:blue;
+}
+.title
+{
+    text-align: center;
+    color:rgb(22, 77, 160)  
+}
+.required:after {
+    content:" *";
+    color: red;
+  }
+label{
+    font-weight:bold;
+}
+#submitButton{
+    margin-left: 15cm;
+}
+#resetButton
+{
+    margin-left: 0.5cm;
+}
+#updateButton{
+    margin-left: 1cm;
+}
+#deleteButton{
+    margin-left: 13cm;
+}

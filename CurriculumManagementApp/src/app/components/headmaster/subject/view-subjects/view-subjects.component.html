@@ -14,7 +14,7 @@
             </div>
             <button id="submitButton" class="btn btn-info" type="submit" (click)="getSubjects()">Get Subjects</button>
             <button id="resetButton" class="btn btn-info" type="submit" (click)="backToMain()">Back</button><br>
-            <span class="error" style="text-align: center;" *ngIf="subjectAssignList.length<=0">No subjects founds</span>
+            <span class="error" *ngIf="subjectAssignList.length<=0">No subjects founds</span>
             <table class="table table-bordered" *ngIf="subjectAssignList.length>0">
                 <thead>
                     <tr>

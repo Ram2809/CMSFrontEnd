@@ -1,0 +1,51 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>View Topics Form</i></b></h3>
+    <form [formGroup]="ViewTopicsForm">
+        <div class="boxed">
+            <div class="form-group">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" name="standard" (change)="getSubjects()" formControlName="standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Subject Name</label>
+                <select class="custom-select" class="form-control" name="subject" formControlName="subject">
+                    <option value="" selected>Select the subject name</option>
+                    <option *ngFor="let subjectAssign of subjectAssignList">{{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
+                </select>
+                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="getUnits()">Get Units</button>
+            <button id="resetButton" class="btn btn-info" type="submit" (click)="backToMain()">Back</button><br>
+        </div>
+        <table class="table table-bordered" *ngIf="topicList.length>0">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Unit Number</th>
+                    <th>Unit Name</th>
+                    <th>Description</th>
+                    <th>Month</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let topic of topicList">
+                    <td><input type="radio" name="option" formControlName="option" value={{topic.unitNo}}></td>
+                    <td>{{topic.unitNo}}</td>
+                    <td>{{topic.unitName}}</td>
+                    <td>{{topic.description}}</td>
+                    <td>{{topic.month}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button  id="deleteButton" (click)="deleteUnit()" class="btn btn-info" type="submit" [hidden]="!isHidden" [disabled]="option?.value.length==0">Delete</button>
+        <button  id="updateButton" (click)="updateUnit()" class="btn btn-info"  type="submit" [hidden]="!isHidden" [disabled]="option?.value.length==0">Update</button> 
+    </form>
+</div>

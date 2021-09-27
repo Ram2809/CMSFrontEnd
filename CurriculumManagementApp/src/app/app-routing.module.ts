@@ -9,6 +9,10 @@ import { ViewStudentsComponent } from './components/headmaster/student/view-stud
 import { AddSubjectComponent } from './components/headmaster/subject/add-subject/add-subject.component';
 import { UpdateSubjectComponent } from './components/headmaster/subject/update-subject/update-subject.component';
 import { ViewSubjectsComponent } from './components/headmaster/subject/view-subjects/view-subjects.component';
+import { AddTimetableComponent } from './components/headmaster/timetable/add-timetable/add-timetable.component';
+import { AddTopicComponent } from './components/headmaster/topic/add-topic/add-topic.component';
+import { UpdateTopicComponent } from './components/headmaster/topic/update-topic/update-topic.component';
+import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/view-topics.component';
 import { AddAddressComponent } from './components/teacher/profile/add-address/add-address.component';
 import { AddLoginDataComponent } from './components/teacher/profile/add-login-data/add-login-data.component';
 import { TeacherSignupComponent } from './components/teacher/profile/teacher-signup/teacher-signup.component';
@@ -16,16 +20,20 @@ import { TeacherSignupComponent } from './components/teacher/profile/teacher-sig
 const routes: Routes = [
   {path:'admin',component:AdminDashboardComponent},
   {path:'addclass',component:AddClassComponent},
-  {path:'admin/viewclass',component:ViewClassComponent},
-  {path:'admin/updateclass/:roomNo',component:UpdateClassComponent},
-  {path:'admin/addstudent',component:AddStudentComponent},
-  {path:'admin/viewstudents',component:ViewStudentsComponent},
+  {path:'viewclass',component:ViewClassComponent},
+  {path:'updateclass/:roomNo',component:UpdateClassComponent},
+  {path:'addstudent',component:AddStudentComponent},
+  {path:'viewstudents',component:ViewStudentsComponent},
   {path:'teacher/signup',component:TeacherSignupComponent},
   {path:'teacher/addaddress/:id',component:AddAddressComponent},
   {path:'teacher/addlogin/:id',component:AddLoginDataComponent},
   {path:'admin/addsubject',component:AddSubjectComponent},
   {path:'admin/viewsubjects',component:ViewSubjectsComponent},
   {path:'admin/updatesubject',component:UpdateSubjectComponent},
+  {path:'admin/addtopic',component:AddTopicComponent},
+  {path:'admin/viewtopics',component:ViewTopicsComponent},
+  {path:'admin/updatetopic',component:UpdateTopicComponent},
+  {path:'admin/addtimetable',component:AddTimetableComponent},
 ];
 
 @NgModule({

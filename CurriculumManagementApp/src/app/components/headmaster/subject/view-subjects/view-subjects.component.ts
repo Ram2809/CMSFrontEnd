@@ -42,7 +42,6 @@ export class ViewSubjectsComponent implements OnInit {
         this.isHidden=true;
       });
     });
-
   }
   deleteSubject()
   {

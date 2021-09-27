@@ -1,0 +1,62 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Add Topic Form</i></b></h3>
+    <form [formGroup]="AddTopicForm">
+        <div class="boxed">
+            <div class="form-group">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" name="standard" (change)="getSubjects()" formControlName="standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Subject Name</label>
+                <select class="custom-select" class="form-control" name="subject" formControlName="subject">
+                    <option value="" selected>Select the subject name</option>
+                    <option *ngFor="let subjectAssign of subjectAssignList">{{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
+                </select>
+                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Unit Number</label>
+                <input type="text" class="form-control" name="unitNo" formControlName="unitNo" placeholder="Enter the unit number length not exceeds 8 characters">
+                <small class="info">Unit number not exceeds 8 characters</small>
+                <div *ngIf="unitNo?.invalid &&(unitNo?.touched||unitNo?.dirty)">
+                    <div class="error" *ngIf="unitNo?.errors?.required">* This field is required</div>
+                    <div class="error" *ngIf="unitNo?.errors?.maxlength">* Unit number length exceeds</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Unit Name</label>
+                <input type="text" class="form-control" name="unitName" formControlName="unitName" placeholder="Enter the unit number">
+                <div *ngIf="unitName?.invalid &&(unitName?.touched||unitName?.dirty)">
+                    <div class="error" *ngIf="unitName?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Description</label>
+                <textarea rows="5" cols="50" class="form-control" name="description" formControlName="description" placeholder="Enter the description or sub topics"></textarea>
+                <div *ngIf="description?.invalid &&(description?.touched||description?.dirty)">
+                    <div class="error" *ngIf="description?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Month</label>
+                <select class="custom-select" class="form-control" name="month"  formControlName="month">
+                    <option value="" selected>Select the month</option>
+                    <option [value]="month" *ngFor="let month of monthList">{{month}}</option>
+                </select>
+                <div *ngIf="month?.invalid &&(month?.touched||month?.dirty)">
+                    <div class="error" *ngIf="month?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!AddTopicForm.valid" (click)="addTopic()">Add Topic</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        </div>
+    </form>
+</div>

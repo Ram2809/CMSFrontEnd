@@ -16,6 +16,10 @@ import { AddLoginDataComponent } from './components/teacher/profile/add-login-da
 import { AddSubjectComponent } from './components/headmaster/subject/add-subject/add-subject.component';
 import { ViewSubjectsComponent } from './components/headmaster/subject/view-subjects/view-subjects.component';
 import { UpdateSubjectComponent } from './components/headmaster/subject/update-subject/update-subject.component';
+import { AddTopicComponent } from './components/headmaster/topic/add-topic/add-topic.component';
+import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/view-topics.component';
+import { UpdateTopicComponent } from './components/headmaster/topic/update-topic/update-topic.component';
+import { AddTimetableComponent } from './components/headmaster/timetable/add-timetable/add-timetable.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +35,10 @@ import { UpdateSubjectComponent } from './components/headmaster/subject/update-s
     AddSubjectComponent,
     ViewSubjectsComponent,
     UpdateSubjectComponent,
+    AddTopicComponent,
+    ViewTopicsComponent,
+    UpdateTopicComponent,
+    AddTimetableComponent,
   ],
   imports: [
     BrowserModule,
