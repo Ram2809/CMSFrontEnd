@@ -1,0 +1,38 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>View Subjects</i></b></h3>
+    <form [formGroup]="ViewSubjectsForm">
+        <div class="boxed">
+            <div class="form-group">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" name="standard" formControlName="standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="getSubjects()">Get Subjects</button>
+            <button id="resetButton" class="btn btn-info" type="submit" (click)="backToMain()">Back</button><br>
+            <span class="error" style="text-align: center;" *ngIf="subjectAssignList.length<=0">No subjects founds</span>
+            <table class="table table-bordered" *ngIf="subjectAssignList.length>0">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let subjectAssign of subjectAssignList">
+                        <td><input type="radio" name="option" formControlName="option" value={{subjectAssign.subject?.code}}></td>
+                        <td>{{subjectAssign.subject?.code}}</td>
+                        <td>{{subjectAssign.subject?.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button  id="deleteButton" (click)="deleteSubject()" class="btn btn-info" type="submit" [hidden]="!isHidden">Delete</button>
+            <button  id="updateButton" (click)="updateSubject()" class="btn btn-info"  type="submit" [hidden]="!isHidden">Update</button> 
+        </div>
+    </form>
+</div>

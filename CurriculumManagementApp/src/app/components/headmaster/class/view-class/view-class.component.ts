@@ -10,7 +10,7 @@ import { Response } from 'src/app/model/response';
 })
 export class ViewClassComponent implements OnInit {
   public response:Response=new Response();
-  public classList:Class[]|any;
+  public classList:Class[]=[];
   public roomNo:number=0;
   constructor(private classService:ClassService,private router:Router) { }
   ngOnInit(): void {

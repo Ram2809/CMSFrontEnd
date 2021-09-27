@@ -29,7 +29,7 @@ export class ClassService {
   {
     return this.http.delete(`${this.baseUrl}`+'/'+`${roomNo}`)
   }
-  getSections(standard:string):Observable<Response>
+  getClassesByStandard(standard:string):Observable<Response>
   {
     return this.http.get(`${this.baseUrl}`+'/standard/'+`${standard}`)
   }

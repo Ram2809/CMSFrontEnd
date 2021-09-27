@@ -1,0 +1,35 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Add Subject Form</i></b></h3>
+    <form [formGroup]="AddSubjectForm">
+        <div class="boxed">
+            <div class="form-group">
+                <label class="required">Subject Code</label>
+                <input type="text" class="form-control" name="code" formControlName="code" placeholder="Enter the subject code">
+                <small class="info">Subject code not exceeds 6 characters</small>
+                <div *ngIf="code?.invalid &&(code?.touched||code?.dirty)">
+                    <div class="error" *ngIf="code?.errors?.required">* This field is required</div>
+                    <div class="error" *ngIf="code?.errors?.maxlength">* Subject code not exceeds 6 characters</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Subject Name</label>
+                <input type="text" class="form-control" name="name" formControlName="name" placeholder="Enter the subject name">
+                <div *ngIf="name?.invalid &&(name?.touched||name?.dirty)">
+                    <div class="error" *ngIf="name?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" name="standard" formControlName="standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!AddSubjectForm.valid" (click)="addSubject()">Add Subject</button>
+        <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        </div>
+    </form>
+</div>

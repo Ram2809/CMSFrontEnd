@@ -6,21 +6,26 @@ import { UpdateClassComponent } from './components/headmaster/class/update-class
 import { ViewClassComponent } from './components/headmaster/class/view-class/view-class.component';
 import { AddStudentComponent } from './components/headmaster/student/add-student/add-student.component';
 import { ViewStudentsComponent } from './components/headmaster/student/view-students/view-students.component';
+import { AddSubjectComponent } from './components/headmaster/subject/add-subject/add-subject.component';
+import { UpdateSubjectComponent } from './components/headmaster/subject/update-subject/update-subject.component';
+import { ViewSubjectsComponent } from './components/headmaster/subject/view-subjects/view-subjects.component';
 import { AddAddressComponent } from './components/teacher/profile/add-address/add-address.component';
 import { AddLoginDataComponent } from './components/teacher/profile/add-login-data/add-login-data.component';
 import { TeacherSignupComponent } from './components/teacher/profile/teacher-signup/teacher-signup.component';
 
-
 const routes: Routes = [
   {path:'admin',component:AdminDashboardComponent},
   {path:'addclass',component:AddClassComponent},
-  {path:'viewclass',component:ViewClassComponent},
-  {path:'updateclass/:roomNo',component:UpdateClassComponent},
-  {path:'addstudent',component:AddStudentComponent},
-  {path:'viewstudents',component:ViewStudentsComponent},
+  {path:'admin/viewclass',component:ViewClassComponent},
+  {path:'admin/updateclass/:roomNo',component:UpdateClassComponent},
+  {path:'admin/addstudent',component:AddStudentComponent},
+  {path:'admin/viewstudents',component:ViewStudentsComponent},
   {path:'teacher/signup',component:TeacherSignupComponent},
   {path:'teacher/addaddress/:id',component:AddAddressComponent},
   {path:'teacher/addlogin/:id',component:AddLoginDataComponent},
+  {path:'admin/addsubject',component:AddSubjectComponent},
+  {path:'admin/viewsubjects',component:ViewSubjectsComponent},
+  {path:'admin/updatesubject',component:UpdateSubjectComponent},
 ];
 
 @NgModule({

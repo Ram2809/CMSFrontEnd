@@ -10,7 +10,7 @@ import { Response } from 'src/app/model/response';
 })
 export class UpdateClassComponent implements OnInit {
 
-  public classDetail:Class|any;
+  public classDetail:Class=new Class();
   public roomNo:number=0;
   public response:Response=new Response();
   constructor(private classService:ClassService,

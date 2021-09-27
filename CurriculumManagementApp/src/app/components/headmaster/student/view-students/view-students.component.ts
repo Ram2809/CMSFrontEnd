@@ -6,16 +6,17 @@ import { ClassService } from 'src/app/services/class.service';
 import { StudentService } from 'src/app/services/student.service';
 import { Response } from 'src/app/model/response';
 import { Router } from '@angular/router';
+import { Class } from 'src/app/model/class';
 @Component({
   selector: 'app-view-students',
   templateUrl: './view-students.component.html',
   styleUrls: ['./view-students.component.css']
 })
 export class ViewStudentsComponent implements OnInit {
-  public studentsList:Student[]|any;
+  public studentsList:Student[]=[];
   public student:Student=new Student();
   public standardList:string[]=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
-  public sectionList:String[]|any;
+  public classList:Class[]=[];
   public roomNo:Number|any;
   public response:Response=new Response();
   public studentCount:number=0;
@@ -33,10 +34,10 @@ export class ViewStudentsComponent implements OnInit {
   }
   getSections()
   {
-    this.classService.getSections(this.standard?.value).subscribe(data=>{
+    this.classService.getClassesByStandard(this.standard?.value).subscribe(data=>{
       this.response=data;
-      this.sectionList=this.response.data;
-      console.log(this.sectionList)
+      this.classList=this.response.data;
+      console.log(this.classList)
     })
   }
   getStudents()

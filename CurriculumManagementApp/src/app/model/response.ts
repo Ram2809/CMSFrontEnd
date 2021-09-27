@@ -1,5 +1,5 @@
 export class Response {
     code?:number;
-    data?:object;
+    data?:any;
     message?:string;
 }

@@ -13,6 +13,9 @@ import { ViewStudentsComponent } from './components/headmaster/student/view-stud
 import { TeacherSignupComponent } from './components/teacher/profile/teacher-signup/teacher-signup.component';
 import { AddAddressComponent } from './components/teacher/profile/add-address/add-address.component';
 import { AddLoginDataComponent } from './components/teacher/profile/add-login-data/add-login-data.component';
+import { AddSubjectComponent } from './components/headmaster/subject/add-subject/add-subject.component';
+import { ViewSubjectsComponent } from './components/headmaster/subject/view-subjects/view-subjects.component';
+import { UpdateSubjectComponent } from './components/headmaster/subject/update-subject/update-subject.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +28,9 @@ import { AddLoginDataComponent } from './components/teacher/profile/add-login-da
     TeacherSignupComponent,
     AddAddressComponent,
     AddLoginDataComponent,
+    AddSubjectComponent,
+    ViewSubjectsComponent,
+    UpdateSubjectComponent,
   ],
   imports: [
     BrowserModule,

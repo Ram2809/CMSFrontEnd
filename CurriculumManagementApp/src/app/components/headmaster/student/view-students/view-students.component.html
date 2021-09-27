@@ -15,7 +15,7 @@
         <label class="required">Section</label>
         <select class="custom-select" class="form-control" name="section" formControlName="section">
             <option value="" selected>Select the section</option>
-            <option [value]="section" *ngFor="let section of sectionList">{{section}}</option>
+            <option *ngFor="let class of classList">{{class.section}}</option>
         </select>
         <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
             <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
