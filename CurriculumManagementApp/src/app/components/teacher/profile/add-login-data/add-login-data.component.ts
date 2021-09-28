@@ -12,48 +12,43 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./add-login-data.component.css']
 })
 export class AddLoginDataComponent implements OnInit {
-  public staffId:number=0;
-  public response:Response=new Response();
-  CreateLoginForm=new FormGroup({
-    id:new FormControl('',Validators.required),
-    password:new FormControl('',[Validators.required,Validators.minLength(8)]),
-    confirmPassword:new FormControl('',Validators.required),
+  public staffId: number = 0;
+  public response: Response = new Response();
+  CreateLoginForm = new FormGroup({
+    id: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    confirmPassword: new FormControl('', Validators.required),
   });
-  constructor(private route:ActivatedRoute,
-    private loginService:LoginService) { }
+  constructor(private route: ActivatedRoute,
+    private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.staffId=this.route.snapshot.params['id'];
+    this.staffId = this.route.snapshot.params['id'];
   }
-  createLogin()
-  {
-    if(this.password?.value!=this.confirmPassword?.value)
-    {
+  createLogin() {
+    if (this.password?.value != this.confirmPassword?.value) {
       window.alert("The password and confirm password not same!");
     }
-    else{
-      const login:Login=new Login();
-      login.password=this.password?.value;
-      const teacher:Teacher=new Teacher();
-      teacher.id=this.staffId;
-      login.teacher=teacher;
-      this.loginService.addLogin(login).subscribe(data=>{
-        this.response=data;
+    else {
+      const login: Login = new Login();
+      login.password = this.password?.value;
+      const teacher: Teacher = new Teacher();
+      teacher.id = this.staffId;
+      login.teacher = teacher;
+      this.loginService.addLogin(login).subscribe(data => {
+        this.response = data;
         console.log(this.response);
         window.alert(this.response.message);
       });
     }
   }
-  get id()
-  {
+  get id() {
     return this.CreateLoginForm.get('id');
   }
-  get password()
-  {
+  get password() {
     return this.CreateLoginForm.get('password');
   }
-  get confirmPassword()
-  {
+  get confirmPassword() {
     return this.CreateLoginForm.get('confirmPassword');
   }
 }

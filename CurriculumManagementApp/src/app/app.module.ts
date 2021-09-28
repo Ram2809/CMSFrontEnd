@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddClassComponent } from './components/headmaster/class/add-class/add-class.component';
@@ -20,6 +20,9 @@ import { AddTopicComponent } from './components/headmaster/topic/add-topic/add-t
 import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/view-topics.component';
 import { UpdateTopicComponent } from './components/headmaster/topic/update-topic/update-topic.component';
 import { AddTimetableComponent } from './components/headmaster/timetable/add-timetable/add-timetable.component';
+import { AddDiscussionComponent } from './components/teacher/discussion/add-discussion/add-discussion.component';
+import { StaffAssignComponent } from './components/headmaster/staff/staff-assign/staff-assign.component';
+import { ViewstaffsComponent } from './components/headmaster/staff/viewstaffs/viewstaffs.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,9 @@ import { AddTimetableComponent } from './components/headmaster/timetable/add-tim
     ViewTopicsComponent,
     UpdateTopicComponent,
     AddTimetableComponent,
+    AddDiscussionComponent,
+    StaffAssignComponent,
+    ViewstaffsComponent,
   ],
   imports: [
     BrowserModule,

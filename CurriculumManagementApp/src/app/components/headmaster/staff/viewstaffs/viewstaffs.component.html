@@ -1,0 +1,79 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>View Staffs</i></b></h3>
+    <form>
+        <div class="form-group">
+            <label class="required">Standard</label>
+            <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                [(ngModel)]="standard">
+                <option value="" selected>Select the standard</option>
+                <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+            </select>
+            <!-- <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+            </div> -->
+        </div>
+        <div class="form-group">
+            <label class="required">Section</label>
+            <select class="custom-select" class="form-control" name="section" [(ngModel)]="section"
+                (change)="getSubjects()">
+                <option value="" selected>Select the section</option>
+                <option *ngFor="let class of classList">{{class.section}}</option>
+            </select>
+            <!-- <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+            </div> -->
+        </div>
+        <div class="form-group">
+            <label class="required">Subject Name</label>
+            <select class="custom-select" class="form-control" name="subject" [(ngModel)]="subject">
+                <option value="" selected>Select the subject name</option>
+                <option *ngFor="let subjectAssign of subjectAssignList">
+                    {{subjectAssign.id}}-{{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
+            </select>
+            <!-- <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+            </div> -->
+        </div>
+        <button id="submitButton" class="btn btn-info" type="submit" (click)="getStaffs()">Get Details</button>
+        <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        <!-- <table class="table table-bordered" *ngIf="subjectAssignList.length>0">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Subject Code</th>
+                    <th>Subject Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let subjectAssign of subjectAssignList;let i=index">
+                    <td><input type="radio" name="option" [(ngModel)]="id" value="{{subjectAssign.id}}"></td>
+                    <td>{{subjectAssign.subject?.code}}</td>
+                    <td>{{subjectAssign.subject?.name}}</td>
+                </tr>
+            </tbody>
+        </table> -->
+        <!-- <button  id="deleteButton" (click)="getStaffs()" class="btn btn-info" type="submit" [hidden]="!isHidden">Get Staff</button> -->
+        <table class="table table-bordered" *ngIf="id>0">
+            <thead>
+                <tr>
+                    <th>Staff Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Major</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{teacher?.id}}</td>
+                    <td>{{teacher?.firstName}}</td>
+                    <td>{{teacher?.lastName}}</td>
+                    <td>{{teacher?.major}}</td>
+                    <td>{{teacher?.contactNo}}</td>
+                    <td>{{teacher?.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

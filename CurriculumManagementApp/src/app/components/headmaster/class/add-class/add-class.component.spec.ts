@@ -8,9 +8,9 @@ describe('AddClassComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddClassComponent ]
+      declarations: [AddClassComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

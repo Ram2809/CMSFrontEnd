@@ -9,22 +9,21 @@ import { Response } from 'src/app/model/response';
   styleUrls: ['./view-class.component.css']
 })
 export class ViewClassComponent implements OnInit {
-  public response:Response=new Response();
-  public classList:Class[]=[];
-  public roomNo:number=0;
-  constructor(private classService:ClassService,private router:Router) { }
+  public response: Response = new Response();
+  public classList: Class[] = [];
+  public roomNo: number = 0;
+  constructor(private classService: ClassService, private router: Router) { }
   ngOnInit(): void {
-    this.classService.getAllClasses().subscribe(data=>{
-      this.response=data;
-      this.classList=this.response.data;
+    this.classService.getAllClasses().subscribe(data => {
+      this.response = data;
+      this.classList = this.response.data;
       console.log(this.classList);
     })
   }
-  updateClass()
-  {
+  updateClass() {
     console.log(this.roomNo);
     //localStorage.setItem('roomNo',JSON.stringify(this.roomNo));
-    this.router.navigate(['/updateclass',this.roomNo]);
+    this.router.navigate(['/updateclass', this.roomNo]);
   }
   // deleteClass()
   // {
@@ -35,8 +34,7 @@ export class ViewClassComponent implements OnInit {
   //     this.ngOnInit();
   //   })
   // }
-  backToMain()
-  {
+  backToMain() {
     this.router.navigate(['admin'])
   }
 }

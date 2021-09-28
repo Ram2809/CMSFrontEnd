@@ -8,9 +8,9 @@ describe('AddTopicComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddTopicComponent ]
+      declarations: [AddTopicComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

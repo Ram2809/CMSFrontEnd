@@ -25,14 +25,17 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let subjectAssign of subjectAssignList">
-                        <td><input type="radio" name="option" formControlName="option" value={{subjectAssign.subject?.code}}></td>
+                        <td><input type="radio" name="option" formControlName="option"
+                                value={{subjectAssign.subject?.code}}></td>
                         <td>{{subjectAssign.subject?.code}}</td>
                         <td>{{subjectAssign.subject?.name}}</td>
                     </tr>
                 </tbody>
             </table>
-            <button  id="deleteButton" (click)="deleteSubject()" class="btn btn-info" type="submit" [hidden]="!isHidden">Delete</button>
-            <button  id="updateButton" (click)="updateSubject()" class="btn btn-info"  type="submit" [hidden]="!isHidden">Update</button> 
+            <button id="deleteButton" (click)="deleteSubject()" class="btn btn-info" type="submit"
+                [hidden]="!isHidden">Delete</button>
+            <button id="updateButton" (click)="updateSubject()" class="btn btn-info" type="submit"
+                [hidden]="!isHidden">Update</button>
         </div>
     </form>
 </div>

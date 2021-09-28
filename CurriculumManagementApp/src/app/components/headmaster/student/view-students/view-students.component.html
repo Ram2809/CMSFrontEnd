@@ -1,57 +1,59 @@
 <div class="panel panel-default">
-<h3 class="title"><b><i>Student Details</i></b></h3>
-<form [formGroup]="ViewStudentForm" (ngSubmit)="getStudents()">
-    <div class="form-group">
-        <label class="required">Standard</label>
-        <select class="custom-select" class="form-control" (change)="getSections()" name="standard" formControlName="standard">
-            <option value="" selected>Select the standard</option>
-            <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
-        </select>
-        <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
-            <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+    <h3 class="title"><b><i>Student Details</i></b></h3>
+    <form [formGroup]="ViewStudentForm" (ngSubmit)="getStudents()">
+        <div class="form-group">
+            <label class="required">Standard</label>
+            <select class="custom-select" class="form-control" (change)="getSections()" name="standard"
+                formControlName="standard">
+                <option value="" selected>Select the standard</option>
+                <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+            </select>
+            <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="required">Section</label>
-        <select class="custom-select" class="form-control" name="section" formControlName="section">
-            <option value="" selected>Select the section</option>
-            <option *ngFor="let class of classList">{{class.section}}</option>
-        </select>
-        <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
-            <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+        <div class="form-group">
+            <label class="required">Section</label>
+            <select class="custom-select" class="form-control" name="section" formControlName="section">
+                <option value="" selected>Select the section</option>
+                <option *ngFor="let class of classList">{{class.section}}</option>
+            </select>
+            <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+            </div>
         </div>
-    </div>
-    <button id="submitButton" class="btn btn-info" type="submit">Get Students</button>
-    <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
-    <span class="error" style="text-align: center;" *ngIf="studentCount<=0">No student Available</span>
-<table *ngIf="studentCount>0" class="table table-bordered">
-    <thead>
-<tr>
-    <th>Select</th>
-    <th>Register Number</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Date of Birth</th>
-    <th>Gender</th>
-    <th>Contact Number</th>
-    <th>Address</th>
-</tr>
-</thead>
-<tbody>
-<tr *ngFor="let student of studentsList">
-    <td><input type="radio" name="option" value="{{student.rollNo}}" formControlName="option"></td>
-    <td>{{student.rollNo}}</td>
-    <td>{{student.firstName}}</td>
-    <td>{{student.lastName}}</td>
-    <td>{{student.dateOfBirth}}</td>
-    <td>{{student.gender}}</td>
-    <td>{{student.contactNo}}</td>
-    <td>{{student.address}}</td>
-</tr>
-</tbody>
-</table>
-</form>
-<button [hidden]="!isShown" id="deleteButton" (click)="deleteStudent()" class="btn btn-info" type="submit">Delete</button>
-<button [hidden]="!isShown" id="backButton" class="btn btn-info" (click)="backToMain()" type="submit()">Back</button>
+        <button id="submitButton" class="btn btn-info" type="submit">Get Students</button>
+        <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        <span class="error" style="text-align: center;" *ngIf="studentCount<=0">No student Available</span>
+        <table *ngIf="studentCount>0" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Register Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of studentsList">
+                    <td><input type="radio" name="option" value="{{student.rollNo}}" formControlName="option"></td>
+                    <td>{{student.rollNo}}</td>
+                    <td>{{student.firstName}}</td>
+                    <td>{{student.lastName}}</td>
+                    <td>{{student.dateOfBirth}}</td>
+                    <td>{{student.gender}}</td>
+                    <td>{{student.contactNo}}</td>
+                    <td>{{student.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <button [hidden]="!isShown" id="deleteButton" (click)="deleteStudent()" class="btn btn-info"
+        type="submit">Delete</button>
+    <button [hidden]="!isShown" id="backButton" class="btn btn-info" (click)="backToMain()"
+        type="submit()">Back</button>
 </div>
-

@@ -8,9 +8,9 @@ describe('AddLoginDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddLoginDataComponent ]
+      declarations: [AddLoginDataComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

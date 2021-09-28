@@ -14,55 +14,52 @@ import { Subject } from 'src/app/model/subject';
 })
 export class ViewSubjectsComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public subjectAssignList:SubjectAssign[]=[];
-  public subject:Subject=new Subject();
-  public isHidden:boolean=false;
-  public subjectAssign:SubjectAssign=new SubjectAssign();
-  ViewSubjectsForm=new FormGroup({
-    standard:new FormControl('',Validators.required),
-    option:new FormControl(''),
+  public subjectAssignList: SubjectAssign[] = [];
+  public subject: Subject = new Subject();
+  public isHidden: boolean = false;
+  public subjectAssign: SubjectAssign = new SubjectAssign();
+  ViewSubjectsForm = new FormGroup({
+    standard: new FormControl('', Validators.required),
+    option: new FormControl(''),
   });
-  constructor(private router:Router,
-    private subjectService:SubjectService,
-    private classService:ClassService) { }
+  constructor(private router: Router,
+    private subjectService: SubjectService,
+    private classService: ClassService) { }
 
   ngOnInit(): void {
   }
-  getSubjects()
-  {
-    let responseBody:Response=new Response();
-    let classList:Class[]=[];
-    this.classService.getClassesByStandard(this.standard?.value).subscribe(response=>{
-      responseBody=response;
-      classList=responseBody.data;
-      this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response=>{
-        responseBody=response;
+  getSubjects() {
+    let responseBody: Response = new Response();
+    let classList: Class[] = [];
+    this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
+      responseBody = response;
+      classList = responseBody.data;
+      this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response => {
+        responseBody = response;
         console.log(response.data);
-        this.subjectAssignList=responseBody.data;
-        this.isHidden=true;
+        this.subjectAssignList = responseBody.data;
+        this.isHidden = true;
       });
     });
   }
-  deleteSubject()
-  {
+  deleteSubject() {
     console.log(this.option?.value);
-    this.subjectService.deleteSubject(this.option?.value).subscribe(response=>{
-      let responseBody:Response=response;
+    this.subjectService.deleteSubject(this.option?.value).subscribe(response => {
+      let responseBody: Response = response;
       window.alert(responseBody.message);
     })
   }
-  updateSubject()
-  {
-    localStorage.setItem('subjectCode',this.option?.value);
+  updateSubject() {
+    localStorage.setItem('subjectCode', this.option?.value);
     this.router.navigate(['admin/updatesubject']);
   }
-  backToMain(){
+  backToMain() {
     this.router.navigate(['admin']);
   }
-  get standard(){
+  get standard() {
     return this.ViewSubjectsForm.get('standard');
   }
-  get option(){
+  get option() {
     return this.ViewSubjectsForm.get('option');
   }
 }

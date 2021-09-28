@@ -8,9 +8,9 @@ describe('AddTimetableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddTimetableComponent ]
+      declarations: [AddTimetableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

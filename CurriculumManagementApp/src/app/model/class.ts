@@ -1,5 +1,5 @@
 export class Class {
-    roomNo?:number;
-    standard?:string;
-    section?:string
+    roomNo?: number;
+    standard?: string;
+    section?: string
 }

@@ -13,7 +13,7 @@ import { SubjectAssign } from 'src/app/model/subject-assign';
 })
 export class AddSubjectComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public classList: Class[]=[];
+  public classList: Class[] = [];
   public response: Response = new Response();
   AddSubjectForm = new FormGroup({
     code: new FormControl('', [Validators.required, Validators.maxLength(6)]),
@@ -39,12 +39,12 @@ export class AddSubjectComponent implements OnInit {
         for (var i = 0; i < this.classList.length; i++) {
           console.log(this.classList[i].roomNo);
           console.log(this.code?.value);
-          this.assignSubject(this.code?.value ,Number(this.classList[i].roomNo));
+          this.assignSubject(this.code?.value, Number(this.classList[i].roomNo));
         }
       });
     });
   }
-  assignSubject(code: string,roomNo: number) {
+  assignSubject(code: string, roomNo: number) {
     const subject: Subject = new Subject();
     subject.code = code;
     const classDetail: Class = new Class();

@@ -2,32 +2,33 @@
     <h3 class="title" style="text-align: center;"><b><i>Add class Details</i></b></h3>
     <form [formGroup]="AddClassForm" (ngSubmit)="addClass()">
         <div class="boxed">
-        <div class="form-group">
-            <label>Standard</label>
-            <input type="text" class="form-control form-control-lg" name="standard" formControlName="standard" placeholder="Enter the standard">
-             <div *ngIf="standard?.invalid && (standard?.dirty||standard?.touched)"
-                class="alert alert-danger">
-                <div *ngIf="standard?.errors?.required">Standard is required!</div>
-                <div *ngIf="standard?.errors?.maxlength">Standard must contain only 4 letters</div>
-            </div> 
+            <div class="form-group">
+                <label>Standard</label>
+                <input type="text" class="form-control form-control-lg" name="standard" formControlName="standard"
+                    placeholder="Enter the standard">
+                <div *ngIf="standard?.invalid && (standard?.dirty||standard?.touched)" class="alert alert-danger">
+                    <div *ngIf="standard?.errors?.required">Standard is required!</div>
+                    <div *ngIf="standard?.errors?.maxlength">Standard must contain only 4 letters</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Section</label>
+                <input type="text" class="form-control form-control-lg" name="section" formControlName="section"
+                    placeholder="Enter the section">
+                <div *ngIf="section?.invalid && (section?.dirty||section?.touched)" class="alert alert-danger">
+                    <div *ngIf="section?.errors?.required">Section is required!</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Room Number</label>
+                <input type="number" class="form-control form-control-lg" name="roomNo" formControlName="roomNo"
+                    placeholder="Enter the room number">
+                <div *ngIf="roomNo?.invalid && (roomNo?.dirty||roomNo?.touched)" class="alert alert-danger">
+                    <div *ngIf="roomNo?.errors?.required">Class Room Number is required!</div>
+                </div>
+            </div>
+            <button class="btn btn-info" style="margin-left: 8cm;" type="submit">Submit</button>&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-info" type="reset">Reset</button>
         </div>
-        <div class="form-group">
-            <label>Section</label>
-            <input type="text" class="form-control form-control-lg" name="section" formControlName="section" placeholder="Enter the section">
-             <div *ngIf="section?.invalid && (section?.dirty||section?.touched)"
-                class="alert alert-danger">
-                <div *ngIf="section?.errors?.required">Section is required!</div>
-            </div> 
-        </div>
-        <div class="form-group">
-            <label>Room Number</label>
-            <input type="number" class="form-control form-control-lg" name="roomNo" formControlName="roomNo" placeholder="Enter the room number">
-             <div *ngIf="roomNo?.invalid && (roomNo?.dirty||roomNo?.touched)" class="alert alert-danger">
-                <div *ngIf="roomNo?.errors?.required">Class Room Number is required!</div>
-            </div> 
-        </div>
-        <button class="btn btn-info" style="margin-left: 8cm;" type="submit">Submit</button>&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-info"  type="reset">Reset</button>
-    </div>
     </form>
 </div>

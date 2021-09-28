@@ -10,31 +10,30 @@ import { Response } from 'src/app/model/response';
 })
 export class UpdateClassComponent implements OnInit {
 
-  public classDetail:Class=new Class();
-  public roomNo:number=0;
-  public response:Response=new Response();
-  constructor(private classService:ClassService,
-    private route:ActivatedRoute,
-    private router:Router) { }
+  public classDetail: Class = new Class();
+  public roomNo: number = 0;
+  public response: Response = new Response();
+  constructor(private classService: ClassService,
+    private route: ActivatedRoute,
+    private router: Router) { }
   ngOnInit(): void {
-    this.classDetail=new Class()
-    this.roomNo=this.route.snapshot.params['roomNo']
-    this.classService.getClass(this.roomNo).subscribe(data=>{
+    this.classDetail = new Class()
+    this.roomNo = this.route.snapshot.params['roomNo']
+    this.classService.getClass(this.roomNo).subscribe(data => {
       console.log(data);
-      this.response=data
-      this.classDetail=this.response.data
+      this.response = data
+      this.classDetail = this.response.data
       console.log(this.classDetail);
     })
   }
-  updateClass()
-  {
+  updateClass() {
     console.log(this.roomNo)
     console.log(this.classDetail)
-      this.classService.updateClass(this.roomNo,this.classDetail).subscribe(data=>{
-        console.log(data)
-        this.response=data
-        window.alert(this.response.message)
-        this.router.navigate(['viewclass'])
-      }) 
+    this.classService.updateClass(this.roomNo, this.classDetail).subscribe(data => {
+      console.log(data)
+      this.response = data
+      window.alert(this.response.message)
+      this.router.navigate(['viewclass'])
+    })
   }
 }

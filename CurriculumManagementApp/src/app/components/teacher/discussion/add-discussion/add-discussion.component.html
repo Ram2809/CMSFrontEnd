@@ -1,0 +1,81 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Add Discussion Form</i></b></h3>
+    <form [formGroup]="AddDiscussionForm">
+        <div class="boxed">
+            <div class="form-group">
+                <label class="required">Subject Name</label>
+                <select class="custom-select" class="form-control" name="subject" formControlName="subject"
+                    (change)="getTopics()">
+                    <option value="" selected>Select the subject</option>
+                    <option *ngFor="let subject of subjectList">{{subject.code}}-{{subject.name}}</option>
+                </select>
+                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Unit</label>
+                <select class="custom-select" class="form-control" name="unit" formControlName="unit">
+                    <option value="" selected>Select the unit</option>
+                    <option *ngFor="let topic of topicList">{{topic.unitNo}}-{{topic.unitName}}</option>
+                </select>
+                <div *ngIf="unit?.invalid &&(unit?.touched||unit?.dirty)">
+                    <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Question</label>
+                <input type="text" class="form-control" name="question" formControlName="question"
+                    placeholder="Enter the question">
+                <div *ngIf="question?.invalid &&(question?.touched||question?.dirty)">
+                    <div class="error" *ngIf="question?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Answer</label>
+                <textarea rows="3" cols="50" class="form-control" name="answer" formControlName="answer"
+                    placeholder="Enter the answer"></textarea>
+                <div *ngIf="answer?.invalid &&(answer?.touched||answer?.dirty)">
+                    <div class="error" *ngIf="answer?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Date</label>
+                <input type="date" class="form-control" name="date" formControlName="date" placeholder="Enter the date">
+                <div *ngIf="date?.invalid &&(date?.touched||date?.dirty)">
+                    <div class="error" *ngIf="date?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!AddDiscussionForm.valid"
+                (click)="addDiscussion()">Add Discussion</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        </div>
+        <!-- <div class="question" >
+            <h5 class="title"><b><i>Add Question</i></b></h5>
+            <form [formGroup]="AddQuestionForm" [hidden]="isHidden"></form>
+            <div class="form-group">
+                <label class="required">Question</label>
+                <input type="text" class="form-control" name="question" formControlName="question" placeholder="Enter the question">
+                <div *ngIf="question?.invalid &&(question?.touched||question?.dirty)">
+                    <div class="error" *ngIf="question?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Answer</label>
+                <textarea rows="3" cols="50" class="form-control" name="answer" formControlName="answer" placeholder="Enter the answer"></textarea>
+                <div *ngIf="answer?.invalid &&(answer?.touched||answer?.dirty)">
+                    <div class="error" *ngIf="answer?.errors?.required">* This field is required</div>
+                </div> 
+            </div>
+            <div class="form-group">
+                <label class="required">Date</label>
+                <input type="date" class="form-control" name="date" formControlName="date" placeholder="Enter the date">
+                <div *ngIf="date?.invalid &&(date?.touched||date?.dirty)">
+                    <div class="error" *ngIf="date?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="addDiscussion()">Submit</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        </div> -->
+    </form>
+</div>

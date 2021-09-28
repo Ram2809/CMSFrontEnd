@@ -15,79 +15,74 @@ import { Router } from '@angular/router';
 })
 export class ViewTopicsComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public subjectAssignList:SubjectAssign[]=[];
-  public topicList:Topic[]=[];
-  public isHidden:boolean=false;
-  ViewTopicsForm=new FormGroup({
-    standard:new FormControl('',Validators.required),
-    subject:new FormControl('',Validators.required),
-    option:new FormControl('')
+  public subjectAssignList: SubjectAssign[] = [];
+  public topicList: Topic[] = [];
+  public isHidden: boolean = false;
+  ViewTopicsForm = new FormGroup({
+    standard: new FormControl('', Validators.required),
+    subject: new FormControl('', Validators.required),
+    option: new FormControl('')
   });
-  constructor(private classService:ClassService,
-    private subjectService:SubjectService,
-    private topicService:TopicService,
-    private router:Router) { }
+  constructor(private classService: ClassService,
+    private subjectService: SubjectService,
+    private topicService: TopicService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
-  getSubjects()
-  {
-    let responseBody:Response=new Response();
-    let classList:Class[]=[];
-    this.classService.getClassesByStandard(this.standard?.value).subscribe(response=>{
-      responseBody=response;
-      classList=responseBody.data;
-      this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response=>{
-        responseBody=response;
+  getSubjects() {
+    let responseBody: Response = new Response();
+    let classList: Class[] = [];
+    this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
+      responseBody = response;
+      classList = responseBody.data;
+      this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response => {
+        responseBody = response;
         console.log(response.data);
-        this.subjectAssignList=responseBody.data;
+        this.subjectAssignList = responseBody.data;
       });
     });
   }
-  getUnits()
-  {
-    let subjectCode:string=this.subject?.value.split("-").shift();
+  getUnits() {
+    let subjectCode: string = this.subject?.value.split("-").shift();
     console.log(subjectCode);
-    this.topicService.getTopics(subjectCode).subscribe(response=>{
-      let responseBody:Response=response;
-      this.topicList=responseBody.data;
+    this.topicService.getTopics(subjectCode).subscribe(response => {
+      let responseBody: Response = response;
+      this.topicList = responseBody.data;
       console.log(this.topicList);
-    },error=>{
+    }, error => {
       console.log(error.message);
       window.alert(error.message);
     });
-    this.isHidden=true;
+    this.isHidden = true;
     // if(this.topicList.length<=0)
     // {
     //   this.isHidden=false;
     // }
   }
-  backToMain()
-  {
+  backToMain() {
     this.router.navigate(['admin']);
   }
-  updateUnit()
-  {
-    localStorage.setItem('unitNo',this.option?.value);
+  updateUnit() {
+    localStorage.setItem('unitNo', this.option?.value);
     this.router.navigate(['admin/updatetopic']);
   }
-  deleteUnit()
-  {
+  deleteUnit() {
     console.log(this.option?.value);
-    this.topicService.deleteTopic(this.option?.value).subscribe(response=>{
-      let responseBody:Response=response;
+    this.topicService.deleteTopic(this.option?.value).subscribe(response => {
+      let responseBody: Response = response;
       console.log(responseBody);
       window.alert(responseBody.message);
       this.getUnits;
     });
   }
-  get standard(){
+  get standard() {
     return this.ViewTopicsForm.get('standard');
   }
-  get subject(){
+  get subject() {
     return this.ViewTopicsForm.get('subject');
   }
-  get option(){
+  get option() {
     return this.ViewTopicsForm.get('option');
   }
 }

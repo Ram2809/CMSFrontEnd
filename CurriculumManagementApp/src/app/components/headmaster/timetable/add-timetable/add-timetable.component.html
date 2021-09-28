@@ -4,17 +4,19 @@
         <div class="boxed">
             <div class="form-group">
                 <label class="required">Standard</label>
-                <select class="custom-select" class="form-control" name="standard" (change)="getSections()" formControlName="standard">
+                <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                    formControlName="standard">
                     <option value="" selected>Select the standard</option>
                     <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
                 </select>
                 <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
                     <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
-                </div> 
+                </div>
             </div>
             <div class="form-group">
                 <label class="required">Section</label>
-                <select class="custom-select" class="form-control" name="section" formControlName="section">
+                <select class="custom-select" class="form-control" name="section" formControlName="section"
+                    (change)="getSubjects()">
                     <option value="" selected>Select the section</option>
                     <option *ngFor="let class of classList">{{class.section}}</option>
                 </select>
@@ -32,6 +34,50 @@
                     <div class="error" *ngIf="day?.errors?.required">* This field is required</div>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="required">Period</label>
+                <select class="custom-select" class="form-control" name="period" formControlName="period">
+                    <option value="" selected>Select the period</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                </select>
+                <div *ngIf="period?.invalid &&(period?.touched||period?.dirty)">
+                    <div class="error" *ngIf="period?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Subject Name</label>
+                <select class="custom-select" class="form-control" name="subject" formControlName="subject">
+                    <option value="" selected>Select the subject name</option>
+                    <option *ngFor="let subjectAssign of subjectAssignList">
+                        {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
+                </select>
+                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button class="btn btn-success" type="submit" (click)="addPeriod()">Add period</button>
+            <button class="btn btn-success" type="submit" (click)="addTimetable()">Add timetable</button>
+            <!-- <table class="table table-bordered" *ngFor="let i=index">
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{i}}</td>
+                        <td>{{periodsMap.get(i)}}</td>
+                    </tr>
+                </tbody>
+            </table> -->
         </div>
     </form>
 </div>

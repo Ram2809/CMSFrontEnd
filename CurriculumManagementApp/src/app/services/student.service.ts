@@ -7,18 +7,15 @@ import { Response } from '../model/response';
   providedIn: 'root'
 })
 export class StudentService {
-  private baseUrl='http://localhost:8081/api/student'
-  constructor(private http:HttpClient) { }
-  addStudent(student:Student):Observable<Response>
-  {
-    return this.http.post(`${this.baseUrl}`,student)
+  private baseUrl = 'http://localhost:8081/api/student'
+  constructor(private http: HttpClient) { }
+  addStudent(student: Student): Observable<Response> {
+    return this.http.post(`${this.baseUrl}`, student)
   }
-  getStudents(roomNo:number):Observable<Response>
-  {
-    return this.http.get(`${this.baseUrl}`+'/'+`${roomNo}`)
+  getStudents(roomNo: number): Observable<Response> {
+    return this.http.get(`${this.baseUrl}` + '/' + `${roomNo}`)
   }
-  deleteStudent(rollNo:number):Observable<Response>
-  {
-    return this.http.delete(`${this.baseUrl}`+'/'+`${rollNo}`)
+  deleteStudent(rollNo: number): Observable<Response> {
+    return this.http.delete(`${this.baseUrl}` + '/' + `${rollNo}`)
   }
 }

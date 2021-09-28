@@ -9,24 +9,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./update-subject.component.css']
 })
 export class UpdateSubjectComponent implements OnInit {
-  public subject:Subject=new Subject();
-  public code:string="";
-  constructor(private subjectService:SubjectService,
-    private router:Router) { }
+  public subject: Subject = new Subject();
+  public code: string = "";
+  constructor(private subjectService: SubjectService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.code=String(localStorage.getItem('subjectCode'));
+    this.code = String(localStorage.getItem('subjectCode'));
     console.log(this.code);
-    this.subjectService.getSubject(this.code).subscribe(response=>{
-      let responseBody:Response=response;
-      this.subject=responseBody.data;
+    this.subjectService.getSubject(this.code).subscribe(response => {
+      let responseBody: Response = response;
+      this.subject = responseBody.data;
       console.log(this.subject);
     });
   }
-  updateSubject()
-  {
-    this.subjectService.updateSubject(this.code,this.subject).subscribe(response=>{
-      let responseBody:Response=response;
+  updateSubject() {
+    this.subjectService.updateSubject(this.code, this.subject).subscribe(response => {
+      let responseBody: Response = response;
       window.alert(responseBody.message);
       this.router.navigate(['admin/viewsubjects']);
     });

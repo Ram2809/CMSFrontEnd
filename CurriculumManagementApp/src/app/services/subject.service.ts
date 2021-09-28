@@ -30,4 +30,10 @@ export class SubjectService {
   getSubject(code: string): Observable<Response> {
     return this.http.get(`${this.baseUrl}` + '/' + `${code}`);
   }
+  getAssignId(roomNo: number, subjectCode: string): Observable<Response> {
+    return this.http.get(`${this.urlUtil.baseUrl}` + 'subjectassign/' + `${roomNo}` + '/' + `${subjectCode}`);
+  }
+  getSubjectCode(assignId: number): Observable<Response> {
+    return this.http.get(`${this.urlUtil.baseUrl}` + 'subjectassign?id=' + `${assignId}`);
+  }
 }

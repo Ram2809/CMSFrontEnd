@@ -7,10 +7,9 @@ import { Response } from '../model/response';
   providedIn: 'root'
 })
 export class AddressService {
-  private baseUrl='http://localhost:8081/api/address'
-  constructor(private http:HttpClient) { }
-  addAddress(address:Address):Observable<Response>
-  {
-    return this.http.post(`${this.baseUrl}`,address);
+  private baseUrl = 'http://localhost:8081/api/address'
+  constructor(private http: HttpClient) { }
+  addAddress(address: Address): Observable<Response> {
+    return this.http.post(`${this.baseUrl}`, address);
   }
 }

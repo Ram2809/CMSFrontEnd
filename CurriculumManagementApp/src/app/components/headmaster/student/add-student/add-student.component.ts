@@ -12,7 +12,7 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class AddStudentComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public classList: Class[] =[];
+  public classList: Class[] = [];
   public response: Response = new Response();
   public roomNo: number | any;
   AddStudentForm = new FormGroup({

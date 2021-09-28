@@ -4,7 +4,8 @@
         <div class="boxed">
             <div class="form-group">
                 <label class="required">Standard</label>
-                <select class="custom-select" class="form-control" name="standard" (change)="getSubjects()" formControlName="standard">
+                <select class="custom-select" class="form-control" name="standard" (change)="getSubjects()"
+                    formControlName="standard">
                     <option value="" selected>Select the standard</option>
                     <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
                 </select>
@@ -16,7 +17,8 @@
                 <label class="required">Subject Name</label>
                 <select class="custom-select" class="form-control" name="subject" formControlName="subject">
                     <option value="" selected>Select the subject name</option>
-                    <option *ngFor="let subjectAssign of subjectAssignList">{{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
+                    <option *ngFor="let subjectAssign of subjectAssignList">
+                        {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
                 </select>
                 <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
                     <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
@@ -45,7 +47,9 @@
                 </tr>
             </tbody>
         </table>
-        <button  id="deleteButton" (click)="deleteUnit()" class="btn btn-info" type="submit" [hidden]="!isHidden" [disabled]="option?.value.length==0">Delete</button>
-        <button  id="updateButton" (click)="updateUnit()" class="btn btn-info"  type="submit" [hidden]="!isHidden" [disabled]="option?.value.length==0">Update</button> 
+        <button id="deleteButton" (click)="deleteUnit()" class="btn btn-info" type="submit" [hidden]="!isHidden"
+            [disabled]="option?.value.length==0">Delete</button>
+        <button id="updateButton" (click)="updateUnit()" class="btn btn-info" type="submit" [hidden]="!isHidden"
+            [disabled]="option?.value.length==0">Update</button>
     </form>
 </div>

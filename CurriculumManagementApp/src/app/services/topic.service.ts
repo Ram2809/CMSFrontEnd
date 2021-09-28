@@ -12,29 +12,23 @@ import { TeacherSignupComponent } from '../components/teacher/profile/teacher-si
 export class TopicService {
   public urlUtil: UrlUtil = new UrlUtil();
   private baseUrl = this.urlUtil.baseUrl + 'topic';
-  constructor(private http:HttpClient) { }
-  addTopic(topic:Topic):Observable<Response>
-  {
-    return this.http.post(`${this.baseUrl}`,topic);
+  constructor(private http: HttpClient) { }
+  addTopic(topic: Topic): Observable<Response> {
+    return this.http.post(`${this.baseUrl}`, topic);
   }
-  getTopics(subjectCode:string):Observable<Response>
-  {
-    return this.http.get(`${this.baseUrl}`+'/subject/'+`${subjectCode}`);
+  getTopics(subjectCode: string): Observable<Response> {
+    return this.http.get(`${this.baseUrl}` + '/subject/' + `${subjectCode}`);
   }
-  deleteTopic(unitNo:string):Observable<Response>
-  {
-    return this.http.delete(`${this.baseUrl}`+'/'+`${unitNo}`);
+  deleteTopic(unitNo: string): Observable<Response> {
+    return this.http.delete(`${this.baseUrl}` + '/' + `${unitNo}`);
   }
-  updateTopic(unitNo:string,topic:Topic):Observable<Response>
-  {
-    return this.http.put(`${this.baseUrl}`+'/'+`${unitNo}`,topic);
+  updateTopic(unitNo: string, topic: Topic): Observable<Response> {
+    return this.http.put(`${this.baseUrl}` + '/' + `${unitNo}`, topic);
   }
-  getTopic(unitNo:string):Observable<Response>
-  {
-    return this.http.get(`${this.baseUrl}`+'?unitNo='+`${unitNo}`)
+  getTopic(unitNo: string): Observable<Response> {
+    return this.http.get(`${this.baseUrl}` + '?unitNo=' + `${unitNo}`)
   }
-  getSubjectByUnit(unitNo:string):Observable<Response>
-  {
-    return this.http.get(`${this.baseUrl}`+'/'+`${unitNo}`);
+  getSubjectByUnit(unitNo: string): Observable<Response> {
+    return this.http.get(`${this.baseUrl}` + '/' + `${unitNo}`);
   }
 }
