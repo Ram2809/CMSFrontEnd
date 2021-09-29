@@ -23,6 +23,16 @@ import { AddTimetableComponent } from './components/headmaster/timetable/add-tim
 import { AddDiscussionComponent } from './components/teacher/discussion/add-discussion/add-discussion.component';
 import { StaffAssignComponent } from './components/headmaster/staff/staff-assign/staff-assign.component';
 import { ViewstaffsComponent } from './components/headmaster/staff/viewstaffs/viewstaffs.component';
+import { ViewDiscussionComponent } from './components/teacher/discussion/view-discussion/view-discussion.component';
+import { UpdateDiscussionComponent } from './components/teacher/discussion/update-discussion/update-discussion.component';
+import { ViewDiscussionsComponent } from './components/headmaster/discussion/view-discussions/view-discussions.component';
+import { ViewTimetableComponent } from './components/headmaster/timetable/view-timetable/view-timetable.component';
+import { DropdownListModule } from 'ngx-dropdown-list';
+import { UpdateTimetableComponent } from './components/headmaster/timetable/update-timetable/update-timetable.component';
+import { ViewTeachersComponent } from './components/headmaster/staff/view-teachers/view-teachers.component';
+import { AdminSignupComponent } from './components/headmaster/profile/admin-signup/admin-signup.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from "@angular/material/dialog";
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,15 +55,26 @@ import { ViewstaffsComponent } from './components/headmaster/staff/viewstaffs/vi
     AddDiscussionComponent,
     StaffAssignComponent,
     ViewstaffsComponent,
+    ViewDiscussionComponent,
+    UpdateDiscussionComponent,
+    ViewDiscussionsComponent,
+    ViewTimetableComponent,
+    UpdateTimetableComponent,
+    ViewTeachersComponent,
+    AdminSignupComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DropdownListModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[UpdateTopicComponent]
 })
 export class AppModule { }

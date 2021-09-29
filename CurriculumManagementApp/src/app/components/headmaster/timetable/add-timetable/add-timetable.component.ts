@@ -38,7 +38,9 @@ export class AddTimetableComponent implements OnInit {
       let responseBody: Response = response;
       this.classList = responseBody.data;
       console.log(this.classList);
-    })
+    },error=>{
+      window.alert(error.error.message);
+    });
   }
   getSubjects() {
     let responseBody: Response = new Response();
@@ -50,7 +52,11 @@ export class AddTimetableComponent implements OnInit {
         let responseBody: Response = response;
         console.log(responseBody.data);
         this.subjectAssignList = responseBody.data;
+      },error=>{
+        window.alert(error.error.message);
       });
+    },error=>{
+      window.alert(error.error.message);
     });
   }
   addPeriod() {
@@ -72,6 +78,10 @@ export class AddTimetableComponent implements OnInit {
       let responseBody: Response = response;
       console.log(responseBody.message);
       window.alert(responseBody.message);
+      this.periodsMap.clear();
+      console.log(this.periodsMap);
+    },error=>{
+      window.alert(error.error.message);
     });
   }
   get standard() {

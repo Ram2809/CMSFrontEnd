@@ -17,9 +17,7 @@ export class ViewStudentsComponent implements OnInit {
   public student: Student = new Student();
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public classList: Class[] = [];
-  public roomNo: Number | any;
-  public response: Response = new Response();
-  public studentCount: number = 0;
+  public roomNo: number =0;
   public isShown: boolean = false;
   constructor(private studentService: StudentService,
     private classService: ClassService,
@@ -33,31 +31,35 @@ export class ViewStudentsComponent implements OnInit {
 
   }
   getSections() {
-    this.classService.getClassesByStandard(this.standard?.value).subscribe(data => {
-      this.response = data;
-      this.classList = this.response.data;
-      console.log(this.classList)
+    this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
+      let responseBody:Response=response;
+      this.classList = responseBody.data;
+      console.log(this.classList);
+    },error=>{
+      window.alert(error.error.message);
     })
   }
   getStudents() {
-    this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(data => {
-      this.response = data;
-      console.log(this.response);
-      this.roomNo = this.response.data;
-      this.studentService.getStudents(this.roomNo).subscribe(data => {
-        this.response = data;
-        console.log(this.response.data);
-        this.studentsList = this.response.data;
-        this.studentCount = this.studentsList.length;
-        console.log(this.studentCount);
+    this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
+      let responseBody:Response = response;
+      console.log(responseBody.data);
+      this.roomNo = responseBody.data;
+      this.studentService.getStudents(this.roomNo).subscribe(response => {
+        let responseBody:Response = response;
+        console.log(responseBody.data);
+        this.studentsList = responseBody.data;
+      },error=>{
+        window.alert(error.error.message);
       });
+    },error=>{
+      window.alert(error.error.message);
     });
     this.isShown = true;
   }
   deleteStudent() {
-    this.studentService.deleteStudent(this.ViewStudentForm.get('option')?.value).subscribe(data => {
-      this.response = data;
-      window.alert(this.response.message);
+    this.studentService.deleteStudent(this.ViewStudentForm.get('option')?.value).subscribe(response => {
+      let responseBody:Response=response;
+      window.alert(responseBody.message);
       this.getStudents;
     });
   }

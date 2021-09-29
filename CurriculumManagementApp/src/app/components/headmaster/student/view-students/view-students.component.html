@@ -24,8 +24,8 @@
         </div>
         <button id="submitButton" class="btn btn-info" type="submit">Get Students</button>
         <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
-        <span class="error" style="text-align: center;" *ngIf="studentCount<=0">No student Available</span>
-        <table *ngIf="studentCount>0" class="table table-bordered">
+        <span class="error" style="text-align: center;" *ngIf="studentsList.length<=0">No student Available</span>
+        <table *ngIf="studentsList.length>0" class="table table-bordered">
             <thead>
                 <tr>
                     <th>Select</th>

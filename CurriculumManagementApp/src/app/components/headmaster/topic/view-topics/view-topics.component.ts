@@ -8,6 +8,8 @@ import { SubjectService } from 'src/app/services/subject.service';
 import { Topic } from 'src/app/model/topic';
 import { TopicService } from 'src/app/services/topic.service';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UpdateTopicComponent } from '../update-topic/update-topic.component';
 @Component({
   selector: 'app-view-topics',
   templateUrl: './view-topics.component.html',
@@ -26,7 +28,8 @@ export class ViewTopicsComponent implements OnInit {
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private topicService: TopicService,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -65,7 +68,11 @@ export class ViewTopicsComponent implements OnInit {
   }
   updateUnit() {
     localStorage.setItem('unitNo', this.option?.value);
-    this.router.navigate(['admin/updatetopic']);
+    //this.router.navigate(['admin/updatetopic']);
+    const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      this.dialog.open(UpdateTopicComponent,dialogConfig)
   }
   deleteUnit() {
     console.log(this.option?.value);

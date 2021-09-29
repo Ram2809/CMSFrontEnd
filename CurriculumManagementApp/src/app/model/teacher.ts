@@ -1,3 +1,5 @@
+import { Address } from "./address";
+
 export class Teacher {
     public id?: number;
     public firstName?: string;
@@ -8,4 +10,5 @@ export class Teacher {
     public major?: string;
     public email?: string;
     public contactNo?: number;
+    public address?:Address;
 }

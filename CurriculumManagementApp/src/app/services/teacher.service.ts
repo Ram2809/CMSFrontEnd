@@ -30,4 +30,10 @@ export class TeacherService {
   getSubjectAssignIds(staffId: number): Observable<Response> {
     return this.http.get(`${this.urlUtil.baseUrl}` + 'teacherassign?staffId=' + `${staffId}`);
   }
+  getAllStaffs(): Observable<Response> {
+    return this.http.get(`${this.baseUrl}`);
+  }
+  deleteStaff(staffId: number): Observable<Response> {
+    return this.http.delete(`${this.baseUrl}/${staffId}`);
+  }
 }

@@ -1,0 +1,53 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>View Timetable</i></b></h3>
+    <form [formGroup]="ViewTimetableForm">
+        <div class="boxed">
+            <div class="form-group">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                    formControlName="standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Section</label>
+                <select class="custom-select" class="form-control" name="section" formControlName="section">
+                    <option value="" selected>Select the section</option>
+                    <option *ngFor="let class of classList">{{class.section}}</option>
+                </select>
+                <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                    <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button class="btn btn-success" id="viewButton" type="submit" (click)="getTimetable()" [disabled]="!ViewTimetableForm.valid">View Timetable</button>
+            <button class="btn btn-success" id="deleteButton" type="submit" (click)="deleteTimetable()" [disabled]="!ViewTimetableForm.valid">Delete Timetable</button> 
+        </div>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let timetable of timetableList;">
+                        <td>{{timetable.day}}</td>
+                        <td *ngFor="let period of timetable.periods | keyvalue">{{period.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>

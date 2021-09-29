@@ -1,3 +1,4 @@
+import { Class } from "./class";
 import { Teacher } from "./teacher";
 import { Topic } from "./topic";
 
@@ -8,4 +9,5 @@ export class Discussion {
     public date?: Date;
     public topic?: Topic;
     public teacher?: Teacher;
+    public classDetail?:Class;
 }

@@ -1,0 +1,40 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Teacher Details</i></b></h3>
+    <form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Teacher Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date of birth</th>
+                    <th>Gender</th>
+                    <th>Qualification</th>
+                    <th>Major</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let teacher of teacherList">
+                    <td><input type="radio" name="option" [(ngModel)]="option" value="{{teacher.id}}"></td>
+                    <td>{{teacher.id}}</td>
+                    <td>{{teacher.firstName}}</td>
+                    <td>{{teacher.lastName}}</td>
+                    <td>{{teacher.dateOfBirth}}</td>
+                    <td>{{teacher.gender}}</td>
+                    <td>{{teacher.qualification}}</td>
+                    <td>{{teacher.major}}</td>
+                    <td>{{teacher.email}}</td>
+                    <td>{{teacher.contactNo}}</td>
+                    <td>{{teacher.address?.addressLine}},{{teacher.address?.city}},{{teacher.address?.district}},{{teacher.address?.state}},{{teacher.address?.country}}-{{teacher.address?.pinCode}}</td>
+                </tr>
+            </tbody>
+            </table>
+            <button id="submitButton" class="btn btn-success" type="submit"
+                (click)="deleteStaff()">Delete</button>
+            <button id="resetButton" class="btn btn-success" type="reset">Reset</button>
+    </form>
+</div>

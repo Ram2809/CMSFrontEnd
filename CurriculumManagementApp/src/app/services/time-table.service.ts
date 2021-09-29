@@ -14,4 +14,10 @@ export class TimeTableService {
   addTimetable(timetable: TimeTable): Observable<Response> {
     return this.http.post(`${this.baseUrl}`, timetable);
   }
+  getTimeTable(roomNo: number): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/${roomNo}`);
+  }
+  deleteTimetable(roomNo: number): Observable<Response> {
+    return this.http.delete(`${this.baseUrl}/${roomNo}`);
+  }
 }

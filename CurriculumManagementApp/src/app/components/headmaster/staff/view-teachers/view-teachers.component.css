@@ -1,0 +1,15 @@
+thead{
+    background-color: rgb(90, 168, 168);
+}
+.title
+{
+    text-align: center;
+    color:rgb(22, 77, 160)  
+}
+#submitButton{
+    margin-left: 14cm;
+}
+#resetButton
+{
+    margin-left: 0.5cm;
+}
