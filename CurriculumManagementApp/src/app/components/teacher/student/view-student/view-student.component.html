@@ -1,0 +1,48 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>View Students</i></b></h3>
+    <form [formGroup]="ViewStudentForm">
+        <div class="boxed">
+            <div class="row">
+                <div class="col">
+                    <label class="required">Class</label>
+                    <select class="custom-select" class="form-control" name="class" formControlName="class">
+                        <option value="" selected>Select the standard and section</option>
+                        <option *ngFor="let class of classList">{{class.standard}}-{{class.section}}</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <button id="submitButton" class="btn btn-info" type="submit" (click)="getStudents()">Get Students</button>
+                </div>
+            </div><br>
+            <ng-template #elseBlock>
+                <label class="notFound">{{errorMessage}}</label>
+            </ng-template>
+            <div *ngIf="studentList.length>0 else elseBlock">
+                <table class="table table-bordered" [hidden]="isHidden">
+                    <thead>
+                        <tr>
+                            <th>Roll Number</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Date of birth</th>
+                            <th>Gender</th>
+                            <th>Contact Number</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentList">
+                            <td>{{student.rollNo}}</td>
+                            <td>{{student.firstName}}</td>
+                            <td>{{student.lastName}}</td>
+                            <td>{{student.dateOfBirth}}</td>
+                            <td>{{student.gender}}</td>
+                            <td>{{student.contactNo}}</td>
+                            <td>{{student.address}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

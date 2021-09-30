@@ -1,0 +1,48 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Update Topic Status</i></b></h3>
+    <form>
+        <div class="row">
+            <div class="col">
+                <label>Unit Number</label>
+                <input type="text" class="form-control" name="unitNo" value="{{topicStatus.topic?.unitNo}}" readonly="true">
+            </div>
+            <div class="col">
+                <label>Unit Name</label>
+                <input type="text" class="form-control" name="unitName" value="{{topicStatus.topic?.unitName}}" readonly="true">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Status id</label>
+                <input type="number" class="form-control" name="id" [(ngModel)]="topicStatus.id" readonly="true">
+            </div>
+            <div class="col">
+                <label>Status</label>
+                <select class="custom-select" class="form-control" name="status" [(ngModel)]="topicStatus.status">
+                    <option value="" selected>Select the status</option>
+                    <option>Started</option>
+                    <option>Partially completed</option>
+                    <option>Completed</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Begin Date</label>
+                <input type="date" class="form-control" name="beginDate" [(ngModel)]="topicStatus.beginDate">
+            </div>
+            <div class="col">
+                <label>Completed Date</label>
+                <input type="date" class="form-control" name="completedDate" [(ngModel)]="topicStatus.completedDate">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Remarks</label>
+                <textarea rows="3" cols="50" class="form-control" name="remarks" [(ngModel)]="topicStatus.remarks"></textarea>
+            </div>
+        </div>
+        <button id="submitButton" (click)="updateStatus()" class="btn btn-info">Update</button>
+        <button id="resetButton" class="btn btn-info" (click)="close()">Close</button>
+    </form>
+</div>

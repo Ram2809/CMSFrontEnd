@@ -20,4 +20,7 @@ export class TimeTableService {
   deleteTimetable(roomNo: number): Observable<Response> {
     return this.http.delete(`${this.baseUrl}/${roomNo}`);
   }
+  getTimeTableByDay(roomNo: number, day: string): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/${roomNo}/${day}`);
+  }
 }

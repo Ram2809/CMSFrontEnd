@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminDashboardComponent } from './admin-dashboard.component';
+import { StaffViewTimetableComponent } from './staff-view-timetable.component';
 
-describe('AdminDashboardComponent', () => {
-  let component: AdminDashboardComponent;
-  let fixture: ComponentFixture<AdminDashboardComponent>;
+describe('StaffViewTimetableComponent', () => {
+  let component: StaffViewTimetableComponent;
+  let fixture: ComponentFixture<StaffViewTimetableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminDashboardComponent ]
+      declarations: [ StaffViewTimetableComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminDashboardComponent);
+    fixture = TestBed.createComponent(StaffViewTimetableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

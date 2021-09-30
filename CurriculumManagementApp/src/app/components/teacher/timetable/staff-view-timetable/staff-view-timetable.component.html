@@ -1,0 +1,45 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>View Timetable</i></b></h3>
+    <form [formGroup]="ViewTimeTableForm">
+        <div class="boxed">
+            <div class="row">
+                <div class="col">
+                    <label class="required">Class</label>
+                    <select class="custom-select" class="form-control" name="class" formControlName="class">
+                        <option value="" selected>Select the standard and section</option>
+                        <option *ngFor="let class of classList">{{class.standard}}-{{class.section}}</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <button id="submitButton" class="btn btn-info" type="submit" (click)="getTimetable()">View Timetable</button>
+                </div>
+            </div><br>
+            <ng-template #elseBlock>
+                <label class="notFound">{{errorMessage}}</label>
+            </ng-template>
+            <div *ngIf="timetableList.length>0 else elseBlock" [hidden]="isHidden">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let timetable of timetableList">
+                            <td>{{timetable.day}}</td>
+                            <td *ngFor="let period of timetable.periods | keyvalue">{{period.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

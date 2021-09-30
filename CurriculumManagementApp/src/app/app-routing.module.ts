@@ -18,6 +18,7 @@ import { AddTimetableComponent } from './components/headmaster/timetable/add-tim
 import { UpdateTimetableComponent } from './components/headmaster/timetable/update-timetable/update-timetable.component';
 import { ViewTimetableComponent } from './components/headmaster/timetable/view-timetable/view-timetable.component';
 import { AddTopicComponent } from './components/headmaster/topic/add-topic/add-topic.component';
+import { TopicStatusComponent } from './components/headmaster/topic/topic-status/topic-status.component';
 import { UpdateTopicComponent } from './components/headmaster/topic/update-topic/update-topic.component';
 import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/view-topics.component';
 import { AddDiscussionComponent } from './components/teacher/discussion/add-discussion/add-discussion.component';
@@ -26,34 +27,55 @@ import { ViewDiscussionComponent } from './components/teacher/discussion/view-di
 import { AddAddressComponent } from './components/teacher/profile/add-address/add-address.component';
 import { AddLoginDataComponent } from './components/teacher/profile/add-login-data/add-login-data.component';
 import { TeacherSignupComponent } from './components/teacher/profile/teacher-signup/teacher-signup.component';
+import { ViewStudentComponent } from './components/teacher/student/view-student/view-student.component';
+import { StaffViewTimetableComponent } from './components/teacher/timetable/staff-view-timetable/staff-view-timetable.component';
+import { AddTopicStatusComponent } from './components/teacher/topic/add-topic-status/add-topic-status.component';
+import { UpdateTopicStatusComponent } from './components/teacher/topic/update-topic-status/update-topic-status.component';
+import { ViewSyllabusComponent } from './components/teacher/topic/view-syllabus/view-syllabus.component';
+import { ViewTopicStatusComponent } from './components/teacher/topic/view-topic-status/view-topic-status.component';
+
 
 const routes: Routes = [
-  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'admin', component: AdminDashboardComponent ,children:[
   { path: 'addclass', component: AddClassComponent },
-  { path: 'viewclass', component: ViewClassComponent },
+  { path: 'viewclass', component: ViewClassComponent ,children:[
   { path: 'updateclass/:roomNo', component: UpdateClassComponent },
+]},
   { path: 'addstudent', component: AddStudentComponent },
   { path: 'viewstudents', component: ViewStudentsComponent },
+  { path: 'addsubject', component: AddSubjectComponent },
+  { path: 'viewsubjects', component: ViewSubjectsComponent },
+  { path: 'updatesubject', component: UpdateSubjectComponent },
+  { path: 'addtopic', component: AddTopicComponent },
+  { path: 'viewtopics', component: ViewTopicsComponent },
+  { path: 'updatetopic', component: UpdateTopicComponent },
+  { path: 'addtimetable', component: AddTimetableComponent },
+  { path: 'staffassign', component: StaffAssignComponent },
+  { path: 'viewstaffs', component: ViewstaffsComponent },
+  { path: 'viewdiscussions', component: ViewDiscussionsComponent },
+  { path: 'viewtimetable', component: ViewTimetableComponent },
+  { path: 'updatetimetable', component: UpdateTimetableComponent },
+  { path: 'viewteachers', component: ViewTeachersComponent },
+  { path: 'signup', component: AdminSignupComponent },
+  { path: 'viewtopicstatus', component: TopicStatusComponent }
+  ]},
+ 
   { path: 'teacher/signup', component: TeacherSignupComponent },
   { path: 'teacher/addaddress/:id', component: AddAddressComponent },
   { path: 'teacher/addlogin/:id', component: AddLoginDataComponent },
-  { path: 'admin/addsubject', component: AddSubjectComponent },
-  { path: 'admin/viewsubjects', component: ViewSubjectsComponent },
-  { path: 'admin/updatesubject', component: UpdateSubjectComponent },
-  { path: 'admin/addtopic', component: AddTopicComponent },
-  { path: 'admin/viewtopics', component: ViewTopicsComponent },
-  { path: 'admin/updatetopic', component: UpdateTopicComponent },
-  { path: 'admin/addtimetable', component: AddTimetableComponent },
+ 
   { path: 'teacher/adddiscussion', component: AddDiscussionComponent },
-  { path: 'admin/staffassign', component: StaffAssignComponent },
-  { path: 'admin/viewstaffs', component: ViewstaffsComponent },
-  {path:'teacher/viewdiscussion',component:ViewDiscussionComponent},
-  {path:'teacher/updatediscussion',component:UpdateDiscussionComponent},
-  {path:'admin/viewdiscussions',component:ViewDiscussionsComponent},
-  {path:'admin/viewtimetable',component:ViewTimetableComponent},
-  {path:'admin/updatetimetable',component:UpdateTimetableComponent},
-  {path:'viewteachers',component:ViewTeachersComponent},
-  {path:'admin/signup',component:AdminSignupComponent},
+  
+  { path: 'teacher/viewdiscussion', component: ViewDiscussionComponent },
+  { path: 'teacher/updatediscussion', component: UpdateDiscussionComponent },
+ 
+  { path: 'teacher/addtopicstatus', component: AddTopicStatusComponent },
+  { path: 'teacher/viewtopicstatus', component: ViewTopicStatusComponent },
+  { path: 'teacher/updatetopicstatus', component: UpdateTopicStatusComponent },
+  { path: 'teacher/viewsyllabus', component: ViewSyllabusComponent },
+  { path: 'teacher/viewstudents', component: ViewStudentComponent },
+  { path: 'teacher/viewtimetable', component: StaffViewTimetableComponent },
+ 
 ];
 
 @NgModule({

@@ -4,7 +4,6 @@ import { ClassService } from 'src/app/services/class.service';
 import { Response } from 'src/app/model/response';
 import { SubjectService } from 'src/app/services/subject.service';
 import { SubjectAssign } from 'src/app/model/subject-assign';
-import { TeacherAssign } from 'src/app/model/teacher-assign';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { Teacher } from 'src/app/model/teacher';
 @Component({

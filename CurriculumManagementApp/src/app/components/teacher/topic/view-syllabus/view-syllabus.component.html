@@ -1,0 +1,63 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>View Curriculum</i></b></h3>
+    <form [formGroup]="ViewCurriculumForm">
+        <div class="boxed">
+            <div class="row">
+                <div class="col">
+                    <label class="required">Standard</label>
+                    <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                        formControlName="standard">
+                        <option value="" selected>Select the standard</option>
+                        <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                    </select>
+                    <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                        <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="required">Section</label>
+                    <select class="custom-select" class="form-control" name="section" formControlName="section"
+                        (change)="getSubjects()">
+                        <option value="" selected>Select the section</option>
+                        <option *ngFor="let class of classList">{{class.section}}</option>
+                    </select>
+                    <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                        <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
+            </div><br>
+            <div class="form-group">
+                <label class="required">Subject Name</label>
+                <select class="custom-select" class="form-control" name="subject" formControlName="subject">
+                    <option value="" selected>Select the subject</option>
+                    <option *ngFor="let subject of subjectList">{{subject.code}}-{{subject.name}}</option>
+                </select>
+                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="getCurriculum()">View Curriculum</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br>
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Unit Number</th>
+                            <th>Unit Name</th>
+                            <th>Description</th>
+                            <th>Month</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let topic of topicList">
+                            <td>{{topic.unitNo}}</td>
+                            <td>{{topic.unitName}}</td>
+                            <td>{{topic.description}}</td>
+                            <td>{{topic.month}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

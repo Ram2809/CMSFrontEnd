@@ -1,4 +1,67 @@
 <!-- <div class="container-fluid mb-3">
     <h3 class="title"><b><i>Update Timetable</i></b></h3>
-    <form []
-</div> -->
+     <form [formGroup]="UpdateTimeTableForm"> 
+        <form>
+        <div class="row">
+            <div class="col">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                    [(ngModel)]="standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="col">
+                <label class="required">Section</label>
+                <select class="custom-select" class="form-control" name="section" [(ngModel)]="section">
+                    <option value="" selected>Select the section</option>
+                    <option *ngFor="let class of classList">{{class.section}}</option>
+                </select>
+                <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                    <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                </div> 
+            </div>
+        </div><br>
+        <div class="form-group">
+            <label class="required">Day</label>
+            <select class="custom-select" class="form-control" name="day" [(ngModel)]="day">
+                <option value="" selected>Select the day</option>
+                <option [value]="day" *ngFor="let day of daysList">{{day}}</option>
+            </select>
+             <div *ngIf="day?.invalid &&(day?.touched||day?.dirty)">
+                <div class="error" *ngIf="day?.errors?.required">* This field is required</div>
+            </div>
+        </div> 
+        <button class="btn btn-success" id="submitButton" type="submit" (click)="getTimetable()">View Timetable</button>
+            <button class="btn btn-success" id="resetButton" type="reset">Reset</button> <br>
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{timetable.day}}</td>
+                            <td *ngFor="let period of timetable.periods | keyvalue"><input type="text" value="{{period.value}}" [(ngModel)]="timetable.periods.values()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-success" (click)="updateTt()" type="submit">Update tt</button>
+            </div>
+            {{periods|json}}
+    </form>
+</div> 
+-->

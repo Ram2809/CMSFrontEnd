@@ -11,15 +11,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  optionItems = [
-    {id: 'addClass',     value: 'Max',     text: 'Add Class'},
-    {id: 'viewClass',     value: 'Average', text: 'View Class'},
-    {id: 'manageClass',     value: 'Sum',     text: 'Manage Class'},
-  ];
-  logout() {
-
-  }
-  onChange(){
-
+  logout(){
+    
   }
 }
