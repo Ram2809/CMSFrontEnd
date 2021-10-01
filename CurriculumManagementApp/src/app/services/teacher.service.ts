@@ -36,4 +36,10 @@ export class TeacherService {
   deleteStaff(staffId: number): Observable<Response> {
     return this.http.delete(`${this.baseUrl}/${staffId}`);
   }
+  getStaffByEmail(email: string): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/email/${email}`);
+  }
+  updateStaff(id: number, teacher: Teacher): Observable<Response> {
+    return this.http.put(`${this.baseUrl}/${id}`, teacher);
+  }
 }

@@ -11,7 +11,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 13cm;
+    margin-left: 5cm;
 }
 #resetButton
 {
@@ -20,4 +20,16 @@ label{
 .error
 {
     color: red;
+}
+.info{
+    color:blue;
+}
+#loginForm{
+    margin-left: 9cm;
+}
+.signup{
+    margin-left: 5cm;
+}
+#main{
+    margin-top: 50px;
 }

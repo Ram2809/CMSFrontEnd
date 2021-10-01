@@ -4,7 +4,6 @@ import { UrlUtil } from '../model/url-util';
 import { Response } from '../model/response';
 import { Topic } from '../model/topic';
 import { HttpClient } from '@angular/common/http';
-import { TeacherSignupComponent } from '../components/teacher/profile/teacher-signup/teacher-signup.component';
 
 @Injectable({
   providedIn: 'root'

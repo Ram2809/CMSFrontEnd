@@ -10,9 +10,6 @@ import { ViewClassComponent } from './components/headmaster/class/view-class/vie
 import { UpdateClassComponent } from './components/headmaster/class/update-class/update-class.component';
 import { AddStudentComponent } from './components/headmaster/student/add-student/add-student.component';
 import { ViewStudentsComponent } from './components/headmaster/student/view-students/view-students.component';
-import { TeacherSignupComponent } from './components/teacher/profile/teacher-signup/teacher-signup.component';
-import { AddAddressComponent } from './components/teacher/profile/add-address/add-address.component';
-import { AddLoginDataComponent } from './components/teacher/profile/add-login-data/add-login-data.component';
 import { AddSubjectComponent } from './components/headmaster/subject/add-subject/add-subject.component';
 import { ViewSubjectsComponent } from './components/headmaster/subject/view-subjects/view-subjects.component';
 import { UpdateSubjectComponent } from './components/headmaster/subject/update-subject/update-subject.component';
@@ -43,6 +40,16 @@ import { AdminForgotPasswordComponent } from './components/home/headmaster/admin
 import { AdminLoginComponent } from './components/home/headmaster/admin-login/admin-login.component';
 import { AdminSignupComponent } from './components/home/headmaster/admin-signup/admin-signup.component';
 import { HomeComponent } from './components/home/home/home.component';
+import { AdminViewProfileComponent } from './components/headmaster/profile/admin-view-profile/admin-view-profile.component';
+import { AdminUpdateProfileComponent } from './components/headmaster/profile/admin-update-profile/admin-update-profile.component';
+import { TeacherDashboardComponent } from './components/teacher/teacher-dashboard/teacher-dashboard.component';
+import { TeacherLoginComponent } from './components/home/teacher/teacher-login/teacher-login.component';
+import { TeacherForgotpasswordComponent } from './components/home/teacher/teacher-forgotpassword/teacher-forgotpassword.component';
+import { AddAddressComponent } from './components/home/teacher/add-address/add-address.component';
+import { AddLoginDataComponent } from './components/home/teacher/add-login-data/add-login-data.component';
+import { TeacherSignupComponent } from './components/home/teacher/teacher-signup/teacher-signup.component';
+import { StaffViewProfileComponent } from './components/teacher/profile/staff-view-profile/staff-view-profile.component';
+import { StaffUpdateProfileComponent } from './components/teacher/profile/staff-update-profile/staff-update-profile.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +90,13 @@ import { HomeComponent } from './components/home/home/home.component';
     AdminLoginComponent,
     AdminForgotPasswordComponent,
     HomeComponent,
+    AdminViewProfileComponent,
+    AdminUpdateProfileComponent,
+    TeacherDashboardComponent,
+    TeacherLoginComponent,
+    TeacherForgotpasswordComponent,
+    StaffViewProfileComponent,
+    StaffUpdateProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { Teacher } from 'src/app/model/teacher';
 import { LoginService } from 'src/app/services/login.service';
 import { Response } from 'src/app/model/response';
 import { ThrowStmt } from '@angular/compiler';
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-login-data',
   templateUrl: './add-login-data.component.html',
@@ -20,10 +21,12 @@ export class AddLoginDataComponent implements OnInit {
     confirmPassword: new FormControl('', Validators.required),
   });
   constructor(private route: ActivatedRoute,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    public dialogRef: MatDialogRef<AddLoginDataComponent>) { }
 
   ngOnInit(): void {
-    this.staffId = this.route.snapshot.params['id'];
+    this.staffId = Number(localStorage.getItem('teacherId'));
+    console.log(this.staffId);
   }
   createLogin() {
     if (this.password?.value != this.confirmPassword?.value) {
@@ -41,6 +44,9 @@ export class AddLoginDataComponent implements OnInit {
         window.alert(this.response.message);
       });
     }
+  }
+  close(){
+    this.dialogRef.close();
   }
   get id() {
     return this.CreateLoginForm.get('id');

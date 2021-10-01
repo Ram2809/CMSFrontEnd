@@ -1,0 +1,43 @@
+<div id="main" class="container-fluid mb-3">
+    <h3 class="title"><b><i>My Profile</i></b></h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>First Name</th>
+            <td>{{headMaster.firstName}}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{headMaster.lastName}}</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>{{headMaster.dateOfBirth}}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{{headMaster.gender}}</td>
+        </tr>
+        <tr>
+            <th>Qualification</th>
+            <td>{{headMaster.qualification}}</td>
+        </tr>
+        <tr>
+            <th>Major</th>
+            <td>{{headMaster.major}}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{headMaster.email}}</td>
+        </tr>
+        <tr>
+            <th>Contact Number</th>
+            <td>{{headMaster.contactNo}}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{headMaster.address}}</td>
+        </tr>
+    </table>
+    <button id="submitButton" class="btn btn-primary" type="submit" (click)="updateProfile()">Update</button>
+    <button id="resetButton" class="btn btn-primary" type="reset">Reset</button>
+</div>

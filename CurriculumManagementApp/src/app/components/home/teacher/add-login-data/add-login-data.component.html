@@ -1,11 +1,11 @@
 <div class="container-fluid mb-3">
     <h3 class="title"><b><i>Login Credentials Form</i></b></h3>
-    <form [formGroup]="CreateLoginForm" (ngSubmit)="createLogin()">
+    <form [formGroup]="CreateLoginForm">
         <div class="boxed">
             <div class="form-group">
                 <label class="required">User Name</label>
                 <input type="number" class="form-control" name="id" formControlName="id"
-                    placeholder="Enter the staff id">
+                    placeholder="Enter the staff id" value="{{staffId}}">
                 <div *ngIf="id?.invalid &&(id?.dirty||id?.touched)">
                     <div class="error" *ngIf="id?.errors?.required">* This field is required</div>
                 </div>
@@ -29,8 +29,8 @@
                 </div>
             </div>
             <button id="submitButton" class="btn btn-info" type="submit"
-                [disabled]="!CreateLoginForm.valid">Submit</button>
-            <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+                [disabled]="!CreateLoginForm.valid" (click)="createLogin()">Submit</button>
+            <button id="resetButton" class="btn btn-info" type="submit" (click)="close()">Close</button>
         </div>
     </form>
 </div>
