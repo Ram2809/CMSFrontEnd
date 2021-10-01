@@ -12,4 +12,10 @@ export class AddressService {
   addAddress(address: Address): Observable<Response> {
     return this.http.post(`${this.baseUrl}`, address);
   }
+  getAddress(staffId: number): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/${staffId}`);
+  }
+  updateAddress(id: number, address: Address): Observable<Response> {
+    return this.http.put(`${this.baseUrl}/${id}`, address);
+  }
 }

@@ -23,4 +23,13 @@ export class TimeTableService {
   getTimeTableByDay(roomNo: number, day: string): Observable<Response> {
     return this.http.get(`${this.baseUrl}/${roomNo}/${day}`);
   }
+  getPeriod(period: number, id: number): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/period/${period}/${id}`);
+  }
+  updatePeriod(period: number, subject: string, id: number, timetable: TimeTable): Observable<Response> {
+    return this.http.put(`${this.baseUrl}/${period}/${subject}/${id}`, timetable);
+  }
+  getTimeTableId(roomNo: number, day: string): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/${roomNo}/${day}`);
+  }
 }

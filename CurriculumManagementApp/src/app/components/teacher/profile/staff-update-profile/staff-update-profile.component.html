@@ -1,1 +1,95 @@
-<p>staff-update-profile works!</p>
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Update Profile</i></b></h3>
+    <form>
+        <div class="boxed">
+            <div class="row">
+                <div class="col">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" class="form-control" [(ngModel)]="teacher.firstName">
+                </div>
+                <div class="col">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" class="form-control" [(ngModel)]="teacher.lastName">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <label>Date of Birth</label>
+                    <input type="date" class="form-control" name="dateOfBirth" [(ngModel)]="teacher.dateOfBirth">
+                </div>
+                <div class="col">
+                    <label>Gender</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" [(ngModel)]="teacher.gender" name="gender"
+                            value="Male">
+                        <label class="form-check-label">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" [(ngModel)]="teacher.gender" name="gender"
+                            value="Female">
+                        <label class="form-check-label">Female</label>
+                    </div>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <label>Qualification</label>
+                    <select class="custom-select" class="form-control" name="qualification" [(ngModel)]="teacher.qualification">
+                        <option value="" selected>Select the qualification</option>
+                        <option [value]="qualification" *ngFor="let qualification of qualificationList">
+                            {{qualification}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Major</label>
+                    <select class="custom-select" class="form-control" name="major" [(ngModel)]="teacher.major">
+                        <option value="" selected>Select the major</option>
+                        <option [value]="major" *ngFor="let major of majorList">{{major}}</option>
+                    </select>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="teacher.email">
+                </div>
+                <div class="col">
+                    <label>Contact Number</label>
+                    <input type="tel" class="form-control" name="contactNo" [(ngModel)]="teacher.contactNo">
+                </div>
+            </div><br>
+            <div class="form-group">
+                <label>Address Line</label>
+                <textarea rows="1" cols="50" class="form-control" name="addressLine"
+                    [(ngModel)]="address.addressLine"></textarea>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>City</label>
+                    <input type="text" class="form-control" name="city" [(ngModel)]="address.city">
+                </div>
+                <div class="col">
+                    <label>District</label>
+                    <input type="text" class="form-control" name="district" [(ngModel)]="address.district">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <label>State</label>
+                    <input type="text" class="form-control" name="state" [(ngModel)]="address.state">
+                </div>
+                <div class="col">
+                    <label>Country</label>
+                    <input type="text" class="form-control" name="country" [(ngModel)]="address.country">
+                </div>
+                <div class="col">
+                    <label>Postal Code</label>
+                    <input type="number" class="form-control" name="pinCode" [(ngModel)]="address.pinCode">
+                </div>
+            </div><br>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="updateProfile()">Update</button>
+            <button id="resetButton" class="btn btn-info" type="reset" (click)="close()">Close</button>
+        </div>
+    </form>
+</div>

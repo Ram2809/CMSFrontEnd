@@ -43,6 +43,7 @@ export class ViewTimetableComponent implements OnInit {
       let responseBody: Response = response;
       console.log(responseBody.data);
       this.roomNo = responseBody.data;
+      localStorage.setItem('roomNo',String(this.roomNo));
       console.log(this.roomNo);
       this.timetableService.getTimeTable(this.roomNo).subscribe(response => {
         let responseBody: Response = response;

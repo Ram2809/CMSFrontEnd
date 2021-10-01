@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Class } from 'src/app/model/class';
 import { Response } from 'src/app/model/response';
+import { SubjectAssign } from 'src/app/model/subject-assign';
 import { TimeTable } from 'src/app/model/time-table';
 import { ClassService } from 'src/app/services/class.service';
+import { SubjectService } from 'src/app/services/subject.service';
 import { TimeTableService } from 'src/app/services/time-table.service';
 @Component({
   selector: 'app-update-timetable',
@@ -11,45 +13,42 @@ import { TimeTableService } from 'src/app/services/time-table.service';
   styleUrls: ['./update-timetable.component.css']
 })
 export class UpdateTimetableComponent implements OnInit {
-  public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public classList: Class[] = [];
   public daysList: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  public periodList: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
   public roomNo: number = 0;
   public timetable: TimeTable = new TimeTable();
-  public periods:any=[];
-  public standard:string="";
-  public section:string="";
-  public day:string="";
-  // UpdateTimeTableForm = new FormGroup({
-  //   standard: new FormControl('', Validators.required),
-  //   section: new FormControl('', Validators.required),
-  //   day: new FormControl('', Validators.required),
-  // });
+  public existingPeriod: string = "";
+  public period: number = 0;
+  public day: string = "";
+  public subject: string = "";
+  public id: number = 0;
+  public subjectAssignList: SubjectAssign[] = [];
   constructor(private classService: ClassService,
-    private timetableService: TimeTableService) { }
+    private timetableService: TimeTableService,
+    private subjectService: SubjectService) { }
 
   ngOnInit(): void {
-  }
-  getSections() {
-    this.classService.getClassesByStandard(this.standard).subscribe(response => {
+    this.roomNo = Number(localStorage.getItem('roomNo'));
+    console.log(this.roomNo);
+    let responseBody: Response = new Response();
+    this.subjectService.getSubjets(this.roomNo).subscribe(response => {
       let responseBody: Response = response;
-      this.classList = responseBody.data;
-      console.log(this.classList);
+      console.log(responseBody.data);
+      this.subjectAssignList = responseBody.data;
     }, error => {
-      console.log(error);
-      let responseBody: Response = error;
       window.alert(error.error.message);
     });
   }
-  getTimetable() {
-    this.classService.getClassRoomNo(this.standard, this.section).subscribe(response => {
+  getPeriod() {
+    this.timetableService.getTimeTableId(this.roomNo, this.day).subscribe(response => {
       let responseBody: Response = response;
-      this.roomNo = responseBody.data;
-      console.log(this.roomNo);
-      this.timetableService.getTimeTableByDay(this.roomNo, this.day).subscribe(response => {
+      this.timetable = responseBody.data;
+      this.id = Number(this.timetable.id);
+      console.log(this.id);
+      this.timetableService.getPeriod(this.period, this.id).subscribe(response => {
         let responseBody: Response = response;
-        this.timetable = responseBody.data;
-        console.log(this.timetable);
+        this.existingPeriod = responseBody.data;
+        console.log(this.existingPeriod)
       }, error => {
         window.alert(error.error.message);
       })
@@ -57,16 +56,13 @@ export class UpdateTimetableComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-  // get standard() {
-  //   return this.UpdateTimeTableForm.get('standard');
-  // }
-  // get section() {
-  //   return this.UpdateTimeTableForm.get('section');
-  // }
-  // get day() {
-  //   return this.UpdateTimeTableForm.get('day');
-  // }
-  updateTt(){
-    console.log(this.timetable);
+  updateTimetable() {
+    this.timetableService.updatePeriod(this.period, String(this.subject.split("-").pop()), this.id, this.timetable).subscribe(response => {
+      let responseBody: Response = response;
+      console.log(responseBody.message);
+      window.alert(responseBody.data + " " + responseBody.message);
+    }, error => {
+      window.alert(error.error.message);
+    });
   }
 }

@@ -1,1 +1,48 @@
-<p>staff-view-profile works!</p>
+<div id="main" class="container-fluid mb-3">
+    <h3 class="title"><b><i>My Profile</i></b></h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>First Name</th>
+            <td>{{teacher.firstName}}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{teacher.lastName}}</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>{{teacher.dateOfBirth}}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{{teacher.gender}}</td>
+        </tr>
+        <tr>
+            <th>Qualification</th>
+            <td>{{teacher.qualification}}</td>
+        </tr>
+        <tr>
+            <th>Major</th>
+            <td>{{teacher.major}}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{teacher.email}}</td>
+        </tr>
+        <tr>
+            <th>Contact Number</th>
+            <td>{{teacher.contactNo}}</td>
+        </tr>
+        <tr rowspan="3">
+            <th >Address</th>
+            <td>{{address.addressLine}},<br>
+                {{address.city}},<br>
+                {{address.district}}-{{address.pinCode}},<br>
+                {{address.state}},<br>
+                {{address.country}}.</td>
+        </tr>
+    </table>
+    <button id="submitButton" class="btn btn-primary" type="submit" (click)="updateProfile()">Update</button>
+    <button id="resetButton" class="btn btn-primary" type="reset">Reset</button>
+</div>
+
