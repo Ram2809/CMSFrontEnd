@@ -14,4 +14,13 @@ export class HeadMasterService {
   addHeadmaster(headmaster: HeadMaster): Observable<Response> {
     return this.http.post(`${this.baseUrl}`, headmaster);
   }
+  getHeadMaster(email: string): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/${email}`);
+  }
+  updateHeadMaster(id: number, headMaster: HeadMaster): Observable<Response> {
+    return this.http.put(`${this.baseUrl}/${id}`, headMaster);
+  }
+  deleteHeadMaster(id: number): Observable<Response> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
 }

@@ -30,9 +30,8 @@ import { ViewTimetableComponent } from './components/headmaster/timetable/view-t
 import { DropdownListModule } from 'ngx-dropdown-list';
 import { UpdateTimetableComponent } from './components/headmaster/timetable/update-timetable/update-timetable.component';
 import { ViewTeachersComponent } from './components/headmaster/staff/view-teachers/view-teachers.component';
-import { AdminSignupComponent } from './components/headmaster/profile/admin-signup/admin-signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDialogModule} from "@angular/material/dialog";
+import { MatDialogModule } from "@angular/material/dialog";
 import { AddTopicStatusComponent } from './components/teacher/topic/add-topic-status/add-topic-status.component';
 import { ViewTopicStatusComponent } from './components/teacher/topic/view-topic-status/view-topic-status.component';
 import { UpdateTopicStatusComponent } from './components/teacher/topic/update-topic-status/update-topic-status.component';
@@ -40,6 +39,11 @@ import { ViewSyllabusComponent } from './components/teacher/topic/view-syllabus/
 import { ViewStudentComponent } from './components/teacher/student/view-student/view-student.component';
 import { StaffViewTimetableComponent } from './components/teacher/timetable/staff-view-timetable/staff-view-timetable.component';
 import { TopicStatusComponent } from './components/headmaster/topic/topic-status/topic-status.component';
+import { AdminForgotPasswordComponent } from './components/home/headmaster/admin-forgot-password/admin-forgot-password.component';
+import { AdminLoginComponent } from './components/home/headmaster/admin-login/admin-login.component';
+import { AdminSignupComponent } from './components/home/headmaster/admin-signup/admin-signup.component';
+import { HomeComponent } from './components/home/home/home.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +80,9 @@ import { TopicStatusComponent } from './components/headmaster/topic/topic-status
     ViewStudentComponent,
     StaffViewTimetableComponent,
     TopicStatusComponent,
+    AdminLoginComponent,
+    AdminForgotPasswordComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +96,9 @@ import { TopicStatusComponent } from './components/headmaster/topic/topic-status
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[UpdateTopicComponent,
-    UpdateTopicStatusComponent]
+  entryComponents: [UpdateTopicComponent,
+    UpdateTopicStatusComponent,
+    AdminForgotPasswordComponent,
+  ]
 })
 export class AppModule { }

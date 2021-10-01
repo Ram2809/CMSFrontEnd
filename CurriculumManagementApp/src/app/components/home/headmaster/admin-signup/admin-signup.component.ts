@@ -12,7 +12,7 @@ import { Response } from 'src/app/model/response';
 })
 export class AdminSignupComponent implements OnInit {
 
-  public qualificationList: String[] = ['B.Ed', 'Ph.D', 'M.Phill', 'M.Sc', 'M.A', 'B.Sc', 'B.A', 'B.Com', 'M.Com'];
+  public qualificationList: String[] = ['B.Ed', 'Ph.D', 'M.Phil', 'M.Sc', 'M.A', 'B.Sc', 'B.A', 'B.Com', 'M.Com'];
   public majorList: String[] = ['Tamil', 'English', 'Maths', 'History', 'Physics', 'Chemistry', 'Computer Science', 'Botany', 'Zoology', 'Physical Education', 'Hindi'];
   public response: Response = new Response();
   AddHeadMasterForm = new FormGroup({
@@ -44,10 +44,12 @@ export class AdminSignupComponent implements OnInit {
     headmaster.email = this.email?.value;
     headmaster.contactNo = this.contactNo?.value;
     headmaster.address = this.address?.value;
+    headmaster.password="admin@123";
     this.headMasterService.addHeadmaster(headmaster).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.message)
+      console.log(responseBody.message);
       window.alert(responseBody.message);
+      this.AddHeadMasterForm.reset();
     }, error => {
       window.alert(error.error.message);
     });
