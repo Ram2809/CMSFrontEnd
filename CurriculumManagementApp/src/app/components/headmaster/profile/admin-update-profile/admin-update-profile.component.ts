@@ -31,6 +31,7 @@ export class AdminUpdateProfileComponent implements OnInit {
     this.headMasterService.updateHeadMaster(Number(this.headMaster.id),this.headMaster).subscribe(response=>{
       let responseBody:Response=response;
       window.alert(responseBody.message);
+      this.close();
       this.ngOnInit();
     },error=>{
       window.alert(error.error.message);

@@ -3,15 +3,9 @@
     text-align: center;
     color:rgb(22, 77, 160)  
 }
-/* table
-{
-        margin:50px 400px;
-        width:40%;
+#main{
+    margin-top: 50px;
 }
-tr,td
-{
-        padding:5px;
-} */
 .required:after {
     content:" *";
     color: red;
@@ -20,7 +14,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 13cm;
+    margin-left: 8cm;
 }
 #resetButton
 {
@@ -32,8 +26,11 @@ label{
 }
 #deleteButton
 {
-    margin-left: 28cm;
+    margin-left: 14cm;
 }
 #backButton{
     margin-left: 1cm;
+}
+#viewStudent{
+    margin-left: 6cm;
 }

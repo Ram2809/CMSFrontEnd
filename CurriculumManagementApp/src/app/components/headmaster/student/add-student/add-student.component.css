@@ -11,7 +11,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 13cm;
+    margin-left: 10cm;
 }
 #resetButton
 {
@@ -20,4 +20,10 @@ label{
 .error
 {
     color: red;
+}
+#main{
+    margin-top: 50px;
+}
+#addStudent{
+    margin-left: 3cm;
 }

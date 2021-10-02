@@ -13,8 +13,8 @@ import { StudentService } from 'src/app/services/student.service';
 export class AddStudentComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public classList: Class[] = [];
-  public response: Response = new Response();
-  public roomNo: number | any;
+  public roomNo: number = 0;
+
   AddStudentForm = new FormGroup({
     rollNo: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
@@ -28,39 +28,47 @@ export class AddStudentComponent implements OnInit {
   });
   constructor(private classService: ClassService,
     private studentService: StudentService) { }
+
   ngOnInit(): void {
   }
   addStudent() {
-    const student = new Student();
-    student.rollNo = this.rollNo?.value;
-    student.firstName = this.firstName?.value;
-    student.lastName = this.lastName?.value;
-    student.dateOfBirth = this.dateOfBirth?.value;
-    student.gender = this.gender?.value;
-    student.contactNo = this.contactNo?.value;
-    student.address = this.address?.value;
-    const classDetail = new Class();
-    this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(data => {
-      console.log(this.response);
-      this.response = data;
-      this.roomNo = this.response.data;
-      classDetail.roomNo = this.roomNo;
-      student.classDetail = classDetail;
-      console.log(student);
-      this.studentService.addStudent(student).subscribe(data => {
-        this.response = data;
-        console.log(this.response);
-        window.alert(this.response.message);
-      })
-    })
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      const student = new Student();
+      student.rollNo = this.rollNo?.value;
+      student.firstName = this.firstName?.value;
+      student.lastName = this.lastName?.value;
+      student.dateOfBirth = this.dateOfBirth?.value;
+      student.gender = this.gender?.value;
+      student.contactNo = this.contactNo?.value;
+      student.address = this.address?.value;
+      const classDetail = new Class();
+      this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
+        let responseBody: Response = response;
+        this.roomNo = responseBody.data;
+        classDetail.roomNo = this.roomNo;
+        student.classDetail = classDetail;
+        console.log(student);
+        this.studentService.addStudent(student).subscribe(data => {
+          let responseBody: Response = response;
+          window.alert(responseBody.message);
+          this.AddStudentForm.reset();
+        }, error => {
+          window.alert(error.error.message);
+        });
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
   getSections() {
-    this.classService.getClassesByStandard(this.standard?.value).subscribe(data => {
-      console.log(data);
-      this.response = data;
-      this.classList = this.response.data;
+    this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
+      let responseBody: Response = response;
+      this.classList = responseBody.data;
       console.log(this.classList);
-    })
+    }, error => {
+      window.alert(error.error.message);
+    });
   }
   get rollNo() {
     return this.AddStudentForm.get('rollNo');
