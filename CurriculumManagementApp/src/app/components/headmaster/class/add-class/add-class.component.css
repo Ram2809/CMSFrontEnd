@@ -3,7 +3,7 @@
     text-align: center;
     color:rgb(22, 77, 160)  
 }
-.boxed
+/* .boxed
 {
   width: 800px;
   border: 2px solid aqua;
@@ -13,4 +13,36 @@
   margin-top: 100px;
   margin-bottom: 100px;
   background-color: rgb(46, 175, 158);
+} */
+#main{
+  margin-top: 50px;
+}
+#addForm{
+  margin-left: 8cm;
+}
+.error
+{
+    color: red;
+}
+.info{
+    color:blue;
+}
+.title
+{
+    text-align: center;
+    color:rgb(22, 77, 160)  
+}
+.required:after {
+    content:" *";
+    color: red;
+  }
+label{
+    font-weight:bold;
+}
+#submitButton{
+    margin-left: 5cm;
+}
+#resetButton
+{
+    margin-left: 0.5cm;
 }

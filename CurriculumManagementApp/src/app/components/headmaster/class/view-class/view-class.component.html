@@ -1,5 +1,5 @@
 <div class="container fluid mb-3">
-    <h3 class="title" style="text-align: center;"><b><i>Class Details</i></b></h3>
+    <h3 class="title"><b><i>Class Details</i></b></h3>
     <form>
         <table class="table table-bordered" style="margin-left: 6cm; width:70%">
             <thead class="thead-light">
@@ -21,6 +21,6 @@
         </table>
         <button id="updateButton" class="btn btn-success" (click)="updateClass()" type="submit"
             [disabled]='roomNo==0'>Update</button>
-        <button id="deleteButton" class="btn btn-info" type="submit" (click)="backToMain()">Back</button>
+        <button id="backButton" class="btn btn-info" type="submit" (click)="backToMain()">Back</button>
     </form>
 </div>

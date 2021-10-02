@@ -3,27 +3,34 @@ import { Class } from 'src/app/model/class';
 import { ClassService } from 'src/app/services/class.service';
 import { Router } from '@angular/router';
 import { Response } from 'src/app/model/response';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UpdateClassComponent } from '../update-class/update-class.component';
 @Component({
   selector: 'app-view-class',
   templateUrl: './view-class.component.html',
   styleUrls: ['./view-class.component.css']
 })
 export class ViewClassComponent implements OnInit {
-  public response: Response = new Response();
   public classList: Class[] = [];
   public roomNo: number = 0;
-  constructor(private classService: ClassService, private router: Router) { }
+  constructor(private classService: ClassService, 
+    private router: Router,
+    private dialog:MatDialog) { }
   ngOnInit(): void {
-    this.classService.getAllClasses().subscribe(data => {
-      this.response = data;
-      this.classList = this.response.data;
-      console.log(this.classList);
-    })
+    this.classService.getAllClasses().subscribe(response => {
+      let responseBody:Response=response;
+      this.classList =  responseBody.data;
+    },error=>{
+      window.alert(error.error.message);
+    });
   }
   updateClass() {
     console.log(this.roomNo);
-    //localStorage.setItem('roomNo',JSON.stringify(this.roomNo));
-    this.router.navigate(['/updateclass', this.roomNo]);
+    localStorage.setItem('roomNo',String(this.roomNo));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UpdateClassComponent, dialogConfig);
   }
   // deleteClass()
   // {
@@ -35,6 +42,6 @@ export class ViewClassComponent implements OnInit {
   //   })
   // }
   backToMain() {
-    this.router.navigate(['admin'])
+    this.router.navigate(['admin']);
   }
 }

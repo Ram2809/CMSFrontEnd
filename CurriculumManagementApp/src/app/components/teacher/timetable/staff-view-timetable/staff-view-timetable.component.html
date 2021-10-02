@@ -14,7 +14,7 @@
                     <button id="submitButton" class="btn btn-info" type="submit" (click)="getTimetable()">View Timetable</button>
                 </div>
             </div><br>
-            <ng-template #elseBlock>
+            <ng-template [hidden]="!isHidden" #elseBlock>
                 <label class="notFound">{{errorMessage}}</label>
             </ng-template>
             <div *ngIf="timetableList.length>0 else elseBlock" [hidden]="isHidden">

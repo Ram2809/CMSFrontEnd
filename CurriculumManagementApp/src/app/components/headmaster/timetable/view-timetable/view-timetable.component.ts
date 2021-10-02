@@ -5,6 +5,8 @@ import { TimeTable } from 'src/app/model/time-table';
 import { TimeTableService } from 'src/app/services/time-table.service';
 import { Response } from 'src/app/model/response';
 import { ClassService } from 'src/app/services/class.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UpdateTimetableComponent } from '../update-timetable/update-timetable.component';
 
 @Component({
   selector: 'app-view-timetable',
@@ -16,12 +18,14 @@ export class ViewTimetableComponent implements OnInit {
   public timetableList: TimeTable[] = [];
   public classList: Class[] = [];
   public roomNo: number = 0;
+  public isHidden: boolean = false;
   ViewTimetableForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
   })
   constructor(private timetableService: TimeTableService,
-    private classService: ClassService) { }
+    private classService: ClassService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -35,21 +39,20 @@ export class ViewTimetableComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-  getClassRoom() {
-
-  }
   getTimetable() {
     this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
       let responseBody: Response = response;
       console.log(responseBody.data);
       this.roomNo = responseBody.data;
-      localStorage.setItem('roomNo',String(this.roomNo));
+      localStorage.setItem('roomNo', String(this.roomNo));
       console.log(this.roomNo);
       this.timetableService.getTimeTable(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.timetableList = responseBody.data;
+        this.isHidden=false;
         console.log(this.timetableList);
       }, error => {
+        this.isHidden=true;
         window.alert(error.error.message);
       });
     }, error => {
@@ -71,6 +74,12 @@ export class ViewTimetableComponent implements OnInit {
     }, error => {
       window.alert(error.error.message);
     });
+  }
+  updateTimetable() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UpdateTimetableComponent, dialogConfig);
   }
   get standard() {
     return this.ViewTimetableForm.get('standard');

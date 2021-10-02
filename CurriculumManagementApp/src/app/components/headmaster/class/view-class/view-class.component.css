@@ -1,11 +1,16 @@
 #updateButton
 {
-    margin-left: 23cm;
+    margin-left: 14cm;
 }
-#deleteButton
+#backButton
 {
-    margin-left: 1cm;
+    margin-left: 0.5cm;
 }
 div{
     margin-top: 50px;
+}
+.title
+{
+    text-align: center;
+    color:rgb(22, 77, 160)  
 }

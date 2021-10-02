@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <label>Existing period</label>
-            <input type="text" class="form-control" name="existingPeriod" [(ngModel)]="existingPeriod">
+            <input type="text" class="form-control" name="existingPngeriod" [(ngModel)]="existingPeriod">
         </div>
         <div class="form-group">
             <label class="required">Subject Name</label>
@@ -27,7 +27,7 @@
                     {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
             </select>
         </div>
-        <button class="btn btn-success" id="submitButton" type="submit" (click)="updateTimetable()">View Timetable</button>
-        <button class="btn btn-success" id="resetButton" type="reset">Reset</button> <br>
+        <button class="btn btn-success" id="submitButton" type="submit" (click)="updateTimetable()">Update Timetable</button>
+        <button class="btn btn-success" id="resetButton" type="submit" (click)="close()">Close</button> <br>
     </form>
 </div>

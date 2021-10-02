@@ -1,12 +1,10 @@
-.error
-{
+.error{
     color: red;
 }
 .info{
     color:blue;
 }
-.title
-{
+.title{
     text-align: center;
     color:rgb(22, 77, 160)  
 }
@@ -20,19 +18,15 @@ label{
 #submitButton{
     margin-left: 14cm;
 }
-#resetButton
-{
+#resetButton{
     margin-left: 0.5cm;
 }
-.notFound
-{
+.notFound{
     margin-left: 14cm;
     color: crimson;
 }
 table{
-    /* margin-left: 5cm;
-    margin-right: 30cm; */
-    width: 800px;
+  width: 800px;
   padding: 10px;
   margin-left :200px;
   margin-right:100px;
@@ -42,7 +36,15 @@ table{
 #viewButton{
     margin-left: 13cm;
 }
-#deleteButton
-{
+#updateButton{
+    margin-left:12cm;
+}
+#deleteButton{
     margin-left: 0.5cm;
+}
+#main{
+    margin-top: 50px;
+}
+#formComponent{
+    margin-left: 9cm;
 }

@@ -1,32 +1,38 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Timetable</i></b></h3>
     <form [formGroup]="ViewTimetableForm">
         <div class="boxed">
-            <div class="form-group">
-                <label class="required">Standard</label>
-                <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
-                    formControlName="standard">
-                    <option value="" selected>Select the standard</option>
-                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
-                </select>
-                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
-                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+            <div id="formComponent" class="row">
+                <div class="col-sm-3">
+                    <label class="required">Standard</label>
+                    <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                        formControlName="standard">
+                        <option value="" selected>Select the standard</option>
+                        <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                    </select>
+                    <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                        <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Section</label>
-                <select class="custom-select" class="form-control" name="section" formControlName="section">
-                    <option value="" selected>Select the section</option>
-                    <option *ngFor="let class of classList">{{class.section}}</option>
-                </select>
-                <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
-                    <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                <div class="col-sm-3">
+                    <label class="required">Section</label>
+                    <select class="custom-select" class="form-control" name="section" formControlName="section">
+                        <option value="" selected>Select the section</option>
+                        <option *ngFor="let class of classList">{{class.section}}</option>
+                    </select>
+                    <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                        <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
-            <button class="btn btn-success" id="viewButton" type="submit" (click)="getTimetable()" [disabled]="!ViewTimetableForm.valid">View Timetable</button>
-            <button class="btn btn-success" id="deleteButton" type="submit" (click)="deleteTimetable()" [disabled]="!ViewTimetableForm.valid">Delete Timetable</button> 
+            </div><br>
+            <button class="btn btn-success" id="viewButton" type="submit" (click)="getTimetable()"
+                [disabled]="!ViewTimetableForm.valid">View Timetable</button>
+            <button class="btn btn-success" id="resetButton" type="reset">Reset</button> <br>
         </div>
-        <div>
+        <ng-template #elseBlock>
+            <label class="notFound">No Timetable Found</label>
+        </ng-template>
+        <div *ngIf="timetableList.length>0 else elseBlock" [hidden]="isHidden">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -48,6 +54,10 @@
                     </tr>
                 </tbody>
             </table>
+            <button class="btn btn-success" id="updateButton" type="submit" (click)="updateTimetable()"
+                [disabled]="!ViewTimetableForm.valid">Update Timetable</button>
+            <button class="btn btn-success" id="deleteButton" type="submit" (click)="deleteTimetable()"
+                [disabled]="!ViewTimetableForm.valid">Delete Timetable</button>
         </div>
     </form>
 </div>

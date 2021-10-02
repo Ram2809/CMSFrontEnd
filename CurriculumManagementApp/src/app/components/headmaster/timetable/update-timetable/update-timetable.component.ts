@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Class } from 'src/app/model/class';
 import { Response } from 'src/app/model/response';
 import { SubjectAssign } from 'src/app/model/subject-assign';
@@ -7,6 +8,7 @@ import { TimeTable } from 'src/app/model/time-table';
 import { ClassService } from 'src/app/services/class.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TimeTableService } from 'src/app/services/time-table.service';
+import { ViewTimetableComponent } from '../view-timetable/view-timetable.component';
 @Component({
   selector: 'app-update-timetable',
   templateUrl: './update-timetable.component.html',
@@ -23,10 +25,13 @@ export class UpdateTimetableComponent implements OnInit {
   public subject: string = "";
   public id: number = 0;
   public subjectAssignList: SubjectAssign[] = [];
+
   constructor(private classService: ClassService,
     private timetableService: TimeTableService,
-    private subjectService: SubjectService) { }
-
+    private subjectService: SubjectService,
+    private dialogRef: MatDialogRef<UpdateTimetableComponent>,
+    private dialog: MatDialog) { }
+    
   ngOnInit(): void {
     this.roomNo = Number(localStorage.getItem('roomNo'));
     console.log(this.roomNo);
@@ -57,12 +62,21 @@ export class UpdateTimetableComponent implements OnInit {
     });
   }
   updateTimetable() {
-    this.timetableService.updatePeriod(this.period, String(this.subject.split("-").pop()), this.id, this.timetable).subscribe(response => {
-      let responseBody: Response = response;
-      console.log(responseBody.message);
-      window.alert(responseBody.data + " " + responseBody.message);
-    }, error => {
-      window.alert(error.error.message);
-    });
+    let response: boolean = window.confirm("Are you sure to continue?");
+    if (response == true) {
+      this.timetableService.updatePeriod(this.period, String(this.subject.split("-").pop()), this.id, this.timetable).subscribe(response => {
+        let responseBody: Response = response;
+        console.log(responseBody.message);
+        window.alert(responseBody.data + " " + responseBody.message);
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
+  }
+  close() {
+    let response = window.confirm("Are you sure to close?");
+    if (response == true) {
+      this.dialogRef.close();
+    }
   }
 }

@@ -3,7 +3,13 @@
     text-align: center;
     color:rgb(22, 77, 160)  
 }
-.submitButton
+#submitButton
 {
-    margin-left: 12cm;
+    margin-left: 3.5cm;
+}
+#closeButton{
+    margin-left: 0.5cm;
+}
+#main{
+    width:12cm;
 }
