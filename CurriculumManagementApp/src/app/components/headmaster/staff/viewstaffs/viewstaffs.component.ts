@@ -68,11 +68,11 @@ export class ViewstaffsComponent implements OnInit {
       this.teacherService.getStaff(responseBody.data).subscribe(response => {
         let responseBody: Response = response;
         this.teacher = responseBody.data;
-        this.isHidden=false;
+        this.isHidden = false;
         console.log(this.teacher);
       }, error => {
-        this.isHidden=true;
-        this.errorMessage=error.error.message;
+        this.isHidden = true;
+        this.errorMessage = error.error.message;
         window.alert(error.error.message);
       });
     }, error => {
