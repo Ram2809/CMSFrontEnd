@@ -7,6 +7,8 @@ import { SubjectService } from 'src/app/services/subject.service';
 import { Response } from 'src/app/model/response';
 import { SubjectAssign } from 'src/app/model/subject-assign';
 import { Subject } from 'src/app/model/subject';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UpdateSubjectComponent } from '../update-subject/update-subject.component';
 @Component({
   selector: 'app-view-subjects',
   templateUrl: './view-subjects.component.html',
@@ -18,11 +20,12 @@ export class ViewSubjectsComponent implements OnInit {
   public subject: Subject = new Subject();
   public isHidden: boolean = false;
   public subjectAssign: SubjectAssign = new SubjectAssign();
+  public errorMessage: string = "";
   ViewSubjectsForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     option: new FormControl(''),
   });
-  constructor(private router: Router,
+  constructor(private dialog: MatDialog,
     private subjectService: SubjectService,
     private classService: ClassService) { }
 
@@ -38,23 +41,34 @@ export class ViewSubjectsComponent implements OnInit {
         responseBody = response;
         console.log(response.data);
         this.subjectAssignList = responseBody.data;
+        this.isHidden = false;
+      }, error => {
         this.isHidden = true;
+        this.errorMessage = error.error.message;
+        window.alert(error.error.message);
       });
+    }, error => {
+      window.alert(error.error.message);
     });
   }
   deleteSubject() {
-    console.log(this.option?.value);
-    this.subjectService.deleteSubject(this.option?.value).subscribe(response => {
-      let responseBody: Response = response;
-      window.alert(responseBody.message);
-    })
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      console.log(this.option?.value);
+      this.subjectService.deleteSubject(this.option?.value).subscribe(response => {
+        let responseBody: Response = response;
+        window.alert(responseBody.message);
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
   updateSubject() {
     localStorage.setItem('subjectCode', this.option?.value);
-    this.router.navigate(['admin/updatesubject']);
-  }
-  backToMain() {
-    this.router.navigate(['admin']);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UpdateSubjectComponent, dialogConfig);
   }
   get standard() {
     return this.ViewSubjectsForm.get('standard');

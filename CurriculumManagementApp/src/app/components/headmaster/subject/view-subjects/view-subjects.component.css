@@ -11,7 +11,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 13cm;
+    margin-top:28px;
 }
 #resetButton
 {
@@ -22,8 +22,18 @@ label{
     color: red;
 }
 #updateButton{
-    margin-left: 1cm;
+    margin-left: 0.5cm;
 }
 #deleteButton{
-    margin-left: 13cm;
+    margin-left: 8cm;
+}
+#main{
+    margin-top: 50px;
+}
+#viewSubjects{
+    margin-left: 8cm;
+}
+.notFound{
+    text-align: center;
+    color: red;
 }

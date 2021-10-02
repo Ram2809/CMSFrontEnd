@@ -11,7 +11,7 @@
                 <input type="text" name="name" class="form-control" [(ngModel)]="subject.name">
             </div>
             <button id="submitButton" (click)="updateSubject()" class="btn btn-info">Update</button>
-            <button id="resetButton" class="btn btn-info">Reset</button>
+            <button id="resetButton" class="btn btn-info" type="submit" (click)="close()">Close</button>
         </div>
     </form>
 </div>
