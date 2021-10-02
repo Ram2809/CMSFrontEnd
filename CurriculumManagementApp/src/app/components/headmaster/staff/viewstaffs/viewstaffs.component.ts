@@ -22,6 +22,7 @@ export class ViewstaffsComponent implements OnInit {
   public isHidden: boolean = false;
   public subjectAssignList: SubjectAssign[] = [];
   public teacher: Teacher = new Teacher();
+  public errorMessage: string = "";
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private teacherService: TeacherService) { }
@@ -58,7 +59,7 @@ export class ViewstaffsComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-  getStaffs() {
+  getStaff() {
     this.id = Number(this.subject.split("-").shift());
     console.log(this.id);
     this.teacherService.getTeacherId(this.id).subscribe(response => {
@@ -67,12 +68,15 @@ export class ViewstaffsComponent implements OnInit {
       this.teacherService.getStaff(responseBody.data).subscribe(response => {
         let responseBody: Response = response;
         this.teacher = responseBody.data;
+        this.isHidden=false;
         console.log(this.teacher);
       }, error => {
+        this.isHidden=true;
+        this.errorMessage=error.error.message;
         window.alert(error.error.message);
-      })
+      });
     }, error => {
       window.alert(error.error.message);
-    })
+    });
   }
 }

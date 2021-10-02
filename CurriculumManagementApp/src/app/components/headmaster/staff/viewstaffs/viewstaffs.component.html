@@ -1,6 +1,7 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Staffs</i></b></h3>
-    <form>
+    <form >
+        <div id="viewStaff" class="col-sm-6">
         <div class="form-group">
             <label class="required">Standard</label>
             <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
@@ -34,26 +35,14 @@
                 <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
             </div> -->
         </div>
-        <button id="submitButton" class="btn btn-info" type="submit" (click)="getStaffs()">Get Details</button>
-        <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
-        <!-- <table class="table table-bordered" *ngIf="subjectAssignList.length>0">
-            <thead>
-                <tr>
-                    <th>Action</th>
-                    <th>Subject Code</th>
-                    <th>Subject Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let subjectAssign of subjectAssignList;let i=index">
-                    <td><input type="radio" name="option" [(ngModel)]="id" value="{{subjectAssign.id}}"></td>
-                    <td>{{subjectAssign.subject?.code}}</td>
-                    <td>{{subjectAssign.subject?.name}}</td>
-                </tr>
-            </tbody>
-        </table> -->
-        <!-- <button  id="deleteButton" (click)="getStaffs()" class="btn btn-info" type="submit" [hidden]="!isHidden">Get Staff</button> -->
-        <table class="table table-bordered" *ngIf="id>0">
+        <button id="submitButton" class="btn btn-info" type="submit" (click)="getStaff()">Get Details</button>
+        <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br>
+    </div>
+    <ng-template #elseBlock>
+        <label class="notFound">{{errorMessage}}</label>
+    </ng-template>
+    <div *ngIf="(teacher | json) != '{}' else elseBlock">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Staff Id</th>
@@ -75,5 +64,6 @@
                 </tr>
             </tbody>
         </table>
+    </div>
     </form>
 </div>

@@ -31,5 +31,4 @@ export class ViewTeachersComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-
 }

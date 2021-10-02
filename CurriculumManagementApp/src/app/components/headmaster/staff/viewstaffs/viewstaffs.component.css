@@ -11,7 +11,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 13cm;
+    margin-left: 5.5cm;
 }
 #resetButton
 {
@@ -23,4 +23,15 @@ label{
 }
 .info{
     color:blue;
+}
+#main{
+    margin-top: 50px;
+}
+#viewStaff{
+    margin-left: 8cm;
+}
+.notFound
+{
+    margin-left: 14cm;
+    color: crimson;
 }

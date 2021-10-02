@@ -19,12 +19,14 @@ export class StaffAssignComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public roomNo: number = 0;
   public staffList: Teacher[] = [];
+
   AssignStaffForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     teacher: new FormControl('', Validators.required),
   });
+
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private teacherService: TeacherService) { }
@@ -34,14 +36,18 @@ export class StaffAssignComponent implements OnInit {
       let responseBody: Response = response;
       console.log(responseBody.data);
       this.staffList = responseBody.data;
-    })
+    }, error => {
+      window.alert(error.error.message);
+    });
   }
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
       console.log(this.classList);
-    })
+    }, error => {
+      window.alert(error.error.message);
+    });
   }
   getSubjects() {
     let responseBody: Response = new Response();
@@ -53,34 +59,42 @@ export class StaffAssignComponent implements OnInit {
         let responseBody: Response = response;
         console.log(responseBody.data);
         this.subjectAssignList = responseBody.data;
+      }, error => {
+        window.alert(error.error.message);
       });
+    }, error => {
+      window.alert(error.error.message);
     });
   }
   assignStaff() {
-    this.subjectService.getAssignId(this.roomNo, this.subject?.value.split("-").shift()).subscribe(response => {
-      let responseBody: Response = response;
-      console.log(responseBody.data);
-      let subjectAssignId = responseBody.data;
-      const teacherAssign: TeacherAssign = new TeacherAssign();
-      const teacher: Teacher = new Teacher();
-      teacher.id = this.teacher?.value.split("-").shift();
-      console.log(teacher.id);
-      const subjectAssign: SubjectAssign = new SubjectAssign();
-      subjectAssign.id = subjectAssignId;
-      console.log(subjectAssign.id);
-      teacherAssign.teacher = teacher;
-      teacherAssign.subjectAssign = subjectAssign;
-      console.log(teacherAssign);
-      this.teacherService.assignStaff(teacherAssign).subscribe(responseBody => {
-        let responseEntity: Response = response;
-        console.log(responseEntity.message);
-        window.alert(responseEntity.message);
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      this.subjectService.getAssignId(this.roomNo, this.subject?.value.split("-").shift()).subscribe(response => {
+        let responseBody: Response = response;
+        console.log(responseBody.data);
+        let subjectAssignId = responseBody.data;
+        const teacherAssign: TeacherAssign = new TeacherAssign();
+        const teacher: Teacher = new Teacher();
+        teacher.id = this.teacher?.value.split("-").shift();
+        console.log(teacher.id);
+        const subjectAssign: SubjectAssign = new SubjectAssign();
+        subjectAssign.id = subjectAssignId;
+        console.log(subjectAssign.id);
+        teacherAssign.teacher = teacher;
+        teacherAssign.subjectAssign = subjectAssign;
+        console.log(teacherAssign);
+        this.teacherService.assignStaff(teacherAssign).subscribe(responseBody => {
+          let responseEntity: Response = response;
+          console.log(responseEntity.message);
+          window.alert(responseEntity.message);
+          this.AssignStaffForm.reset();
+        }, error => {
+          window.alert(error.message);
+        });
       }, error => {
         window.alert(error.message);
       });
-    }, error => {
-      window.alert(error.message);
-    });
+    }
   }
   get standard() {
     return this.AssignStaffForm.get('standard');

@@ -1,7 +1,7 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>Assign staff for subject</i></b></h3>
     <form [formGroup]="AssignStaffForm">
-        <div class="boxed">
+        <div id="staffAssignForm" class="col-sm-6">
             <div class="form-group">
                 <label class="required">Standard</label>
                 <select class="custom-select" class="form-control" name="standard" (change)="getSections()"

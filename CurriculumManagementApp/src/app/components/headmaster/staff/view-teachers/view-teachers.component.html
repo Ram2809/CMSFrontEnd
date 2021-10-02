@@ -29,7 +29,12 @@
                     <td>{{teacher.major}}</td>
                     <td>{{teacher.email}}</td>
                     <td>{{teacher.contactNo}}</td>
-                    <td>{{teacher.address?.addressLine}},{{teacher.address?.city}},{{teacher.address?.district}},{{teacher.address?.state}},{{teacher.address?.country}}-{{teacher.address?.pinCode}}</td>
+                    <td>{{teacher.address?.addressLine}},<br>
+                        {{teacher.address?.city}},<br>
+                        {{teacher.address?.district}}-{{teacher.address?.pinCode}}<br>
+                        {{teacher.address?.state}},<br>
+                        {{teacher.address?.country}}<br>
+                    </td>
                 </tr>
             </tbody>
             </table>
