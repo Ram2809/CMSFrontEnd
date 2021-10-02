@@ -1,5 +1,4 @@
-.title
-{
+.title{
     text-align: center;
     color:rgb(22, 77, 160)  
 }
@@ -11,16 +10,20 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 13cm;
+    margin-left: 5.5cm;
 }
-#resetButton
-{
+#resetButton{
     margin-left: 0.5cm;
 }
-.error
-{
+.error{
     color: red;
 }
 .info{
     color:blue;
+}
+#main{
+    margin-top: 50px;
+}
+#addSubject{
+    margin-left:8cm;
 }
