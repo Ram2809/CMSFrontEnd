@@ -19,6 +19,8 @@ export class ViewTimetableComponent implements OnInit {
   public classList: Class[] = [];
   public roomNo: number = 0;
   public isHidden: boolean = false;
+  public errorMessage:string="";
+
   ViewTimetableForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -49,10 +51,11 @@ export class ViewTimetableComponent implements OnInit {
       this.timetableService.getTimeTable(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.timetableList = responseBody.data;
-        this.isHidden=false;
+        this.isHidden = false;
         console.log(this.timetableList);
       }, error => {
-        this.isHidden=true;
+        this.errorMessage=error.error.message;
+        this.isHidden = true;
         window.alert(error.error.message);
       });
     }, error => {
@@ -60,20 +63,23 @@ export class ViewTimetableComponent implements OnInit {
     });
   }
   deleteTimetable() {
-    this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
-      let responseBody: Response = response;
-      console.log(responseBody.data);
-      this.roomNo = responseBody.data;
-      console.log(this.roomNo);
-      this.timetableService.deleteTimetable(this.roomNo).subscribe(response => {
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
-        window.alert(responseBody.message);
+        console.log(responseBody.data);
+        this.roomNo = responseBody.data;
+        console.log(this.roomNo);
+        this.timetableService.deleteTimetable(this.roomNo).subscribe(response => {
+          let responseBody: Response = response;
+          window.alert(responseBody.message);
+        }, error => {
+          window.alert(error.error.message);
+        });
       }, error => {
         window.alert(error.error.message);
       });
-    }, error => {
-      window.alert(error.error.message);
-    });
+    }
   }
   updateTimetable() {
     const dialogConfig = new MatDialogConfig();

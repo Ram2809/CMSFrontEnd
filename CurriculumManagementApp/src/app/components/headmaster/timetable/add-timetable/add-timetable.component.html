@@ -1,91 +1,94 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>Add TimeTable</i></b></h3>
     <form [formGroup]="AddTimetableForm">
-        <div class="boxed">
-            <div class="form-group">
-                <label class="required">Standard</label>
-                <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
-                    formControlName="standard">
-                    <option value="" selected>Select the standard</option>
-                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
-                </select>
-                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
-                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+        <div id="addTimetable" class="col-sm-12">
+            <div class="row">
+                <div class="col">
+                    <label class="required">Standard</label>
+                    <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                        formControlName="standard">
+                        <option value="" selected>Select the standard</option>
+                        <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                    </select>
+                    <div *ngIf="standard?.invalid && (standard?.touched || standard?.dirty)">
+                        <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Section</label>
-                <select class="custom-select" class="form-control" name="section" formControlName="section"
-                    (change)="getSubjects()">
-                    <option value="" selected>Select the section</option>
-                    <option *ngFor="let class of classList">{{class.section}}</option>
-                </select>
-                <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
-                    <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                <div class="col">
+                    <label class="required">Section</label>
+                    <select class="custom-select" class="form-control" name="section" formControlName="section"
+                        (change)="getSubjects()">
+                        <option value="" selected>Select the section</option>
+                        <option *ngFor="let class of classList">{{class.section}}</option>
+                    </select>
+                    <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                        <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
+            </div><br>
             <div class="form-group">
                 <label class="required">Day</label>
-                <select class="custom-select" class="form-control" name="day" formControlName="day">
+                <select class="custom-select" class="form-control" name="day" formControlName="day" aria-disabled="">
                     <option value="" selected>Select the day</option>
                     <option [value]="day" *ngFor="let day of daysList">{{day}}</option>
                 </select>
                 <div *ngIf="day?.invalid &&(day?.touched||day?.dirty)">
                     <div class="error" *ngIf="day?.errors?.required">* This field is required</div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Period</label>
-                <select class="custom-select" class="form-control" name="period" formControlName="period">
-                    <option value="" selected>Select the period</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                </select>
-                <div *ngIf="period?.invalid &&(period?.touched||period?.dirty)">
-                    <div class="error" *ngIf="period?.errors?.required">* This field is required</div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <label class="required">Period</label>
+                    <select class="custom-select" class="form-control" name="period" formControlName="period">
+                        <option value="" selected>Select the period</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                    </select>
+                    <div *ngIf="period?.invalid &&(period?.touched||period?.dirty)">
+                        <div class="error" *ngIf="period?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Subject Name</label>
-                <select class="custom-select" class="form-control" name="subject" formControlName="subject">
-                    <option value="" selected>Select the subject name</option>
-                    <option *ngFor="let subjectAssign of subjectAssignList">
-                        {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
-                </select>
-                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
-                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                <div class="col">
+                    <label class="required">Subject Name</label>
+                    <select class="custom-select" class="form-control" name="subject" formControlName="subject">
+                        <option value="" selected>Select the subject name</option>
+                        <option *ngFor="let subjectAssign of subjectAssignList">
+                            {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
+                    </select>
+                    <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                        <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
+            </div><br>
+            <button id="submitButton" class="btn btn-success" type="submit" (click)="addPeriod()"
+                [disabled]="!AddTimetableForm.valid">Add period</button>
+            <button id="resetButton" class="btn btn-success" type="reset">Reset</button>
+            <div *ngIf="periodsMap.size()>0">
+                <h3 class="title"><b><i>Period details</i></b></h3><br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let entry of periodsMap.entries()">
+                            <td>{{entry[0]}}</td>
+                            <td>{{entry[1]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="confirmButton" class="btn btn-success" type="submit" (click)="addTimetable()"
+                    [disabled]="periodsMap.size()<8">Confirm</button>
+                <button id="cancelButton" class="btn btn-success">Cancel</button>
             </div>
-            <button id="submitButton" class="btn btn-success" type="submit" (click)="addPeriod()" [disabled]="!AddTimetableForm.valid">Add period</button>
-            <button id="resetButton" class="btn btn-success" type="reset">Reset</button><br>
-            <ng-template #elseBlock>
-                <label class="notFound">No Content Available!</label>
-            </ng-template><br>
-            <div *ngIf="periodsMap.size()>0 else elseBlock">
-                <h3 class="title"><b><i>Period details</i></b></h3>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Period</th>
-                        <th>Subject Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let entry of periodsMap.entries()">
-                        <td>{{entry[0]}}</td>
-                        <td>{{entry[1]}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button id="confirmButton" class="btn btn-success" type="submit" (click)="addTimetable()" [disabled]="periodsMap.size()<8">Confirm</button>
-            <button id="cancelButton" class="btn btn-success" >Cancel</button>
-        </div>
         </div>
     </form>
 </div>

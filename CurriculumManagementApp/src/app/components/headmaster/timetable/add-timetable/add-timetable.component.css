@@ -24,15 +24,8 @@ label{
 {
     margin-left: 0.5cm;
 }
-.notFound
-{
-    margin-left: 14cm;
-    color: crimson;
-}
 table{
-    /* margin-left: 5cm;
-    margin-right: 30cm; */
-    width: 800px;
+  width: 800px;
   padding: 10px;
   margin-left :200px;
   margin-right:100px;
@@ -45,4 +38,10 @@ table{
 #cancelButton
 {
     margin-left: 0.5cm;
+}
+#main{
+    margin-top: 50px;
+}
+th,td{
+    text-align: center;
 }

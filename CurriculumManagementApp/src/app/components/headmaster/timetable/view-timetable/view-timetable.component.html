@@ -30,7 +30,7 @@
             <button class="btn btn-success" id="resetButton" type="reset">Reset</button> <br>
         </div>
         <ng-template #elseBlock>
-            <label class="notFound">No Timetable Found</label>
+            <label class="notFound">{{errorMessage}}</label>
         </ng-template>
         <div *ngIf="timetableList.length>0 else elseBlock" [hidden]="isHidden">
             <table class="table table-bordered">

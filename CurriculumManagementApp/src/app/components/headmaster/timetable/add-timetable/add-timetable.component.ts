@@ -20,6 +20,8 @@ export class AddTimetableComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public periodsMap: TSMap<Number, String> = new TSMap();
   public roomNo: number = 0;
+  public isHidden: boolean = false;
+
   AddTimetableForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -27,6 +29,7 @@ export class AddTimetableComponent implements OnInit {
     period: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
   });
+
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private timetableService: TimeTableService) { }
@@ -38,7 +41,7 @@ export class AddTimetableComponent implements OnInit {
       let responseBody: Response = response;
       this.classList = responseBody.data;
       console.log(this.classList);
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
@@ -52,10 +55,10 @@ export class AddTimetableComponent implements OnInit {
         let responseBody: Response = response;
         console.log(responseBody.data);
         this.subjectAssignList = responseBody.data;
-      },error=>{
+      }, error => {
         window.alert(error.error.message);
       });
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
@@ -65,24 +68,27 @@ export class AddTimetableComponent implements OnInit {
     return this.periodsMap.toJSON();
   }
   addTimetable() {
-    console.log(this.addPeriod());
-    const timetable: TimeTable = new TimeTable();
-    timetable.day = this.day?.value;
-    timetable.periods = this.addPeriod();
-    console.log(timetable.periods);
-    const classDetail = new Class();
-    classDetail.roomNo = this.roomNo;
-    timetable.classDetail = classDetail;
-    console.log(timetable);
-    this.timetableService.addTimetable(timetable).subscribe(response => {
-      let responseBody: Response = response;
-      console.log(responseBody.message);
-      window.alert(responseBody.message);
-      this.periodsMap.clear();
-      console.log(this.periodsMap);
-    },error=>{
-      window.alert(error.error.message);
-    });
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      console.log(this.addPeriod());
+      const timetable: TimeTable = new TimeTable();
+      timetable.day = this.day?.value;
+      timetable.periods = this.addPeriod();
+      console.log(timetable.periods);
+      const classDetail = new Class();
+      classDetail.roomNo = this.roomNo;
+      timetable.classDetail = classDetail;
+      console.log(timetable);
+      this.timetableService.addTimetable(timetable).subscribe(response => {
+        let responseBody: Response = response;
+        console.log(responseBody.message);
+        window.alert(responseBody.message);
+        this.periodsMap.clear();
+        console.log(this.periodsMap);
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
   get standard() {
     return this.AddTimetableForm.get('standard');
