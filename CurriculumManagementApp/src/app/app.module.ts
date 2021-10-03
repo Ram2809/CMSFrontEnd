@@ -51,6 +51,7 @@ import { TeacherSignupComponent } from './components/home/teacher/teacher-signup
 import { StaffViewProfileComponent } from './components/teacher/profile/staff-view-profile/staff-view-profile.component';
 import { StaffUpdateProfileComponent } from './components/teacher/profile/staff-update-profile/staff-update-profile.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ViewAssignedSubjectsComponent } from './components/teacher/profile/view-assigned-subjects/view-assigned-subjects.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     TeacherForgotpasswordComponent,
     StaffViewProfileComponent,
     StaffUpdateProfileComponent,
+    ViewAssignedSubjectsComponent,
   ],
   imports: [
     BrowserModule,

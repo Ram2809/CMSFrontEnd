@@ -19,7 +19,7 @@ import { ClassService } from 'src/app/services/class.service';
 })
 export class AddDiscussionComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public staffId: number = 1002;
+  public staffId: number = 0;
   public assignIdList: SubjectAssign[] = [];
   public subjectList: Subject[] = [];
   public topicList: Topic[] = [];
@@ -48,7 +48,8 @@ export class AddDiscussionComponent implements OnInit {
     private classService: ClassService) { }
 
   ngOnInit(): void {
-
+    this.staffId=Number(localStorage.getItem('staffId'));
+    console.log(this.staffId);
   }
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {

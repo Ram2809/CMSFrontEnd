@@ -25,15 +25,13 @@ import { AdminForgotPasswordComponent } from './components/home/headmaster/admin
 import { AdminLoginComponent } from './components/home/headmaster/admin-login/admin-login.component';
 import { AdminSignupComponent } from './components/home/headmaster/admin-signup/admin-signup.component';
 import { HomeComponent } from './components/home/home/home.component';
-import { AddAddressComponent } from './components/home/teacher/add-address/add-address.component';
-import { AddLoginDataComponent } from './components/home/teacher/add-login-data/add-login-data.component';
 import { TeacherForgotpasswordComponent } from './components/home/teacher/teacher-forgotpassword/teacher-forgotpassword.component';
 import { TeacherLoginComponent } from './components/home/teacher/teacher-login/teacher-login.component';
-import { TeacherSignupComponent } from './components/home/teacher/teacher-signup/teacher-signup.component';
 import { AddDiscussionComponent } from './components/teacher/discussion/add-discussion/add-discussion.component';
 import { UpdateDiscussionComponent } from './components/teacher/discussion/update-discussion/update-discussion.component';
 import { ViewDiscussionComponent } from './components/teacher/discussion/view-discussion/view-discussion.component';
 import { StaffViewProfileComponent } from './components/teacher/profile/staff-view-profile/staff-view-profile.component';
+import { ViewAssignedSubjectsComponent } from './components/teacher/profile/view-assigned-subjects/view-assigned-subjects.component';
 import { ViewStudentComponent } from './components/teacher/student/view-student/view-student.component';
 import { TeacherDashboardComponent } from './components/teacher/teacher-dashboard/teacher-dashboard.component';
 import { StaffViewTimetableComponent } from './components/teacher/timetable/staff-view-timetable/staff-view-timetable.component';
@@ -42,16 +40,13 @@ import { UpdateTopicStatusComponent } from './components/teacher/topic/update-to
 import { ViewSyllabusComponent } from './components/teacher/topic/view-syllabus/view-syllabus.component';
 import { ViewTopicStatusComponent } from './components/teacher/topic/view-topic-status/view-topic-status.component';
 
-
 const routes: Routes = [
   {
-    path: 'admin', component: AdminDashboardComponent, children: [
+    path: 'admin', component: AdminDashboardComponent,
+    children: [
       { path: 'addclass', component: AddClassComponent },
-      {
-        path: 'viewclass', component: ViewClassComponent, children: [
-          { path: 'updateclass/:roomNo', component: UpdateClassComponent },
-        ]
-      },
+      { path: 'viewclass', component: ViewClassComponent },
+      { path: 'updateclass/:roomNo', component: UpdateClassComponent },
       { path: 'addstudent', component: AddStudentComponent },
       { path: 'viewstudents', component: ViewStudentsComponent },
       { path: 'addsubject', component: AddSubjectComponent },
@@ -68,32 +63,35 @@ const routes: Routes = [
       { path: 'updatetimetable', component: UpdateTimetableComponent },
       { path: 'viewteachers', component: ViewTeachersComponent },
       { path: 'viewtopicstatus', component: TopicStatusComponent },
-      {path:'viewprofile',component:AdminViewProfileComponent},
+      { path: 'viewprofile', component: AdminViewProfileComponent },
     ]
   },
-  {path:'home',component:HomeComponent,
-  children:[
-    {path:'admin/signup',component:AdminSignupComponent},
-    {path:'admin/login',component:AdminLoginComponent},
-    {path:'admin/forgotpassword',component:AdminForgotPasswordComponent},
-    {path:'teacher/login',component:TeacherLoginComponent},
-    {path:'teacher/forgotpassword',component:TeacherForgotpasswordComponent}
-  ]},
-  {path:'teacher',component:TeacherDashboardComponent,children:[
-
-  { path: 'adddiscussion', component: AddDiscussionComponent },
-
-  { path: 'viewdiscussion', component: ViewDiscussionComponent },
-  { path: 'updatediscussion', component: UpdateDiscussionComponent },
-
-  { path: 'addtopicstatus', component: AddTopicStatusComponent },
-  { path: 'viewtopicstatus', component: ViewTopicStatusComponent },
-  { path: 'updatetopicstatus', component: UpdateTopicStatusComponent },
-  { path: 'viewsyllabus', component: ViewSyllabusComponent },
-  { path: 'viewstudents', component: ViewStudentComponent },
-  { path: 'viewtimetable', component: StaffViewTimetableComponent },
-  {path:'viewprofile',component:StaffViewProfileComponent},
-]}
+  {
+    path: 'home', component: HomeComponent,
+    children: [
+      { path: 'admin/signup', component: AdminSignupComponent },
+      { path: 'admin/login', component: AdminLoginComponent },
+      { path: 'admin/forgotpassword', component: AdminForgotPasswordComponent },
+      { path: 'teacher/login', component: TeacherLoginComponent },
+      { path: 'teacher/forgotpassword', component: TeacherForgotpasswordComponent }
+    ]
+  },
+  {
+    path: 'teacher', component: TeacherDashboardComponent,
+    children: [
+      { path: 'adddiscussion', component: AddDiscussionComponent },
+      { path: 'viewdiscussion', component: ViewDiscussionComponent },
+      { path: 'updatediscussion', component: UpdateDiscussionComponent },
+      { path: 'addtopicstatus', component: AddTopicStatusComponent },
+      { path: 'viewtopicstatus', component: ViewTopicStatusComponent },
+      { path: 'updatetopicstatus', component: UpdateTopicStatusComponent },
+      { path: 'viewsyllabus', component: ViewSyllabusComponent },
+      { path: 'viewstudents', component: ViewStudentComponent },
+      { path: 'viewtimetable', component: StaffViewTimetableComponent },
+      { path: 'viewprofile', component: StaffViewProfileComponent },
+      { path: 'viewassignedsubjects', component: ViewAssignedSubjectsComponent },
+    ]
+  }
 ];
 
 @NgModule({

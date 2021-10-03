@@ -1,0 +1,25 @@
+<div id="main" class="container-fluid">
+    <h3 class="title"><b><i>View Assigned Subjects</i></b></h3>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Subject Code</th>
+                    <th>Subject Name</th>
+                    <th>Standard</th>
+                    <th>Section</th>
+                    <th>Room Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let subject of subjectList;let i=index">
+                    <td>{{subject.code}}</td>
+                    <td>{{subject.name}}</td>
+                    <td>{{classList[i].standard}}</td>
+                    <td>{{classList[i].section}}</td>
+                    <td>{{classList[i].roomNo}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
