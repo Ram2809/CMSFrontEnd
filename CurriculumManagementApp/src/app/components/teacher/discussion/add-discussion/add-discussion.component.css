@@ -11,7 +11,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 13cm;
+    margin-left: 8cm;
 }
 #resetButton
 {
@@ -24,14 +24,9 @@ label{
 .info{
     color:blue;
 }
-/* .question
-{
-    width: 500px;
-  border: 2px solid aqua;
-  padding: 10px;
-  margin-left :200px;
-  margin-right:100px;
-  margin-top: 100px;
-  margin-bottom: 100px;
-  background-color: rgb(46, 175, 158);
-} */
+#main{
+    margin-top: 50px;
+}
+#addDiscussion{
+    margin-left:6cm;
+}

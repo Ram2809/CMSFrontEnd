@@ -15,7 +15,7 @@ import { Student } from 'src/app/model/student';
 })
 export class ViewStudentComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public staffId: number = 1005;
+  public staffId: number = 0;
   public assignIdList: SubjectAssign[] = [];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
@@ -31,6 +31,7 @@ export class ViewStudentComponent implements OnInit {
     private studentService: StudentService) { }
 
   ngOnInit(): void {
+    this.staffId=Number(localStorage.getItem('staffId'));
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
       console.log(responseBody);

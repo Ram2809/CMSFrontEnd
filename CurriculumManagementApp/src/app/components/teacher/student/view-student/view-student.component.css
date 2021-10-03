@@ -32,6 +32,15 @@ label{
 }
 .notFound
 {
-    margin-left: 14cm;
+    margin-left: 6cm;
     color: crimson;
+}
+#main{
+    margin-top: 50px;
+}
+th,td{
+    text-align: center;
+}
+#viewstudent{
+    margin-left: 8cm;
 }

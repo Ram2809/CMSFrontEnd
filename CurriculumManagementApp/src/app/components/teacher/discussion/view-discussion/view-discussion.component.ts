@@ -19,33 +19,39 @@ import { Router } from '@angular/router';
 })
 export class ViewDiscussionComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public staffId: number = 1002;
+  public staffId: number = 0;
   public topicList: Topic[] = [];
   public classList: Class[] = [];
   public assignIdList: SubjectAssign[] = [];
   public subjectList: Subject[] = [];
   public classRoomNo: number = 0;
-  public discussionList:Discussion[]=[];
-  public isHidden:boolean=false;
-  ViewDiscussionForm=new FormGroup({
+  public discussionList: Discussion[] = [];
+  public isHidden: boolean = false;
+  public errorMessage:string="";
+
+  ViewDiscussionForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     unit: new FormControl('', Validators.required),
-    option:new FormControl(''),
-  })
-  constructor(private classService:ClassService,
-    private topicService:TopicService,
-    private subjectService:SubjectService,
-    private teacherService:TeacherService,
-    private discussionService:DiscussionService,
-    private router:Router) { }
+    option: new FormControl(''),
+  });
+
+  constructor(private classService: ClassService,
+    private topicService: TopicService,
+    private subjectService: SubjectService,
+    private teacherService: TeacherService,
+    private discussionService: DiscussionService,
+    private router: Router) { }
+
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
       console.log(this.classList);
-    })
+    }, error => {
+      window.alert(error.error.message);
+    });
   }
   getTopics() {
     console.log(this.subject?.value.split("-").shift());
@@ -82,7 +88,7 @@ export class ViewDiscussionComponent implements OnInit {
                 }, error => {
                   window.alert(error.error.message);
                 })
-              },error=>{
+              }, error => {
                 window.alert(error.error.message);
               });
             }
@@ -98,43 +104,48 @@ export class ViewDiscussionComponent implements OnInit {
     });
     console.log(this.subjectList);
   }
-  getDiscussions(){
-    let unitNo:string=this.unit?.value.split("-").shift();
+  getDiscussions() {
+    let unitNo: string = this.unit?.value.split("-").shift();
     console.log(unitNo);
-    this.classService.getClassRoomNo(this.standard?.value,this.section?.value).subscribe(response=>{
-      let responseBody:Response=response;
-      this.classRoomNo=responseBody.data;
+    this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
+      let responseBody: Response = response;
+      this.classRoomNo = responseBody.data;
       console.log(this.classRoomNo);
-      this.discussionService.getDiscussions(unitNo,this.classRoomNo,this.staffId).subscribe(response=>{
-        let responseBody:Response=response;
-        this.discussionList=responseBody.data;
+      this.discussionService.getDiscussions(unitNo, this.classRoomNo, this.staffId).subscribe(response => {
+        let responseBody: Response = response;
+        this.discussionList = responseBody.data;
+        this.isHidden=false;
         console.log(this.discussionList);
-      },error=>{
+      }, error => {
+        this.isHidden=true;
+        this.errorMessage=error.error.message;
         window.alert(error.error.message);
       });
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     })
-    this.isHidden=true;
+    this.isHidden = true;
   }
   ngOnInit(): void {
+    this.staffId = Number(localStorage.getItem('staffId'));
+    console.log(this.staffId);
   }
-  backToMain(){
-
-  }
-  updateDiscussion(){
-    localStorage.setItem('questionNo',this.option?.value);
+  updateDiscussion() {
+    localStorage.setItem('questionNo', this.option?.value);
     this.router.navigate(['/teacher/updatediscussion'])
   }
-  deleteDiscussion(){
-    console.log(this.option?.value);
-    this.discussionService.deleteDiscussion(this.option?.value).subscribe(response=>{
-      let responseBody:Response=response;
-      console.log(responseBody);
-      window.alert(responseBody.message);
-    },error=>{
-      window.alert(error.error.message);
-    })
+  deleteDiscussion() {
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      console.log(this.option?.value);
+      this.discussionService.deleteDiscussion(this.option?.value).subscribe(response => {
+        let responseBody: Response = response;
+        console.log(responseBody);
+        window.alert(responseBody.message);
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
   get standard() {
     return this.ViewDiscussionForm.get('standard');
@@ -148,7 +159,7 @@ export class ViewDiscussionComponent implements OnInit {
   get unit() {
     return this.ViewDiscussionForm.get('unit');
   }
-  get option(){
+  get option() {
     return this.ViewDiscussionForm.get('option');
   }
 }

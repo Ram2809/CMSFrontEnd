@@ -8,29 +8,32 @@ import { Response } from 'src/app/model/response';
   styleUrls: ['./update-discussion.component.css']
 })
 export class UpdateDiscussionComponent implements OnInit {
-  public discussion:Discussion=new Discussion();
-  public questionNo:number=0;
-  constructor(private discussionService:DiscussionService) { }
+  public discussion: Discussion = new Discussion();
+  public questionNo: number = 0;
+  constructor(private discussionService: DiscussionService) { }
 
   ngOnInit(): void {
-    let getItem:string="";
-    getItem=String(localStorage.getItem('questionNo'));
-    this.questionNo=parseInt(getItem);
+    let getItem: string = "";
+    getItem = String(localStorage.getItem('questionNo'));
+    this.questionNo = parseInt(getItem);
     console.log(this.questionNo);
-    this.discussionService.getDiscussion(this.questionNo).subscribe(response=>{
-      let responseBody:Response=response;
-      this.discussion=responseBody.data;
+    this.discussionService.getDiscussion(this.questionNo).subscribe(response => {
+      let responseBody: Response = response;
+      this.discussion = responseBody.data;
       console.log(responseBody.data);
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
-  updateDiscussion(){
-    this.discussionService.updateDiscussion(this.questionNo,this.discussion).subscribe(response=>{
-      let responseBody:Response=response;
-      window.alert(responseBody.message);
-    },error=>{
-      window.alert(error.error.message);
-    });
+  updateDiscussion() {
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      this.discussionService.updateDiscussion(this.questionNo, this.discussion).subscribe(response => {
+        let responseBody: Response = response;
+        window.alert(responseBody.message);
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
 }

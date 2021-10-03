@@ -68,27 +68,31 @@ export class AddDiscussionComponent implements OnInit {
     });
   }
   addDiscussion() {
-    const discussion: Discussion = new Discussion();
-    discussion.question = this.question?.value;
-    discussion.answer = this.answer?.value;
-    discussion.date = this.date?.value;
-    const topic: Topic = new Topic();
-    topic.unitNo = this.unit?.value.split("-").shift();
-    const teacher: Teacher = new Teacher();
-    teacher.id = this.staffId;
-    const classDetail: Class = new Class();
-    classDetail.roomNo = this.classRoomNo;
-    discussion.topic = topic;
-    discussion.teacher = teacher;
-    discussion.classDetail = classDetail;
-    console.log(discussion);
-    this.discussionService.addDiscussion(discussion).subscribe(response => {
-      let responseBody: Response = response;
-      console.log(responseBody);
-      window.alert(responseBody.message);
-    }, error => {
-      window.alert(error.error.message);
-    });
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      const discussion: Discussion = new Discussion();
+      discussion.question = this.question?.value;
+      discussion.answer = this.answer?.value;
+      discussion.date = this.date?.value;
+      const topic: Topic = new Topic();
+      topic.unitNo = this.unit?.value.split("-").shift();
+      const teacher: Teacher = new Teacher();
+      teacher.id = this.staffId;
+      const classDetail: Class = new Class();
+      classDetail.roomNo = this.classRoomNo;
+      discussion.topic = topic;
+      discussion.teacher = teacher;
+      discussion.classDetail = classDetail;
+      console.log(discussion);
+      this.discussionService.addDiscussion(discussion).subscribe(response => {
+        let responseBody: Response = response;
+        console.log(responseBody);
+        window.alert(responseBody.message);
+        this.AddDiscussionForm.reset();
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
   getSubjects() {
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
@@ -115,7 +119,7 @@ export class AddDiscussionComponent implements OnInit {
                 }, error => {
                   window.alert(error.error.message);
                 })
-              },error=>{
+              }, error => {
                 window.alert(error.error.message);
               });
             }

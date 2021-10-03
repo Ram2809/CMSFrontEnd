@@ -11,7 +11,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 13cm;
+    margin-left: 9cm;
 }
 #resetButton
 {
@@ -34,4 +34,10 @@ label{
 }
 #deleteButton{
     margin-left: 13cm;
+}
+#main{
+    margin-top: 50px;
+}
+#viewDiscussion{
+    margin-left:3cm;
 }
