@@ -1,57 +1,64 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Discussion Details</i></b></h3>
     <form [formGroup]="ViewDiscussionForm">
-        <div class="boxed">
-            <div class="form-group">
-                <label class="required">Standard</label>
-                <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
-                    formControlName="standard">
-                    <option value="" selected>Select the standard</option>
-                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
-                </select>
-                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
-                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+        <div id="viewDiscussion" class="col-sm-11">
+            <div class="row">
+                <div class="col">
+                    <label class="required">Standard</label>
+                    <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                        formControlName="standard">
+                        <option value="" selected>Select the standard</option>
+                        <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                    </select>
+                    <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                        <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Section</label>
-                <select class="custom-select" class="form-control" name="section" formControlName="section" (change)="getSubjects()">
-                    <option value="" selected>Select the section</option>
-                    <option *ngFor="let class of classList">{{class.section}}</option>
-                </select>
-                <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
-                    <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                <div class="col">
+                    <label class="required">Section</label>
+                    <select class="custom-select" class="form-control" name="section" formControlName="section"
+                        (change)="getSubjects()">
+                        <option value="" selected>Select the section</option>
+                        <option *ngFor="let class of classList">{{class.section}}</option>
+                    </select>
+                    <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                        <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Subject Name</label>
-                <select class="custom-select" class="form-control" name="subject" formControlName="subject" (change)="getTopics()">
-                    <option value="" selected>Select the subject name</option>
-                    <option *ngFor="let subjectAssign of subjectAssignList">
-                        {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
-                </select>
-                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
-                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <label class="required">Subject Name</label>
+                    <select class="custom-select" class="form-control" name="subject" formControlName="subject"
+                        (change)="getTopics()">
+                        <option value="" selected>Select the subject name</option>
+                        <option *ngFor="let subjectAssign of subjectAssignList">
+                            {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
+                    </select>
+                    <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                        <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Unit</label>
-                <select class="custom-select" class="form-control" name="unit" formControlName="unit">
-                    <option value="" selected>Select the unit</option>
-                    <option *ngFor="let topic of topicList">{{topic.unitNo}}-{{topic.unitName}}</option>
-                </select>
-                <div *ngIf="unit?.invalid &&(unit?.touched||unit?.dirty)">
-                    <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
+                <div class="col">
+                    <label class="required">Unit</label>
+                    <select class="custom-select" class="form-control" name="unit" formControlName="unit">
+                        <option value="" selected>Select the unit</option>
+                        <option *ngFor="let topic of topicList">{{topic.unitNo}}-{{topic.unitName}}</option>
+                    </select>
+                    <div *ngIf="unit?.invalid &&(unit?.touched||unit?.dirty)">
+                        <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
-            </div>
-            <button id="submitButton" class="btn btn-info" type="submit" (click)="getDiscussions()">Get Discussions</button>
-            <button id="resetButton" class="btn btn-info" type="submit">Back</button><br>
-            <ng-template #elseBlock>  
-                <label class="notFound">No discussion found!</label> 
-                </ng-template> 
-            </div>
-            <div *ngIf="discussionList.length>0 else elseBlock">
-            <table class="table table-bordered">
+            </div><br>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="getDiscussions()" [disabled]="!ViewDiscussionForm.valid">Get
+                Discussions</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br><br>
+            <ng-template #elseBlock>
+                <label class="notFound">{{errorMessage}}</label>
+            </ng-template>
+        </div>
+        <div *ngIf="discussionList.length>0 else elseBlock">
+            <table class="table table-bordered" [hidden]="isHidden">
                 <thead>
                     <tr>
                         <th>Question No</th>
@@ -61,7 +68,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let discussion of discussionList;let i=index">
+                    <tr *ngFor="let discussion of discussionList;let i=index paginate:{id:viewDiscussionList,
+                        itemsPerPage:1,
+                        currentPage:currentPage,
+                        totalItems:totalDiscussions}">
                         <td>{{i+1}}</td>
                         <td>{{discussion.question}}</td>
                         <td>{{discussion.answer}}</td>
@@ -69,6 +79,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div>
+                <pagination-controls id="viewDiscussionList" (pageChange)="currentPage = $event"></pagination-controls>
+            </div>
         </div>
-    </form> 
+    </form>
 </div>

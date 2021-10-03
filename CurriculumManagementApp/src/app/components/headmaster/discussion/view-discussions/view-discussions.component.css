@@ -18,7 +18,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 14cm;
+    margin-left: 11.5cm;
 }
 #resetButton
 {
@@ -28,4 +28,10 @@ label{
 {
     margin-left: 14cm;
     color: crimson;
+}
+#main{
+    margin-top: 50px;
+}
+#viewDiscussion{
+    margin-left: 1.5cm;
 }

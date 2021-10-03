@@ -50,6 +50,7 @@ import { AddLoginDataComponent } from './components/home/teacher/add-login-data/
 import { TeacherSignupComponent } from './components/home/teacher/teacher-signup/teacher-signup.component';
 import { StaffViewProfileComponent } from './components/teacher/profile/staff-view-profile/staff-view-profile.component';
 import { StaffUpdateProfileComponent } from './components/teacher/profile/staff-update-profile/staff-update-profile.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { StaffUpdateProfileComponent } from './components/teacher/profile/staff-
     DropdownListModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent],

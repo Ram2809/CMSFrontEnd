@@ -24,6 +24,11 @@ export class ViewDiscussionsComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public roomNo: number = 0;
   public discussionList: Discussion[] = [];
+  public errorMessage: string = "";
+  public isHidden: boolean = false;
+  public currentPage: number = 1;
+  public totalDisucussions:string="";
+  public maxSize:string=String(1);
   ViewDiscussionForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -33,7 +38,7 @@ export class ViewDiscussionsComponent implements OnInit {
   constructor(private classService: ClassService,
     private topicService: TopicService,
     private subjectService: SubjectService,
-    private discussionService:DiscussionService) { }
+    private discussionService: DiscussionService) { }
 
   ngOnInit(): void {
   }
@@ -42,7 +47,7 @@ export class ViewDiscussionsComponent implements OnInit {
       let responseBody: Response = response;
       this.classList = responseBody.data;
       console.log(this.classList);
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     })
   }
@@ -55,10 +60,10 @@ export class ViewDiscussionsComponent implements OnInit {
         responseBody = response;
         console.log(response.data);
         this.subjectAssignList = responseBody.data;
-      },error=>{
+      }, error => {
         window.alert(error.error.message);
       });
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
@@ -73,13 +78,17 @@ export class ViewDiscussionsComponent implements OnInit {
     });
   }
   getDiscussions() {
-    let unitNo=this.unit?.value.split("-").shift();
+    let unitNo = this.unit?.value.split("-").shift();
     console.log(this.roomNo);
-    this.discussionService.getDiscussionByRoomNo(unitNo,this.roomNo).subscribe(response=>{
-      let responseBody:Response=response;
-      this.discussionList=responseBody.data;
+    this.discussionService.getDiscussionByRoomNo(unitNo, this.roomNo).subscribe(response => {
+      let responseBody: Response = response;
+      this.discussionList = responseBody.data;
+      this.isHidden = false;
       console.log(this.discussionList);
-    },error=>{
+      this.totalDisucussions=String(this.discussionList.length);
+    }, error => {
+      this.isHidden = true;
+      this.errorMessage = error.error.message;
       window.alert(error.error.message);
     })
   }
