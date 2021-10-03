@@ -16,7 +16,7 @@ import { TimeTable } from 'src/app/model/time-table';
 })
 export class StaffViewTimetableComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public staffId: number = 1002;
+  public staffId: number = 0;
   public assignIdList: SubjectAssign[] = [];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
@@ -33,6 +33,8 @@ export class StaffViewTimetableComponent implements OnInit {
     private timetableService: TimeTableService) { }
 
   ngOnInit(): void {
+    this.staffId=Number(localStorage.getItem('staffId'));
+    console.log(this.staffId);
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
       console.log(responseBody);

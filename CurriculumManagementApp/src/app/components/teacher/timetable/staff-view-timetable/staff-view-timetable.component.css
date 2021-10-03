@@ -38,3 +38,9 @@ label{
 #main{
     margin-top:50px;
 }
+th,td{
+    text-align: center;
+}
+#viewTimetable{
+    margin-left: 6.5cm;
+}

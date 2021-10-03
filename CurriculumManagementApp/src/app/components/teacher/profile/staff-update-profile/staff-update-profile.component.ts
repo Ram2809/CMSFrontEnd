@@ -41,19 +41,22 @@ export class StaffUpdateProfileComponent implements OnInit {
     });
   }
   updateProfile() {
-    this.teacherService.updateStaff(this.staffId, this.teacher).subscribe(response => {
-      let responseBody: Response = response;
-      window.alert(responseBody.message);
-      this.addressService.updateAddress(Number(this.address.id), this.address).subscribe(response => {
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      this.teacherService.updateStaff(this.staffId, this.teacher).subscribe(response => {
         let responseBody: Response = response;
         window.alert(responseBody.message);
-        this.close();
+        this.addressService.updateAddress(Number(this.address.id), this.address).subscribe(response => {
+          let responseBody: Response = response;
+          window.alert(responseBody.message);
+          this.close();
+        }, error => {
+          window.alert(error.error.message);
+        })
       }, error => {
         window.alert(error.error.message);
-      })
-    }, error => {
-      window.alert(error.error.message);
-    })
+      });
+    }
   }
   close() {
     this.dialogRef.close();

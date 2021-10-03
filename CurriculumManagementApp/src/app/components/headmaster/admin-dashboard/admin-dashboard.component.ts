@@ -8,13 +8,16 @@ import { Router } from '@angular/router';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-  logout(){
-    window.alert("Logged out successfully!");
-    localStorage.removeItem('admin');
-    this.router.navigate(['home']);
+  logout() {
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      window.alert("Logged out successfully!");
+      localStorage.clear();
+      this.router.navigate(['home']);
+    }
   }
 }
