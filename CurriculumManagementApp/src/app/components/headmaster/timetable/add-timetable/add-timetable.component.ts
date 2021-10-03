@@ -21,7 +21,7 @@ export class AddTimetableComponent implements OnInit {
   public periodsMap: TSMap<Number, String> = new TSMap();
   public roomNo: number = 0;
   public isHidden: boolean = false;
-
+  public dayOfWeek:string="";
   AddTimetableForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -89,6 +89,9 @@ export class AddTimetableComponent implements OnInit {
         window.alert(error.error.message);
       });
     }
+  }
+  cancel(){
+    this.periodsMap.clear();
   }
   get standard() {
     return this.AddTimetableForm.get('standard');

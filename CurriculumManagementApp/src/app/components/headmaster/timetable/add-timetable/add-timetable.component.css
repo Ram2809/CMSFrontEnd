@@ -45,3 +45,8 @@ table{
 th,td{
     text-align: center;
 }
+#day{
+    margin-left:14.5cm;
+    color:blueviolet;
+    font-size: large;
+}
