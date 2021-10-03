@@ -14,9 +14,11 @@ import { Response } from 'src/app/model/response';
   styleUrls: ['./add-topic.component.css']
 })
 export class AddTopicComponent implements OnInit {
+
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public monthList: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   public subjectAssignList: SubjectAssign[] = [];
+
   AddTopicForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     unitNo: new FormControl('', [Validators.required, Validators.maxLength(8)]),
@@ -25,6 +27,7 @@ export class AddTopicComponent implements OnInit {
     month: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
   });
+
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private topicService: TopicService) { }
@@ -32,20 +35,26 @@ export class AddTopicComponent implements OnInit {
   ngOnInit(): void {
   }
   addTopic() {
-    console.log(this.subject?.value.split("-").shift());
-    const topic: Topic = new Topic();
-    topic.unitNo = this.unitNo?.value;
-    topic.unitName = this.unitName?.value;
-    topic.description = this.description?.value;
-    topic.month = this.month?.value;
-    const subject: Subject = new Subject();
-    subject.code = this.subject?.value.split("-").shift();
-    topic.subject = subject;
-    this.topicService.addTopic(topic).subscribe(response => {
-      let responseBody: Response = response;
-      console.log(responseBody);
-      window.alert(responseBody.message);
-    })
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      console.log(this.subject?.value.split("-").shift());
+      const topic: Topic = new Topic();
+      topic.unitNo = this.unitNo?.value;
+      topic.unitName = this.unitName?.value;
+      topic.description = this.description?.value;
+      topic.month = this.month?.value;
+      const subject: Subject = new Subject();
+      subject.code = this.subject?.value.split("-").shift();
+      topic.subject = subject;
+      this.topicService.addTopic(topic).subscribe(response => {
+        let responseBody: Response = response;
+        console.log(responseBody);
+        window.alert(responseBody.message);
+        this.AddTopicForm.reset();
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
   getSubjects() {
     let responseBody: Response = new Response();
@@ -57,7 +66,11 @@ export class AddTopicComponent implements OnInit {
         responseBody = response;
         console.log(response.data);
         this.subjectAssignList = responseBody.data;
+      },error=>{
+        window.alert(error.error.message);
       });
+    },error=>{
+      window.alert(error.error.message);
     });
   }
   get standard() {

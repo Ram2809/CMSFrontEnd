@@ -1,6 +1,7 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Topic Status</i></b></h3>
     <form [formGroup]="ViewTopicStatusForm">
+        <div id="viewTopicStatus" class="col-sm-11">
         <div class="row">
             <div class="col">
                 <label class="required">Standard</label>
@@ -58,10 +59,11 @@
             <div *ngIf="staff?.invalid &&(staff?.touched||staff?.dirty)">
                 <div class="error" *ngIf="staff?.errors?.required">* This field is required</div>
             </div>
-        </div>
+        </div><br>
         <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!ViewTopicStatusForm.valid"
             (click)="getTopicStatus()">View Topic Status</button>
-        <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br><br>
+        <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br>
+    </div><br>
         <ng-template #elseBlock>
             <label class="notFound">{{errorMessage}}</label>
         </ng-template>

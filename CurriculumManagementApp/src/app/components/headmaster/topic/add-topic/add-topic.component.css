@@ -18,9 +18,15 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 15cm;
+    margin-left: 8cm;
 }
 #resetButton
 {
     margin-left: 0.5cm;
+}
+#main{
+    margin-top:50px;
+}
+#addTopic{
+    margin-left: 5.5cm;
 }

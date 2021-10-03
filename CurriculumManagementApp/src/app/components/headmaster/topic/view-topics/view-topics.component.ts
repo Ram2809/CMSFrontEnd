@@ -20,11 +20,14 @@ export class ViewTopicsComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public topicList: Topic[] = [];
   public isHidden: boolean = false;
+  public errorMessage:string="";
+
   ViewTopicsForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     option: new FormControl('')
   });
+
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private topicService: TopicService,
@@ -43,7 +46,11 @@ export class ViewTopicsComponent implements OnInit {
         responseBody = response;
         console.log(response.data);
         this.subjectAssignList = responseBody.data;
+      }, error => {
+        window.alert(error.error.message);
       });
+    }, error => {
+      window.alert(error.error.message);
     });
   }
   getUnits() {
@@ -52,36 +59,34 @@ export class ViewTopicsComponent implements OnInit {
     this.topicService.getTopics(subjectCode).subscribe(response => {
       let responseBody: Response = response;
       this.topicList = responseBody.data;
+      this.isHidden=false;
       console.log(this.topicList);
     }, error => {
-      console.log(error.message);
-      window.alert(error.message);
+      this.isHidden=true;
+      this.errorMessage=error.error.message;
+      window.alert(error.error.message);
     });
-    this.isHidden = true;
-    // if(this.topicList.length<=0)
-    // {
-    //   this.isHidden=false;
-    // }
-  }
-  backToMain() {
-    this.router.navigate(['admin']);
   }
   updateUnit() {
     localStorage.setItem('unitNo', this.option?.value);
-    //this.router.navigate(['admin/updatetopic']);
     const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = false;
-      dialogConfig.autoFocus = true;
-      this.dialog.open(UpdateTopicComponent,dialogConfig)
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UpdateTopicComponent, dialogConfig)
   }
   deleteUnit() {
-    console.log(this.option?.value);
-    this.topicService.deleteTopic(this.option?.value).subscribe(response => {
-      let responseBody: Response = response;
-      console.log(responseBody);
-      window.alert(responseBody.message);
-      this.getUnits;
-    });
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      console.log(this.option?.value);
+      this.topicService.deleteTopic(this.option?.value).subscribe(response => {
+        let responseBody: Response = response;
+        console.log(responseBody);
+        window.alert(responseBody.message);
+        this.getUnits();
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
   get standard() {
     return this.ViewTopicsForm.get('standard');

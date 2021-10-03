@@ -1,7 +1,7 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Topics Form</i></b></h3>
     <form [formGroup]="ViewTopicsForm">
-        <div class="boxed">
+        <div id="viewTopics" class="col-sm-6">
             <div class="form-group">
                 <label class="required">Standard</label>
                 <select class="custom-select" class="form-control" name="standard" (change)="getSubjects()"
@@ -25,9 +25,12 @@
                 </div>
             </div>
             <button id="submitButton" class="btn btn-info" type="submit" (click)="getUnits()">Get Units</button>
-            <button id="resetButton" class="btn btn-info" type="submit" (click)="backToMain()">Back</button><br>
-        </div>
-        <table class="table table-bordered" *ngIf="topicList.length>0">
+        </div><br>
+        <ng-template #elseBlock>
+            <label class="notFound">{{errorMessage}}</label>
+        </ng-template>
+        <div *ngIf="topicList.length>0 else elseBlock">
+        <table class="table table-bordered" [hidden]="isHidden">
             <thead>
                 <tr>
                     <th>Select</th>
@@ -47,9 +50,10 @@
                 </tr>
             </tbody>
         </table>
-        <button id="deleteButton" (click)="deleteUnit()" class="btn btn-info" type="submit" [hidden]="!isHidden"
-            [disabled]="option?.value.length==0">Delete</button>
-        <button id="updateButton" (click)="updateUnit()" class="btn btn-info" type="submit" [hidden]="!isHidden"
-            [disabled]="option?.value.length==0">Update</button>
+        <button id="deleteButton" (click)="deleteUnit()" class="btn btn-info" type="submit"
+            [disabled]="option?.value.length==0" [hidden]="isHidden">Delete</button>
+        <button id="updateButton" (click)="updateUnit()" class="btn btn-info" type="submit"
+            [disabled]="option?.value.length==0" [hidden]="isHidden">Update</button>
+        </div>
     </form>
 </div>
