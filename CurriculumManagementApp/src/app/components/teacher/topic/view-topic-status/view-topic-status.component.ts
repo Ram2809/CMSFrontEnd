@@ -13,6 +13,7 @@ import { TopicStatusService } from 'src/app/services/topic-status.service';
 import { TopicService } from 'src/app/services/topic.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UpdateTopicStatusComponent } from '../update-topic-status/update-topic-status.component';
+
 @Component({
   selector: 'app-view-topic-status',
   templateUrl: './view-topic-status.component.html',
@@ -20,29 +21,33 @@ import { UpdateTopicStatusComponent } from '../update-topic-status/update-topic-
 })
 export class ViewTopicStatusComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public staffId: number = 1005;
+  public staffId: number = 0;
   public assignIdList: SubjectAssign[] = [];
   public subjectList: Subject[] = [];
   public topicList: Topic[] = [];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
   public topicStatus: TopicStatus = new TopicStatus();
-  public isHidden:boolean=false;
+  public isHidden: boolean = false;
+  public errorMessage: string = "";
+
   ViewTopicStatusForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     unit: new FormControl('', Validators.required),
   })
-  
+
   constructor(private classService: ClassService,
     private teacherService: TeacherService,
     private subjectService: SubjectService,
     private topicService: TopicService,
     private topicStatusService: TopicStatusService,
-    private dialog:MatDialog) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.staffId = Number(localStorage.getItem('staffId'));
+    console.log(this.staffId);
   }
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
@@ -111,33 +116,37 @@ export class ViewTopicStatusComponent implements OnInit {
       console.log(this.classRoomNo);
       this.topicStatusService.getTopicStatusByUnitNo(this.unit?.value.split("-").shift(), this.staffId, this.classRoomNo).subscribe(response => {
         let responseBody: Response = response;
-        this.topicStatus=responseBody.data;
+        this.topicStatus = responseBody.data;
         console.log(this.topicStatus);
-        this.isHidden=true;
-      },error=>{
+        this.isHidden = false;
+      }, error => {
+        this.errorMessage = error.error.messsage;
+        this.isHidden = true;
         window.alert(error.error.message);
       });
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
-  deleteStatus(){
-    this.topicStatusService.deleteTopicStatus(Number(this.topicStatus.id)).subscribe(response=>{
-      let responseBody:Response=response;
-      window.alert(responseBody.message);
-      this.getTopicStatus();
-    },error=>{
-      window.alert(error.error.message);
-    });
+  deleteStatus() {
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      this.topicStatusService.deleteTopicStatus(Number(this.topicStatus.id)).subscribe(response => {
+        let responseBody: Response = response;
+        window.alert(responseBody.message);
+        this.getTopicStatus();
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
-  updateStatus(){
-    localStorage.setItem('topicStatus',JSON.stringify(this.topicStatus));
+  updateStatus() {
+    localStorage.setItem('topicStatus', JSON.stringify(this.topicStatus));
     console.log(this.topicStatus.id);
     const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = false;
-      dialogConfig.autoFocus = true;
-      //dialogConfig.height(100px);
-      this.dialog.open(UpdateTopicStatusComponent,dialogConfig)
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UpdateTopicStatusComponent, dialogConfig)
   }
   get standard() {
     return this.ViewTopicStatusForm.get('standard');

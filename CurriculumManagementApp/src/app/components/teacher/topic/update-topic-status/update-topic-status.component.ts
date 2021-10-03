@@ -19,12 +19,16 @@ export class UpdateTopicStatusComponent implements OnInit {
     console.log(this.topicStatus);
   }
   updateStatus() {
-    this.topicStatusService.updateTopicStatus(Number(this.topicStatus.id), this.topicStatus).subscribe(response => {
-      let responseBody: Response = response;
-      window.alert(responseBody.message);
-    }, error => {
-      window.alert(error.error.message);
-    });
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      this.topicStatusService.updateTopicStatus(Number(this.topicStatus.id), this.topicStatus).subscribe(response => {
+        let responseBody: Response = response;
+        window.alert(responseBody.message);
+        this.close();
+      }, error => {
+        window.alert(error.error.message);
+      });
+    }
   }
   close() {
     this.dialogRef.close();

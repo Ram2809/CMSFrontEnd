@@ -1,7 +1,7 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Curriculum</i></b></h3>
     <form [formGroup]="ViewCurriculumForm">
-        <div class="boxed">
+        <div id="viewCurriculum" class="col-sm-10">
             <div class="row">
                 <div class="col">
                     <label class="required">Standard</label>
@@ -36,10 +36,14 @@
                     <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
                 </div>
             </div>
-            <button id="submitButton" class="btn btn-info" type="submit" (click)="getCurriculum()">View Curriculum</button>
-            <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br>
-            <div>
-                <table class="table table-bordered">
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="getCurriculum()" [disabled]="!ViewCurriculumForm.valid">View Curriculum</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        </div><br>
+        <ng-template #elseBlock>
+            <label class="notFound">{{errorMessage}}</label>
+        </ng-template>
+            <div *ngIf="topicList.length>0 else elseBlock">
+                <table class="table table-bordered" [hidden]="isHidden">
                     <thead>
                         <tr>
                             <th>Unit Number</th>
@@ -58,6 +62,5 @@
                     </tbody>
                 </table>
             </div>
-        </div>
     </form>
 </div>

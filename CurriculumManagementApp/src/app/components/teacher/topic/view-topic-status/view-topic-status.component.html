@@ -1,7 +1,7 @@
-<div class="container-fluid mb-3">
+<div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Topic Status</i></b></h3>
     <form [formGroup]="ViewTopicStatusForm">
-        <div class="boxed">
+        <div id="viewTopicStatus" class="col-sm-10">
             <div class="row">
                 <div class="col">
                     <label class="required">Standard</label>
@@ -49,41 +49,43 @@
                     </div>
                 </div>
             </div><br>
-            <button id="submitButton" class="btn btn-info" type="submit" (click)="getTopicStatus()">Get Topic
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="getTopicStatus()"
+                [disabled]="!ViewTopicStatusForm.valid">Get Topic
                 Status</button>
-            <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br>
-            <ng-template #elseBlock>  
-                <label class="notFound">No discussion found!</label> 
-            </ng-template>
-            <!-- <div> -->
-            <div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Unit Number</th>
-                            <th>Unit Name</th>
-                            <th>Month</th>
-                            <th>Begin Date</th>
-                            <th>Completed Date</th>
-                            <th>Status</th>
-                            <th>Remarks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{topicStatus.topic?.unitNo}}</td>
-                            <td>{{topicStatus.topic?.unitName}}</td>
-                            <td>{{topicStatus.topic?.month}}</td>
-                            <td>{{topicStatus.beginDate}}</td>
-                            <td>{{topicStatus.completedDate}}</td>
-                            <td>{{topicStatus.status}}</td>
-                            <td>{{topicStatus.remarks}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button id="deleteButton" (click)="deleteStatus()" class="btn btn-info" type="submit" [hidden]="!isHidden">Delete</button>
-                <button id="updateButton" (click)="updateStatus()" class="btn btn-info" type="submit" [hidden]="!isHidden">Update</button>
-            </div>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        </div><br>
+        <ng-template #elseBlock>
+            <label class="notFound">{{errorMessage}}</label>
+        </ng-template>
+        <div *ngIf="(topicStatus | json) !='{}' else elseBlock">
+            <table class="table table-bordered" [hidden]="isHidden">
+                <thead>
+                    <tr>
+                        <th>Unit Number</th>
+                        <th>Unit Name</th>
+                        <th>Month</th>
+                        <th>Begin Date</th>
+                        <th>Completed Date</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{topicStatus.topic?.unitNo}}</td>
+                        <td>{{topicStatus.topic?.unitName}}</td>
+                        <td>{{topicStatus.topic?.month}}</td>
+                        <td>{{topicStatus.beginDate}}</td>
+                        <td>{{topicStatus.completedDate}}</td>
+                        <td>{{topicStatus.status}}</td>
+                        <td>{{topicStatus.remarks}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="deleteButton" (click)="deleteStatus()" class="btn btn-info" type="submit"
+                [hidden]="isHidden">Delete</button>
+            <button id="updateButton" (click)="updateStatus()" class="btn btn-info" type="submit"
+                [hidden]="isHidden">Update</button>
         </div>
     </form>
 </div>

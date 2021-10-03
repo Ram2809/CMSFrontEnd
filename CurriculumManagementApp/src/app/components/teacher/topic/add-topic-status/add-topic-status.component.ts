@@ -34,7 +34,7 @@ export class AddTopicStatusComponent implements OnInit {
     beginDate: new FormControl('', Validators.required),
     status: new FormControl('', Validators.required),
     completedDate: new FormControl(''),
-    remarks:new FormControl(''),
+    remarks: new FormControl(''),
   })
   constructor(private classService: ClassService,
     private teacherService: TeacherService,
@@ -105,36 +105,40 @@ export class AddTopicStatusComponent implements OnInit {
     console.log(this.subjectList);
   }
   addTopicStatus() {
-    let unitNo: string = this.unit?.value.split("-").shift();
-    console.log(unitNo);
-    this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
-      let responseBody: Response = response;
-      this.classRoomNo = responseBody.data;
-      console.log(this.classRoomNo);
-      const topicStatus: TopicStatus = new TopicStatus();
-      topicStatus.beginDate = this.beginDate?.value;
-      topicStatus.status = this.status?.value;
-      topicStatus.completedDate = this.completedDate?.value;
-      topicStatus.remarks=this.remarks?.value;
-      const topic: Topic = new Topic();
-      topic.unitNo = unitNo;
-      const teacher: Teacher = new Teacher();
-      teacher.id = this.staffId;
-      const classDetail: Class = new Class();
-      classDetail.roomNo = this.classRoomNo;
-      topicStatus.topic = topic;
-      topicStatus.teacher = teacher;
-      topicStatus.classDetail = classDetail;
-      this.topicStatusService.addTopicStatus(topicStatus).subscribe(response => {
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      let unitNo: string = this.unit?.value.split("-").shift();
+      console.log(unitNo);
+      this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
-        console.log(responseBody.message);
-        window.alert(responseBody.message);
+        this.classRoomNo = responseBody.data;
+        console.log(this.classRoomNo);
+        const topicStatus: TopicStatus = new TopicStatus();
+        topicStatus.beginDate = this.beginDate?.value;
+        topicStatus.status = this.status?.value;
+        topicStatus.completedDate = this.completedDate?.value;
+        topicStatus.remarks = this.remarks?.value;
+        const topic: Topic = new Topic();
+        topic.unitNo = unitNo;
+        const teacher: Teacher = new Teacher();
+        teacher.id = this.staffId;
+        const classDetail: Class = new Class();
+        classDetail.roomNo = this.classRoomNo;
+        topicStatus.topic = topic;
+        topicStatus.teacher = teacher;
+        topicStatus.classDetail = classDetail;
+        this.topicStatusService.addTopicStatus(topicStatus).subscribe(response => {
+          let responseBody: Response = response;
+          console.log(responseBody.message);
+          window.alert(responseBody.message);
+          this.UpdateTopicStatusForm.reset();
+        }, error => {
+          window.alert(error.error.message);
+        });
       }, error => {
         window.alert(error.error.message);
       });
-    }, error => {
-      window.alert(error.error.message);
-    });
+    }
   }
   get standard() {
     return this.UpdateTopicStatusForm.get('standard');
@@ -157,7 +161,7 @@ export class AddTopicStatusComponent implements OnInit {
   get completedDate() {
     return this.UpdateTopicStatusForm.get('completedDate');
   }
-  get remarks(){
+  get remarks() {
     return this.UpdateTopicStatusForm.get('remarks');
   }
 }

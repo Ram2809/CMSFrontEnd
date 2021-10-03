@@ -16,12 +16,14 @@ import { Topic } from 'src/app/model/topic';
 })
 export class ViewSyllabusComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public staffId: number = 1002;
+  public staffId: number = 0;
   public assignIdList: SubjectAssign[] = [];
   public subjectList: Subject[] = [];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
   public topicList: Topic[] = [];
+  public errorMessage: string = "";
+  public isHidden:boolean=false;
 
   ViewCurriculumForm = new FormGroup({
     standard: new FormControl('', Validators.required),
@@ -35,6 +37,7 @@ export class ViewSyllabusComponent implements OnInit {
     private topicService: TopicService) { }
 
   ngOnInit(): void {
+    this.staffId = Number(localStorage.getItem('staffId'));
   }
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
@@ -87,13 +90,17 @@ export class ViewSyllabusComponent implements OnInit {
     console.log(this.subjectList);
   }
   getCurriculum() {
-    let subjectCode:string=this.subject?.value.split("-").shift();
+    let subjectCode: string = this.subject?.value.split("-").shift();
     console.log(subjectCode);
-    this.topicService.getTopics(subjectCode).subscribe(response=>{
-      let responseBody:Response=response;
-      this.topicList=responseBody.data;
+    this.topicService.getTopics(subjectCode).subscribe(response => {
+      let responseBody: Response = response;
+      this.topicList = responseBody.data;
+      this.isHidden=false;
+      this.ViewCurriculumForm.reset();
       console.log(this.topicList);
-    },error=>{
+    }, error => {
+      this.errorMessage=error.error.message;
+      this.isHidden=true;
       window.alert(error.error.message);
     });
   }

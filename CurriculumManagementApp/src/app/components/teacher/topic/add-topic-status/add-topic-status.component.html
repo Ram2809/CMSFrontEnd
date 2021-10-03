@@ -1,7 +1,7 @@
-<div class="container-fluid mb-3">
-    <h3 class="title"><b><i>Update Topic Status</i></b></h3>
+<div id="main" class="container-fluid mb-3">
+    <h3 class="title"><b><i>Add Topic Status</i></b></h3>
     <form [formGroup]="UpdateTopicStatusForm">
-        <div class="boxed">
+        <div id="addTopicStatus" class="col-sm-10">
             <div class="row">
                 <div class="col">
                     <label class="required">Standard</label>
@@ -47,14 +47,7 @@
                         <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Begin Date</label>
-                <input type="date" class="form-control" name="beginDate" formControlName="beginDate" placeholder="Enter the begin date">
-                <div *ngIf="beginDate?.invalid &&(beginDate?.touched||beginDate?.dirty)">
-                    <div class="error" *ngIf="beginDate?.errors?.required">* This field is required</div>
-                </div> 
-            </div>
+            </div><br>
             <div class="form-group">
                 <label class="required">Status</label>
                 <select class="custom-select" class="form-control" name="status" formControlName="status" placeholder="Enter the status">
@@ -67,26 +60,25 @@
                     <div class="error" *ngIf="status?.errors?.required">* This field is required</div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="row">
+            <div class="col">
+                <label class="required">Begin Date</label>
+                <input type="date" class="form-control" name="beginDate" formControlName="beginDate" placeholder="Enter the begin date">
+                <div *ngIf="beginDate?.invalid &&(beginDate?.touched||beginDate?.dirty)">
+                    <div class="error" *ngIf="beginDate?.errors?.required">* This field is required</div>
+                </div> 
+            </div>
+            <div class="col">
                 <label>Completed Date</label>
                 <input type="date" class="form-control" name="completedDate" formControlName="completedDate" placeholder="Enter the completion date">
             </div>
+        </div><br>
             <div class="form-group">
                 <label>Remarks</label>
                 <textarea rows="3" cols="50" class="form-control" name="remarks" formControlName="remarks" placeholder="Enter the remarks"></textarea>
             </div>
-            <!-- <div class="row">
-                <div class="col">
-                    <label class="required">Begin Date</label>
-                    <input type="date" class="form-control" name="beginDate" formControlName="beginDate" placeholder="Enter the begin date"> 
-                </div>
-                <div class="col">
-                    <label>Completed Date</label>
-                    <input type="date" class="form-control" name="completedDate" formControlName="completedDate" placeholder="Enter the completion date">
-                </div>
-            </div> -->
             <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!UpdateTopicStatusForm.valid"
-                (click)="addTopicStatus()">Update Status</button>
+                (click)="addTopicStatus()">Submit</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
         </div> 
     </form>
