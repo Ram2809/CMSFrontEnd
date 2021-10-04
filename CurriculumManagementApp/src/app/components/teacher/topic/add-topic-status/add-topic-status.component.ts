@@ -19,7 +19,7 @@ import { TopicStatusService } from 'src/app/services/topic-status.service';
 })
 export class AddTopicStatusComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public staffId: number = 1005;
+  public staffId: number = 0;
   public assignIdList: SubjectAssign[] = [];
   public subjectList: Subject[] = [];
   public topicList: Topic[] = [];
@@ -43,6 +43,8 @@ export class AddTopicStatusComponent implements OnInit {
     private topicStatusService: TopicStatusService) { }
 
   ngOnInit(): void {
+    this.staffId=Number(localStorage.getItem('staffId'));
+    console.log(this.staffId);
   }
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {

@@ -18,4 +18,10 @@ export class StudentService {
   deleteStudent(rollNo: number): Observable<Response> {
     return this.http.delete(`${this.baseUrl}` + '/' + `${rollNo}`)
   }
+  getStudent(rollNo: number): Observable<Response> {
+    return this.http.get(`${this.baseUrl}?rollNo=${rollNo}`);
+  }
+  updateStudent(rollNo: number, student: Student): Observable<Response> {
+    return this.http.put(`${this.baseUrl}/${rollNo}`, student);
+  }
 }

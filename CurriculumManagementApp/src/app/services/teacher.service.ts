@@ -42,4 +42,7 @@ export class TeacherService {
   updateStaff(id: number, teacher: Teacher): Observable<Response> {
     return this.http.put(`${this.baseUrl}/${id}`, teacher);
   }
+  updateStaffAssign(subjectAssignId: number, staffId: number, teacherAssign: TeacherAssign): Observable<Response> {
+    return this.http.put(`${this.urlUtil.baseUrl}teacherassign/${subjectAssignId}/${staffId}`, teacherAssign);
+  }
 }

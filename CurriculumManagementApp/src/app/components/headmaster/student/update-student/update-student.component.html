@@ -1,0 +1,73 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Update Student Form</i></b></h3>
+    <form>
+        <div id="addStudent">
+            <div class="form-group">
+                <label class="required">Roll Number</label>
+                <input type="number" class="form-control" name="rollNo" [(ngModel)]="student.rollNo"
+                   readonly="true">
+            </div>
+            <div class="row">
+            <div class="col">
+                <label class="required">First Name</label>
+                <input type="text" class="form-control" name="firstName" [(ngModel)]="student.firstName"
+                    placeholder="Enter the first name">
+            </div>
+            <div class="col">
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="lastName" [(ngModel)]="student.lastName"
+                    placeholder="Enter the last name">
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col">
+                <label class="required">Date of Birth</label>
+                <input type="date" class="form-control" name="dateOfBirth" [(ngModel)]="student.dateOfBirth"
+                    placeholder="Enter the date of birth">
+            </div>
+            <div class="col">
+                <label class="required">Gender</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" [(ngModel)]="student.gender" name="gender" value="Male">
+                    <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" [(ngModel)]="student.gender" name="gender" value="Female">
+                    <label class="form-check-label">Female</label>
+                </div>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col">
+                <label class="required">Contact Number</label>
+                <input type="tel" class="form-control" name="contactNo" [(ngModel)]="student.contactNo"
+                    placeholder="Enter the contact number">
+            </div>
+            <div class="col">
+                <label class="required">Address</label>
+                <textarea class="form-control" rows="3" cols="20" name="address" [(ngModel)]="student.address"
+                    placeholder="Enter the address"></textarea>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" name="standard"
+                    [(ngModel)]="classDetail.standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="required">Section</label>
+                <select class="custom-select" class="form-control" name="section" [(ngModel)]="classDetail.section">
+                    <option value="" selected>Select the section</option>
+                    <option *ngFor="let class of classList">{{class.section}}</option>
+                </select>
+            </div>
+        </div><br>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="updateStudent()">Update</button>
+            <button id="resetButton" class="btn btn-info" type="submit" (click)="close()">Close</button>
+        </div>
+    </form>
+</div>

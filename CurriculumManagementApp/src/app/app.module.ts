@@ -52,6 +52,8 @@ import { StaffViewProfileComponent } from './components/teacher/profile/staff-vi
 import { StaffUpdateProfileComponent } from './components/teacher/profile/staff-update-profile/staff-update-profile.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ViewAssignedSubjectsComponent } from './components/teacher/profile/view-assigned-subjects/view-assigned-subjects.component';
+import { UpdateStudentComponent } from './components/headmaster/student/update-student/update-student.component';
+import { UpdateStaffAssignComponent } from './components/headmaster/staff/update-staff-assign/update-staff-assign.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +102,8 @@ import { ViewAssignedSubjectsComponent } from './components/teacher/profile/view
     StaffViewProfileComponent,
     StaffUpdateProfileComponent,
     ViewAssignedSubjectsComponent,
+    UpdateStudentComponent,
+    UpdateStaffAssignComponent,
   ],
   imports: [
     BrowserModule,

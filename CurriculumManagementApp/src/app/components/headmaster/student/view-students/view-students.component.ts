@@ -7,6 +7,8 @@ import { StudentService } from 'src/app/services/student.service';
 import { Response } from 'src/app/model/response';
 import { Router } from '@angular/router';
 import { Class } from 'src/app/model/class';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UpdateStudentComponent } from '../update-student/update-student.component';
 @Component({
   selector: 'app-view-students',
   templateUrl: './view-students.component.html',
@@ -22,7 +24,9 @@ export class ViewStudentsComponent implements OnInit {
   public errorMessage: string = "";
   constructor(private studentService: StudentService,
     private classService: ClassService,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog) { }
+
   ViewStudentForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -72,14 +76,25 @@ export class ViewStudentsComponent implements OnInit {
       });
     }
   }
-  backToMain() {
-    this.router.navigate(['admin'])
+  updateStudent() {
+    localStorage.setItem('rollNo', this.ViewStudentForm.get('option')?.value);
+    console.log(this.ViewStudentForm.get('option')?.value);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UpdateStudentComponent, {maxWidth: '100vw',
+    maxHeight: '100vh',
+    width: '750px',
+    height: '85vh',});
   }
   get standard() {
     return this.ViewStudentForm.get('standard');
   }
   get section() {
     return this.ViewStudentForm.get('section');
+  }
+  get option() {
+    return this.ViewStudentForm.get('option');
   }
 
 }

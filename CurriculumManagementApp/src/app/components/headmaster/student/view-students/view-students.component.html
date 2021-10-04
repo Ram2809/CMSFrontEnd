@@ -58,8 +58,8 @@
                     </tr>
                 </tbody>
             </table>
-            <button id="deleteButton" (click)="deleteStudent()" class="btn btn-info" type="submit" [hidden]="isHidden">Delete</button>
-            <button id="backButton" class="btn btn-info" (click)="backToMain()" type="submit" [hidden]="isHidden">Back</button>
+            <button id="deleteButton" (click)="deleteStudent()" class="btn btn-info" type="submit" [disabled]="option?.value==0" [hidden]="isHidden">Delete</button>
+            <button id="backButton" class="btn btn-info" (click)="updateStudent()" type="submit" [disabled]="option?.value==0" [hidden]="isHidden">Update</button>
         </div>
     </form>
 </div>

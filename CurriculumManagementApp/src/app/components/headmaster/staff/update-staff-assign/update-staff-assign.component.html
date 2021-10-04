@@ -1,0 +1,58 @@
+<div id="main" class="container-fluid mb-3">
+    <h3 class="title"><b><i>Changing Staff for Subject</i></b></h3>
+    <form [formGroup]="AssignStaffForm">
+        <div id="staffAssignForm" class="col-sm-6">
+            <div class="form-group">
+                <label class="required">Standard</label>
+                <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                    formControlName="standard">
+                    <option value="" selected>Select the standard</option>
+                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                </select>
+                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Section</label>
+                <select class="custom-select" class="form-control" name="section" formControlName="section"
+                    (change)="getSubjects()">
+                    <option value="" selected>Select the section</option>
+                    <option *ngFor="let class of classList">{{class.section}}</option>
+                </select>
+                <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                    <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Subject Name</label>
+                <select class="custom-select" class="form-control" name="subject" formControlName="subject" (change)="getStaff()">
+                    <option value="" selected>Select the subject name</option>
+                    <option *ngFor="let subjectAssign of subjectAssignList">
+                        {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
+                </select>
+                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Previously Assigned Staff</label>
+                <input type="text" class="form-control" name="existingTeacher" value="{{staff.id}}-{{staff.firstName}}-{{staff.major}}">
+            </div>
+            <div class="form-group">
+                <label class="required">Teacher Name</label>
+                <select class="custom-select" class="form-control" name="teacher" formControlName="teacher">
+                    <option value="" selected>Select the teacher</option>
+                    <option *ngFor="let staff of staffList">
+                        {{staff.id}}-{{staff?.firstName}}-{{staff.major}}</option>
+                </select>
+                <div *ngIf="teacher?.invalid &&(teacher?.touched||teacher?.dirty)">
+                    <div class="error" *ngIf="teacher?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!AssignStaffForm.valid"
+                (click)="assignStaff()">Assign Staff</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
+        </div>
+    </form>
+</div>

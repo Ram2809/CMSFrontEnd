@@ -81,6 +81,7 @@ export class ViewSyllabusComponent implements OnInit {
             window.alert(error.error.message);
           });
         }
+        this.subjectList=[];
       }, error => {
         window.alert(error.error.message);
       })

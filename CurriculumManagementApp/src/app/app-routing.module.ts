@@ -7,9 +7,11 @@ import { ViewClassComponent } from './components/headmaster/class/view-class/vie
 import { ViewDiscussionsComponent } from './components/headmaster/discussion/view-discussions/view-discussions.component';
 import { AdminViewProfileComponent } from './components/headmaster/profile/admin-view-profile/admin-view-profile.component';
 import { StaffAssignComponent } from './components/headmaster/staff/staff-assign/staff-assign.component';
+import { UpdateStaffAssignComponent } from './components/headmaster/staff/update-staff-assign/update-staff-assign.component';
 import { ViewTeachersComponent } from './components/headmaster/staff/view-teachers/view-teachers.component';
 import { ViewstaffsComponent } from './components/headmaster/staff/viewstaffs/viewstaffs.component';
 import { AddStudentComponent } from './components/headmaster/student/add-student/add-student.component';
+import { UpdateStudentComponent } from './components/headmaster/student/update-student/update-student.component';
 import { ViewStudentsComponent } from './components/headmaster/student/view-students/view-students.component';
 import { AddSubjectComponent } from './components/headmaster/subject/add-subject/add-subject.component';
 import { UpdateSubjectComponent } from './components/headmaster/subject/update-subject/update-subject.component';
@@ -64,6 +66,8 @@ const routes: Routes = [
       { path: 'viewteachers', component: ViewTeachersComponent },
       { path: 'viewtopicstatus', component: TopicStatusComponent },
       { path: 'viewprofile', component: AdminViewProfileComponent },
+      { path: 'admin/updatestudent', component: UpdateStudentComponent },
+      { path: 'updatestaffassign', component: UpdateStaffAssignComponent },
     ]
   },
   {

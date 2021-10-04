@@ -34,3 +34,6 @@ label{
 #viewStudent{
     margin-left: 6cm;
 }
+th,td{
+    text-align: center;
+}
