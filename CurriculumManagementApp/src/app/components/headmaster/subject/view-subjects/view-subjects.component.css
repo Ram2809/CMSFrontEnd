@@ -25,7 +25,7 @@ label{
     margin-left: 0.5cm;
 }
 #deleteButton{
-    margin-left: 8cm;
+    margin-left: 15cm;
 }
 #main{
     margin-top: 50px;
@@ -36,4 +36,7 @@ label{
 .notFound{
     text-align: center;
     color: red;
+}
+th,td{
+    text-align: center;
 }

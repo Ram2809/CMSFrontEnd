@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Student } from '../model/student';
 import { Response } from '../model/response';
+import { UrlUtil } from '../model/url-util';
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  private baseUrl = 'http://localhost:8081/api/student'
+  public urlUtil: UrlUtil = new UrlUtil();
+  private baseUrl = this.urlUtil.baseUrl + 'student';
   constructor(private http: HttpClient) { }
   addStudent(student: Student): Observable<Response> {
     return this.http.post(`${this.baseUrl}`, student)

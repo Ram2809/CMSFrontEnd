@@ -63,7 +63,7 @@ export class AddSubjectComponent implements OnInit {
     }, error => {
       window.alert(error.error.message);
     });
-    window.alert("Subject assigned for standard successfully!");
+  //  window.alert("Subject assigned for standard successfully!");
   }
   get code() {
     return this.AddSubjectForm.get('code');

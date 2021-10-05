@@ -39,4 +39,7 @@ export class SubjectService {
   getRoomNo(assignId: number): Observable<Response> {
     return this.http.get(`${this.urlUtil.baseUrl}` + 'subjectassign/subject/' + `${assignId}`);
   }
+  deleteSubjectAssign(roomNo: number): Observable<Response> {
+    return this.http.delete(`${this.urlUtil.baseUrl}subjectassign/${roomNo}`);
+  }
 }

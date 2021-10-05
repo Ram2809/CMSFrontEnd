@@ -8,6 +8,7 @@ import { TeacherAssign } from 'src/app/model/teacher-assign';
 import { ClassService } from 'src/app/services/class.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TeacherService } from 'src/app/services/teacher.service';
+
 @Component({
   selector: 'app-update-staff-assign',
   templateUrl: './update-staff-assign.component.html',
@@ -93,15 +94,18 @@ export class UpdateStaffAssignComponent implements OnInit {
       window.alert(error.message);
     });
   }
-  assignStaff() {
-    const teacherAssign:TeacherAssign=new TeacherAssign();
-    this.teacherService.updateStaffAssign(this.subjectAssignId,this.teacher?.value.split("-").shift(),teacherAssign).subscribe(response=>{
-      let responseBody:Response=response;
-      window.alert(responseBody.message);
-      this.AssignStaffForm.reset();
-    },error=>{
-      window.alert(error.message);
-    });
+  changeStaff() {
+    let response: boolean = window.confirm("Are you sure want to continue?");
+    if (response) {
+      const teacherAssign: TeacherAssign = new TeacherAssign();
+      this.teacherService.updateStaffAssign(this.subjectAssignId, this.teacher?.value.split("-").shift(), teacherAssign).subscribe(response => {
+        let responseBody: Response = response;
+        window.alert(responseBody.message);
+        this.AssignStaffForm.reset();
+      }, error => {
+        window.alert(error.message);
+      });
+    }
   }
   get standard() {
     return this.AssignStaffForm.get('standard');

@@ -42,10 +42,13 @@ export class AddLoginDataComponent implements OnInit {
         this.response = data;
         console.log(this.response);
         window.alert(this.response.message);
+        this.close();
+      }, error => {
+        window.alert(error.error.message);
       });
     }
   }
-  close(){
+  close() {
     this.dialogRef.close();
   }
   get id() {

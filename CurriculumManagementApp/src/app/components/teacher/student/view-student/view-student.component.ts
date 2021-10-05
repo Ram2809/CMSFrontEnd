@@ -53,7 +53,7 @@ export class ViewStudentComponent implements OnInit {
         });
       }
     }, error => {
-      window.alert(error.error.message);
+      window.alert("No subject assigned for"+" "+this.staffId);
     });
   }
   getStudents() {

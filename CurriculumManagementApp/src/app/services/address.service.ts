@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Address } from '../model/address';
 import { Response } from '../model/response';
+import { UrlUtil } from '../model/url-util';
 @Injectable({
   providedIn: 'root'
 })
 export class AddressService {
-  private baseUrl = 'http://localhost:8081/api/address'
+  public urlUtil: UrlUtil = new UrlUtil();
+  private baseUrl = this.urlUtil.baseUrl + 'address';
   constructor(private http: HttpClient) { }
   addAddress(address: Address): Observable<Response> {
     return this.http.post(`${this.baseUrl}`, address);

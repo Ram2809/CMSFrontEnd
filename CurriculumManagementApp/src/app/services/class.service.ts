@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { Class } from '../model/class';
 import { Observable } from 'rxjs';
 import { Response } from '../model/response';
+import { UrlUtil } from '../model/url-util';
 @Injectable({
   providedIn: 'root'
 })
 export class ClassService {
-  private baseUrl = 'http://localhost:8081/api/class'
+  public urlUtil: UrlUtil = new UrlUtil();
+  private baseUrl = this.urlUtil.baseUrl + 'class';
   constructor(private http: HttpClient) { }
   addClass(classDetail: Class): Observable<Response> {
     return this.http.post(`${this.baseUrl}`, classDetail);

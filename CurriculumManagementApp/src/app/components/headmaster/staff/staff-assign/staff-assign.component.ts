@@ -89,10 +89,10 @@ export class StaffAssignComponent implements OnInit {
           window.alert(responseEntity.message);
           this.AssignStaffForm.reset();
         }, error => {
-          window.alert(error.message);
+          window.alert("Staff Assigned Already!If you want change the staff,Go to edit section!");
         });
       }, error => {
-        window.alert(error.message);
+        window.alert(error.error.message);
       });
     }
   }

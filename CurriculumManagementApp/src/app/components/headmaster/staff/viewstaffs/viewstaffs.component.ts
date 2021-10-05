@@ -6,6 +6,8 @@ import { SubjectService } from 'src/app/services/subject.service';
 import { SubjectAssign } from 'src/app/model/subject-assign';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { Teacher } from 'src/app/model/teacher';
+import { Subject } from 'src/app/model/subject';
+
 @Component({
   selector: 'app-viewstaffs',
   templateUrl: './viewstaffs.component.html',
@@ -23,6 +25,10 @@ export class ViewstaffsComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public teacher: Teacher = new Teacher();
   public errorMessage: string = "";
+  // public teacherAssignmap:TSMap<Subject,Teacher>=new TSMap();
+  public subjectList: Subject[] = [];
+  public teacherList: Teacher[] = [];
+
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private teacherService: TeacherService) { }
@@ -42,7 +48,7 @@ export class ViewstaffsComponent implements OnInit {
     });
   }
 
-  getSubjects() {
+  getStaffs() {
     this.classService.getClassRoomNo(this.standard, this.section).subscribe(response => {
       let responseBody: Response = response;
       this.roomNo = responseBody.data;
@@ -50,8 +56,24 @@ export class ViewstaffsComponent implements OnInit {
       this.subjectService.getSubjets(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.subjectAssignList = responseBody.data;
-        console.log(responseBody.data)
-        this.isHidden = true;
+        console.log(responseBody.data);
+        this.subjectList=[];
+        this.teacherList=[];
+        for (let i in this.subjectAssignList) {
+          console.log(this.subjectAssignList[i].id);
+          this.teacherService.getTeacherId(Number(this.subjectAssignList[i].id)).subscribe(response => {
+            let staffId: number = response.data;
+            this.teacherService.getStaff(staffId).subscribe(response => {
+              let responseBody: Response = response;
+              const subject: Subject = this.subjectAssignList[i].subject!;
+              const teacher: Teacher = responseBody.data;
+              this.subjectList.push(subject);
+              this.teacherList.push(teacher);
+              //this.teacherAssignmap.set(subject,teacher);
+            });
+          });
+        }
+        // console.log(this.teacherAssignmap);
       }, error => {
         window.alert(error.error.message);
       });
@@ -59,24 +81,7 @@ export class ViewstaffsComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-  getStaff() {
-    this.id = Number(this.subject.split("-").shift());
-    console.log(this.id);
-    this.teacherService.getTeacherId(this.id).subscribe(response => {
-      let responseBody: Response = response;
-      console.log(responseBody);
-      this.teacherService.getStaff(responseBody.data).subscribe(response => {
-        let responseBody: Response = response;
-        this.teacher = responseBody.data;
-        this.isHidden = false;
-        console.log(this.teacher);
-      }, error => {
-        this.isHidden = true;
-        this.errorMessage = error.error.message;
-        window.alert(error.error.message);
-      });
-    }, error => {
-      window.alert(error.error.message);
-    });
-  }
+  // getSubjectCode(subject: any) {
+  //   return subject.code;
+  // }
 }

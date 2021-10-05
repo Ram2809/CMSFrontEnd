@@ -43,7 +43,7 @@ export class TeacherLoginComponent implements OnInit {
         else {
           localStorage.setItem('staffId',String(this.teacher.id));
           window.alert("Logged in successfully!");
-          this.router.navigate(['teacher']);
+          this.router.navigate(['teacher/viewassignedsubjects']);
         }
       },error=>{
         window.alert(error.error.message);

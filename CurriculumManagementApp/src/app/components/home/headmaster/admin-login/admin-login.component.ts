@@ -35,7 +35,7 @@ export class AdminLoginComponent implements OnInit {
       }
       else {
         window.alert("Logged in successfully!");
-        this.router.navigate(['admin']);
+        this.router.navigate(['admin/viewprofile']);
       }
     }, error => {
       window.alert(error.error.message);

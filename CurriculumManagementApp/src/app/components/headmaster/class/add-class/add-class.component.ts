@@ -3,20 +3,26 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Class } from 'src/app/model/class';
 import { ClassService } from 'src/app/services/class.service';
 import { Response } from 'src/app/model/response';
+import { Subject } from 'src/app/model/subject';
+import { SubjectAssign } from 'src/app/model/subject-assign';
+import { SubjectService } from 'src/app/services/subject.service';
 @Component({
   selector: 'app-add-class',
   templateUrl: './add-class.component.html',
   styleUrls: ['./add-class.component.css']
 })
 export class AddClassComponent implements OnInit {
-
+  public classList: Class[] = [];
+  public subjectAssignList: SubjectAssign[] = [];
+  public subject: Subject = new Subject();
   AddClassForm = new FormGroup({
     standard: new FormControl('', [Validators.required, Validators.maxLength(4)]),
     section: new FormControl('', Validators.required),
     roomNo: new FormControl('', Validators.required),
   });
 
-  constructor(private classService: ClassService) { }
+  constructor(private classService: ClassService,
+    private subjectService: SubjectService) { }
 
   ngOnInit(): void {
   }
@@ -32,10 +38,43 @@ export class AddClassComponent implements OnInit {
         let responseBody: Response = response;
         window.alert(responseBody.message);
         this.AddClassForm.reset();
+        this.classList = [];
+        console.log(this.classList.length);
+        this.classService.getClassesByStandard(String(classDetail.standard)).subscribe(response => {
+          let responseBody: Response = response;
+          this.classList = responseBody.data;
+          if (this.classList.length != 0) {
+            console.log(this.classList[0].roomNo);
+            this.subjectService.getSubjets(Number(this.classList[0].roomNo)).subscribe(response => {
+              let responseEntity: Response = response;
+              console.log(responseEntity.data);
+              this.subjectAssignList = responseEntity.data;
+              console.log(this.subjectAssignList);
+              for (var i = 0; i < this.subjectAssignList.length; i++) {
+                console.log(this.subjectAssignList[i].subject?.code);
+                this.assignSubject(String(this.subjectAssignList[i].subject?.code), Number(classDetail.roomNo));
+              }
+            });
+          }
+        });
       }, error => {
         window.alert(error.error.message);
       });
     }
+  }
+  assignSubject(code: string, roomNo: number) {
+    const subject: Subject = new Subject();
+    subject.code = code;
+    const classDetail: Class = new Class();
+    classDetail.roomNo = roomNo;
+    const subjectAssign: SubjectAssign = new SubjectAssign();
+    subjectAssign.subject = subject;
+    subjectAssign.classDetail = classDetail;
+    this.subjectService.assignSubject(subjectAssign).subscribe(response => {
+      let responseBody: Response = response;
+    }, error => {
+      window.alert(error.error.message);
+    });
   }
   get standard() {
     return this.AddClassForm.get('standard');

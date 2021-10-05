@@ -3,7 +3,7 @@
     <form #loginForm="ngForm">
         <div id="loginForm" class="col-sm-6">
             <div class="form-group">
-                <label class="required">User Name</label>
+                <label class="required">Email</label>
                 <input type="text" class="form-control" #email="ngModel" name="username" ngModel [(ngModel)]="username"
                     placeholder="Enter your email" required email>
                 <div *ngIf="email.touched">
@@ -23,8 +23,7 @@
             </div>
             <button class="btn btn-success" id="submitButton" type="submit"
                 (click)="checkUser()" [disabled]="loginForm.invalid">Login</button>
-            <button class="btn btn-primary" id="resetButton" type="submit" (click)="forgotPassword()">Forgot
-                Password</button><br><br>
+            <button class="btn btn-primary" id="resetButton" type="submit" (click)="forgotPassword()">Change/Reset Password</button><br><br>
                 <div class="signup"><button class="btn btn-default" (click)="signup()">New User? Register Here</button></div>
         </div>
     </form>
