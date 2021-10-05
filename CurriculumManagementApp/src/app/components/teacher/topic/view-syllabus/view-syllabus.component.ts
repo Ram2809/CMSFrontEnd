@@ -23,7 +23,7 @@ export class ViewSyllabusComponent implements OnInit {
   public classRoomNo: number = 0;
   public topicList: Topic[] = [];
   public errorMessage: string = "";
-  public isHidden:boolean=false;
+  public isHidden: boolean = false;
 
   ViewCurriculumForm = new FormGroup({
     standard: new FormControl('', Validators.required),
@@ -81,7 +81,7 @@ export class ViewSyllabusComponent implements OnInit {
             window.alert(error.error.message);
           });
         }
-        this.subjectList=[];
+        this.subjectList = [];
       }, error => {
         window.alert(error.error.message);
       })
@@ -96,12 +96,12 @@ export class ViewSyllabusComponent implements OnInit {
     this.topicService.getTopics(subjectCode).subscribe(response => {
       let responseBody: Response = response;
       this.topicList = responseBody.data;
-      this.isHidden=false;
+      this.isHidden = false;
       this.ViewCurriculumForm.reset();
       console.log(this.topicList);
     }, error => {
-      this.errorMessage=error.error.message;
-      this.isHidden=true;
+      this.errorMessage = error.error.message;
+      this.isHidden = true;
       window.alert(error.error.message);
     });
   }

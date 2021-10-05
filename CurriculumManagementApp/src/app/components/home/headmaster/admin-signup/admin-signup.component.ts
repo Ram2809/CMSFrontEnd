@@ -44,7 +44,7 @@ export class AdminSignupComponent implements OnInit {
     headmaster.email = this.email?.value;
     headmaster.contactNo = this.contactNo?.value;
     headmaster.address = this.address?.value;
-    headmaster.password="admin@123";
+    headmaster.password = "admin@123";
     this.headMasterService.addHeadmaster(headmaster).subscribe(response => {
       let responseBody: Response = response;
       console.log(responseBody.message);

@@ -1,6 +1,6 @@
 <div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>Add class Details</i></b></h3>
-    <form [formGroup]="AddClassForm" >
+    <form [formGroup]="AddClassForm">
         <div id="addForm" class="col-sm-6">
             <div class="form-group">
                 <label class="required">Standard</label>
@@ -27,7 +27,8 @@
                     <div *ngIf="roomNo?.errors?.required">Class Room Number is required!</div>
                 </div>
             </div>
-            <button id="submitButton" class="btn btn-info" type="submit" (click)="addClass()" [disabled]="!AddClassForm.valid">Submit</button>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="addClass()"
+                [disabled]="!AddClassForm.valid">Submit</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
         </div>
     </form>

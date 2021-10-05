@@ -34,7 +34,8 @@
             <div class="row">
                 <div class="col">
                     <label>Qualification</label>
-                    <select class="custom-select" class="form-control" name="qualification" [(ngModel)]="teacher.qualification">
+                    <select class="custom-select" class="form-control" name="qualification"
+                        [(ngModel)]="teacher.qualification">
                         <option value="" selected>Select the qualification</option>
                         <option [value]="qualification" *ngFor="let qualification of qualificationList">
                             {{qualification}}

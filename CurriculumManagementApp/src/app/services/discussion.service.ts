@@ -26,8 +26,7 @@ export class DiscussionService {
   deleteDiscussion(questionNo: number): Observable<Response> {
     return this.http.delete(`${this.baseUrl}` + '/' + `${questionNo}`);
   }
-  getDiscussionByRoomNo(unitNo:string,roomNo:number):Observable<Response>
-  {
+  getDiscussionByRoomNo(unitNo: string, roomNo: number): Observable<Response> {
     return this.http.get(`${this.baseUrl}/${unitNo}/${roomNo}`);
   }
 }

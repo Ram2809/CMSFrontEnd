@@ -26,7 +26,8 @@
             </div>
             <div class="form-group">
                 <label class="required">Subject Name</label>
-                <select class="custom-select" class="form-control" name="subject" formControlName="subject" (change)="getStaff()">
+                <select class="custom-select" class="form-control" name="subject" formControlName="subject"
+                    (change)="getStaff()">
                     <option value="" selected>Select the subject name</option>
                     <option *ngFor="let subjectAssign of subjectAssignList">
                         {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
@@ -37,7 +38,8 @@
             </div>
             <div class="form-group">
                 <label class="required">Previously Assigned Staff</label>
-                <input type="text" class="form-control" name="existingTeacher" value="{{staff.id}}-{{staff.firstName}}-{{staff.major}}">
+                <input type="text" class="form-control" name="existingTeacher"
+                    value="{{staff.id}}-{{staff.firstName}}-{{staff.major}}">
             </div>
             <div class="form-group">
                 <label class="required">Teacher Name</label>

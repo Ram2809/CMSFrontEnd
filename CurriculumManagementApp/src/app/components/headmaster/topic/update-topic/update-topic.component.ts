@@ -16,7 +16,7 @@ export class UpdateTopicComponent implements OnInit {
   public unitNo: string = "";
   public monthList: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   constructor(private topicService: TopicService,
-    private dialogRef:MatDialogRef<UpdateTopicComponent>) { }
+    private dialogRef: MatDialogRef<UpdateTopicComponent>) { }
 
   ngOnInit(): void {
     this.unitNo = String(localStorage.getItem('unitNo'));
@@ -49,7 +49,7 @@ export class UpdateTopicComponent implements OnInit {
       });
     }
   }
-  close(){
+  close() {
     this.dialogRef.close();
   }
 }

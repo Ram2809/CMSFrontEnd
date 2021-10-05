@@ -11,21 +11,21 @@ import { Response } from 'src/app/model/response';
   styleUrls: ['./admin-view-profile.component.css']
 })
 export class AdminViewProfileComponent implements OnInit {
-  public headMaster:HeadMaster=new HeadMaster();
-  constructor(private dialog:MatDialog,
-    private headMasterService:HeadMasterService) { }
+  public headMaster: HeadMaster = new HeadMaster();
+  constructor(private dialog: MatDialog,
+    private headMasterService: HeadMasterService) { }
 
   ngOnInit(): void {
-    let user:string=String(localStorage.getItem('admin'));
-    let headMasterDetail:HeadMaster=JSON.parse(user);
-    this.headMasterService.getHeadMaster(String(headMasterDetail.email)).subscribe(response=>{
-      let responseBody:Response=response;
-      this.headMaster=responseBody.data;
-    },error=>{
+    let user: string = String(localStorage.getItem('admin'));
+    let headMasterDetail: HeadMaster = JSON.parse(user);
+    this.headMasterService.getHeadMaster(String(headMasterDetail.email)).subscribe(response => {
+      let responseBody: Response = response;
+      this.headMaster = responseBody.data;
+    }, error => {
       window.alert(error.error.message);
     })
   }
-  updateProfile(){
+  updateProfile() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;

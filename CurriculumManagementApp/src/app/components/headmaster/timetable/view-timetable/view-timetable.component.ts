@@ -19,7 +19,7 @@ export class ViewTimetableComponent implements OnInit {
   public classList: Class[] = [];
   public roomNo: number = 0;
   public isHidden: boolean = false;
-  public errorMessage:string="";
+  public errorMessage: string = "";
 
   ViewTimetableForm = new FormGroup({
     standard: new FormControl('', Validators.required),
@@ -54,7 +54,7 @@ export class ViewTimetableComponent implements OnInit {
         this.isHidden = false;
         console.log(this.timetableList);
       }, error => {
-        this.errorMessage=error.error.message;
+        this.errorMessage = error.error.message;
         this.isHidden = true;
         window.alert(error.error.message);
       });

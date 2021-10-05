@@ -10,5 +10,5 @@ export class Teacher {
     public major?: string;
     public email?: string;
     public contactNo?: number;
-    public address?:Address;
+    public address?: Address;
 }

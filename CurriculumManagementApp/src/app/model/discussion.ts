@@ -9,5 +9,5 @@ export class Discussion {
     public date?: Date;
     public topic?: Topic;
     public teacher?: Teacher;
-    public classDetail?:Class;
+    public classDetail?: Class;
 }

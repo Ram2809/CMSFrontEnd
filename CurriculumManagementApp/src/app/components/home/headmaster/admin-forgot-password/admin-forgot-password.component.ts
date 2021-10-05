@@ -24,27 +24,26 @@ export class AdminForgotPasswordComponent implements OnInit {
       let responseBody: Response = response;
       this.headMaster = responseBody.data;
       console.log(this.headMaster);
-      if(this.password==this.confirmPassword){
-      this.headMaster.password=this.password;
-      this.headMasterService.updateHeadMaster(Number(this.headMaster.id),this.headMaster).subscribe(response=>{
-        let responseBody:Response=response;
-        if(responseBody.code==200)
-        {
-          window.alert("Password Updated successfully!");
-        }
-        console.log(responseBody.message);
-      },error=>{
-        window.alert(error.error.message);
-      });
-    }
-    else{
-      window.alert("Confirm password is not same!");
-    }
-  },error=>{
+      if (this.password == this.confirmPassword) {
+        this.headMaster.password = this.password;
+        this.headMasterService.updateHeadMaster(Number(this.headMaster.id), this.headMaster).subscribe(response => {
+          let responseBody: Response = response;
+          if (responseBody.code == 200) {
+            window.alert("Password Updated successfully!");
+          }
+          console.log(responseBody.message);
+        }, error => {
+          window.alert(error.error.message);
+        });
+      }
+      else {
+        window.alert("Confirm password is not same!");
+      }
+    }, error => {
       window.alert(error.error.message);
     });
   }
-  close(){
+  close() {
     this.dialogRef.close();
   }
 

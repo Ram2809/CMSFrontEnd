@@ -20,7 +20,7 @@ export class ViewTopicsComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public topicList: Topic[] = [];
   public isHidden: boolean = false;
-  public errorMessage:string="";
+  public errorMessage: string = "";
 
   ViewTopicsForm = new FormGroup({
     standard: new FormControl('', Validators.required),
@@ -59,11 +59,11 @@ export class ViewTopicsComponent implements OnInit {
     this.topicService.getTopics(subjectCode).subscribe(response => {
       let responseBody: Response = response;
       this.topicList = responseBody.data;
-      this.isHidden=false;
+      this.isHidden = false;
       console.log(this.topicList);
     }, error => {
-      this.isHidden=true;
-      this.errorMessage=error.error.message;
+      this.isHidden = true;
+      this.errorMessage = error.error.message;
       window.alert(error.error.message);
     });
   }

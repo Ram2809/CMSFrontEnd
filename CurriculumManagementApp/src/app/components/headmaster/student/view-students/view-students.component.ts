@@ -82,10 +82,12 @@ export class ViewStudentsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    this.dialog.open(UpdateStudentComponent, {maxWidth: '100vw',
-    maxHeight: '100vh',
-    width: '750px',
-    height: '85vh',});
+    this.dialog.open(UpdateStudentComponent, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: '750px',
+      height: '85vh',
+    });
   }
   get standard() {
     return this.ViewStudentForm.get('standard');

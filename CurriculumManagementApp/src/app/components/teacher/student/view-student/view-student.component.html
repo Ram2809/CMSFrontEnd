@@ -11,39 +11,40 @@
                     </select>
                 </div>
                 <div class="col">
-                    <button id="submitButton" class="btn btn-info" type="submit" (click)="getStudents()">Get Students</button>
+                    <button id="submitButton" class="btn btn-info" type="submit" (click)="getStudents()">Get
+                        Students</button>
                 </div>
             </div><br>
         </div>
-            <ng-template #elseBlock>
-                <label class="notFound">{{errorMessage}}</label>
-            </ng-template>
-            <div *ngIf="studentList.length>0 else elseBlock">
-                <table class="table table-bordered" [hidden]="isHidden">
-                    <thead>
-                        <tr>
-                            <th>Roll Number</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Date of birth</th>
-                            <th>Gender</th>
-                            <th>Contact Number</th>
-                            <th>Address</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let student of studentList">
-                            <td>{{student.rollNo}}</td>
-                            <td>{{student.firstName}}</td>
-                            <td>{{student.lastName}}</td>
-                            <td>{{student.dateOfBirth}}</td>
-                            <td>{{student.gender}}</td>
-                            <td>{{student.contactNo}}</td>
-                            <td>{{student.address}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        
+        <ng-template #elseBlock>
+            <label class="notFound">{{errorMessage}}</label>
+        </ng-template>
+        <div *ngIf="studentList.length>0 else elseBlock">
+            <table class="table table-bordered" [hidden]="isHidden">
+                <thead>
+                    <tr>
+                        <th>Roll Number</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Date of birth</th>
+                        <th>Gender</th>
+                        <th>Contact Number</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of studentList">
+                        <td>{{student.rollNo}}</td>
+                        <td>{{student.firstName}}</td>
+                        <td>{{student.lastName}}</td>
+                        <td>{{student.dateOfBirth}}</td>
+                        <td>{{student.gender}}</td>
+                        <td>{{student.contactNo}}</td>
+                        <td>{{student.address}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </form>
 </div>

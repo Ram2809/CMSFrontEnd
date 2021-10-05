@@ -27,7 +27,7 @@ export class ViewDiscussionComponent implements OnInit {
   public classRoomNo: number = 0;
   public discussionList: Discussion[] = [];
   public isHidden: boolean = false;
-  public errorMessage:string="";
+  public errorMessage: string = "";
 
   ViewDiscussionForm = new FormGroup({
     standard: new FormControl('', Validators.required),
@@ -114,11 +114,11 @@ export class ViewDiscussionComponent implements OnInit {
       this.discussionService.getDiscussions(unitNo, this.classRoomNo, this.staffId).subscribe(response => {
         let responseBody: Response = response;
         this.discussionList = responseBody.data;
-        this.isHidden=false;
+        this.isHidden = false;
         console.log(this.discussionList);
       }, error => {
-        this.isHidden=true;
-        this.errorMessage=error.error.message;
+        this.isHidden = true;
+        this.errorMessage = error.error.message;
         window.alert(error.error.message);
       });
     }, error => {

@@ -57,7 +57,7 @@ export class UpdateStudentComponent implements OnInit {
         let responseBody: Response = response;
         window.alert(responseBody.message);
         this.close();
-      },error=>{
+      }, error => {
         window.alert(error.error.message);
       });
     }

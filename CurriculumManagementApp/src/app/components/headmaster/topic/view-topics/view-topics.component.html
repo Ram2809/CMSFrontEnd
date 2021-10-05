@@ -30,30 +30,30 @@
             <label class="notFound">{{errorMessage}}</label>
         </ng-template>
         <div *ngIf="topicList.length>0 else elseBlock">
-        <table class="table table-bordered" [hidden]="isHidden">
-            <thead>
-                <tr>
-                    <th>Select</th>
-                    <th>Topic Number</th>
-                    <th>Topic Name</th>
-                    <th>Description</th>
-                    <th>Month</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let topic of topicList">
-                    <td><input type="radio" name="option" formControlName="option" value={{topic.unitNo}}></td>
-                    <td>{{topic.unitNo}}</td>
-                    <td>{{topic.unitName}}</td>
-                    <td>{{topic.description}}</td>
-                    <td>{{topic.month}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <button id="deleteButton" (click)="deleteUnit()" class="btn btn-info" type="submit"
-            [disabled]="option?.value.length==0" [hidden]="isHidden">Delete</button>
-        <button id="updateButton" (click)="updateUnit()" class="btn btn-info" type="submit"
-            [disabled]="option?.value.length==0" [hidden]="isHidden">Update</button>
+            <table class="table table-bordered" [hidden]="isHidden">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Topic Number</th>
+                        <th>Topic Name</th>
+                        <th>Description</th>
+                        <th>Month</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let topic of topicList">
+                        <td><input type="radio" name="option" formControlName="option" value={{topic.unitNo}}></td>
+                        <td>{{topic.unitNo}}</td>
+                        <td>{{topic.unitName}}</td>
+                        <td>{{topic.description}}</td>
+                        <td>{{topic.month}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="deleteButton" (click)="deleteUnit()" class="btn btn-info" type="submit"
+                [disabled]="option?.value.length==0" [hidden]="isHidden">Delete</button>
+            <button id="updateButton" (click)="updateUnit()" class="btn btn-info" type="submit"
+                [disabled]="option?.value.length==0" [hidden]="isHidden">Update</button>
         </div>
     </form>
 </div>

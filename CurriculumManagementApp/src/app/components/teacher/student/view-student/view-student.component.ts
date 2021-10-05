@@ -20,8 +20,8 @@ export class ViewStudentComponent implements OnInit {
   public classList: Class[] = [];
   public classRoomNo: number = 0;
   public studentList: Student[] = [];
-  public errorMessage:string="";
-  public isHidden:boolean=false;
+  public errorMessage: string = "";
+  public isHidden: boolean = false;
   ViewStudentForm = new FormGroup({
     class: new FormControl('', Validators.required),
   });
@@ -31,7 +31,7 @@ export class ViewStudentComponent implements OnInit {
     private studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.staffId=Number(localStorage.getItem('staffId'));
+    this.staffId = Number(localStorage.getItem('staffId'));
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
       console.log(responseBody);
@@ -53,7 +53,7 @@ export class ViewStudentComponent implements OnInit {
         });
       }
     }, error => {
-      window.alert("No subject assigned for"+" "+this.staffId);
+      window.alert("No subject assigned for" + " " + this.staffId);
     });
   }
   getStudents() {
@@ -67,13 +67,13 @@ export class ViewStudentComponent implements OnInit {
       this.classRoomNo = responseBody.data;
       console.log(this.classRoomNo);
       this.studentService.getStudents(this.classRoomNo).subscribe(response => {
-        let responseBody:Response=response;
-        this.studentList=responseBody.data;
+        let responseBody: Response = response;
+        this.studentList = responseBody.data;
         console.log(this.studentList);
-        this.isHidden=false;
-      },error=>{
-        this.isHidden=true;
-        this.errorMessage=error.error.message;
+        this.isHidden = false;
+      }, error => {
+        this.isHidden = true;
+        this.errorMessage = error.error.message;
         window.alert(error.error.message);
       })
     }, error => {

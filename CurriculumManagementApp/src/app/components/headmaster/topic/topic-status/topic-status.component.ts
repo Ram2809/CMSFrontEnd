@@ -25,9 +25,9 @@ export class TopicStatusComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public topicList: Topic[] = [];
   public staffId: number = 0;
-  public teacher:Teacher=new Teacher();
-  public topicStatus:TopicStatus=new TopicStatus();
-  public errorMessage:string="";
+  public teacher: Teacher = new Teacher();
+  public topicStatus: TopicStatus = new TopicStatus();
+  public errorMessage: string = "";
   ViewTopicStatusForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -72,7 +72,7 @@ export class TopicStatusComponent implements OnInit {
     });
   }
   getTopics() {
-    let splitList=this.subject?.value.split("-");
+    let splitList = this.subject?.value.split("-");
     console.log(splitList);
     console.log(splitList[1]);
     this.topicService.getTopics(splitList[1]).subscribe(response => {
@@ -85,11 +85,11 @@ export class TopicStatusComponent implements OnInit {
     this.getStaff();
   }
   getStaff() {
-    let assignId:number = Number(this.subject?.value.split("-").shift());
+    let assignId: number = Number(this.subject?.value.split("-").shift());
     console.log(assignId);
     this.teacherService.getTeacherId(assignId).subscribe(response => {
       let responseBody: Response = response;
-      this.staffId=responseBody.data;
+      this.staffId = responseBody.data;
       console.log(responseBody);
       this.teacherService.getStaff(responseBody.data).subscribe(response => {
         let responseBody: Response = response;
@@ -102,19 +102,19 @@ export class TopicStatusComponent implements OnInit {
       window.alert(error.error.message);
     })
   }
-  getTopicStatus(){
-    let unitNo:string=this.unit?.value.split("-").shift();
+  getTopicStatus() {
+    let unitNo: string = this.unit?.value.split("-").shift();
     console.log(unitNo);
     console.log(this.staffId);
     console.log(this.roomNo);
-    this.topicStatusService.getTopicStatusByUnitNo(unitNo,this.staffId,this.roomNo).subscribe(response=>{
-      let responseBody:Response=response;
-      this.topicStatus=responseBody.data;
-      this.isHidden=false;
+    this.topicStatusService.getTopicStatusByUnitNo(unitNo, this.staffId, this.roomNo).subscribe(response => {
+      let responseBody: Response = response;
+      this.topicStatus = responseBody.data;
+      this.isHidden = false;
       console.log(this.topicStatus);
-    },error=>{
-      this.isHidden=true;
-      this.errorMessage=error.error.message;
+    }, error => {
+      this.isHidden = true;
+      this.errorMessage = error.error.message;
       window.alert(error.error.message);
     });
   }
@@ -130,7 +130,7 @@ export class TopicStatusComponent implements OnInit {
   get unit() {
     return this.ViewTopicStatusForm.get('unit');
   }
-  get staff(){
+  get staff() {
     return this.ViewTopicStatusForm.get('teacher');
   }
 }

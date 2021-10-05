@@ -17,48 +17,48 @@ import { TeacherForgotpasswordComponent } from '../teacher-forgotpassword/teache
 export class TeacherLoginComponent implements OnInit {
   public username: string = "";
   public password: string = "";
-  public teacher:Teacher=new Teacher();
-  public login:Login=new Login();
-  constructor(private teacherService:TeacherService,
-    private loginService:LoginService,
-    private router:Router,
-    private dialog:MatDialog) { }
+  public teacher: Teacher = new Teacher();
+  public login: Login = new Login();
+  constructor(private teacherService: TeacherService,
+    private loginService: LoginService,
+    private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
-  checkUser(){
+  checkUser() {
     console.log(this.username);
     console.log(this.password);
-    this.teacherService.getStaffByEmail(this.username).subscribe(response=>{
-      let responseBody:Response=response;
-      this.teacher=responseBody.data;
+    this.teacherService.getStaffByEmail(this.username).subscribe(response => {
+      let responseBody: Response = response;
+      this.teacher = responseBody.data;
       console.log(this.teacher);
-      this.loginService.getLogin(Number(this.teacher.id)).subscribe(response=>{
-        let responseBody:Response=response;
-        this.login=responseBody.data;
+      this.loginService.getLogin(Number(this.teacher.id)).subscribe(response => {
+        let responseBody: Response = response;
+        this.login = responseBody.data;
         console.log(this.login);
         if (this.username != this.teacher.email || this.password != this.login.password) {
           window.alert("Invalid login credentials! Enter the valid username and password!");
         }
         else {
-          localStorage.setItem('staffId',String(this.teacher.id));
+          localStorage.setItem('staffId', String(this.teacher.id));
           window.alert("Logged in successfully!");
           this.router.navigate(['teacher/viewassignedsubjects']);
         }
-      },error=>{
+      }, error => {
         window.alert(error.error.message);
       });
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
-  signup(){
+  signup() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     this.dialog.open(TeacherSignupComponent, dialogConfig);
   }
-  forgotPassword(){
+  forgotPassword() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;

@@ -13,38 +13,40 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
   styleUrls: ['./staff-view-profile.component.css']
 })
 export class StaffViewProfileComponent implements OnInit {
-  public staffId:number=0;
-  public teacher:Teacher=new Teacher();
-  public address:Address=new Address();
-  constructor(private teacherService:TeacherService,
-    private addressService:AddressService,
-    private dialog:MatDialog) { }
+  public staffId: number = 0;
+  public teacher: Teacher = new Teacher();
+  public address: Address = new Address();
+  constructor(private teacherService: TeacherService,
+    private addressService: AddressService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.staffId=Number(localStorage.getItem('staffId'));
+    this.staffId = Number(localStorage.getItem('staffId'));
     console.log(this.staffId);
-    this.teacherService.getStaff(this.staffId).subscribe(response=>{
-      let responseBody:Response=response;
-      this.teacher=responseBody.data;
+    this.teacherService.getStaff(this.staffId).subscribe(response => {
+      let responseBody: Response = response;
+      this.teacher = responseBody.data;
       console.log(this.teacher);
-      this.addressService.getAddress(Number(this.teacher.id)).subscribe(response=>{
-        let responseBody:Response=response;
-        this.address=responseBody.data;
+      this.addressService.getAddress(Number(this.teacher.id)).subscribe(response => {
+        let responseBody: Response = response;
+        this.address = responseBody.data;
         console.log(this.address);
-      },error=>{
+      }, error => {
         window.alert(error.error.message);
       });
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
-  updateProfile(){
+  updateProfile() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    this.dialog.open(StaffUpdateProfileComponent,{maxWidth: '100vw',
-    maxHeight: '100vh',
-    width: '750px',
-    height: '85vh',});
+    this.dialog.open(StaffUpdateProfileComponent, {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: '750px',
+      height: '85vh',
+    });
   }
 }

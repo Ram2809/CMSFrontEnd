@@ -36,31 +36,32 @@
                     <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
                 </div>
             </div>
-            <button id="submitButton" class="btn btn-info" type="submit" (click)="getCurriculum()" [disabled]="!ViewCurriculumForm.valid">View Curriculum</button>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="getCurriculum()"
+                [disabled]="!ViewCurriculumForm.valid">View Curriculum</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
         </div><br>
         <ng-template #elseBlock>
             <label class="notFound">{{errorMessage}}</label>
         </ng-template>
-            <div *ngIf="topicList.length>0 else elseBlock">
-                <table class="table table-bordered" [hidden]="isHidden">
-                    <thead>
-                        <tr>
-                            <th>Unit Number</th>
-                            <th>Unit Name</th>
-                            <th>Description</th>
-                            <th>Month</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let topic of topicList">
-                            <td>{{topic.unitNo}}</td>
-                            <td>{{topic.unitName}}</td>
-                            <td>{{topic.description}}</td>
-                            <td>{{topic.month}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div *ngIf="topicList.length>0 else elseBlock">
+            <table class="table table-bordered" [hidden]="isHidden">
+                <thead>
+                    <tr>
+                        <th>Unit Number</th>
+                        <th>Unit Name</th>
+                        <th>Description</th>
+                        <th>Month</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let topic of topicList">
+                        <td>{{topic.unitNo}}</td>
+                        <td>{{topic.unitName}}</td>
+                        <td>{{topic.description}}</td>
+                        <td>{{topic.month}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </form>
 </div>

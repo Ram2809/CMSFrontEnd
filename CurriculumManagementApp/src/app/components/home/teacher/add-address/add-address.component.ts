@@ -16,10 +16,10 @@ export class AddAddressComponent implements OnInit {
   public staffId: number = 0;
   public districtList: String[] = ['Chennai', 'Coimbatore', 'Madurai', 'Krishnagiri', 'Villupuram', 'Trichy', 'Thiruvannamalai', 'Dharamapuri', 'Salem', 'Namakal', 'Erode', 'Chengalpet', 'Thiruvallur', 'Tindivanam', 'Velankanni', 'Thanjur', 'Ramanathapuram', 'Thirunelveli']
   public sortedDistrictList: String[] = [];
-  public isHidden:boolean=false;
+  public isHidden: boolean = false;
   constructor(private route: ActivatedRoute,
     private addressService: AddressService,
-    private dialog:MatDialog,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<AddAddressComponent>) { }
 
   AddAddressForm = new FormGroup({
@@ -47,21 +47,21 @@ export class AddAddressComponent implements OnInit {
     teacher.id = this.staffId;
     address.teacher = teacher;
     this.addressService.addAddress(address).subscribe(response => {
-     let responseBody:Response=response;
+      let responseBody: Response = response;
       console.log(responseBody.message);
-      this.isHidden=true;
+      this.isHidden = true;
       window.alert(responseBody.message);
       //this.router.navigate(['teacher/addlogin', this.staffId]);
     });
   }
-  addLoginCredentials(){
+  addLoginCredentials() {
     this.dialogRef.close();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     this.dialog.open(AddLoginDataComponent, dialogConfig);
   }
- 
+
   get addressLine() {
     return this.AddAddressForm.get('addressLine');
   }

@@ -37,33 +37,35 @@
             </div>
         </div>
         <div class="row">
-        <div class="col">
-            <label class="required">State</label>
-            <input type="text" class="form-control" name="state" formControlName="state" value="Tamil Nadu"
-                placeholder="Enter the state">
-            <div *ngIf="state?.invalid &&(state?.touched||state?.dirty)">
-                <div class="error" *ngIf="state?.errors?.required">* This field is required</div>
+            <div class="col">
+                <label class="required">State</label>
+                <input type="text" class="form-control" name="state" formControlName="state" value="Tamil Nadu"
+                    placeholder="Enter the state">
+                <div *ngIf="state?.invalid &&(state?.touched||state?.dirty)">
+                    <div class="error" *ngIf="state?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="col">
+                <label class="required">Country</label>
+                <input type="text" class="form-control" name="country" formControlName="country" value="India"
+                    placeholder="Enter the country">
+                <div *ngIf="country?.invalid &&(country?.touched||country?.dirty)">
+                    <div class="error" *ngIf="country?.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <div class="col">
+                <label class="required">Pin code</label>
+                <input type="number" class="form-control" name="pinCode" formControlName="pinCode"
+                    placeholder="Enter the pin code">
+                <div *ngIf="pinCode?.invalid &&(pinCode?.dirty||pinCode?.touched)">
+                    <div class="error" *ngIf="pinCode?.errors?.required">* This field is required</div>
+                    <div class="error" *ngIf="pinCode?.errors?.pattern">* Pincode only contains 10 digits</div>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <label class="required">Country</label>
-            <input type="text" class="form-control" name="country" formControlName="country" value="India"
-                placeholder="Enter the country">
-            <div *ngIf="country?.invalid &&(country?.touched||country?.dirty)">
-                <div class="error" *ngIf="country?.errors?.required">* This field is required</div>
-            </div>
-        </div>
-        <div class="col">
-            <label class="required">Pin code</label>
-            <input type="number" class="form-control" name="pinCode" formControlName="pinCode"
-                placeholder="Enter the pin code">
-            <div *ngIf="pinCode?.invalid &&(pinCode?.dirty||pinCode?.touched)">
-                <div class="error" *ngIf="pinCode?.errors?.required">* This field is required</div>
-                <div class="error" *ngIf="pinCode?.errors?.pattern">* Pincode only contains 10 digits</div>
-            </div>
-        </div>
-        </div>
-        <button id="submitButton" class="btn btn-info" type="submit" (click)="addAddress()" [disabled]="!AddAddressForm.valid">Submit</button>
-        <button id="resetButton" class="btn btn-info" type="submit" (click)="addLoginCredentials()" [hidden]="!isHidden">Next</button>
+        <button id="submitButton" class="btn btn-info" type="submit" (click)="addAddress()"
+            [disabled]="!AddAddressForm.valid">Submit</button>
+        <button id="resetButton" class="btn btn-info" type="submit" (click)="addLoginCredentials()"
+            [hidden]="!isHidden">Next</button>
     </form>
 </div>

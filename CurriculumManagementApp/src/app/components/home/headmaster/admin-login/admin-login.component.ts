@@ -19,7 +19,7 @@ export class AdminLoginComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
     private headMasterService: HeadMasterService,
-    private router:Router) { }
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +29,7 @@ export class AdminLoginComponent implements OnInit {
       let responseBody: Response = response;
       this.headMaster = responseBody.data;
       console.log(this.headMaster);
-      localStorage.setItem('admin',JSON.stringify(this.headMaster));
+      localStorage.setItem('admin', JSON.stringify(this.headMaster));
       if (this.username != this.headMaster.email || this.password != this.headMaster.password) {
         window.alert("Invalid login credentials! Enter the valid username and password!");
       }

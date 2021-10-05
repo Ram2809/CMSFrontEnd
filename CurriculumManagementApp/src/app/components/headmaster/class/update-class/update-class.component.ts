@@ -16,7 +16,7 @@ export class UpdateClassComponent implements OnInit {
   public classDetail: Class = new Class();
   public roomNo: number = 0;
   public standard: string = "";
-  public newStandard:string="";
+  public newStandard: string = "";
   public classList: Class[] = [];
   public subjectAssignList: SubjectAssign[] = [];
 
@@ -59,7 +59,7 @@ export class UpdateClassComponent implements OnInit {
   }
   updateSubjects() {
     console.log(this.standard);
-    let standard=this.classDetail.standard;
+    let standard = this.classDetail.standard;
     console.log(standard);
     if (this.standard != this.classDetail.standard) {
       this.subjectService.deleteSubjectAssign(this.roomNo).subscribe(response => {

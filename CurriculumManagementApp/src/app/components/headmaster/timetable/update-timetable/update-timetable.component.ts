@@ -31,7 +31,7 @@ export class UpdateTimetableComponent implements OnInit {
     private subjectService: SubjectService,
     private dialogRef: MatDialogRef<UpdateTimetableComponent>,
     private dialog: MatDialog) { }
-    
+
   ngOnInit(): void {
     this.roomNo = Number(localStorage.getItem('roomNo'));
     console.log(this.roomNo);

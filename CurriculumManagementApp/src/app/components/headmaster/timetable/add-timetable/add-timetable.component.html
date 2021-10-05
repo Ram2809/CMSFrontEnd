@@ -28,7 +28,8 @@
             </div><br>
             <div class="form-group">
                 <label class="required">Day</label>
-                <select class="custom-select" class="form-control" name="day" formControlName="day" [(ngModel)]="dayOfWeek">
+                <select class="custom-select" class="form-control" name="day" formControlName="day"
+                    [(ngModel)]="dayOfWeek">
                     <option value="" selected>Select the day</option>
                     <option [value]="day" *ngFor="let day of daysList">{{day}}</option>
                 </select>

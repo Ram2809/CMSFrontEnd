@@ -2,68 +2,69 @@
     <h3 class="title"><b><i>View Topic Status</i></b></h3>
     <form [formGroup]="ViewTopicStatusForm">
         <div id="viewTopicStatus" class="col-sm-11">
-        <div class="row">
-            <div class="col">
-                <label class="required">Standard</label>
-                <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
-                    formControlName="standard">
-                    <option value="" selected>Select the standard</option>
-                    <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
-                </select>
-                <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
-                    <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+            <div class="row">
+                <div class="col">
+                    <label class="required">Standard</label>
+                    <select class="custom-select" class="form-control" name="standard" (change)="getSections()"
+                        formControlName="standard">
+                        <option value="" selected>Select the standard</option>
+                        <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                    </select>
+                    <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
+                        <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="required">Section</label>
+                    <select class="custom-select" class="form-control" name="section" formControlName="section"
+                        (change)="getSubjects()">
+                        <option value="" selected>Select the section</option>
+                        <option *ngFor="let class of classList">{{class.section}}</option>
+                    </select>
+                    <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                        <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <label class="required">Subject Name</label>
+                    <select class="custom-select" class="form-control" name="subject" formControlName="subject"
+                        (change)="getTopics()">
+                        <option value="" selected>Select the subject name</option>
+                        <option *ngFor="let subjectAssign of subjectAssignList">
+                            {{subjectAssign.id}}-{{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}
+                        </option>
+                    </select>
+                    <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
+                        <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="required">Unit</label>
+                    <select class="custom-select" class="form-control" name="unit" formControlName="unit">
+                        <option value="" selected>Select the unit</option>
+                        <option *ngFor="let topic of topicList">{{topic.unitNo}}-{{topic.unitName}}</option>
+                    </select>
+                    <div *ngIf="unit?.invalid &&(unit?.touched||unit?.dirty)">
+                        <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <label class="required">Section</label>
-                <select class="custom-select" class="form-control" name="section" formControlName="section"
-                    (change)="getSubjects()">
-                    <option value="" selected>Select the section</option>
-                    <option *ngFor="let class of classList">{{class.section}}</option>
+            <div class="form-group">
+                <label class="required">Teacher</label>
+                <select class="custom-select" class="form-control" name="staff" formControlName="staff">
+                    <option value="" selected>Select the teacher</option>
+                    <option>{{teacher.id}}-{{teacher.firstName}} {{teacher.lastName}}</option>
                 </select>
-                <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
-                    <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                <div *ngIf="staff?.invalid &&(staff?.touched||staff?.dirty)">
+                    <div class="error" *ngIf="staff?.errors?.required">* This field is required</div>
                 </div>
-            </div>
+            </div><br>
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!ViewTopicStatusForm.valid"
+                (click)="getTopicStatus()">View Topic Status</button>
+            <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br>
         </div><br>
-        <div class="row">
-            <div class="col">
-                <label class="required">Subject Name</label>
-                <select class="custom-select" class="form-control" name="subject" formControlName="subject"
-                    (change)="getTopics()">
-                    <option value="" selected>Select the subject name</option>
-                    <option *ngFor="let subjectAssign of subjectAssignList">
-                        {{subjectAssign.id}}-{{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
-                </select>
-                <div *ngIf="subject?.invalid &&(subject?.touched||subject?.dirty)">
-                    <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
-                </div>
-            </div>
-            <div class="col">
-                <label class="required">Unit</label>
-                <select class="custom-select" class="form-control" name="unit" formControlName="unit">
-                    <option value="" selected>Select the unit</option>
-                    <option *ngFor="let topic of topicList">{{topic.unitNo}}-{{topic.unitName}}</option>
-                </select>
-                <div *ngIf="unit?.invalid &&(unit?.touched||unit?.dirty)">
-                    <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="required">Teacher</label>
-            <select class="custom-select" class="form-control" name="staff" formControlName="staff">
-                <option value="" selected>Select the teacher</option>
-                <option>{{teacher.id}}-{{teacher.firstName}} {{teacher.lastName}}</option>
-            </select>
-            <div *ngIf="staff?.invalid &&(staff?.touched||staff?.dirty)">
-                <div class="error" *ngIf="staff?.errors?.required">* This field is required</div>
-            </div>
-        </div><br>
-        <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!ViewTopicStatusForm.valid"
-            (click)="getTopicStatus()">View Topic Status</button>
-        <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br>
-    </div><br>
         <ng-template #elseBlock>
             <label class="notFound">{{errorMessage}}</label>
         </ng-template>

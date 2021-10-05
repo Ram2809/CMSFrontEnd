@@ -1,6 +1,6 @@
 <div class="container-fluid mb-3">
     <h3 class="title"><b><i>Staff Registration Form</i></b></h3>
-    <form [formGroup]="AddStaffForm" >
+    <form [formGroup]="AddStaffForm">
         <div class="boxed">
             <div class="form-group">
                 <label class="required">Staff Id</label>
@@ -96,8 +96,10 @@
                     </div>
                 </div>
             </div><br>
-            <button id="submitButton" class="btn btn-info" type="submit" (click)="addStaff()" [disabled]="!AddStaffForm.valid">Submit</button>
-            <button id="resetButton" class="btn btn-info" type="submit" (click)="addAddress()" [hidden]="!isHidden">Next</button>
+            <button id="submitButton" class="btn btn-info" type="submit" (click)="addStaff()"
+                [disabled]="!AddStaffForm.valid">Submit</button>
+            <button id="resetButton" class="btn btn-info" type="submit" (click)="addAddress()"
+                [hidden]="!isHidden">Next</button>
         </div>
     </form>
 </div>

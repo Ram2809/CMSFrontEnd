@@ -33,7 +33,7 @@ export class StaffViewTimetableComponent implements OnInit {
     private timetableService: TimeTableService) { }
 
   ngOnInit(): void {
-    this.staffId=Number(localStorage.getItem('staffId'));
+    this.staffId = Number(localStorage.getItem('staffId'));
     console.log(this.staffId);
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
@@ -63,21 +63,21 @@ export class StaffViewTimetableComponent implements OnInit {
     console.log(this.class?.value);
     let standard: string = this.class?.value.split("-").shift();
     let section: string = this.class?.value.split("-").pop();
-    this.classService.getClassRoomNo(standard,section).subscribe(response=>{
-      let responseBody:Response=response;
-      this.classRoomNo=responseBody.data;
+    this.classService.getClassRoomNo(standard, section).subscribe(response => {
+      let responseBody: Response = response;
+      this.classRoomNo = responseBody.data;
       console.log(this.classRoomNo);
-      this.timetableService.getTimeTable(this.classRoomNo).subscribe(response=>{
-        let responseBody:Response=response;
-        this.timetableList=responseBody.data;
-        this.isHidden=false;
+      this.timetableService.getTimeTable(this.classRoomNo).subscribe(response => {
+        let responseBody: Response = response;
+        this.timetableList = responseBody.data;
+        this.isHidden = false;
         console.log(this.timetableList);
-      },error=>{
-        this.isHidden=true;
-        this.errorMessage=error.error.message;
+      }, error => {
+        this.isHidden = true;
+        this.errorMessage = error.error.message;
         window.alert(error.error.message);
       });
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }

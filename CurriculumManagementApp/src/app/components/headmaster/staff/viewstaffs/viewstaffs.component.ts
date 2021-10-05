@@ -57,8 +57,8 @@ export class ViewstaffsComponent implements OnInit {
         let responseBody: Response = response;
         this.subjectAssignList = responseBody.data;
         console.log(responseBody.data);
-        this.subjectList=[];
-        this.teacherList=[];
+        this.subjectList = [];
+        this.teacherList = [];
         for (let i in this.subjectAssignList) {
           console.log(this.subjectAssignList[i].id);
           this.teacherService.getTeacherId(Number(this.subjectAssignList[i].id)).subscribe(response => {

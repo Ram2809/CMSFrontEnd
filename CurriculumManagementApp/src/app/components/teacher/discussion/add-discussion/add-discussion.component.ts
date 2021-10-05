@@ -48,7 +48,7 @@ export class AddDiscussionComponent implements OnInit {
     private classService: ClassService) { }
 
   ngOnInit(): void {
-    this.staffId=Number(localStorage.getItem('staffId'));
+    this.staffId = Number(localStorage.getItem('staffId'));
     console.log(this.staffId);
   }
   getSections() {

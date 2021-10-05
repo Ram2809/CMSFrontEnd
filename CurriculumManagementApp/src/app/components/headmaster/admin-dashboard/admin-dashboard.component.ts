@@ -8,12 +8,12 @@ import { HeadMaster } from 'src/app/model/head-master';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  public headMaster:HeadMaster=new HeadMaster();
+  public headMaster: HeadMaster = new HeadMaster();
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    let adminDetail:string=String(localStorage.getItem('admin'));
-    this.headMaster=JSON.parse(adminDetail);
+    let adminDetail: string = String(localStorage.getItem('admin'));
+    this.headMaster = JSON.parse(adminDetail);
     console.log(this.headMaster);
   }
   logout() {

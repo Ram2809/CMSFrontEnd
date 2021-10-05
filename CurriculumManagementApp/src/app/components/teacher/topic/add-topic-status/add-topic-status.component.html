@@ -16,7 +16,8 @@
                 </div>
                 <div class="col">
                     <label class="required">Section</label>
-                    <select class="custom-select" class="form-control" name="section" formControlName="section" (change)="getSubjects()">
+                    <select class="custom-select" class="form-control" name="section" formControlName="section"
+                        (change)="getSubjects()">
                         <option value="" selected>Select the section</option>
                         <option *ngFor="let class of classList">{{class.section}}</option>
                     </select>
@@ -50,7 +51,8 @@
             </div><br>
             <div class="form-group">
                 <label class="required">Status</label>
-                <select class="custom-select" class="form-control" name="status" formControlName="status" placeholder="Enter the status">
+                <select class="custom-select" class="form-control" name="status" formControlName="status"
+                    placeholder="Enter the status">
                     <option value="" selected>Select the status</option>
                     <option>Started</option>
                     <option>Partially completed</option>
@@ -61,25 +63,28 @@
                 </div>
             </div>
             <div class="row">
-            <div class="col">
-                <label class="required">Begin Date</label>
-                <input type="date" class="form-control" name="beginDate" formControlName="beginDate" placeholder="Enter the begin date">
-                <div *ngIf="beginDate?.invalid &&(beginDate?.touched||beginDate?.dirty)">
-                    <div class="error" *ngIf="beginDate?.errors?.required">* This field is required</div>
-                </div> 
-            </div>
-            <div class="col">
-                <label>Completed Date</label>
-                <input type="date" class="form-control" name="completedDate" formControlName="completedDate" placeholder="Enter the completion date">
-            </div>
-        </div><br>
+                <div class="col">
+                    <label class="required">Begin Date</label>
+                    <input type="date" class="form-control" name="beginDate" formControlName="beginDate"
+                        placeholder="Enter the begin date">
+                    <div *ngIf="beginDate?.invalid &&(beginDate?.touched||beginDate?.dirty)">
+                        <div class="error" *ngIf="beginDate?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label>Completed Date</label>
+                    <input type="date" class="form-control" name="completedDate" formControlName="completedDate"
+                        placeholder="Enter the completion date">
+                </div>
+            </div><br>
             <div class="form-group">
                 <label>Remarks</label>
-                <textarea rows="3" cols="50" class="form-control" name="remarks" formControlName="remarks" placeholder="Enter the remarks"></textarea>
+                <textarea rows="3" cols="50" class="form-control" name="remarks" formControlName="remarks"
+                    placeholder="Enter the remarks"></textarea>
             </div>
             <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!UpdateTopicStatusForm.valid"
                 (click)="addTopicStatus()">Submit</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
-        </div> 
+        </div>
     </form>
 </div>

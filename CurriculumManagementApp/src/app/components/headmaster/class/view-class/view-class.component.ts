@@ -13,20 +13,20 @@ import { UpdateClassComponent } from '../update-class/update-class.component';
 export class ViewClassComponent implements OnInit {
   public classList: Class[] = [];
   public roomNo: number = 0;
-  constructor(private classService: ClassService, 
+  constructor(private classService: ClassService,
     private router: Router,
-    private dialog:MatDialog) { }
+    private dialog: MatDialog) { }
   ngOnInit(): void {
     this.classService.getAllClasses().subscribe(response => {
-      let responseBody:Response=response;
-      this.classList =  responseBody.data;
-    },error=>{
+      let responseBody: Response = response;
+      this.classList = responseBody.data;
+    }, error => {
       window.alert(error.error.message);
     });
   }
   updateClass() {
     console.log(this.roomNo);
-    localStorage.setItem('roomNo',String(this.roomNo));
+    localStorage.setItem('roomNo', String(this.roomNo));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;

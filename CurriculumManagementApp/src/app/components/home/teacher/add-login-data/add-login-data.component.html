@@ -28,8 +28,8 @@
                     <div class="error" *ngIf="confirmPassword?.errors?.required">* This field is required</div>
                 </div>
             </div>
-            <button id="submitButton" class="btn btn-info" type="submit"
-                [disabled]="!CreateLoginForm.valid" (click)="createLogin()">Submit</button>
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!CreateLoginForm.valid"
+                (click)="createLogin()">Submit</button>
             <button id="resetButton" class="btn btn-info" type="submit" (click)="close()">Close</button>
         </div>
     </form>

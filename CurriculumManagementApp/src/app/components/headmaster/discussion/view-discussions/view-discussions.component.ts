@@ -27,8 +27,8 @@ export class ViewDiscussionsComponent implements OnInit {
   public errorMessage: string = "";
   public isHidden: boolean = false;
   public currentPage: number = 1;
-  public totalDisucussions:string="";
-  public maxSize:string=String(1);
+  public totalDisucussions: string = "";
+  public maxSize: string = String(1);
   ViewDiscussionForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -85,7 +85,7 @@ export class ViewDiscussionsComponent implements OnInit {
       this.discussionList = responseBody.data;
       this.isHidden = false;
       console.log(this.discussionList);
-      this.totalDisucussions=String(this.discussionList.length);
+      this.totalDisucussions = String(this.discussionList.length);
     }, error => {
       this.isHidden = true;
       this.errorMessage = error.error.message;

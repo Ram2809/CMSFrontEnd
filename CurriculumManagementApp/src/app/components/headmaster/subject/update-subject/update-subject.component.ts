@@ -11,7 +11,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class UpdateSubjectComponent implements OnInit {
   public subject: Subject = new Subject();
   public code: string = "";
-  
+
   constructor(private subjectService: SubjectService,
     private dialogRef: MatDialogRef<UpdateSubjectComponent>) { }
 

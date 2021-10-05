@@ -8,26 +8,26 @@ import { Response } from 'src/app/model/response';
   styleUrls: ['./view-teachers.component.css']
 })
 export class ViewTeachersComponent implements OnInit {
-  public teacherList:Teacher[]=[];
-  public option:string="";
-  constructor(private teacherService:TeacherService) { }
+  public teacherList: Teacher[] = [];
+  public option: string = "";
+  constructor(private teacherService: TeacherService) { }
 
   ngOnInit(): void {
-    this.teacherService.getAllStaffs().subscribe(response=>{
-      let responseBody:Response=response;
-      this.teacherList=responseBody.data;
+    this.teacherService.getAllStaffs().subscribe(response => {
+      let responseBody: Response = response;
+      this.teacherList = responseBody.data;
       console.log(this.teacherList);
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
-  deleteStaff(){
+  deleteStaff() {
     console.log(this.option);
-    this.teacherService.deleteStaff(Number(this.option)).subscribe(response=>{
-      let responseBody:Response=response;
+    this.teacherService.deleteStaff(Number(this.option)).subscribe(response => {
+      let responseBody: Response = response;
       window.alert(responseBody.message);
       this.ngOnInit();
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }

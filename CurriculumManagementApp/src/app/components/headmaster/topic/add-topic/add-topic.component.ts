@@ -66,10 +66,10 @@ export class AddTopicComponent implements OnInit {
         responseBody = response;
         console.log(response.data);
         this.subjectAssignList = responseBody.data;
-      },error=>{
+      }, error => {
         window.alert(error.error.message);
       });
-    },error=>{
+    }, error => {
       window.alert(error.error.message);
     });
   }
