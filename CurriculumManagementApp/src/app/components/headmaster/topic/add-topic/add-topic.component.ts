@@ -3,11 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Class } from 'src/app/model/class';
 import { Subject } from 'src/app/model/subject';
 import { SubjectAssign } from 'src/app/model/subject-assign';
-import { Topic } from 'src/app/model/topic';
 import { ClassService } from 'src/app/services/class.service';
 import { SubjectService } from 'src/app/services/subject.service';
-import { TopicService } from 'src/app/services/topic.service';
+
 import { Response } from 'src/app/model/response';
+import { UnitService } from 'src/app/services/unit.service';
+import { Unit } from 'src/app/model/unit';
 @Component({
   selector: 'app-add-topic',
   templateUrl: './add-topic.component.html',
@@ -30,7 +31,7 @@ export class AddTopicComponent implements OnInit {
 
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
-    private topicService: TopicService) { }
+    private unitService: UnitService) { }
 
   ngOnInit(): void {
   }
@@ -38,15 +39,15 @@ export class AddTopicComponent implements OnInit {
     let response: boolean = window.confirm("Are you sure want to continue?");
     if (response) {
       console.log(this.subject?.value.split("-").shift());
-      const topic: Topic = new Topic();
-      topic.unitNo = this.unitNo?.value;
-      topic.unitName = this.unitName?.value;
-      topic.description = this.description?.value;
-      topic.month = this.month?.value;
+      const unit: Unit = new Unit();
+      unit.unitNo = this.unitNo?.value;
+      unit.unitName = this.unitName?.value;
+      unit.description = this.description?.value;
+      unit.month = this.month?.value;
       const subject: Subject = new Subject();
       subject.code = this.subject?.value.split("-").shift();
-      topic.subject = subject;
-      this.topicService.addTopic(topic).subscribe(response => {
+      unit.subject = subject;
+      this.unitService.addUnit(unit).subscribe(response => {
         let responseBody: Response = response;
         console.log(responseBody);
         window.alert(responseBody.message);

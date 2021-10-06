@@ -1,6 +1,6 @@
-import { Subject } from "../model/subject";
+import { Subject } from "./subject";
 
-export class Topic {
+export class Unit {
     public unitNo?: string;
     public unitName?: string;
     public description?: string;

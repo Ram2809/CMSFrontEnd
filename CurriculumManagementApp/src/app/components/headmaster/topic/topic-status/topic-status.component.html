@@ -44,7 +44,7 @@
                     <label class="required">Unit</label>
                     <select class="custom-select" class="form-control" name="unit" formControlName="unit">
                         <option value="" selected>Select the unit</option>
-                        <option *ngFor="let topic of topicList">{{topic.unitNo}}-{{topic.unitName}}</option>
+                        <option *ngFor="let unit of unitList">{{unit.unitNo}}-{{unit.unitName}}</option>
                     </select>
                     <div *ngIf="unit?.invalid &&(unit?.touched||unit?.dirty)">
                         <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
@@ -68,7 +68,7 @@
         <ng-template #elseBlock>
             <label class="notFound">{{errorMessage}}</label>
         </ng-template>
-        <div *ngIf="(topicStatus | json) != '{}' else elseBlock">
+        <div *ngIf="(unitStatus | json) != '{}' else elseBlock">
             <table class="table table-bordered" [hidden]="isHidden">
                 <thead>
                     <tr>
@@ -83,13 +83,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{topicStatus.topic?.unitNo}}</td>
-                        <td>{{topicStatus.topic?.unitName}}</td>
-                        <td>{{topicStatus.topic?.month}}</td>
-                        <td>{{topicStatus.beginDate}}</td>
-                        <td>{{topicStatus.completedDate}}</td>
-                        <td>{{topicStatus.status}}</td>
-                        <td>{{topicStatus.remarks}}</td>
+                        <td>{{unitStatus.unit?.unitNo}}</td>
+                        <td>{{unitStatus.unit?.unitName}}</td>
+                        <td>{{unitStatus.unit?.month}}</td>
+                        <td>{{unitStatus.beginDate}}</td>
+                        <td>{{unitStatus.completedDate}}</td>
+                        <td>{{unitStatus.status}}</td>
+                        <td>{{unitStatus.remarks}}</td>
                     </tr>
                 </tbody>
             </table>

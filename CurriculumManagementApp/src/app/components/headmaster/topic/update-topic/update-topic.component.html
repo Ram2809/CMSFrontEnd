@@ -3,20 +3,20 @@
     <form>
         <div class="form-group">
             <label>Unit Number</label>
-            <input type="text" class="form-control" name="unitNo" [(ngModel)]="topic.unitNo" readonly="true">
+            <input type="text" class="form-control" name="unitNo" [(ngModel)]="unit.unitNo" readonly="true">
         </div>
         <div class="form-group">
             <label>Unit Name</label>
-            <input type="text" class="form-control" name="unitName" [(ngModel)]="topic.unitName">
+            <input type="text" class="form-control" name="unitName" [(ngModel)]="unit.unitName">
         </div>
         <div class="form-group">
             <label>Description</label>
             <textarea rows="5" cols="5" class="form-control" name="description"
-                [(ngModel)]="topic.description"></textarea>
+                [(ngModel)]="unit.description"></textarea>
         </div>
         <div class="form-group">
             <label>Month</label>
-            <select class="custom-select" class="form-control" name="month" [(ngModel)]="topic.month">
+            <select class="custom-select" class="form-control" name="month" [(ngModel)]="unit.month">
                 <option value="" selected>Select the month</option>
                 <option [value]="month" *ngFor="let month of monthList">{{month}}</option>
             </select>

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TopicStatusService } from './topic-status.service';
+import { UnitStatusService } from 'src/app/services/unit-status.service';
 
 describe('TopicStatusService', () => {
-  let service: TopicStatusService;
+  let service: UnitStatusService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TopicStatusService);
+    service = TestBed.inject(UnitStatusService);
   });
 
   it('should be created', () => {

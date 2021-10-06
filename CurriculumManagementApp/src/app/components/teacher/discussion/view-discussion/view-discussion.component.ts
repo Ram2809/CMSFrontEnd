@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Class } from 'src/app/model/class';
 import { ClassService } from 'src/app/services/class.service';
-import { TopicService } from 'src/app/services/topic.service';
+import {  UnitService } from 'src/app/services/unit.service';
 import { Response } from 'src/app/model/response';
-import { Topic } from 'src/app/model/topic';
+import { Unit } from 'src/app/model/unit';
 import { SubjectAssign } from 'src/app/model/subject-assign';
 import { Subject } from 'src/app/model/subject';
 import { SubjectService } from 'src/app/services/subject.service';
@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 export class ViewDiscussionComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public staffId: number = 0;
-  public topicList: Topic[] = [];
+  public unitList: Unit[] = [];
   public classList: Class[] = [];
   public assignIdList: Number[] = [];
   public subjectCodeList: String[] = [];
@@ -39,7 +39,7 @@ export class ViewDiscussionComponent implements OnInit {
   });
 
   constructor(private classService: ClassService,
-    private topicService: TopicService,
+    private unitService: UnitService,
     private subjectService: SubjectService,
     private teacherService: TeacherService,
     private discussionService: DiscussionService,
@@ -56,10 +56,10 @@ export class ViewDiscussionComponent implements OnInit {
   }
   getTopics() {
     console.log(this.subject?.value.split("-").shift());
-    this.topicService.getTopics(this.subject?.value.split("-").shift()).subscribe(response => {
+    this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
-      this.topicList = responseBody.data;
-      console.log(this.topicList);
+      this.unitList = responseBody.data;
+      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });

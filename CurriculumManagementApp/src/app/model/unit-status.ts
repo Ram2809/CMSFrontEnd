@@ -1,14 +1,14 @@
 import { Class } from "./class";
 import { Teacher } from "./teacher";
-import { Topic } from "./topic";
+import { Unit } from "src/app/model/unit";
 
-export class TopicStatus {
+export class UnitStatus {
     public id?: number;
     public beginDate?: Date;
     public status?: string;
     public completedDate?: Date;
     public remarks?: string;
-    public topic?: Topic;
+    public unit?: Unit;
     public teacher?: Teacher;
     public classDetail?: Class;
 }

@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Class } from 'src/app/model/class';
 import { Subject } from 'src/app/model/subject';
-import { SubjectAssign } from 'src/app/model/subject-assign';
 import { Response } from 'src/app/model/response';
 import { ClassService } from 'src/app/services/class.service';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { SubjectService } from 'src/app/services/subject.service';
-import { TopicService } from 'src/app/services/topic.service';
-import { Topic } from 'src/app/model/topic';
+import { UnitService } from 'src/app/services/unit.service';
+import { Unit } from 'src/app/model/unit';
 @Component({
   selector: 'app-view-syllabus',
   templateUrl: './view-syllabus.component.html',
@@ -18,11 +17,11 @@ export class ViewSyllabusComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public staffId: number = 0;
   public assignIdList: Number[] = [];
-  public subjectCodeList:String[]=[];
+  public subjectCodeList: String[] = [];
   public subjectList: Subject[] = [];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
-  public topicList: Topic[] = [];
+  public unitList: Unit[] = [];
   public errorMessage: string = "";
   public isHidden: boolean = false;
 
@@ -35,7 +34,7 @@ export class ViewSyllabusComponent implements OnInit {
   constructor(private classService: ClassService,
     private teacherService: TeacherService,
     private subjectService: SubjectService,
-    private topicService: TopicService) { }
+    private unitService: UnitService) { }
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
@@ -82,12 +81,12 @@ export class ViewSyllabusComponent implements OnInit {
   getCurriculum() {
     let subjectCode: string = this.subject?.value.split("-").shift();
     console.log(subjectCode);
-    this.topicService.getTopics(subjectCode).subscribe(response => {
+    this.unitService.getUnits(subjectCode).subscribe(response => {
       let responseBody: Response = response;
-      this.topicList = responseBody.data;
+      this.unitList = responseBody.data;
       this.isHidden = false;
       this.ViewCurriculumForm.reset();
-      console.log(this.topicList);
+      console.log(this.unitList);
     }, error => {
       this.errorMessage = error.error.message;
       this.isHidden = true;

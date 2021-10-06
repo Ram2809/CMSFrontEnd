@@ -4,23 +4,23 @@
         <div class="row">
             <div class="col">
                 <label>Unit Number</label>
-                <input type="text" class="form-control" name="unitNo" value="{{topicStatus.topic?.unitNo}}"
+                <input type="text" class="form-control" name="unitNo" value="{{unitStatus.unit?.unitNo}}"
                     readonly="true">
             </div>
             <div class="col">
                 <label>Unit Name</label>
-                <input type="text" class="form-control" name="unitName" value="{{topicStatus.topic?.unitName}}"
+                <input type="text" class="form-control" name="unitName" value="{{unitStatus.unit?.unitName}}"
                     readonly="true">
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <label>Status id</label>
-                <input type="number" class="form-control" name="id" [(ngModel)]="topicStatus.id" readonly="true">
+                <input type="number" class="form-control" name="id" [(ngModel)]="unitStatus.id" readonly="true">
             </div>
             <div class="col">
                 <label>Status</label>
-                <select class="custom-select" class="form-control" name="status" [(ngModel)]="topicStatus.status">
+                <select class="custom-select" class="form-control" name="status" [(ngModel)]="unitStatus.status">
                     <option value="" selected>Select the status</option>
                     <option>Started</option>
                     <option>Partially completed</option>
@@ -31,18 +31,18 @@
         <div class="row">
             <div class="col">
                 <label>Begin Date</label>
-                <input type="date" class="form-control" name="beginDate" [(ngModel)]="topicStatus.beginDate">
+                <input type="date" class="form-control" name="beginDate" [(ngModel)]="unitStatus.beginDate">
             </div>
             <div class="col">
                 <label>Completed Date</label>
-                <input type="date" class="form-control" name="completedDate" [(ngModel)]="topicStatus.completedDate">
+                <input type="date" class="form-control" name="completedDate" [(ngModel)]="unitStatus.completedDate">
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <label>Remarks</label>
                 <textarea rows="3" cols="50" class="form-control" name="remarks"
-                    [(ngModel)]="topicStatus.remarks"></textarea>
+                    [(ngModel)]="unitStatus.remarks"></textarea>
             </div>
         </div><br>
         <button id="submitButton" (click)="updateStatus()" class="btn btn-info">Update</button>

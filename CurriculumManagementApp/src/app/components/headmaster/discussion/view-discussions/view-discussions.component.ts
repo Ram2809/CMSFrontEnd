@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Class } from 'src/app/model/class';
 import { ClassService } from 'src/app/services/class.service';
-import { TopicService } from 'src/app/services/topic.service';
+import { UnitService } from 'src/app/services/unit.service';
 import { Response } from 'src/app/model/response';
-import { Topic } from 'src/app/model/topic';
+import { Unit } from 'src/app/model/unit';
 import { Subject } from 'src/app/model/subject';
 import { SubjectService } from 'src/app/services/subject.service';
 import { SubjectAssign } from 'src/app/model/subject-assign';
@@ -18,7 +18,7 @@ import { DiscussionService } from 'src/app/services/discussion.service';
 })
 export class ViewDiscussionsComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-  public topicList: Topic[] = [];
+  public unitList: Unit[] = [];
   public classList: Class[] = [];
   public subjectList: Subject[] = [];
   public subjectAssignList: SubjectAssign[] = [];
@@ -37,7 +37,7 @@ export class ViewDiscussionsComponent implements OnInit {
     unit: new FormControl('', Validators.required),
   })
   constructor(private classService: ClassService,
-    private topicService: TopicService,
+    private unitService: UnitService,
     private subjectService: SubjectService,
     private discussionService: DiscussionService) { }
 
@@ -68,9 +68,9 @@ export class ViewDiscussionsComponent implements OnInit {
   }
   getTopics() {
     console.log(this.subject?.value.split("-").shift());
-    this.topicService.getTopics(this.subject?.value.split("-").shift()).subscribe(response => {
+    this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
-      this.topicList = responseBody.data;
+      this.unitList = responseBody.data;
     }, error => {
       window.alert(error.error.message);
     });

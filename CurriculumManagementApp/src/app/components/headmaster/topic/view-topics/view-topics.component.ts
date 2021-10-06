@@ -5,8 +5,8 @@ import { Class } from 'src/app/model/class';
 import { ClassService } from 'src/app/services/class.service';
 import { Response } from 'src/app/model/response';
 import { SubjectService } from 'src/app/services/subject.service';
-import { Topic } from 'src/app/model/topic';
-import { TopicService } from 'src/app/services/topic.service';
+import { Unit } from 'src/app/model/unit';
+import {  UnitService } from 'src/app/services/unit.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UpdateTopicComponent } from '../update-topic/update-topic.component';
@@ -18,7 +18,7 @@ import { UpdateTopicComponent } from '../update-topic/update-topic.component';
 export class ViewTopicsComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public subjectAssignList: SubjectAssign[] = [];
-  public topicList: Topic[] = [];
+  public unitList: Unit[] = [];
   public isHidden: boolean = false;
   public errorMessage: string = "";
 
@@ -30,7 +30,7 @@ export class ViewTopicsComponent implements OnInit {
 
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
-    private topicService: TopicService,
+    private unitService: UnitService,
     private router: Router,
     private dialog: MatDialog) { }
 
@@ -56,11 +56,11 @@ export class ViewTopicsComponent implements OnInit {
   getUnits() {
     let subjectCode: string = this.subject?.value.split("-").shift();
     console.log(subjectCode);
-    this.topicService.getTopics(subjectCode).subscribe(response => {
+    this.unitService.getUnits(subjectCode).subscribe(response => {
       let responseBody: Response = response;
-      this.topicList = responseBody.data;
+      this.unitList = responseBody.data;
       this.isHidden = false;
-      console.log(this.topicList);
+      console.log(this.unitList);
     }, error => {
       this.isHidden = true;
       this.errorMessage = error.error.message;
@@ -78,7 +78,7 @@ export class ViewTopicsComponent implements OnInit {
     let response: boolean = window.confirm("Are you sure want to continue?");
     if (response) {
       console.log(this.option?.value);
-      this.topicService.deleteTopic(this.option?.value).subscribe(response => {
+      this.unitService.deleteUnit(this.option?.value).subscribe(response => {
         let responseBody: Response = response;
         console.log(responseBody);
         window.alert(responseBody.message);

@@ -3,15 +3,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Class } from 'src/app/model/class';
 import { Subject } from 'src/app/model/subject';
 import { SubjectAssign } from 'src/app/model/subject-assign';
-import { Topic } from 'src/app/model/topic';
+import { Unit } from 'src/app/model/unit';
 import { ClassService } from 'src/app/services/class.service';
 import { Response } from 'src/app/model/response';
 import { TeacherService } from 'src/app/services/teacher.service';
-import { TopicService } from 'src/app/services/topic.service';
+import { UnitService } from 'src/app/services/unit.service';
 import { SubjectService } from 'src/app/services/subject.service';
-import { TopicStatus } from 'src/app/model/topic-status';
+import { UnitStatus } from 'src/app/model/unit-status';
 import { Teacher } from 'src/app/model/teacher';
-import { TopicStatusService } from 'src/app/services/topic-status.service';
+import { UnitStatusService } from 'src/app/services/unit-status.service';
 @Component({
   selector: 'app-add-topic-status',
   templateUrl: './add-topic-status.component.html',
@@ -23,7 +23,7 @@ export class AddTopicStatusComponent implements OnInit {
   public assignIdList: Number[] = [];
   public subjectCodeList: String[] = [];
   public subjectList: Subject[] = [];
-  public topicList: Topic[] = [];
+  public unitList: Unit[] = [];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
 
@@ -39,9 +39,9 @@ export class AddTopicStatusComponent implements OnInit {
   })
   constructor(private classService: ClassService,
     private teacherService: TeacherService,
-    private topicService: TopicService,
+    private unitService: UnitService,
     private subjectService: SubjectService,
-    private topicStatusService: TopicStatusService) { }
+    private unitStatusService: UnitStatusService) { }
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
@@ -58,10 +58,10 @@ export class AddTopicStatusComponent implements OnInit {
   }
   getTopics() {
     console.log(this.subject?.value.split("-").shift());
-    this.topicService.getTopics(this.subject?.value.split("-").shift()).subscribe(response => {
+    this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
-      this.topicList = responseBody.data;
-      console.log(this.topicList);
+      this.unitList = responseBody.data;
+      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -105,21 +105,21 @@ export class AddTopicStatusComponent implements OnInit {
         let responseBody: Response = response;
         this.classRoomNo = responseBody.data;
         console.log(this.classRoomNo);
-        const topicStatus: TopicStatus = new TopicStatus();
-        topicStatus.beginDate = this.beginDate?.value;
-        topicStatus.status = this.status?.value;
-        topicStatus.completedDate = this.completedDate?.value;
-        topicStatus.remarks = this.remarks?.value;
-        const topic: Topic = new Topic();
-        topic.unitNo = unitNo;
+        const unitStatus: UnitStatus = new UnitStatus();
+        unitStatus.beginDate = this.beginDate?.value;
+        unitStatus.status = this.status?.value;
+        unitStatus.completedDate = this.completedDate?.value;
+        unitStatus.remarks = this.remarks?.value;
+        const unit: Unit = new Unit();
+        unit.unitNo = unitNo;
         const teacher: Teacher = new Teacher();
         teacher.id = this.staffId;
         const classDetail: Class = new Class();
         classDetail.roomNo = this.classRoomNo;
-        topicStatus.topic = topic;
-        topicStatus.teacher = teacher;
-        topicStatus.classDetail = classDetail;
-        this.topicStatusService.addTopicStatus(topicStatus).subscribe(response => {
+        unitStatus.unit = unit;
+        unitStatus.teacher = teacher;
+        unitStatus.classDetail = classDetail;
+        this.unitStatusService.addUnitStatus(unitStatus).subscribe(response => {
           let responseBody: Response = response;
           console.log(responseBody.message);
           window.alert(responseBody.message);

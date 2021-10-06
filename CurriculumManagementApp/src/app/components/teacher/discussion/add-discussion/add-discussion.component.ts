@@ -6,8 +6,8 @@ import { TeacherService } from 'src/app/services/teacher.service';
 import { Response } from 'src/app/model/response';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'src/app/model/subject';
-import { Topic } from 'src/app/model/topic';
-import { TopicService } from 'src/app/services/topic.service';
+import { Unit } from 'src/app/model/unit';
+import {  UnitService } from 'src/app/services/unit.service';
 import { Discussion } from 'src/app/model/discussion';
 import { Teacher } from 'src/app/model/teacher';
 import { Class } from 'src/app/model/class';
@@ -24,7 +24,7 @@ export class AddDiscussionComponent implements OnInit {
   public assignIdList: Number[] = [];
   public subjectCodeList:String[]=[];
   public subjectList: Subject[] = [];
-  public topicList: Topic[] = [];
+  public unitList: Unit[] = [];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
   public isHidden: boolean = true;
@@ -46,7 +46,7 @@ export class AddDiscussionComponent implements OnInit {
   constructor(private subjectService: SubjectService,
     private teacherService: TeacherService,
     private discussionService: DiscussionService,
-    private topicService: TopicService,
+    private unitService: UnitService,
     private classService: ClassService) { }
 
   ngOnInit(): void {
@@ -62,10 +62,10 @@ export class AddDiscussionComponent implements OnInit {
   }
   getTopics() {
     console.log(this.subject?.value.split("-").shift());
-    this.topicService.getTopics(this.subject?.value.split("-").shift()).subscribe(response => {
+    this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
-      this.topicList = responseBody.data;
-      console.log(this.topicList);
+      this.unitList = responseBody.data;
+      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -77,13 +77,13 @@ export class AddDiscussionComponent implements OnInit {
       discussion.question = this.question?.value;
       discussion.answer = this.answer?.value;
       discussion.date = this.date?.value;
-      const topic: Topic = new Topic();
-      topic.unitNo = this.unit?.value.split("-").shift();
+      const unit: Unit = new Unit();
+      unit.unitNo = this.unit?.value.split("-").shift();
       const teacher: Teacher = new Teacher();
       teacher.id = this.staffId;
       const classDetail: Class = new Class();
       classDetail.roomNo = this.classRoomNo;
-      discussion.topic = topic;
+      discussion.unit = unit;
       discussion.teacher = teacher;
       discussion.classDetail = classDetail;
       console.log(discussion);

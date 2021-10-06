@@ -7,10 +7,11 @@ import { Response } from 'src/app/model/response';
 import { ClassService } from 'src/app/services/class.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TeacherService } from 'src/app/services/teacher.service';
-import { TopicService } from 'src/app/services/topic.service';
-import { TopicStatusService } from 'src/app/services/topic-status.service';
-import { Topic } from 'src/app/model/topic';
-import { TopicStatus } from 'src/app/model/topic-status';
+import { UnitService } from 'src/app/services/unit.service';
+import { UnitStatusService } from 'src/app/services/unit-status.service';
+
+import {  UnitStatus } from 'src/app/model/unit-status';
+import { Unit } from 'src/app/model/unit';
 
 @Component({
   selector: 'app-topic-status',
@@ -23,10 +24,10 @@ export class TopicStatusComponent implements OnInit {
   public roomNo: number = 0;
   public isHidden: boolean = false;
   public subjectAssignList: SubjectAssign[] = [];
-  public topicList: Topic[] = [];
+  public unitList: Unit[] = [];
   public staffId: number = 0;
   public teacher: Teacher = new Teacher();
-  public topicStatus: TopicStatus = new TopicStatus();
+  public unitStatus: UnitStatus = new UnitStatus();
   public errorMessage: string = "";
   ViewTopicStatusForm = new FormGroup({
     standard: new FormControl('', Validators.required),
@@ -38,8 +39,8 @@ export class TopicStatusComponent implements OnInit {
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private teacherService: TeacherService,
-    private topicService: TopicService,
-    private topicStatusService: TopicStatusService) { }
+    private unitService: UnitService,
+    private unitStatusService: UnitStatusService) { }
 
   ngOnInit(): void {
   }
@@ -75,10 +76,10 @@ export class TopicStatusComponent implements OnInit {
     let splitList = this.subject?.value.split("-");
     console.log(splitList);
     console.log(splitList[1]);
-    this.topicService.getTopics(splitList[1]).subscribe(response => {
+    this.unitService.getUnits(splitList[1]).subscribe(response => {
       let responseBody: Response = response;
-      this.topicList = responseBody.data;
-      console.log(this.topicList);
+      this.unitList = responseBody.data;
+      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -107,11 +108,11 @@ export class TopicStatusComponent implements OnInit {
     console.log(unitNo);
     console.log(this.staffId);
     console.log(this.roomNo);
-    this.topicStatusService.getTopicStatusByUnitNo(unitNo, this.staffId, this.roomNo).subscribe(response => {
+    this.unitStatusService.getUnitstatusByUnitNo(unitNo, this.staffId, this.roomNo).subscribe(response => {
       let responseBody: Response = response;
-      this.topicStatus = responseBody.data;
+      this.unitStatus = responseBody.data;
       this.isHidden = false;
-      console.log(this.topicStatus);
+      console.log(this.unitStatus);
     }, error => {
       this.isHidden = true;
       this.errorMessage = error.error.message;

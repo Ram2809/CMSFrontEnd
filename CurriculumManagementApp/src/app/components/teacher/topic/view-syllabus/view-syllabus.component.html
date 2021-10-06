@@ -43,7 +43,7 @@
         <ng-template #elseBlock>
             <label class="notFound">{{errorMessage}}</label>
         </ng-template>
-        <div *ngIf="topicList.length>0 else elseBlock">
+        <div *ngIf="unitList.length>0 else elseBlock">
             <table class="table table-bordered" [hidden]="isHidden">
                 <thead>
                     <tr>
@@ -54,11 +54,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let topic of topicList">
-                        <td>{{topic.unitNo}}</td>
-                        <td>{{topic.unitName}}</td>
-                        <td>{{topic.description}}</td>
-                        <td>{{topic.month}}</td>
+                    <tr *ngFor="let unit of unitList">
+                        <td>{{unit.unitNo}}</td>
+                        <td>{{unit.unitName}}</td>
+                        <td>{{unit.description}}</td>
+                        <td>{{unit.month}}</td>
                     </tr>
                 </tbody>
             </table>

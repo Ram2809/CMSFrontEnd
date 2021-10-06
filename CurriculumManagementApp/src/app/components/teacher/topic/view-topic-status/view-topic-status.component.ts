@@ -4,13 +4,13 @@ import { Class } from 'src/app/model/class';
 import { Response } from 'src/app/model/response';
 import { Subject } from 'src/app/model/subject';
 import { SubjectAssign } from 'src/app/model/subject-assign';
-import { Topic } from 'src/app/model/topic';
-import { TopicStatus } from 'src/app/model/topic-status';
+import { Unit } from 'src/app/model/unit';
+import {UnitStatus } from 'src/app/model/unit-status';
 import { ClassService } from 'src/app/services/class.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TeacherService } from 'src/app/services/teacher.service';
-import { TopicStatusService } from 'src/app/services/topic-status.service';
-import { TopicService } from 'src/app/services/topic.service';
+import {  UnitStatusService } from 'src/app/services/unit-status.service';
+import { UnitService } from 'src/app/services/unit.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UpdateTopicStatusComponent } from '../update-topic-status/update-topic-status.component';
 
@@ -25,10 +25,10 @@ export class ViewTopicStatusComponent implements OnInit {
   public assignIdList: Number[] = [];
   public subjectCodeList: String[] = [];
   public subjectList: Subject[] = [];
-  public topicList: Topic[] = [];
+  public unitList: Unit[] = [];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
-  public topicStatus: TopicStatus = new TopicStatus();
+  public unitStatus: UnitStatus = new UnitStatus();
   public isHidden: boolean = false;
   public errorMessage: string = "";
 
@@ -42,8 +42,8 @@ export class ViewTopicStatusComponent implements OnInit {
   constructor(private classService: ClassService,
     private teacherService: TeacherService,
     private subjectService: SubjectService,
-    private topicService: TopicService,
-    private topicStatusService: TopicStatusService,
+    private unitService: UnitService,
+    private unitStatusService: UnitStatusService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -61,10 +61,10 @@ export class ViewTopicStatusComponent implements OnInit {
   }
   getTopics() {
     console.log(this.subject?.value.split("-").shift());
-    this.topicService.getTopics(this.subject?.value.split("-").shift()).subscribe(response => {
+    this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
-      this.topicList = responseBody.data;
-      console.log(this.topicList);
+      this.unitList = responseBody.data;
+      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -104,10 +104,10 @@ export class ViewTopicStatusComponent implements OnInit {
       let responseBody: Response = response;
       this.classRoomNo = responseBody.data;
       console.log(this.classRoomNo);
-      this.topicStatusService.getTopicStatusByUnitNo(this.unit?.value.split("-").shift(), this.staffId, this.classRoomNo).subscribe(response => {
+      this.unitStatusService.getUnitstatusByUnitNo(this.unit?.value.split("-").shift(), this.staffId, this.classRoomNo).subscribe(response => {
         let responseBody: Response = response;
-        this.topicStatus = responseBody.data;
-        console.log(this.topicStatus);
+        this.unitStatus = responseBody.data;
+        console.log(this.unitStatus);
         this.isHidden = false;
       }, error => {
         this.errorMessage = error.error.messsage;
@@ -121,7 +121,7 @@ export class ViewTopicStatusComponent implements OnInit {
   deleteStatus() {
     let response: boolean = window.confirm("Are you sure want to continue?");
     if (response) {
-      this.topicStatusService.deleteTopicStatus(Number(this.topicStatus.id)).subscribe(response => {
+      this.unitStatusService.deleteUnitStatus(Number(this.unitStatus.id)).subscribe(response => {
         let responseBody: Response = response;
         window.alert(responseBody.message);
         this.getTopicStatus();
@@ -131,8 +131,8 @@ export class ViewTopicStatusComponent implements OnInit {
     }
   }
   updateStatus() {
-    localStorage.setItem('topicStatus', JSON.stringify(this.topicStatus));
-    console.log(this.topicStatus.id);
+    localStorage.setItem('topicStatus', JSON.stringify(this.unitStatus));
+    console.log(this.unitStatus.id);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
