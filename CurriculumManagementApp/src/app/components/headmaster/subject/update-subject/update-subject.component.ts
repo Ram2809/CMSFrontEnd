@@ -17,11 +17,9 @@ export class UpdateSubjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.code = String(localStorage.getItem('subjectCode'));
-    console.log(this.code);
     this.subjectService.getSubject(this.code).subscribe(response => {
       let responseBody: Response = response;
       this.subject = responseBody.data;
-      console.log(this.subject);
     }, error => {
       window.alert(error.error.message);
     });

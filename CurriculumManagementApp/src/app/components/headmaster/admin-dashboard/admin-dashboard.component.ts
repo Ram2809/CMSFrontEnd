@@ -14,7 +14,6 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit(): void {
     let adminDetail: string = String(localStorage.getItem('admin'));
     this.headMaster = JSON.parse(adminDetail);
-    console.log(this.headMaster);
   }
   logout() {
     let response: boolean = window.confirm("Are you sure want to continue?");

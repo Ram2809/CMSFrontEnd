@@ -40,7 +40,6 @@ export class ViewstaffsComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       console.log(error);
       let responseBody: Response = error;
@@ -52,15 +51,12 @@ export class ViewstaffsComponent implements OnInit {
     this.classService.getClassRoomNo(this.standard, this.section).subscribe(response => {
       let responseBody: Response = response;
       this.roomNo = responseBody.data;
-      console.log(this.roomNo);
       this.subjectService.getSubjets(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.subjectAssignList = responseBody.data;
-        console.log(responseBody.data);
         this.subjectList = [];
         this.teacherList = [];
         for (let i in this.subjectAssignList) {
-          console.log(this.subjectAssignList[i].id);
           this.teacherService.getTeacherId(Number(this.subjectAssignList[i].id)).subscribe(response => {
             let staffId: number = response.data;
             this.teacherService.getStaff(staffId).subscribe(response => {

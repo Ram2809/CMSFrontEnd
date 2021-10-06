@@ -39,7 +39,6 @@ export class ViewStudentsComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -47,11 +46,9 @@ export class ViewStudentsComponent implements OnInit {
   getStudents() {
     this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.data);
       this.roomNo = responseBody.data;
       this.studentService.getStudents(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
-        console.log(responseBody.data);
         this.studentsList = responseBody.data;
         this.isHidden = false;
       }, error => {
@@ -78,7 +75,6 @@ export class ViewStudentsComponent implements OnInit {
   }
   updateStudent() {
     localStorage.setItem('rollNo', this.ViewStudentForm.get('option')?.value);
-    console.log(this.ViewStudentForm.get('option')?.value);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;

@@ -16,13 +16,11 @@ export class ViewTeachersComponent implements OnInit {
     this.teacherService.getAllStaffs().subscribe(response => {
       let responseBody: Response = response;
       this.teacherList = responseBody.data;
-      console.log(this.teacherList);
     }, error => {
       window.alert(error.error.message);
     });
   }
   deleteStaff() {
-    console.log(this.option);
     this.teacherService.deleteStaff(Number(this.option)).subscribe(response => {
       let responseBody: Response = response;
       window.alert(responseBody.message);

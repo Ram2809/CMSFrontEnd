@@ -13,13 +13,13 @@ export class AdminUpdateProfileComponent implements OnInit {
   public qualificationList: String[] = ['B.Ed', 'Ph.D', 'M.Phil', 'M.Sc', 'M.A', 'B.Sc', 'B.A', 'B.Com', 'M.Com'];
   public majorList: String[] = ['Tamil', 'English', 'Maths', 'History', 'Physics', 'Chemistry', 'Computer Science', 'Botany', 'Zoology', 'Physical Education', 'Hindi'];
   public headMaster: HeadMaster = new HeadMaster();
+
   constructor(private headMasterService: HeadMasterService,
     public dialogRef: MatDialogRef<AdminUpdateProfileComponent>) { }
 
   ngOnInit(): void {
     let user: string = String(localStorage.getItem('admin'));
     let headMasterDetail: HeadMaster = JSON.parse(user);
-    console.log(headMasterDetail);
     this.headMasterService.getHeadMaster(String(headMasterDetail.email)).subscribe(response => {
       let responseBody: Response = response;
       this.headMaster = responseBody.data;

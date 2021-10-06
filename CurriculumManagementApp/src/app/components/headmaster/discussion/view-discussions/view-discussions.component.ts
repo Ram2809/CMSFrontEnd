@@ -29,6 +29,7 @@ export class ViewDiscussionsComponent implements OnInit {
   public currentPage: number = 1;
   public totalDisucussions: string = "";
   public maxSize: string = String(1);
+
   ViewDiscussionForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -46,7 +47,6 @@ export class ViewDiscussionsComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     })
@@ -58,7 +58,6 @@ export class ViewDiscussionsComponent implements OnInit {
       this.roomNo = responseBody.data;
       this.subjectService.getSubjets(this.roomNo).subscribe(response => {
         responseBody = response;
-        console.log(response.data);
         this.subjectAssignList = responseBody.data;
       }, error => {
         window.alert(error.error.message);
@@ -72,19 +71,16 @@ export class ViewDiscussionsComponent implements OnInit {
     this.topicService.getTopics(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.topicList = responseBody.data;
-      console.log(this.topicList);
     }, error => {
       window.alert(error.error.message);
     });
   }
   getDiscussions() {
     let unitNo = this.unit?.value.split("-").shift();
-    console.log(this.roomNo);
     this.discussionService.getDiscussionByRoomNo(unitNo, this.roomNo).subscribe(response => {
       let responseBody: Response = response;
       this.discussionList = responseBody.data;
       this.isHidden = false;
-      console.log(this.discussionList);
       this.totalDisucussions = String(this.discussionList.length);
     }, error => {
       this.isHidden = true;

@@ -26,18 +26,13 @@ export class UpdateStudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.rollNo = Number(localStorage.getItem('rollNo'));
-    console.log(this.rollNo);
     this.studentService.getStudent(this.rollNo).subscribe(response => {
       let responseBody: Response = response;
       this.student = responseBody.data;
-      console.log(this.student);
       this.classDetail = this.student.classDetail!;
-      console.log(this.classDetail);
-      console.log(String(this.classDetail.standard));
       this.classService.getClassesByStandard(String(this.classDetail.standard)).subscribe(response => {
         let responseBody: Response = response;
         this.classList = responseBody.data;
-        console.log(this.classList);
       }, error => {
         window.alert(error.error.message);
       });
@@ -52,7 +47,6 @@ export class UpdateStudentComponent implements OnInit {
       const classEntity: Class = this.classDetail;
       const studentDetail: Student = this.student;
       studentDetail.classDetail = classEntity;
-      console.log(studentDetail);
       this.studentService.updateStudent(this.rollNo, studentDetail).subscribe(response => {
         let responseBody: Response = response;
         window.alert(responseBody.message);

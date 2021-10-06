@@ -39,7 +39,6 @@ export class ViewSubjectsComponent implements OnInit {
       classList = responseBody.data;
       this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response => {
         responseBody = response;
-        console.log(response.data);
         this.subjectAssignList = responseBody.data;
         this.isHidden = false;
       }, error => {

@@ -38,8 +38,6 @@ export class AddSubjectComponent implements OnInit {
           let responseBody: Response = response;
           this.classList = responseBody.data;
           for (var i = 0; i < this.classList.length; i++) {
-            console.log(this.classList[i].roomNo);
-            console.log(this.code?.value);
             this.assignSubject(this.code?.value, Number(this.classList[i].roomNo));
           }
         }, error => {

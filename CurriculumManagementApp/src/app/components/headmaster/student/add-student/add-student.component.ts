@@ -48,7 +48,6 @@ export class AddStudentComponent implements OnInit {
         this.roomNo = responseBody.data;
         classDetail.roomNo = this.roomNo;
         student.classDetail = classDetail;
-        console.log(student);
         this.studentService.addStudent(student).subscribe(data => {
           let responseBody: Response = response;
           window.alert(responseBody.message);
@@ -65,7 +64,6 @@ export class AddStudentComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     });

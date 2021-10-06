@@ -25,7 +25,6 @@ export class ViewClassComponent implements OnInit {
     });
   }
   updateClass() {
-    console.log(this.roomNo);
     localStorage.setItem('roomNo', String(this.roomNo));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;

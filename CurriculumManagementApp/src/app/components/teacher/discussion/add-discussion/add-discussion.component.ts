@@ -11,7 +11,8 @@ import { TopicService } from 'src/app/services/topic.service';
 import { Discussion } from 'src/app/model/discussion';
 import { Teacher } from 'src/app/model/teacher';
 import { Class } from 'src/app/model/class';
-import { ClassService } from 'src/app/services/class.service';
+import { ClassService } from 'src/app/services/class.service'; 
+
 @Component({
   selector: 'app-add-discussion',
   templateUrl: './add-discussion.component.html',

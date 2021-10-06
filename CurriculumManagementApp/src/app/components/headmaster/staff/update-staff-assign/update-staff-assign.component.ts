@@ -39,7 +39,6 @@ export class UpdateStaffAssignComponent implements OnInit {
   ngOnInit(): void {
     this.teacherService.getStaffs().subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.data);
       this.staffList = responseBody.data;
     }, error => {
       window.alert(error.error.message);
@@ -49,7 +48,6 @@ export class UpdateStaffAssignComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -58,11 +56,9 @@ export class UpdateStaffAssignComponent implements OnInit {
     let responseBody: Response = new Response();
     this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.data);
       this.roomNo = responseBody.data;
       this.subjectService.getSubjets(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
-        console.log(responseBody.data);
         this.subjectAssignList = responseBody.data;
       }, error => {
         window.alert(error.error.message);
@@ -74,16 +70,13 @@ export class UpdateStaffAssignComponent implements OnInit {
   getStaff() {
     this.subjectService.getAssignId(this.roomNo, this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.data);
       this.subjectAssignId = responseBody.data;
       this.teacherService.getTeacherId(this.subjectAssignId).subscribe(response => {
         let responseBody: Response = response;
         this.staffId = responseBody.data;
-        console.log(this.staffId);
         this.teacherService.getStaff(this.staffId).subscribe(response => {
           let responseBody: Response = response;
           this.staff = responseBody.data;
-          console.log(this.staff);
         }, error => {
           window.alert(error.message);
         })

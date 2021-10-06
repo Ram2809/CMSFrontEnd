@@ -39,19 +39,14 @@ export class AddClassComponent implements OnInit {
         window.alert(responseBody.message);
         this.AddClassForm.reset();
         this.classList = [];
-        console.log(this.classList.length);
         this.classService.getClassesByStandard(String(classDetail.standard)).subscribe(response => {
           let responseBody: Response = response;
           this.classList = responseBody.data;
           if (this.classList.length != 0) {
-            console.log(this.classList[0].roomNo);
             this.subjectService.getSubjets(Number(this.classList[0].roomNo)).subscribe(response => {
               let responseEntity: Response = response;
-              console.log(responseEntity.data);
               this.subjectAssignList = responseEntity.data;
-              console.log(this.subjectAssignList);
               for (var i = 0; i < this.subjectAssignList.length; i++) {
-                console.log(this.subjectAssignList[i].subject?.code);
                 this.assignSubject(String(this.subjectAssignList[i].subject?.code), Number(classDetail.roomNo));
               }
             });
