@@ -28,7 +28,7 @@ export class ViewstaffsComponent implements OnInit {
   // public teacherAssignmap:TSMap<Subject,Teacher>=new TSMap();
   public subjectList: Subject[] = [];
   public teacherList: Teacher[] = [];
-
+  public assignIdList:Number[]=[];
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private teacherService: TeacherService) { }
@@ -57,19 +57,13 @@ export class ViewstaffsComponent implements OnInit {
         this.subjectList = [];
         this.teacherList = [];
         for (let i in this.subjectAssignList) {
-          this.teacherService.getTeacherId(Number(this.subjectAssignList[i].id)).subscribe(response => {
-            let staffId: number = response.data;
-            this.teacherService.getStaff(staffId).subscribe(response => {
-              let responseBody: Response = response;
+            this.assignIdList.push(Number(this.subjectAssignList[i].id));
               const subject: Subject = this.subjectAssignList[i].subject!;
-              const teacher: Teacher = responseBody.data;
               this.subjectList.push(subject);
-              this.teacherList.push(teacher);
-              //this.teacherAssignmap.set(subject,teacher);
-            });
-          });
+              console.log(this.subjectList);
+              console.log(this.assignIdList);
         }
-        // console.log(this.teacherAssignmap);
+        
       }, error => {
         window.alert(error.error.message);
       });
