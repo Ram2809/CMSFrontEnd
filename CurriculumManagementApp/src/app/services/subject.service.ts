@@ -42,7 +42,13 @@ export class SubjectService {
   deleteSubjectAssign(roomNo: number): Observable<Response> {
     return this.http.delete(`${this.urlUtil.baseUrl}subjectassign/${roomNo}`);
   }
-  getRoomNoList(assignList:Number[]):Observable<Response>{
+  getSubjectCodeList(assignList: Number[], roomNo: number): Observable<Response> {
+    return this.http.get(`${this.urlUtil.baseUrl}subjectassign/list/${assignList}/${roomNo}`);
+  }
+  getSubjectList(subjectCodeList: String[]): Observable<Response> {
+    return this.http.get(`${this.baseUrl}?subjectCodeList=${subjectCodeList}`);
+  }
+  getRoomNoList(assignList: Number[]): Observable<Response> {
     return this.http.get(`${this.urlUtil.baseUrl}subjectassign/list/${assignList}`);
   }
 }

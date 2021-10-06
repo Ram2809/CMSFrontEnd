@@ -20,7 +20,8 @@ import { TopicStatusService } from 'src/app/services/topic-status.service';
 export class AddTopicStatusComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public staffId: number = 0;
-  public assignIdList: SubjectAssign[] = [];
+  public assignIdList: Number[] = [];
+  public subjectCodeList: String[] = [];
   public subjectList: Subject[] = [];
   public topicList: Topic[] = [];
   public classList: Class[] = [];
@@ -67,44 +68,33 @@ export class AddTopicStatusComponent implements OnInit {
   }
   getSubjects() {
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
-      let responseBody: Response = response;//10,11,13
+      let responseBody: Response = response;
       console.log(responseBody);
-      this.assignIdList = responseBody.data;//10,11,13
+      this.assignIdList = responseBody.data;
       this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
-        this.classRoomNo = responseBody.data;//2
+        this.classRoomNo = responseBody.data;
         console.log(this.classRoomNo);
-        for (let i in this.assignIdList) {//10,2->EVS
-          this.subjectService.getRoomNo(Number(this.assignIdList[i])).subscribe(response => {
+        this.subjectService.getSubjectCodeList(this.assignIdList, this.classRoomNo).subscribe(response => {
+          let responseBody: Response = response;
+          this.subjectCodeList = responseBody.data;
+          console.log(this.subjectCodeList);
+          this.subjectService.getSubjectList(this.subjectCodeList).subscribe(response => {
             let responseBody: Response = response;
-            let roomNo: number = responseBody.data;
-            console.log(roomNo)
-            if (roomNo == this.classRoomNo) {
-              this.subjectService.getSubjectCode(Number(this.assignIdList[i]), this.classRoomNo).subscribe(response => {
-                let responseBody: Response = response;
-                console.log(responseBody.data);
-                this.subjectService.getSubject(responseBody.data).subscribe(response => {
-                  let responseBody: Response = response;
-                  console.log(responseBody.data);
-                  this.subjectList.push(responseBody.data);
-                }, error => {
-                  window.alert(error.error.message);
-                })
-              }, error => {
-                window.alert(error.error.message);
-              });
-            }
+            this.subjectList = responseBody.data;
+            console.log(this.subjectList);
           }, error => {
             window.alert(error.error.message);
-          });
-        }
+          })
+        }, error => {
+          window.alert(error.error.message);
+        })
       }, error => {
         window.alert(error.error.message);
-      })
+      });
     }, error => {
       window.alert(error.error.message);
     });
-    console.log(this.subjectList);
   }
   addTopicStatus() {
     let response: boolean = window.confirm("Are you sure want to continue?");

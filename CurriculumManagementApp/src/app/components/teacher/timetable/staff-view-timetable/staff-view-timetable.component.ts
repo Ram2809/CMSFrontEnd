@@ -17,8 +17,9 @@ import { TimeTable } from 'src/app/model/time-table';
 export class StaffViewTimetableComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public staffId: number = 0;
-  public assignIdList: SubjectAssign[] = [];
+  public assignIdList: Number[] = [];
   public classList: Class[] = [];
+  public roomNoList: Number[] = [];
   public classRoomNo: number = 0;
   public errorMessage: string = "";
   public isHidden: boolean = false;
@@ -39,26 +40,25 @@ export class StaffViewTimetableComponent implements OnInit {
       let responseBody: Response = response;
       console.log(responseBody);
       this.assignIdList = responseBody.data;
-      for (let i in this.assignIdList) {
-        this.subjectService.getRoomNo(Number(this.assignIdList[i])).subscribe(response => {
-          let responseBody: Response = response;
-          let roomNo: number = responseBody.data;
-          console.log(roomNo)
-          this.classService.getClass(roomNo).subscribe(response => {
-            let responseBody: Response = response;
-            this.classList.push(responseBody.data);
-            console.log(this.classList);
-          }, error => {
-            window.alert(error.error.message);
-          })
-        }, error => {
+      this.subjectService.getRoomNoList(this.assignIdList).subscribe(response=>{
+        let responseBody:Response=response;
+        this.roomNoList=responseBody.data;
+        console.log(this.roomNoList);
+        this.classService.getClassList(this.roomNoList).subscribe(response=>{
+          let responseBody:Response=response;
+          this.classList=responseBody.data;
+          console.log(this.classList);
+        },error=>{
           window.alert(error.error.message);
-        });
-      }
+        })
+      },error=>{
+        window.alert(error.error.message);
+      })
     }, error => {
       window.alert(error.error.message);
-    })
+    });
   }
+
   getTimetable() {
     console.log(this.class?.value);
     let standard: string = this.class?.value.split("-").shift();

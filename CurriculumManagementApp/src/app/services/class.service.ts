@@ -32,4 +32,7 @@ export class ClassService {
   getClassRoomNo(standard: string, section: string): Observable<Response> {
     return this.http.get(`${this.baseUrl}` + '/' + `${standard}` + '/' + `${section}`)
   }
+  getClassList(roomNoList: Number[]): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/list/${roomNoList}`);
+  }
 }

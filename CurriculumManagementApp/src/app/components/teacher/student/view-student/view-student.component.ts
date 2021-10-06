@@ -16,7 +16,8 @@ import { Student } from 'src/app/model/student';
 export class ViewStudentComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public staffId: number = 0;
-  public assignIdList: SubjectAssign[] = [];
+  public assignIdList: Number[] = [];
+  public roomNoList:Number[]=[];
   public classList: Class[] = [];
   public classRoomNo: number = 0;
   public studentList: Student[] = [];
@@ -32,27 +33,26 @@ export class ViewStudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
+    console.log(this.staffId);
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
       console.log(responseBody);
       this.assignIdList = responseBody.data;
-      for (let i in this.assignIdList) {
-        this.subjectService.getRoomNo(Number(this.assignIdList[i])).subscribe(response => {
-          let responseBody: Response = response;
-          let roomNo: number = responseBody.data;
-          console.log(roomNo)
-          this.classService.getClass(roomNo).subscribe(response => {
-            let responseBody: Response = response;
-            this.classList.push(responseBody.data);
-            console.log(this.classList);
-          }, error => {
-            window.alert(error.error.message);
-          })
-        }, error => {
+      this.subjectService.getRoomNoList(this.assignIdList).subscribe(response=>{
+        let responseBody:Response=response;
+        this.roomNoList=responseBody.data;
+        console.log(this.roomNoList);
+        this.classService.getClassList(this.roomNoList).subscribe(response=>{
+          let responseBody:Response=response;
+          this.classList=responseBody.data;
+          console.log(this.classList);
+        },error=>{
           window.alert(error.error.message);
-        });
-      }
-    }, error => {
+        })
+      },error=>{
+        window.alert(error.error.message);
+      })
+    },  error => {
       window.alert("No subject assigned for" + " " + this.staffId);
     });
   }
