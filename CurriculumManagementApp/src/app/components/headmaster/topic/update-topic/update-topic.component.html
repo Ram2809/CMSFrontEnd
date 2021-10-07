@@ -1,0 +1,15 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Update Topic</i></b></h3>
+    <form>
+        <div class="form-group">
+            <label>Topic Number</label>
+            <input type="number" class="form-control" name="topicNo" [(ngModel)]="topic.id" readonly="true">
+        </div>
+        <div class="form-group">
+            <label>Topic Name</label>
+            <input type="text" class="form-control" name="topicName" [(ngModel)]="topic.name">
+        </div>
+        <button id="submitButton" (click)="updateTopic()" class="btn btn-info">Update</button>
+        <button id="resetButton" class="btn btn-info" type="submit" (click)="close()">Close</button>
+    </form>
+</div>

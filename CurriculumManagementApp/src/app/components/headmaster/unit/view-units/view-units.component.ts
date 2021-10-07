@@ -72,7 +72,7 @@ export class ViewUnitsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    this.dialog.open(UpdateUnitComponent, dialogConfig)
+    this.dialog.open(UpdateUnitComponent, dialogConfig);
   }
   deleteUnit() {
     let response: boolean = window.confirm("Are you sure want to continue?");

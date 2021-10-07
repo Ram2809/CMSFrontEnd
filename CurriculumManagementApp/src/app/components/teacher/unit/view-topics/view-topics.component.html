@@ -1,0 +1,27 @@
+<div class="container-fluid mb-3">
+    <h3 class="title"><b><i>Topics Details</i></b></h3>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Unit Number</th>
+                <td>{{topicList[0].unit?.unitNo}}</td>
+            </tr>
+            <tr>
+                <th>Unit Name</th>
+                <td>{{topicList[0].unit?.unitName}}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{topicList[0].unit?.description}}</td>
+            </tr>
+            <tr>
+                <th>Month</th>
+                <td>{{topicList[0].unit?.month}}</td>
+            </tr>
+            <tr  >
+                <th>Topics</th>
+                <td *ngFor="let topic of topicList"><span>{{topic.name}}</span></td>
+            </tr>
+        </table>
+    </div>
+</div>

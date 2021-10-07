@@ -9,7 +9,8 @@ import { TopicService } from 'src/app/services/topic.service';
 import { UnitService } from 'src/app/services/unit.service';
 import { Response } from 'src/app/model/response';
 import { Topic } from 'src/app/model/topic';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UpdateTopicComponent } from '../update-topic/update-topic.component';
 @Component({
   selector: 'app-view-topics',
   templateUrl: './view-topics.component.html',
@@ -20,7 +21,9 @@ export class ViewTopicsComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public unitList: Unit[] = [];
   public topicList:Topic[]=[];
-  
+  public errorMessage:String='';
+  public isHidden:boolean=false;
+
   ViewTopicsForm=new FormGroup({
     standard:new FormControl('',Validators.required),
     subject:new FormControl('',Validators.required),
@@ -29,7 +32,8 @@ export class ViewTopicsComponent implements OnInit {
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private unitService: UnitService,
-    private topicService:TopicService) { }
+    private topicService:TopicService,
+    private dialog:MatDialog) { }
 
   getSubjects() {
     let responseBody: Response = new Response();
@@ -63,15 +67,32 @@ export class ViewTopicsComponent implements OnInit {
       let responseBody:Response=response;
       this.topicList=responseBody.data;
       console.log(this.topicList);
+      this.isHidden=false;
     },error=>{
+      this.isHidden=true;
+      this.errorMessage=error.error.message;
       window.alert(error.error.message);
     })
   }
-  updateTopic(id:any){
-    console.log(id);
+  updateTopic(topic:Topic){
+    localStorage.setItem('topicId',String(topic.id));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UpdateTopicComponent, dialogConfig);
   }
   deleteTopic(topic:Topic){
     console.log(topic.id);
+    let response:boolean=window.confirm("Are you sure want to continue?");
+    if(response){
+      this.topicService.deleteTopic(Number(topic.id)).subscribe(response=>{
+        let responseBody:Response=response;
+        window.alert(responseBody.message);
+        this.viewTopics();
+      },error=>{
+        window.alert(error.error.message);
+      });
+    }
   }
   ngOnInit(): void {
   }

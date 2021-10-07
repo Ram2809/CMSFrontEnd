@@ -54,6 +54,7 @@ export class ViewstaffsComponent implements OnInit {
       this.subjectService.getSubjets(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.subjectAssignList = responseBody.data;
+        this.assignIdList=[];
         this.subjectList = [];
         this.teacherList = [];
         for (let i in this.subjectAssignList) {
@@ -81,5 +82,6 @@ export class ViewstaffsComponent implements OnInit {
     }, error => {
       window.alert(error.error.message);
     });
+    
   }
 }

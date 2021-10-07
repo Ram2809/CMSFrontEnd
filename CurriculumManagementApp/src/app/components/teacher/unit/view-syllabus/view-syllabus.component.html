@@ -51,14 +51,16 @@
                         <th>Unit Name</th>
                         <th>Description</th>
                         <th>Month</th>
+                        <th>View Topics</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let unit of unitList">
+                    <tr *ngFor="let unit of unitList;let i=index">
                         <td>{{unit.unitNo}}</td>
                         <td>{{unit.unitName}}</td>
                         <td>{{unit.description}}</td>
                         <td>{{unit.month}}</td>
+                        <td><button class="btn btn-success" type="submit" (click)="viewTopic(topicList[i])">View Topics</button></td>
                     </tr>
                 </tbody>
             </table>

@@ -56,6 +56,9 @@ import { UpdateUnitComponent } from './components/headmaster/unit/update-unit/up
 import { ViewUnitsComponent } from './components/headmaster/unit/view-units/view-units.component';
 import { AddTopicComponent } from './components/headmaster/topic/add-topic/add-topic.component';
 import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/view-topics.component';
+import { UpdateTopicComponent } from './components/headmaster/topic/update-topic/update-topic.component';
+import { CommonModule } from '@angular/common';
+import { ViewTopicComponent } from './components/teacher/unit/view-topics/view-topics.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +111,8 @@ import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/v
     UpdateStaffAssignComponent,
     AddTopicComponent,
     ViewTopicsComponent,
+    UpdateTopicComponent,
+    ViewTopicComponent
   ],
   imports: [
     BrowserModule,
@@ -118,13 +123,15 @@ import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/v
     DropdownListModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [UpdateUnitComponent,
     UpdateUnitStatusComponent,
     AdminForgotPasswordComponent,
+    ViewTopicComponent,
   ]
 })
 export class AppModule { }

@@ -42,10 +42,10 @@
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
         </div><br>
         <ng-template #elseBlock>
-            <label class="notFound">Not Found</label>
+            <label class="notFound">{{errorMessage}}</label>
         </ng-template>
         <div *ngIf="topicList.length>0 else elseBlock">
-            <table class="table table-bordered">
+            <table id="topicTable" class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Topic Number</th>
@@ -57,7 +57,7 @@
                     <tr *ngFor="let topic of topicList;let i=index">
                         <td>{{i+1}}</td>
                         <td>{{topic.name}}</td>
-                        <td><button class="btn btn-success" type="submit" (click)="updateTopic(topic.id)">Update</button><button id="deleteButton" class="btn btn-success" type="submit" (click)="deleteTopic(topic)">Delete</button></td>
+                        <td><button class="btn btn-success" type="submit" (click)="updateTopic(topic)">Update</button><button id="deleteButton" class="btn btn-success" type="submit" (click)="deleteTopic(topic)">Delete</button></td>
                     </tr>
                 </tbody>
             </table>

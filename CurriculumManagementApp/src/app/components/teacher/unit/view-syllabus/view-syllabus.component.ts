@@ -8,6 +8,11 @@ import { TeacherService } from 'src/app/services/teacher.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { UnitService } from 'src/app/services/unit.service';
 import { Unit } from 'src/app/model/unit';
+import { TopicService } from 'src/app/services/topic.service';
+import { Topic } from 'src/app/model/topic';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ViewTopicComponent } from '../view-topics/view-topics.component';
+
 @Component({
   selector: 'app-view-syllabus',
   templateUrl: './view-syllabus.component.html',
@@ -24,7 +29,8 @@ export class ViewSyllabusComponent implements OnInit {
   public unitList: Unit[] = [];
   public errorMessage: string = "";
   public isHidden: boolean = false;
-
+  public unitNoList:String[]=[];
+  public topicList:Array<Array<Topic>>=[];
   ViewCurriculumForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -34,7 +40,9 @@ export class ViewSyllabusComponent implements OnInit {
   constructor(private classService: ClassService,
     private teacherService: TeacherService,
     private subjectService: SubjectService,
-    private unitService: UnitService) { }
+    private unitService: UnitService,
+    private topicService:TopicService,
+    private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
@@ -84,6 +92,16 @@ export class ViewSyllabusComponent implements OnInit {
     this.unitService.getUnits(subjectCode).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
+      for(let i in this.unitList){  
+        this.unitNoList.push(String(this.unitList[i].unitNo));
+      }
+      console.log(this.unitNoList);
+      this.topicService.getTopicsList(this.unitNoList).subscribe(response=>{
+        let responseBody:Response=response;
+        this.topicList=responseBody.data;
+        console.log(this.topicList[0]);
+        console.log(this.topicList[0][0]);
+      });
       this.isHidden = false;
       this.ViewCurriculumForm.reset();
       console.log(this.unitList);
@@ -101,5 +119,13 @@ export class ViewSyllabusComponent implements OnInit {
   }
   get subject() {
     return this.ViewCurriculumForm.get('subject');
+  }
+  viewTopic(topicList:Topic[]){
+    console.log(topicList);
+    localStorage.setItem('topicList',JSON.stringify(topicList));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(ViewTopicComponent, dialogConfig)
   }
 }
