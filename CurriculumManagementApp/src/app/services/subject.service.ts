@@ -51,4 +51,7 @@ export class SubjectService {
   getRoomNoList(assignList: Number[]): Observable<Response> {
     return this.http.get(`${this.urlUtil.baseUrl}subjectassign/list/${assignList}`);
   }
+  getAllSubjectCodeList(assignList:Number[]):Observable<Response>{
+    return this.http.get(`${this.urlUtil.baseUrl}subjectassign/listAll/${assignList}`);
+  }
 }

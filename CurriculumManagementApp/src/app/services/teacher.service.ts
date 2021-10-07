@@ -45,4 +45,10 @@ export class TeacherService {
   updateStaffAssign(subjectAssignId: number, staffId: number, teacherAssign: TeacherAssign): Observable<Response> {
     return this.http.put(`${this.urlUtil.baseUrl}teacherassign/${subjectAssignId}/${staffId}`, teacherAssign);
   }
+  getStaffIdList(subjectAssignIdList: Number[]): Observable<Response> {
+    return this.http.get(`${this.urlUtil.baseUrl}teacherassign/list/${subjectAssignIdList}`);
+  }
+  getStaffList(staffIdList: Number[]): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/list/${staffIdList}`);
+  }
 }

@@ -4,13 +4,13 @@ import { UnitStatus } from 'src/app/model/unit-status';
 import { UnitStatusService } from 'src/app/services/unit-status.service';
 import { Response } from 'src/app/model/response';
 @Component({
-  selector: 'app-update-topic-status',
-  templateUrl: './update-topic-status.component.html',
-  styleUrls: ['./update-topic-status.component.css']
+  selector: 'app-update-unit-status',
+  templateUrl: './update-unit-status.component.html',
+  styleUrls: ['./update-unit-status.component.css']
 })
-export class UpdateTopicStatusComponent implements OnInit {
+export class UpdateUnitStatusComponent implements OnInit {
   public unitStatus: UnitStatus = new UnitStatus();
-  constructor(public dialogRef: MatDialogRef<UpdateTopicStatusComponent>,
+  constructor(public dialogRef: MatDialogRef<UpdateUnitStatusComponent>,
     private unitStatusService: UnitStatusService) { }
 
   ngOnInit(): void {

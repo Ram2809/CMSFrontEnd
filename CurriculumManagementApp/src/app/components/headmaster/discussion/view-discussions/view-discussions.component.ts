@@ -10,6 +10,8 @@ import { SubjectService } from 'src/app/services/subject.service';
 import { SubjectAssign } from 'src/app/model/subject-assign';
 import { Discussion } from 'src/app/model/discussion';
 import { DiscussionService } from 'src/app/services/discussion.service';
+import { TopicService } from 'src/app/services/topic.service';
+import { Topic } from 'src/app/model/topic';
 
 @Component({
   selector: 'app-view-discussions',
@@ -26,19 +28,19 @@ export class ViewDiscussionsComponent implements OnInit {
   public discussionList: Discussion[] = [];
   public errorMessage: string = "";
   public isHidden: boolean = false;
-  public currentPage: number = 1;
-  public totalDisucussions: string = "";
-  public maxSize: string = String(1);
+  public topicList:Topic[]=[];
 
   ViewDiscussionForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     unit: new FormControl('', Validators.required),
+    topic:new FormControl('',Validators.required),
   })
   constructor(private classService: ClassService,
     private unitService: UnitService,
     private subjectService: SubjectService,
+    private topicService:TopicService,
     private discussionService: DiscussionService) { }
 
   ngOnInit(): void {
@@ -66,7 +68,7 @@ export class ViewDiscussionsComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-  getTopics() {
+  getUnits() {
     console.log(this.subject?.value.split("-").shift());
     this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
@@ -75,13 +77,22 @@ export class ViewDiscussionsComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
+  getTopics() {
+    this.topicService.getTopics(this.unit?.value.split("-").shift()).subscribe(response => {
+      let responseBody: Response = response;
+      this.topicList = responseBody.data;
+      console.log(this.topicList);
+    }, error => {
+      window.alert(error.error.message);
+    });
+  }
   getDiscussions() {
-    let unitNo = this.unit?.value.split("-").shift();
-    this.discussionService.getDiscussionByRoomNo(unitNo, this.roomNo).subscribe(response => {
+    let topicNo = this.topic?.value.split("-").shift();
+    console.log(topicNo);
+    this.discussionService.getDiscussionByRoomNo(topicNo, this.roomNo).subscribe(response => {
       let responseBody: Response = response;
       this.discussionList = responseBody.data;
       this.isHidden = false;
-      this.totalDisucussions = String(this.discussionList.length);
     }, error => {
       this.isHidden = true;
       this.errorMessage = error.error.message;
@@ -99,5 +110,8 @@ export class ViewDiscussionsComponent implements OnInit {
   }
   get unit() {
     return this.ViewDiscussionForm.get('unit');
+  }
+  get topic() {
+    return this.ViewDiscussionForm.get('topic');
   }
 }

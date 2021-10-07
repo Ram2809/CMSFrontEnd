@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SubjectAssign } from 'src/app/model/subject-assign';
 import { ClassService } from 'src/app/services/class.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TeacherService } from 'src/app/services/teacher.service';
@@ -13,9 +12,10 @@ import { Class } from 'src/app/model/class';
 })
 export class ViewAssignedSubjectsComponent implements OnInit {
   public staffId: number = 0;
-  public assignIdList: SubjectAssign[] = [];
+  public assignIdList: Number[] = [];
   public classList: Class[] = [];
   public subjectList: Subject[] = [];
+  public roomNoList: Number[]=[];
 
   constructor(private teacherService: TeacherService,
     private subjectService: SubjectService,
@@ -28,38 +28,34 @@ export class ViewAssignedSubjectsComponent implements OnInit {
       let responseBody: Response = response;
       this.assignIdList = responseBody.data;
       console.log(this.assignIdList);
-      for (let i in this.assignIdList) {
-        this.subjectService.getRoomNo(Number(this.assignIdList[i])).subscribe(response => {
-          let responseBody: Response = response;
-          let roomNo: number = responseBody.data;
-          console.log(roomNo);
-          this.classService.getClass(roomNo).subscribe(response => {
-            let responseBody: Response = response;
-            let classDetail: Class = responseBody.data;
-            this.classList.push(classDetail);
-            console.log(this.classList);
-            this.subjectService.getSubjectCode(Number(this.assignIdList[i]), roomNo).subscribe(response => {
-              let responseBody: Response = response;
-              console.log(responseBody.data);
-              let subjectCode: string = responseBody.data;
-              this.subjectService.getSubject(subjectCode).subscribe(response => {
-                let responseBody: Response = response;
-                let subject: Subject = responseBody.data;
-                this.subjectList.push(subject);
-                console.log(this.subjectList);
-              }, error => {
-                window.alert(error.error.message);
-              });
-            }, error => {
+      this.subjectService.getRoomNoList(this.assignIdList).subscribe(response=>{
+        let responseBody:Response=response;
+        this.roomNoList=responseBody.data;
+        console.log(this.roomNoList);
+        this.classService.getClassList(this.roomNoList).subscribe(response=>{
+          let responseBody:Response=response;
+          this.classList=responseBody.data;
+          console.log(this.classList);
+          this.subjectService.getAllSubjectCodeList(this.assignIdList).subscribe(response=>{
+            let responseBody:Response=response;
+            let subjectCodeList:String[]=responseBody.data;
+            console.log(subjectCodeList);
+            this.subjectService.getSubjectList(subjectCodeList).subscribe(response=>{
+              let responseBody:Response=response;
+              this.subjectList=responseBody.data;
+              console.log(this.subjectList);
+            },error=>{
               window.alert(error.error.message);
             });
-          }, error => {
+          },error=>{
             window.alert(error.error.message);
           });
-        }, error => {
+        },error=>{
           window.alert(error.error.message);
-        })
-      }
+        });
+      },error=>{
+        window.alert(error.error.message);
+      });
     }, error => {
       window.alert(error.error.message);
     });

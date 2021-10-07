@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Class } from 'src/app/model/class';
 import { ClassService } from 'src/app/services/class.service';
-import {  UnitService } from 'src/app/services/unit.service';
+import { UnitService } from 'src/app/services/unit.service';
 import { Response } from 'src/app/model/response';
 import { Unit } from 'src/app/model/unit';
-import { SubjectAssign } from 'src/app/model/subject-assign';
 import { Subject } from 'src/app/model/subject';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { Discussion } from 'src/app/model/discussion';
 import { DiscussionService } from 'src/app/services/discussion.service';
 import { Router } from '@angular/router';
+import { TopicService } from 'src/app/services/topic.service';
+import { Topic } from 'src/app/model/topic';
 @Component({
   selector: 'app-view-discussion',
   templateUrl: './view-discussion.component.html',
@@ -26,6 +27,7 @@ export class ViewDiscussionComponent implements OnInit {
   public subjectCodeList: String[] = [];
   public subjectList: Subject[] = [];
   public classRoomNo: number = 0;
+  public topicList: Topic[] = [];
   public discussionList: Discussion[] = [];
   public isHidden: boolean = false;
   public errorMessage: string = "";
@@ -35,6 +37,7 @@ export class ViewDiscussionComponent implements OnInit {
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     unit: new FormControl('', Validators.required),
+    topic:new FormControl('',Validators.required),
     option: new FormControl(''),
   });
 
@@ -43,6 +46,7 @@ export class ViewDiscussionComponent implements OnInit {
     private subjectService: SubjectService,
     private teacherService: TeacherService,
     private discussionService: DiscussionService,
+    private topicService: TopicService,
     private router: Router) { }
 
   getSections() {
@@ -54,12 +58,21 @@ export class ViewDiscussionComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-  getTopics() {
+  getUnits() {
     console.log(this.subject?.value.split("-").shift());
     this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
       console.log(this.unitList);
+    }, error => {
+      window.alert(error.error.message);
+    });
+  }
+  getTopics() {
+    this.topicService.getTopics(this.unit?.value.split("-").shift()).subscribe(response => {
+      let responseBody: Response = response;
+      this.topicList = responseBody.data;
+      console.log(this.topicList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -95,13 +108,13 @@ export class ViewDiscussionComponent implements OnInit {
     });
   }
   getDiscussions() {
-    let unitNo: string = this.unit?.value.split("-").shift();
-    console.log(unitNo);
+    let topicNo: number = this.topic?.value.split("-").shift();
+    console.log(topicNo);
     this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classRoomNo = responseBody.data;
       console.log(this.classRoomNo);
-      this.discussionService.getDiscussions(unitNo, this.classRoomNo, this.staffId).subscribe(response => {
+      this.discussionService.getDiscussions(topicNo, this.classRoomNo, this.staffId).subscribe(response => {
         let responseBody: Response = response;
         this.discussionList = responseBody.data;
         this.isHidden = false;
@@ -151,5 +164,8 @@ export class ViewDiscussionComponent implements OnInit {
   }
   get option() {
     return this.ViewDiscussionForm.get('option');
+  }
+  get topic(){
+    return this.ViewDiscussionForm.get('topic');
   }
 }

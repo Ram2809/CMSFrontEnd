@@ -6,16 +6,16 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Unit } from 'src/app/model/unit';
 
 @Component({
-  selector: 'app-update-topic',
-  templateUrl: './update-topic.component.html',
-  styleUrls: ['./update-topic.component.css']
+  selector: 'app-update-unit',
+  templateUrl: './update-unit.component.html',
+  styleUrls: ['./update-unit.component.css']
 })
-export class UpdateTopicComponent implements OnInit {
+export class UpdateUnitComponent implements OnInit {
   public unit: Unit = new Unit();
   public unitNo: string = "";
   public monthList: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   constructor(private unitService: UnitService,
-    private dialogRef: MatDialogRef<UpdateTopicComponent>) { }
+    private dialogRef: MatDialogRef<UpdateUnitComponent>) { }
 
   ngOnInit(): void {
     this.unitNo = String(localStorage.getItem('unitNo'));

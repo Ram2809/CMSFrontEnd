@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label class="required">Subject Name</label>
-                <select class="custom-select" class="form-control" name="subject" formControlName="subject">
+                <select class="custom-select" class="form-control" name="subject" formControlName="subject" (change)="getUnits()">
                     <option value="" selected>Select the subject name</option>
                     <option *ngFor="let subjectAssign of subjectAssignList">
                         {{subjectAssign.subject?.code}}-{{subjectAssign.subject?.name}}</option>
@@ -24,43 +24,19 @@
                     <div class="error" *ngIf="subject?.errors?.required">* This field is required</div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label class="required">Unit Number</label>
-                    <input type="text" class="form-control" name="unitNo" formControlName="unitNo"
-                        placeholder="Enter the unit number length not exceeds 8 characters">
-                    <small class="info">Unit number not exceeds 8 characters</small>
-                    <div *ngIf="unitNo?.invalid &&(unitNo?.touched||unitNo?.dirty)">
-                        <div class="error" *ngIf="unitNo?.errors?.required">* This field is required</div>
-                        <div class="error" *ngIf="unitNo?.errors?.maxlength">* Unit number length exceeds</div>
-                    </div>
-                </div>
-                <div class="col">
-                    <label class="required">Unit Name</label>
-                    <input type="text" class="form-control" name="unitName" formControlName="unitName"
-                        placeholder="Enter the unit number">
-                    <div *ngIf="unitName?.invalid &&(unitName?.touched||unitName?.dirty)">
-                        <div class="error" *ngIf="unitName?.errors?.required">* This field is required</div>
-                    </div>
-                </div>
-            </div>
             <div class="form-group">
-                <label class="required">Description</label>
-                <textarea rows="3" cols="50" class="form-control" name="description" formControlName="description"
-                    placeholder="Enter the description or sub topics"></textarea>
-                <div *ngIf="description?.invalid &&(description?.touched||description?.dirty)">
-                    <div class="error" *ngIf="description?.errors?.required">* This field is required</div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="required">Month</label>
-                <select class="custom-select" class="form-control" name="month" formControlName="month">
-                    <option value="" selected>Select the month</option>
-                    <option [value]="month" *ngFor="let month of monthList">{{month}}</option>
+                <label class="required">Unit</label>
+                <select class="custom-select" class="form-control" name="unit" formControlName="unit">
+                    <option value="" selected>Select the unit</option>
+                    <option *ngFor="let unit of unitList">{{unit.unitNo}}-{{unit.unitName}}</option>
                 </select>
-                <div *ngIf="month?.invalid &&(month?.touched||month?.dirty)">
-                    <div class="error" *ngIf="month?.errors?.required">* This field is required</div>
+                <div *ngIf="unit?.invalid &&(unit?.touched||unit?.dirty)">
+                    <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
                 </div>
+            </div>
+            <div class="form-group">
+                <label class="required">Topic Name</label>
+                <input type="text" class="form-control" name="topicName" formControlName="topicName" placeholder="Enter the topic name">
             </div>
             <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!AddTopicForm.valid"
                 (click)="addTopic()">Add Topic</button>
@@ -68,3 +44,4 @@
         </div>
     </form>
 </div>
+

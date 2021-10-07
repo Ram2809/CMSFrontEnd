@@ -14,8 +14,8 @@ export class DiscussionService {
   addDiscussion(discussion: Discussion): Observable<Response> {
     return this.http.post(`${this.baseUrl}`, discussion);
   }
-  getDiscussions(unitNo: string, roomNo: number, staffId: number): Observable<Response> {
-    return this.http.get(`${this.baseUrl}/${unitNo}/${roomNo}/${staffId}`);
+  getDiscussions(topicNo: number, roomNo: number, staffId: number): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/${topicNo}/${roomNo}/${staffId}`);
   }
   getDiscussion(questionNo: number): Observable<Response> {
     return this.http.get(`${this.baseUrl}` + '?questionNo=' + `${questionNo}`);
@@ -26,7 +26,7 @@ export class DiscussionService {
   deleteDiscussion(questionNo: number): Observable<Response> {
     return this.http.delete(`${this.baseUrl}` + '/' + `${questionNo}`);
   }
-  getDiscussionByRoomNo(unitNo: string, roomNo: number): Observable<Response> {
-    return this.http.get(`${this.baseUrl}/${unitNo}/${roomNo}`);
+  getDiscussionByRoomNo(topicNo: number, roomNo: number): Observable<Response> {
+    return this.http.get(`${this.baseUrl}/${topicNo}/${roomNo}`);
   }
 }

@@ -20,9 +20,11 @@ import { AddTimetableComponent } from './components/headmaster/timetable/add-tim
 import { UpdateTimetableComponent } from './components/headmaster/timetable/update-timetable/update-timetable.component';
 import { ViewTimetableComponent } from './components/headmaster/timetable/view-timetable/view-timetable.component';
 import { AddTopicComponent } from './components/headmaster/topic/add-topic/add-topic.component';
-import { TopicStatusComponent } from './components/headmaster/topic/topic-status/topic-status.component';
-import { UpdateTopicComponent } from './components/headmaster/topic/update-topic/update-topic.component';
 import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/view-topics.component';
+import { AddUnitComponent } from './components/headmaster/unit/add-unit/add-unit.component';
+import { UnitStatusComponent } from './components/headmaster/unit/unit-status/unit-status.component';
+import { UpdateUnitComponent } from './components/headmaster/unit/update-unit/update-unit.component';
+import { ViewUnitsComponent } from './components/headmaster/unit/view-units/view-units.component';
 import { AdminForgotPasswordComponent } from './components/home/headmaster/admin-forgot-password/admin-forgot-password.component';
 import { AdminLoginComponent } from './components/home/headmaster/admin-login/admin-login.component';
 import { AdminSignupComponent } from './components/home/headmaster/admin-signup/admin-signup.component';
@@ -37,10 +39,10 @@ import { ViewAssignedSubjectsComponent } from './components/teacher/profile/view
 import { ViewStudentComponent } from './components/teacher/student/view-student/view-student.component';
 import { TeacherDashboardComponent } from './components/teacher/teacher-dashboard/teacher-dashboard.component';
 import { StaffViewTimetableComponent } from './components/teacher/timetable/staff-view-timetable/staff-view-timetable.component';
-import { AddTopicStatusComponent } from './components/teacher/topic/add-topic-status/add-topic-status.component';
-import { UpdateTopicStatusComponent } from './components/teacher/topic/update-topic-status/update-topic-status.component';
-import { ViewSyllabusComponent } from './components/teacher/topic/view-syllabus/view-syllabus.component';
-import { ViewTopicStatusComponent } from './components/teacher/topic/view-topic-status/view-topic-status.component';
+import { AddUnitStatusComponent } from './components/teacher/unit/add-unit-status/add-unit-status.component';
+import { UpdateUnitStatusComponent } from './components/teacher/unit/update-unit-status/update-unit-status.component';
+import { ViewSyllabusComponent } from './components/teacher/unit/view-syllabus/view-syllabus.component';
+import { ViewUnitStatusComponent } from './components/teacher/unit/view-unit-status/view-unit-status.component';
 
 const routes: Routes = [
   {
@@ -54,9 +56,9 @@ const routes: Routes = [
       { path: 'addsubject', component: AddSubjectComponent },
       { path: 'viewsubjects', component: ViewSubjectsComponent },
       { path: 'updatesubject', component: UpdateSubjectComponent },
-      { path: 'addtopic', component: AddTopicComponent },
-      { path: 'viewtopics', component: ViewTopicsComponent },
-      { path: 'updatetopic', component: UpdateTopicComponent },
+      { path: 'addunit', component: AddUnitComponent },
+      { path: 'viewunits', component: ViewUnitsComponent },
+      { path: 'updateunit', component: UpdateUnitComponent },
       { path: 'addtimetable', component: AddTimetableComponent },
       { path: 'staffassign', component: StaffAssignComponent },
       { path: 'viewstaffs', component: ViewstaffsComponent },
@@ -64,10 +66,12 @@ const routes: Routes = [
       { path: 'viewtimetable', component: ViewTimetableComponent },
       { path: 'updatetimetable', component: UpdateTimetableComponent },
       { path: 'viewteachers', component: ViewTeachersComponent },
-      { path: 'viewtopicstatus', component: TopicStatusComponent },
+      { path: 'viewunitstatus', component: UnitStatusComponent },
       { path: 'viewprofile', component: AdminViewProfileComponent },
       { path: 'admin/updatestudent', component: UpdateStudentComponent },
       { path: 'updatestaffassign', component: UpdateStaffAssignComponent },
+      { path: 'addtopic', component: AddTopicComponent },
+      { path: 'viewtopics', component: ViewTopicsComponent },
     ]
   },
   {
@@ -86,9 +90,9 @@ const routes: Routes = [
       { path: 'adddiscussion', component: AddDiscussionComponent },
       { path: 'viewdiscussion', component: ViewDiscussionComponent },
       { path: 'updatediscussion', component: UpdateDiscussionComponent },
-      { path: 'addtopicstatus', component: AddTopicStatusComponent },
-      { path: 'viewtopicstatus', component: ViewTopicStatusComponent },
-      { path: 'updatetopicstatus', component: UpdateTopicStatusComponent },
+      { path: 'addunitstatus', component: AddUnitStatusComponent },
+      { path: 'viewunitstatus', component: ViewUnitStatusComponent },
+      { path: 'updateunitstatus', component: UpdateUnitStatusComponent },
       { path: 'viewsyllabus', component: ViewSyllabusComponent },
       { path: 'viewstudents', component: ViewStudentComponent },
       { path: 'viewtimetable', component: StaffViewTimetableComponent },

@@ -18,7 +18,7 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 5.5cm;
+    margin-left: 8cm;
 }
 #resetButton
 {
@@ -27,15 +27,6 @@ label{
 #main{
     margin-top:50px;
 }
-#viewTopics{
-    margin-left: 8cm;
-}
-#deleteButton{
-    margin-left: 0.5cm;
-}
-th,td{
-    text-align: center;
-}
-table{
-    width:800px;
+#addTopic{
+    margin-left: 5.5cm;
 }

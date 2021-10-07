@@ -25,10 +25,10 @@ export class ViewstaffsComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public teacher: Teacher = new Teacher();
   public errorMessage: string = "";
-  // public teacherAssignmap:TSMap<Subject,Teacher>=new TSMap();
   public subjectList: Subject[] = [];
   public teacherList: Teacher[] = [];
-  public assignIdList:Number[]=[];
+  public assignIdList: Number[] = [];
+
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private teacherService: TeacherService) { }
@@ -57,13 +57,24 @@ export class ViewstaffsComponent implements OnInit {
         this.subjectList = [];
         this.teacherList = [];
         for (let i in this.subjectAssignList) {
-            this.assignIdList.push(Number(this.subjectAssignList[i].id));
-              const subject: Subject = this.subjectAssignList[i].subject!;
-              this.subjectList.push(subject);
-              console.log(this.subjectList);
-              console.log(this.assignIdList);
+          this.assignIdList.push(Number(this.subjectAssignList[i].id));
+          const subject: Subject = this.subjectAssignList[i].subject!;
+          this.subjectList.push(subject);
+          console.log(this.subjectList);
+          console.log(this.assignIdList);
         }
-        
+        this.teacherService.getStaffIdList(this.assignIdList).subscribe(response => {
+          let responseBody: Response = response;
+          let staffIdList: Number[] = responseBody.data;
+          this.teacherService.getStaffList(staffIdList).subscribe(response => {
+            let responseBody: Response = response;
+            this.teacherList = responseBody.data;
+          }, error => {
+            window.alert(error.error.message);
+          });
+        }, error => {
+          window.alert(error.error.message);
+        });
       }, error => {
         window.alert(error.error.message);
       });
@@ -71,7 +82,4 @@ export class ViewstaffsComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-  // getSubjectCode(subject: any) {
-  //   return subject.code;
-  // }
 }

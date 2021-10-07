@@ -30,7 +30,7 @@
                 <div class="col">
                     <label class="required">Subject Name</label>
                     <select class="custom-select" class="form-control" name="subject" formControlName="subject"
-                        (change)="getTopics()">
+                        (change)="getUnits()">
                         <option value="" selected>Select the subject</option>
                         <option *ngFor="let subject of subjectList">{{subject.code}}-{{subject.name}}</option>
                     </select>
@@ -40,12 +40,22 @@
                 </div>
                 <div class="col">
                     <label class="required">Unit</label>
-                    <select class="custom-select" class="form-control" name="unit" formControlName="unit">
+                    <select class="custom-select" class="form-control" name="unit" formControlName="unit" (change)="getTopics()">
                         <option value="" selected>Select the unit</option>
                         <option *ngFor="let unit of unitList">{{unit.unitNo}}-{{unit.unitName}}</option>
                     </select>
                     <div *ngIf="unit?.invalid &&(unit?.touched||unit?.dirty)">
                         <div class="error" *ngIf="unit?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="required">Topic</label>
+                    <select class="custom-select" class="form-control" name="topic" formControlName="topic">
+                        <option value="" selected>Select the topic</option>
+                        <option *ngFor="let topic of topicList">{{topic.id}}-{{topic.name}}</option>
+                    </select>
+                    <div *ngIf="topic?.invalid &&(topic?.touched||topic?.dirty)">
+                        <div class="error" *ngIf="topic?.errors?.required">* This field is required</div>
                     </div>
                 </div>
             </div><br>

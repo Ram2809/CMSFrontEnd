@@ -14,11 +14,11 @@ import {  UnitStatus } from 'src/app/model/unit-status';
 import { Unit } from 'src/app/model/unit';
 
 @Component({
-  selector: 'app-topic-status',
-  templateUrl: './topic-status.component.html',
-  styleUrls: ['./topic-status.component.css']
+  selector: 'app-unit-status',
+  templateUrl: './unit-status.component.html',
+  styleUrls: ['./unit-status.component.css']
 })
-export class TopicStatusComponent implements OnInit {
+export class UnitStatusComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public classList: Class[] = [];
   public roomNo: number = 0;

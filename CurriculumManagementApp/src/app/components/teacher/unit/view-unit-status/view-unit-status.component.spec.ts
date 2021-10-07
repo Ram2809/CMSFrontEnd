@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewTopicStatusComponent } from './view-topic-status.component';
+import { ViewUnitStatusComponent } from './view-unit-status.component';
 
 describe('ViewTopicStatusComponent', () => {
-  let component: ViewTopicStatusComponent;
-  let fixture: ComponentFixture<ViewTopicStatusComponent>;
+  let component: ViewUnitStatusComponent;
+  let fixture: ComponentFixture<ViewUnitStatusComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewTopicStatusComponent ]
+      declarations: [ ViewUnitStatusComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewTopicStatusComponent);
+    fixture = TestBed.createComponent(ViewUnitStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

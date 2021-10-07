@@ -18,24 +18,26 @@ label{
     font-weight:bold;
 }
 #submitButton{
-    margin-left: 5.5cm;
+    margin-left: 7cm;
 }
 #resetButton
 {
     margin-left: 0.5cm;
 }
+#updateButton{
+    margin-left: 1cm;
+}
+#deleteButton{
+    margin-left: 13cm;
+}
 #main{
-    margin-top:50px;
+    margin-top: 50px;
 }
 #viewTopics{
     margin-left: 8cm;
 }
-#deleteButton{
-    margin-left: 0.5cm;
-}
-th,td{
+.notFound{
+    margin-left: 14cm;
     text-align: center;
-}
-table{
-    width:800px;
+    color: red;
 }

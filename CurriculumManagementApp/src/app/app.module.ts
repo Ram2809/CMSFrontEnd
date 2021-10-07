@@ -13,9 +13,6 @@ import { ViewStudentsComponent } from './components/headmaster/student/view-stud
 import { AddSubjectComponent } from './components/headmaster/subject/add-subject/add-subject.component';
 import { ViewSubjectsComponent } from './components/headmaster/subject/view-subjects/view-subjects.component';
 import { UpdateSubjectComponent } from './components/headmaster/subject/update-subject/update-subject.component';
-import { AddTopicComponent } from './components/headmaster/topic/add-topic/add-topic.component';
-import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/view-topics.component';
-import { UpdateTopicComponent } from './components/headmaster/topic/update-topic/update-topic.component';
 import { AddTimetableComponent } from './components/headmaster/timetable/add-timetable/add-timetable.component';
 import { AddDiscussionComponent } from './components/teacher/discussion/add-discussion/add-discussion.component';
 import { StaffAssignComponent } from './components/headmaster/staff/staff-assign/staff-assign.component';
@@ -29,13 +26,8 @@ import { UpdateTimetableComponent } from './components/headmaster/timetable/upda
 import { ViewTeachersComponent } from './components/headmaster/staff/view-teachers/view-teachers.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from "@angular/material/dialog";
-import { AddTopicStatusComponent } from './components/teacher/topic/add-topic-status/add-topic-status.component';
-import { ViewTopicStatusComponent } from './components/teacher/topic/view-topic-status/view-topic-status.component';
-import { UpdateTopicStatusComponent } from './components/teacher/topic/update-topic-status/update-topic-status.component';
-import { ViewSyllabusComponent } from './components/teacher/topic/view-syllabus/view-syllabus.component';
 import { ViewStudentComponent } from './components/teacher/student/view-student/view-student.component';
 import { StaffViewTimetableComponent } from './components/teacher/timetable/staff-view-timetable/staff-view-timetable.component';
-import { TopicStatusComponent } from './components/headmaster/topic/topic-status/topic-status.component';
 import { AdminForgotPasswordComponent } from './components/home/headmaster/admin-forgot-password/admin-forgot-password.component';
 import { AdminLoginComponent } from './components/home/headmaster/admin-login/admin-login.component';
 import { AdminSignupComponent } from './components/home/headmaster/admin-signup/admin-signup.component';
@@ -54,6 +46,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ViewAssignedSubjectsComponent } from './components/teacher/profile/view-assigned-subjects/view-assigned-subjects.component';
 import { UpdateStudentComponent } from './components/headmaster/student/update-student/update-student.component';
 import { UpdateStaffAssignComponent } from './components/headmaster/staff/update-staff-assign/update-staff-assign.component';
+import { UnitStatusComponent } from './components/headmaster/unit/unit-status/unit-status.component';
+import { AddUnitStatusComponent } from './components/teacher/unit/add-unit-status/add-unit-status.component';
+import { UpdateUnitStatusComponent } from './components/teacher/unit/update-unit-status/update-unit-status.component';
+import { ViewSyllabusComponent } from './components/teacher/unit/view-syllabus/view-syllabus.component';
+import { ViewUnitStatusComponent } from './components/teacher/unit/view-unit-status/view-unit-status.component';
+import { AddUnitComponent } from './components/headmaster/unit/add-unit/add-unit.component';
+import { UpdateUnitComponent } from './components/headmaster/unit/update-unit/update-unit.component';
+import { ViewUnitsComponent } from './components/headmaster/unit/view-units/view-units.component';
+import { AddTopicComponent } from './components/headmaster/topic/add-topic/add-topic.component';
+import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/view-topics.component';
 
 @NgModule({
   declarations: [
@@ -70,9 +72,9 @@ import { UpdateStaffAssignComponent } from './components/headmaster/staff/update
     AddSubjectComponent,
     ViewSubjectsComponent,
     UpdateSubjectComponent,
-    AddTopicComponent,
-    ViewTopicsComponent,
-    UpdateTopicComponent,
+    AddUnitComponent,
+    ViewUnitsComponent,
+    UpdateUnitComponent,
     AddTimetableComponent,
     AddDiscussionComponent,
     StaffAssignComponent,
@@ -84,13 +86,13 @@ import { UpdateStaffAssignComponent } from './components/headmaster/staff/update
     UpdateTimetableComponent,
     ViewTeachersComponent,
     AdminSignupComponent,
-    AddTopicStatusComponent,
-    ViewTopicStatusComponent,
-    UpdateTopicStatusComponent,
+    AddUnitStatusComponent,
+    ViewUnitStatusComponent,
+    UpdateUnitStatusComponent,
     ViewSyllabusComponent,
     ViewStudentComponent,
     StaffViewTimetableComponent,
-    TopicStatusComponent,
+    UnitStatusComponent,
     AdminLoginComponent,
     AdminForgotPasswordComponent,
     HomeComponent,
@@ -104,6 +106,8 @@ import { UpdateStaffAssignComponent } from './components/headmaster/staff/update
     ViewAssignedSubjectsComponent,
     UpdateStudentComponent,
     UpdateStaffAssignComponent,
+    AddTopicComponent,
+    ViewTopicsComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,8 +122,8 @@ import { UpdateStaffAssignComponent } from './components/headmaster/staff/update
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [UpdateTopicComponent,
-    UpdateTopicStatusComponent,
+  entryComponents: [UpdateUnitComponent,
+    UpdateUnitStatusComponent,
     AdminForgotPasswordComponent,
   ]
 })

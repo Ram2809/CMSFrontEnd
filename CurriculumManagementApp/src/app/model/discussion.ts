@@ -1,6 +1,6 @@
 import { Class } from "./class";
 import { Teacher } from "./teacher";
-import { Unit } from "src/app/model/unit";
+import { Topic } from "./topic";
 
 
 export class Discussion {
@@ -8,7 +8,7 @@ export class Discussion {
     public question?: string;
     public answer?: string;
     public date?: Date;
-    public unit?: Unit;
+    public topic?:Topic;
     public teacher?: Teacher;
     public classDetail?: Class;
 }

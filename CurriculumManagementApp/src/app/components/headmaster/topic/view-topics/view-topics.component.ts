@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SubjectAssign } from 'src/app/model/subject-assign';
 import { Class } from 'src/app/model/class';
-import { ClassService } from 'src/app/services/class.service';
-import { Response } from 'src/app/model/response';
-import { SubjectService } from 'src/app/services/subject.service';
+import { SubjectAssign } from 'src/app/model/subject-assign';
 import { Unit } from 'src/app/model/unit';
-import {  UnitService } from 'src/app/services/unit.service';
-import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { UpdateTopicComponent } from '../update-topic/update-topic.component';
+import { ClassService } from 'src/app/services/class.service';
+import { SubjectService } from 'src/app/services/subject.service';
+import { TopicService } from 'src/app/services/topic.service';
+import { UnitService } from 'src/app/services/unit.service';
+import { Response } from 'src/app/model/response';
+import { Topic } from 'src/app/model/topic';
+
 @Component({
   selector: 'app-view-topics',
   templateUrl: './view-topics.component.html',
@@ -19,23 +19,18 @@ export class ViewTopicsComponent implements OnInit {
   public standardList: string[] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
   public subjectAssignList: SubjectAssign[] = [];
   public unitList: Unit[] = [];
-  public isHidden: boolean = false;
-  public errorMessage: string = "";
-
-  ViewTopicsForm = new FormGroup({
-    standard: new FormControl('', Validators.required),
-    subject: new FormControl('', Validators.required),
-    option: new FormControl('')
+  public topicList:Topic[]=[];
+  
+  ViewTopicsForm=new FormGroup({
+    standard:new FormControl('',Validators.required),
+    subject:new FormControl('',Validators.required),
+    unit:new FormControl('',Validators.required),
   });
-
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private unitService: UnitService,
-    private router: Router,
-    private dialog: MatDialog) { }
+    private topicService:TopicService) { }
 
-  ngOnInit(): void {
-  }
   getSubjects() {
     let responseBody: Response = new Response();
     let classList: Class[] = [];
@@ -54,47 +49,39 @@ export class ViewTopicsComponent implements OnInit {
     });
   }
   getUnits() {
-    let subjectCode: string = this.subject?.value.split("-").shift();
-    console.log(subjectCode);
-    this.unitService.getUnits(subjectCode).subscribe(response => {
+    console.log(this.subject?.value.split("-").shift());
+    this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
-      this.isHidden = false;
       console.log(this.unitList);
     }, error => {
-      this.isHidden = true;
-      this.errorMessage = error.error.message;
       window.alert(error.error.message);
     });
   }
-  updateUnit() {
-    localStorage.setItem('unitNo', this.option?.value);
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    this.dialog.open(UpdateTopicComponent, dialogConfig)
+  viewTopics(){
+    this.topicService.getTopics(this.unit?.value.split("-").shift()).subscribe(response=>{
+      let responseBody:Response=response;
+      this.topicList=responseBody.data;
+      console.log(this.topicList);
+    },error=>{
+      window.alert(error.error.message);
+    })
   }
-  deleteUnit() {
-    let response: boolean = window.confirm("Are you sure want to continue?");
-    if (response) {
-      console.log(this.option?.value);
-      this.unitService.deleteUnit(this.option?.value).subscribe(response => {
-        let responseBody: Response = response;
-        console.log(responseBody);
-        window.alert(responseBody.message);
-        this.getUnits();
-      }, error => {
-        window.alert(error.error.message);
-      });
-    }
+  updateTopic(id:any){
+    console.log(id);
   }
-  get standard() {
+  deleteTopic(topic:Topic){
+    console.log(topic.id);
+  }
+  ngOnInit(): void {
+  }
+  get standard(){
     return this.ViewTopicsForm.get('standard');
   }
-  get subject() {
+  get subject(){
     return this.ViewTopicsForm.get('subject');
   }
-  get option() {
-    return this.ViewTopicsForm.get('option');
+  get unit(){
+    return this.ViewTopicsForm.get('unit');
   }
 }
