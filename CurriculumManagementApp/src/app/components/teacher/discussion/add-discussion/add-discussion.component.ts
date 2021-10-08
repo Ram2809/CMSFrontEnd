@@ -41,6 +41,7 @@ export class AddDiscussionComponent implements OnInit {
     answer: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
   });
+
   constructor(private subjectService: SubjectService,
     private teacherService: TeacherService,
     private discussionService: DiscussionService,
@@ -50,21 +51,18 @@ export class AddDiscussionComponent implements OnInit {
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
   }
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
-    })
+    });
   }
   getUnits() {
     console.log(this.subject?.value.split("-").shift());
     this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
-      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -73,7 +71,6 @@ export class AddDiscussionComponent implements OnInit {
     this.topicService.getTopics(this.unit?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.topicList = responseBody.data;
-      console.log(this.topicList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -94,10 +91,8 @@ export class AddDiscussionComponent implements OnInit {
       discussion.topic = topic;
       discussion.teacher = teacher;
       discussion.classDetail = classDetail;
-      console.log(discussion);
       this.discussionService.addDiscussion(discussion).subscribe(response => {
         let responseBody: Response = response;
-        console.log(responseBody);
         window.alert(responseBody.message);
         this.AddDiscussionForm.reset();
       }, error => {
@@ -108,20 +103,16 @@ export class AddDiscussionComponent implements OnInit {
   getSubjects() {
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody);
       this.assignIdList = responseBody.data;
       this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
         this.classRoomNo = responseBody.data;
-        console.log(this.classRoomNo);
         this.subjectService.getSubjectCodeList(this.assignIdList, this.classRoomNo).subscribe(response => {
           let responseBody: Response = response;
           this.subjectCodeList = responseBody.data;
-          console.log(this.subjectCodeList);
           this.subjectService.getSubjectList(this.subjectCodeList).subscribe(response => {
             let responseBody: Response = response;
             this.subjectList = responseBody.data;
-            console.log(this.subjectList);
           }, error => {
             window.alert(error.error.message);
           })

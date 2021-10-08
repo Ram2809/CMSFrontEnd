@@ -40,7 +40,6 @@ export class AddTopicComponent implements OnInit {
       classList = responseBody.data;
       this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response => {
         responseBody = response;
-        console.log(response.data);
         this.subjectAssignList = responseBody.data;
       }, error => {
         window.alert(error.error.message);

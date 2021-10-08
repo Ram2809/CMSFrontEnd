@@ -22,7 +22,7 @@ export class ViewUnitsComponent implements OnInit {
   public isHidden: boolean = false;
   public errorMessage: string = "";
 
-  ViewTopicsForm = new FormGroup({
+  ViewUnitsForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     option: new FormControl('')
@@ -44,7 +44,6 @@ export class ViewUnitsComponent implements OnInit {
       classList = responseBody.data;
       this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response => {
         responseBody = response;
-        console.log(response.data);
         this.subjectAssignList = responseBody.data;
       }, error => {
         window.alert(error.error.message);
@@ -55,12 +54,10 @@ export class ViewUnitsComponent implements OnInit {
   }
   getUnits() {
     let subjectCode: string = this.subject?.value.split("-").shift();
-    console.log(subjectCode);
     this.unitService.getUnits(subjectCode).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
       this.isHidden = false;
-      console.log(this.unitList);
     }, error => {
       this.isHidden = true;
       this.errorMessage = error.error.message;
@@ -77,10 +74,8 @@ export class ViewUnitsComponent implements OnInit {
   deleteUnit() {
     let response: boolean = window.confirm("Are you sure want to continue?");
     if (response) {
-      console.log(this.option?.value);
       this.unitService.deleteUnit(this.option?.value).subscribe(response => {
         let responseBody: Response = response;
-        console.log(responseBody);
         window.alert(responseBody.message);
         this.getUnits();
       }, error => {
@@ -89,12 +84,12 @@ export class ViewUnitsComponent implements OnInit {
     }
   }
   get standard() {
-    return this.ViewTopicsForm.get('standard');
+    return this.ViewUnitsForm.get('standard');
   }
   get subject() {
-    return this.ViewTopicsForm.get('subject');
+    return this.ViewUnitsForm.get('subject');
   }
   get option() {
-    return this.ViewTopicsForm.get('option');
+    return this.ViewUnitsForm.get('option');
   }
 }

@@ -31,6 +31,7 @@ export class ViewSyllabusComponent implements OnInit {
   public isHidden: boolean = false;
   public unitNoList: String[] = [];
   public topicList: Array<Array<Topic>> = [];
+
   ViewCurriculumForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
@@ -51,7 +52,6 @@ export class ViewSyllabusComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -59,20 +59,16 @@ export class ViewSyllabusComponent implements OnInit {
   getSubjects() {
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody);
       this.assignIdList = responseBody.data;
       this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
         this.classRoomNo = responseBody.data;
-        console.log(this.classRoomNo);
         this.subjectService.getSubjectCodeList(this.assignIdList, this.classRoomNo).subscribe(response => {
           let responseBody: Response = response;
           this.subjectCodeList = responseBody.data;
-          console.log(this.subjectCodeList);
           this.subjectService.getSubjectList(this.subjectCodeList).subscribe(response => {
             let responseBody: Response = response;
             this.subjectList = responseBody.data;
-            console.log(this.subjectList);
           }, error => {
             window.alert(error.error.message);
           })
@@ -88,23 +84,18 @@ export class ViewSyllabusComponent implements OnInit {
   }
   getCurriculum() {
     let subjectCode: string = this.subject?.value.split("-").shift();
-    console.log(subjectCode);
     this.unitService.getUnits(subjectCode).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
       for (let i in this.unitList) {
         this.unitNoList.push(String(this.unitList[i].unitNo));
       }
-      console.log(this.unitNoList);
       this.topicService.getTopicsList(this.unitNoList).subscribe(response => {
         let responseBody: Response = response;
         this.topicList = responseBody.data;
-        console.log(this.topicList[0]);
-        console.log(this.topicList[0][0]);
       });
       this.isHidden = false;
       this.ViewCurriculumForm.reset();
-      console.log(this.unitList);
     }, error => {
       this.errorMessage = error.error.message;
       this.isHidden = true;
@@ -116,7 +107,6 @@ export class ViewSyllabusComponent implements OnInit {
       window.alert("No topics found!");
     }
     else {
-      console.log(topicList);
       localStorage.setItem('topicList', JSON.stringify(topicList));
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false;

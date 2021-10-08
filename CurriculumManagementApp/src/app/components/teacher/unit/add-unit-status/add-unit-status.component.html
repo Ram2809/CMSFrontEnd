@@ -1,6 +1,6 @@
 <div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>Add Topic Status</i></b></h3>
-    <form [formGroup]="UpdateTopicStatusForm">
+    <form [formGroup]="UpdateUnitStatusForm">
         <div id="addTopicStatus" class="col-sm-10">
             <div class="row">
                 <div class="col">
@@ -82,7 +82,7 @@
                 <textarea rows="3" cols="50" class="form-control" name="remarks" formControlName="remarks"
                     placeholder="Enter the remarks"></textarea>
             </div>
-            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!UpdateTopicStatusForm.valid"
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!UpdateUnitStatusForm.valid"
                 (click)="addTopicStatus()">Submit</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
         </div>

@@ -27,7 +27,8 @@ export class StaffViewTimetableComponent implements OnInit {
 
   ViewTimeTableForm = new FormGroup({
     class: new FormControl('', Validators.required),
-  })
+  });
+
   constructor(private teacherService: TeacherService,
     private subjectService: SubjectService,
     private classService: ClassService,
@@ -35,23 +36,19 @@ export class StaffViewTimetableComponent implements OnInit {
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody);
       this.assignIdList = responseBody.data;
-      this.subjectService.getRoomNoList(this.assignIdList).subscribe(response=>{
-        let responseBody:Response=response;
-        this.roomNoList=responseBody.data;
-        console.log(this.roomNoList);
-        this.classService.getClassList(this.roomNoList).subscribe(response=>{
-          let responseBody:Response=response;
-          this.classList=responseBody.data;
-          console.log(this.classList);
-        },error=>{
+      this.subjectService.getRoomNoList(this.assignIdList).subscribe(response => {
+        let responseBody: Response = response;
+        this.roomNoList = responseBody.data;
+        this.classService.getClassList(this.roomNoList).subscribe(response => {
+          let responseBody: Response = response;
+          this.classList = responseBody.data;
+        }, error => {
           window.alert(error.error.message);
         })
-      },error=>{
+      }, error => {
         window.alert(error.error.message);
       })
     }, error => {
@@ -60,18 +57,15 @@ export class StaffViewTimetableComponent implements OnInit {
   }
 
   getTimetable() {
-    console.log(this.class?.value);
     let standard: string = this.class?.value.split("-").shift();
     let section: string = this.class?.value.split("-").pop();
     this.classService.getClassRoomNo(standard, section).subscribe(response => {
       let responseBody: Response = response;
       this.classRoomNo = responseBody.data;
-      console.log(this.classRoomNo);
       this.timetableService.getTimeTable(this.classRoomNo).subscribe(response => {
         let responseBody: Response = response;
         this.timetableList = responseBody.data;
         this.isHidden = false;
-        console.log(this.timetableList);
       }, error => {
         this.isHidden = true;
         this.errorMessage = error.error.message;

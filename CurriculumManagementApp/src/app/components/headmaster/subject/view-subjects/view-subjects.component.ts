@@ -53,7 +53,6 @@ export class ViewSubjectsComponent implements OnInit {
   deleteSubject() {
     let response: boolean = window.confirm("Are you sure want to continue?");
     if (response) {
-      console.log(this.option?.value);
       this.subjectService.deleteSubject(this.option?.value).subscribe(response => {
         let responseBody: Response = response;
         window.alert(responseBody.message);

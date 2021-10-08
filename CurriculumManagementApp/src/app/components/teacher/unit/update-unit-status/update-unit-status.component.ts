@@ -10,13 +10,13 @@ import { Response } from 'src/app/model/response';
 })
 export class UpdateUnitStatusComponent implements OnInit {
   public unitStatus: UnitStatus = new UnitStatus();
+
   constructor(public dialogRef: MatDialogRef<UpdateUnitStatusComponent>,
     private unitStatusService: UnitStatusService) { }
 
   ngOnInit(): void {
     let topicStatusDetail: string = String(localStorage.getItem('topicStatus'));
     this.unitStatus = JSON.parse(topicStatusDetail);
-    console.log(this.unitStatus);
   }
   updateStatus() {
     let response: boolean = window.confirm("Are you sure want to continue?");

@@ -40,7 +40,8 @@
                 </div>
                 <div class="col">
                     <label class="required">Unit</label>
-                    <select class="custom-select" class="form-control" name="unit" formControlName="unit" (change)="getTopics()">
+                    <select class="custom-select" class="form-control" name="unit" formControlName="unit"
+                        (change)="getTopics()">
                         <option value="" selected>Select the unit</option>
                         <option *ngFor="let unit of unitList">{{unit.unitNo}}-{{unit.unitName}}</option>
                     </select>

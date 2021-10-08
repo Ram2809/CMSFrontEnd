@@ -20,7 +20,7 @@ export class AddUnitComponent implements OnInit {
   public monthList: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   public subjectAssignList: SubjectAssign[] = [];
 
-  AddTopicForm = new FormGroup({
+  AddUnitForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     unitNo: new FormControl('', [Validators.required, Validators.maxLength(8)]),
     unitName: new FormControl('', Validators.required),
@@ -38,7 +38,6 @@ export class AddUnitComponent implements OnInit {
   addTopic() {
     let response: boolean = window.confirm("Are you sure want to continue?");
     if (response) {
-      console.log(this.subject?.value.split("-").shift());
       const unit: Unit = new Unit();
       unit.unitNo = this.unitNo?.value;
       unit.unitName = this.unitName?.value;
@@ -49,9 +48,8 @@ export class AddUnitComponent implements OnInit {
       unit.subject = subject;
       this.unitService.addUnit(unit).subscribe(response => {
         let responseBody: Response = response;
-        console.log(responseBody);
         window.alert(responseBody.message);
-        this.AddTopicForm.reset();
+        this.AddUnitForm.reset();
       }, error => {
         window.alert(error.error.message);
       });
@@ -65,7 +63,6 @@ export class AddUnitComponent implements OnInit {
       classList = responseBody.data;
       this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response => {
         responseBody = response;
-        console.log(response.data);
         this.subjectAssignList = responseBody.data;
       }, error => {
         window.alert(error.error.message);
@@ -75,21 +72,21 @@ export class AddUnitComponent implements OnInit {
     });
   }
   get standard() {
-    return this.AddTopicForm.get('standard');
+    return this.AddUnitForm.get('standard');
   }
   get unitNo() {
-    return this.AddTopicForm.get('unitNo');
+    return this.AddUnitForm.get('unitNo');
   }
   get unitName() {
-    return this.AddTopicForm.get('unitName');
+    return this.AddUnitForm.get('unitName');
   }
   get description() {
-    return this.AddTopicForm.get('description');
+    return this.AddUnitForm.get('description');
   }
   get month() {
-    return this.AddTopicForm.get('month');
+    return this.AddUnitForm.get('month');
   }
   get subject() {
-    return this.AddTopicForm.get('subject');
+    return this.AddUnitForm.get('subject');
   }
 }

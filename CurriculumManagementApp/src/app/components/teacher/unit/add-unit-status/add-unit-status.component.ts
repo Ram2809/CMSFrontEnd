@@ -27,7 +27,7 @@ export class AddUnitStatusComponent implements OnInit {
   public classList: Class[] = [];
   public classRoomNo: number = 0;
 
-  UpdateTopicStatusForm = new FormGroup({
+  UpdateUnitStatusForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
@@ -36,7 +36,8 @@ export class AddUnitStatusComponent implements OnInit {
     status: new FormControl('', Validators.required),
     completedDate: new FormControl(''),
     remarks: new FormControl(''),
-  })
+  });
+
   constructor(private classService: ClassService,
     private teacherService: TeacherService,
     private unitService: UnitService,
@@ -45,23 +46,19 @@ export class AddUnitStatusComponent implements OnInit {
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
   }
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     })
   }
   getTopics() {
-    console.log(this.subject?.value.split("-").shift());
     this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
-      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -69,20 +66,16 @@ export class AddUnitStatusComponent implements OnInit {
   getSubjects() {
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody);
       this.assignIdList = responseBody.data;
       this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
         this.classRoomNo = responseBody.data;
-        console.log(this.classRoomNo);
         this.subjectService.getSubjectCodeList(this.assignIdList, this.classRoomNo).subscribe(response => {
           let responseBody: Response = response;
           this.subjectCodeList = responseBody.data;
-          console.log(this.subjectCodeList);
           this.subjectService.getSubjectList(this.subjectCodeList).subscribe(response => {
             let responseBody: Response = response;
             this.subjectList = responseBody.data;
-            console.log(this.subjectList);
           }, error => {
             window.alert(error.error.message);
           })
@@ -100,11 +93,9 @@ export class AddUnitStatusComponent implements OnInit {
     let response: boolean = window.confirm("Are you sure want to continue?");
     if (response) {
       let unitNo: string = this.unit?.value.split("-").shift();
-      console.log(unitNo);
       this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
         this.classRoomNo = responseBody.data;
-        console.log(this.classRoomNo);
         const unitStatus: UnitStatus = new UnitStatus();
         unitStatus.beginDate = this.beginDate?.value;
         unitStatus.status = this.status?.value;
@@ -121,9 +112,8 @@ export class AddUnitStatusComponent implements OnInit {
         unitStatus.classDetail = classDetail;
         this.unitStatusService.addUnitStatus(unitStatus).subscribe(response => {
           let responseBody: Response = response;
-          console.log(responseBody.message);
           window.alert(responseBody.message);
-          this.UpdateTopicStatusForm.reset();
+          this.UpdateUnitStatusForm.reset();
         }, error => {
           window.alert(error.error.message);
         });
@@ -133,27 +123,27 @@ export class AddUnitStatusComponent implements OnInit {
     }
   }
   get standard() {
-    return this.UpdateTopicStatusForm.get('standard');
+    return this.UpdateUnitStatusForm.get('standard');
   }
   get section() {
-    return this.UpdateTopicStatusForm.get('section');
+    return this.UpdateUnitStatusForm.get('section');
   }
   get subject() {
-    return this.UpdateTopicStatusForm.get('subject');
+    return this.UpdateUnitStatusForm.get('subject');
   }
   get unit() {
-    return this.UpdateTopicStatusForm.get('unit');
+    return this.UpdateUnitStatusForm.get('unit');
   }
   get beginDate() {
-    return this.UpdateTopicStatusForm.get('beginDate');
+    return this.UpdateUnitStatusForm.get('beginDate');
   }
   get status() {
-    return this.UpdateTopicStatusForm.get('status');
+    return this.UpdateUnitStatusForm.get('status');
   }
   get completedDate() {
-    return this.UpdateTopicStatusForm.get('completedDate');
+    return this.UpdateUnitStatusForm.get('completedDate');
   }
   get remarks() {
-    return this.UpdateTopicStatusForm.get('remarks');
+    return this.UpdateUnitStatusForm.get('remarks');
   }
 }

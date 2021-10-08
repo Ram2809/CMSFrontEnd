@@ -29,13 +29,15 @@ export class UnitStatusComponent implements OnInit {
   public teacher: Teacher = new Teacher();
   public unitStatus: UnitStatus = new UnitStatus();
   public errorMessage: string = "";
-  ViewTopicStatusForm = new FormGroup({
+
+  ViewUnitStatusForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     unit: new FormControl('', Validators.required),
     staff: new FormControl('', Validators.required),
   });
+
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
     private teacherService: TeacherService,
@@ -48,10 +50,7 @@ export class UnitStatusComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
-      console.log(error);
-      let responseBody: Response = error;
       window.alert(error.error.message);
     });
   }
@@ -60,11 +59,9 @@ export class UnitStatusComponent implements OnInit {
     this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
       let responseBody: Response = response;
       this.roomNo = responseBody.data;
-      console.log(this.roomNo);
       this.subjectService.getSubjets(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.subjectAssignList = responseBody.data;
-        console.log(responseBody.data)
       }, error => {
         window.alert(error.error.message);
       });
@@ -73,13 +70,10 @@ export class UnitStatusComponent implements OnInit {
     });
   }
   getTopics() {
-    let splitList = this.subject?.value.split("-");
-    console.log(splitList);
-    console.log(splitList[1]);
-    this.unitService.getUnits(splitList[1]).subscribe(response => {
+    let subjectList = this.subject?.value.split("-");
+    this.unitService.getUnits(subjectList[1]).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
-      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -87,15 +81,12 @@ export class UnitStatusComponent implements OnInit {
   }
   getStaff() {
     let assignId: number = Number(this.subject?.value.split("-").shift());
-    console.log(assignId);
     this.teacherService.getTeacherId(assignId).subscribe(response => {
       let responseBody: Response = response;
       this.staffId = responseBody.data;
-      console.log(responseBody);
       this.teacherService.getStaff(responseBody.data).subscribe(response => {
         let responseBody: Response = response;
         this.teacher = responseBody.data;
-        console.log(this.teacher);
       }, error => {
         window.alert(error.error.message);
       })
@@ -105,14 +96,10 @@ export class UnitStatusComponent implements OnInit {
   }
   getTopicStatus() {
     let unitNo: string = this.unit?.value.split("-").shift();
-    console.log(unitNo);
-    console.log(this.staffId);
-    console.log(this.roomNo);
     this.unitStatusService.getUnitstatusByUnitNo(unitNo, this.staffId, this.roomNo).subscribe(response => {
       let responseBody: Response = response;
       this.unitStatus = responseBody.data;
       this.isHidden = false;
-      console.log(this.unitStatus);
     }, error => {
       this.isHidden = true;
       this.errorMessage = error.error.message;
@@ -120,18 +107,18 @@ export class UnitStatusComponent implements OnInit {
     });
   }
   get standard() {
-    return this.ViewTopicStatusForm.get('standard');
+    return this.ViewUnitStatusForm.get('standard');
   }
   get section() {
-    return this.ViewTopicStatusForm.get('section');
+    return this.ViewUnitStatusForm.get('section');
   }
   get subject() {
-    return this.ViewTopicStatusForm.get('subject');
+    return this.ViewUnitStatusForm.get('subject');
   }
   get unit() {
-    return this.ViewTopicStatusForm.get('unit');
+    return this.ViewUnitStatusForm.get('unit');
   }
   get staff() {
-    return this.ViewTopicStatusForm.get('teacher');
+    return this.ViewUnitStatusForm.get('teacher');
   }
 }

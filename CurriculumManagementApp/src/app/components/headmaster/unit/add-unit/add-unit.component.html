@@ -1,6 +1,6 @@
 <div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>Add Unit Form</i></b></h3>
-    <form [formGroup]="AddTopicForm">
+    <form [formGroup]="AddUnitForm">
         <div id="addTopic" class="col-sm-8">
             <div class="form-group">
                 <label class="required">Standard</label>
@@ -62,7 +62,7 @@
                     <div class="error" *ngIf="month?.errors?.required">* This field is required</div>
                 </div>
             </div>
-            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!AddTopicForm.valid"
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!AddUnitForm.valid"
                 (click)="addTopic()">Add Topic</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
         </div>

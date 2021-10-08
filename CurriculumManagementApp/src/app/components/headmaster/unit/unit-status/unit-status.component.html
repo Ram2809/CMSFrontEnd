@@ -1,6 +1,6 @@
 <div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Unit Status</i></b></h3>
-    <form [formGroup]="ViewTopicStatusForm">
+    <form [formGroup]="ViewUnitStatusForm">
         <div id="viewTopicStatus" class="col-sm-11">
             <div class="row">
                 <div class="col">
@@ -61,7 +61,7 @@
                     <div class="error" *ngIf="staff?.errors?.required">* This field is required</div>
                 </div>
             </div><br>
-            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!ViewTopicStatusForm.valid"
+            <button id="submitButton" class="btn btn-info" type="submit" [disabled]="!ViewUnitStatusForm.valid"
                 (click)="getTopicStatus()">View Topic Status</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button><br>
         </div><br>

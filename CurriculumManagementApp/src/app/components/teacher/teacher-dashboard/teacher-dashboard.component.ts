@@ -11,12 +11,12 @@ import { TeacherService } from 'src/app/services/teacher.service';
 export class TeacherDashboardComponent implements OnInit {
   public staffId: number = 0;
   public teacher: Teacher = new Teacher();
+
   constructor(private router: Router,
     private teacherService: TeacherService) { }
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
     this.teacherService.getStaff(this.staffId).subscribe(response => {
       this.teacher = response.data;
     });

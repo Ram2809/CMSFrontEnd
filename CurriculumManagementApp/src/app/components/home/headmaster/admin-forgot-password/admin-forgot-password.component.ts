@@ -13,17 +13,16 @@ export class AdminForgotPasswordComponent implements OnInit {
   public password: string = "";
   public confirmPassword: string = "";
   public headMaster: HeadMaster = new HeadMaster();
+
   constructor(private headMasterService: HeadMasterService,
     public dialogRef: MatDialogRef<AdminForgotPasswordComponent>) { }
 
   ngOnInit(): void {
   }
   updatePassword() {
-    console.log(this.username);
     this.headMasterService.getHeadMaster(this.username).subscribe(response => {
       let responseBody: Response = response;
       this.headMaster = responseBody.data;
-      console.log(this.headMaster);
       if (this.password == this.confirmPassword) {
         this.headMaster.password = this.password;
         this.headMasterService.updateHeadMaster(Number(this.headMaster.id), this.headMaster).subscribe(response => {

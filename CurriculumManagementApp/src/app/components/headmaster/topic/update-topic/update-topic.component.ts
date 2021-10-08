@@ -15,11 +15,9 @@ export class UpdateTopicComponent implements OnInit {
 
   ngOnInit(): void {
     let topicId: number = Number(localStorage.getItem('topicId'));
-    console.log(topicId);
     this.topicService.getTopic(topicId).subscribe(response => {
       let responseBody: Response = response;
       this.topic = responseBody.data;
-      console.log(this.topic);
     }, error => {
       window.alert(error.error.message);
     })

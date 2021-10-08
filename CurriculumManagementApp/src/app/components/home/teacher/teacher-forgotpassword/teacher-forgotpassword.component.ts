@@ -17,6 +17,7 @@ export class TeacherForgotpasswordComponent implements OnInit {
   public confirmPassword: string = "";
   public teacher: Teacher = new Teacher();
   public login: Login = new Login();
+
   constructor(private dialogRef: MatDialogRef<TeacherForgotpasswordComponent>,
     private loginService: LoginService,
     private teacherService: TeacherService) { }
@@ -24,15 +25,12 @@ export class TeacherForgotpasswordComponent implements OnInit {
   ngOnInit(): void {
   }
   updatePassword() {
-    console.log(this.username);
     this.teacherService.getStaffByEmail(this.username).subscribe(response => {
       let responseBody: Response = response;
       this.teacher = responseBody.data;
-      console.log(this.teacher);
       this.loginService.getLogin(Number(this.teacher.id)).subscribe(response => {
         let responseBody: Response = response;
         this.login = responseBody.data;
-        console.log(this.login);
         if (this.password == this.confirmPassword) {
           this.login.password = this.password;
           this.loginService.updateLogin(Number(this.teacher.id), this.login).subscribe(response => {
@@ -40,7 +38,6 @@ export class TeacherForgotpasswordComponent implements OnInit {
             if (responseBody.code == 200) {
               window.alert("Password Updated successfully!");
             }
-            console.log(responseBody.message);
           }, error => {
             window.alert(error.error.message);
           });

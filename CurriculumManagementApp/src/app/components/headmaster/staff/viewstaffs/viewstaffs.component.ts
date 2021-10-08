@@ -41,8 +41,6 @@ export class ViewstaffsComponent implements OnInit {
       let responseBody: Response = response;
       this.classList = responseBody.data;
     }, error => {
-      console.log(error);
-      let responseBody: Response = error;
       window.alert(error.error.message);
     });
   }
@@ -54,15 +52,13 @@ export class ViewstaffsComponent implements OnInit {
       this.subjectService.getSubjets(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.subjectAssignList = responseBody.data;
-        this.assignIdList=[];
+        this.assignIdList = [];
         this.subjectList = [];
         this.teacherList = [];
         for (let i in this.subjectAssignList) {
           this.assignIdList.push(Number(this.subjectAssignList[i].id));
           const subject: Subject = this.subjectAssignList[i].subject!;
           this.subjectList.push(subject);
-          console.log(this.subjectList);
-          console.log(this.assignIdList);
         }
         this.teacherService.getStaffIdList(this.assignIdList).subscribe(response => {
           let responseBody: Response = response;
@@ -82,6 +78,6 @@ export class ViewstaffsComponent implements OnInit {
     }, error => {
       window.alert(error.error.message);
     });
-    
+
   }
 }

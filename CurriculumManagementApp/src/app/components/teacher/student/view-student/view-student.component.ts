@@ -23,9 +23,11 @@ export class ViewStudentComponent implements OnInit {
   public studentList: Student[] = [];
   public errorMessage: string = "";
   public isHidden: boolean = false;
+
   ViewStudentForm = new FormGroup({
     class: new FormControl('', Validators.required),
   });
+
   constructor(private teacherService: TeacherService,
     private subjectService: SubjectService,
     private classService: ClassService,
@@ -33,19 +35,15 @@ export class ViewStudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody);
       this.assignIdList = responseBody.data;
       this.subjectService.getRoomNoList(this.assignIdList).subscribe(response=>{
         let responseBody:Response=response;
         this.roomNoList=responseBody.data;
-        console.log(this.roomNoList);
         this.classService.getClassList(this.roomNoList).subscribe(response=>{
           let responseBody:Response=response;
           this.classList=responseBody.data;
-          console.log(this.classList);
         },error=>{
           window.alert(error.error.message);
         })
@@ -57,19 +55,14 @@ export class ViewStudentComponent implements OnInit {
     });
   }
   getStudents() {
-    console.log(this.class?.value);
     let standard: string = this.class?.value.split("-").shift();
     let section: string = this.class?.value.split("-").pop();
-    console.log(standard);
-    console.log(section);
     this.classService.getClassRoomNo(standard, section).subscribe(response => {
       let responseBody: Response = response;
       this.classRoomNo = responseBody.data;
-      console.log(this.classRoomNo);
       this.studentService.getStudents(this.classRoomNo).subscribe(response => {
         let responseBody: Response = response;
         this.studentList = responseBody.data;
-        console.log(this.studentList);
         this.isHidden = false;
       }, error => {
         this.isHidden = true;

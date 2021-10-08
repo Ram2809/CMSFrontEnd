@@ -28,8 +28,8 @@ export class TeacherSignupComponent implements OnInit {
     contactNo: new FormControl('', [Validators.required, Validators.pattern("[0-9]{10}")]),
     email: new FormControl('', [Validators.required, Validators.email])
   });
+
   constructor(private teacherService: TeacherService,
-    private router: Router,
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<TeacherSignupComponent>) { }
 
@@ -48,7 +48,6 @@ export class TeacherSignupComponent implements OnInit {
     teacher.contactNo = this.contactNo?.value;
     this.teacherService.addStaff(teacher).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.message);
       localStorage.setItem('teacherId', this.id?.value);
       window.alert(responseBody.message);
       this.isHidden = true;

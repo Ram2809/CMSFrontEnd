@@ -24,11 +24,9 @@ export class AdminLoginComponent implements OnInit {
   ngOnInit(): void {
   }
   checkUser() {
-    console.log(this.username);
     this.headMasterService.getHeadMaster(this.username).subscribe(response => {
       let responseBody: Response = response;
       this.headMaster = responseBody.data;
-      console.log(this.headMaster);
       localStorage.setItem('admin', JSON.stringify(this.headMaster));
       if (this.username != this.headMaster.email || this.password != this.headMaster.password) {
         window.alert("Invalid login credentials! Enter the valid username and password!");

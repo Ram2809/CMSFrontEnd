@@ -15,6 +15,7 @@ export class AdminSignupComponent implements OnInit {
   public qualificationList: String[] = ['B.Ed', 'Ph.D', 'M.Phil', 'M.Sc', 'M.A', 'B.Sc', 'B.A', 'B.Com', 'M.Com'];
   public majorList: String[] = ['Tamil', 'English', 'Maths', 'History', 'Physics', 'Chemistry', 'Computer Science', 'Botany', 'Zoology', 'Physical Education', 'Hindi'];
   public response: Response = new Response();
+
   AddHeadMasterForm = new FormGroup({
     id: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
@@ -27,6 +28,7 @@ export class AdminSignupComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     address: new FormControl('', Validators.required),
   });
+
   constructor(private headMasterService: HeadMasterService,
     private router: Router) { }
 
@@ -47,7 +49,6 @@ export class AdminSignupComponent implements OnInit {
     headmaster.password = "admin@123";
     this.headMasterService.addHeadmaster(headmaster).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.message);
       window.alert(responseBody.message);
       this.AddHeadMasterForm.reset();
     }, error => {

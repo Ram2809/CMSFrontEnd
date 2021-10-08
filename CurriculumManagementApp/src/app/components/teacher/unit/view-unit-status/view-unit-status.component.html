@@ -1,6 +1,6 @@
 <div id="main" class="container-fluid mb-3">
     <h3 class="title"><b><i>View Topic Status</i></b></h3>
-    <form [formGroup]="ViewTopicStatusForm">
+    <form [formGroup]="ViewUnitStatusForm">
         <div id="viewTopicStatus" class="col-sm-10">
             <div class="row">
                 <div class="col">
@@ -50,7 +50,7 @@
                 </div>
             </div><br>
             <button id="submitButton" class="btn btn-info" type="submit" (click)="getTopicStatus()"
-                [disabled]="!ViewTopicStatusForm.valid">Get Topic
+                [disabled]="!ViewUnitStatusForm.valid">Get Topic
                 Status</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
         </div><br>

@@ -8,15 +8,15 @@ import { Topic } from 'src/app/model/topic';
   styleUrls: ['./view-topics.component.css']
 })
 export class ViewTopicComponent implements OnInit {
-  public topicList:Topic[]=[];
-  constructor(private dialogRef:MatDialogRef<ViewTopicComponent>) { }
+  public topicList: Topic[] = [];
+
+  constructor(private dialogRef: MatDialogRef<ViewTopicComponent>) { }
 
   ngOnInit(): void {
-    let topics:string=String(localStorage.getItem('topicList'));
-    this.topicList=JSON.parse(topics);
-    console.log(this.topicList);
+    let topics: string = String(localStorage.getItem('topicList'));
+    this.topicList = JSON.parse(topics);
   }
-  close(){
+  close() {
     this.dialogRef.close();
   }
 

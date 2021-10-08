@@ -10,17 +10,16 @@ import { Response } from 'src/app/model/response';
 export class UpdateDiscussionComponent implements OnInit {
   public discussion: Discussion = new Discussion();
   public questionNo: number = 0;
+
   constructor(private discussionService: DiscussionService) { }
 
   ngOnInit(): void {
     let getItem: string = "";
     getItem = String(localStorage.getItem('questionNo'));
     this.questionNo = parseInt(getItem);
-    console.log(this.questionNo);
     this.discussionService.getDiscussion(this.questionNo).subscribe(response => {
       let responseBody: Response = response;
       this.discussion = responseBody.data;
-      console.log(responseBody.data);
     }, error => {
       window.alert(error.error.message);
     });

@@ -24,7 +24,8 @@ export class ViewTimetableComponent implements OnInit {
   ViewTimetableForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
-  })
+  });
+
   constructor(private timetableService: TimeTableService,
     private classService: ClassService,
     private dialog: MatDialog) { }
@@ -36,7 +37,6 @@ export class ViewTimetableComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -44,15 +44,12 @@ export class ViewTimetableComponent implements OnInit {
   getTimetable() {
     this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.data);
       this.roomNo = responseBody.data;
       localStorage.setItem('roomNo', String(this.roomNo));
-      console.log(this.roomNo);
       this.timetableService.getTimeTable(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.timetableList = responseBody.data;
         this.isHidden = false;
-        console.log(this.timetableList);
       }, error => {
         this.errorMessage = error.error.message;
         this.isHidden = true;
@@ -67,9 +64,7 @@ export class ViewTimetableComponent implements OnInit {
     if (response) {
       this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
-        console.log(responseBody.data);
         this.roomNo = responseBody.data;
-        console.log(this.roomNo);
         this.timetableService.deleteTimetable(this.roomNo).subscribe(response => {
           let responseBody: Response = response;
           window.alert(responseBody.message);

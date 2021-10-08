@@ -37,7 +37,7 @@ export class ViewDiscussionComponent implements OnInit {
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     unit: new FormControl('', Validators.required),
-    topic:new FormControl('',Validators.required),
+    topic: new FormControl('', Validators.required),
     option: new FormControl(''),
   });
 
@@ -53,17 +53,14 @@ export class ViewDiscussionComponent implements OnInit {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     });
   }
   getUnits() {
-    console.log(this.subject?.value.split("-").shift());
     this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
-      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -72,7 +69,6 @@ export class ViewDiscussionComponent implements OnInit {
     this.topicService.getTopics(this.unit?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.topicList = responseBody.data;
-      console.log(this.topicList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -80,20 +76,16 @@ export class ViewDiscussionComponent implements OnInit {
   getSubjects() {
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody);
       this.assignIdList = responseBody.data;
       this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
         this.classRoomNo = responseBody.data;
-        console.log(this.classRoomNo);
         this.subjectService.getSubjectCodeList(this.assignIdList, this.classRoomNo).subscribe(response => {
           let responseBody: Response = response;
           this.subjectCodeList = responseBody.data;
-          console.log(this.subjectCodeList);
           this.subjectService.getSubjectList(this.subjectCodeList).subscribe(response => {
             let responseBody: Response = response;
             this.subjectList = responseBody.data;
-            console.log(this.subjectList);
           }, error => {
             window.alert(error.error.message);
           })
@@ -109,16 +101,13 @@ export class ViewDiscussionComponent implements OnInit {
   }
   getDiscussions() {
     let topicNo: number = this.topic?.value.split("-").shift();
-    console.log(topicNo);
     this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classRoomNo = responseBody.data;
-      console.log(this.classRoomNo);
       this.discussionService.getDiscussions(topicNo, this.classRoomNo, this.staffId).subscribe(response => {
         let responseBody: Response = response;
         this.discussionList = responseBody.data;
         this.isHidden = false;
-        console.log(this.discussionList);
       }, error => {
         this.isHidden = true;
         this.errorMessage = error.error.message;
@@ -131,7 +120,6 @@ export class ViewDiscussionComponent implements OnInit {
   }
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
   }
   updateDiscussion() {
     localStorage.setItem('questionNo', this.option?.value);
@@ -140,10 +128,8 @@ export class ViewDiscussionComponent implements OnInit {
   deleteDiscussion() {
     let response: boolean = window.confirm("Are you sure want to continue?");
     if (response) {
-      console.log(this.option?.value);
       this.discussionService.deleteDiscussion(this.option?.value).subscribe(response => {
         let responseBody: Response = response;
-        console.log(responseBody);
         window.alert(responseBody.message);
       }, error => {
         window.alert(error.error.message);
@@ -165,7 +151,7 @@ export class ViewDiscussionComponent implements OnInit {
   get option() {
     return this.ViewDiscussionForm.get('option');
   }
-  get topic(){
+  get topic() {
     return this.ViewDiscussionForm.get('topic');
   }
 }

@@ -5,11 +5,11 @@ import { Response } from 'src/app/model/response';
 import { Subject } from 'src/app/model/subject';
 import { SubjectAssign } from 'src/app/model/subject-assign';
 import { Unit } from 'src/app/model/unit';
-import {UnitStatus } from 'src/app/model/unit-status';
+import { UnitStatus } from 'src/app/model/unit-status';
 import { ClassService } from 'src/app/services/class.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TeacherService } from 'src/app/services/teacher.service';
-import {  UnitStatusService } from 'src/app/services/unit-status.service';
+import { UnitStatusService } from 'src/app/services/unit-status.service';
 import { UnitService } from 'src/app/services/unit.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UpdateUnitStatusComponent } from '../update-unit-status/update-unit-status.component';
@@ -32,12 +32,12 @@ export class ViewUnitStatusComponent implements OnInit {
   public isHidden: boolean = false;
   public errorMessage: string = "";
 
-  ViewTopicStatusForm = new FormGroup({
+  ViewUnitStatusForm = new FormGroup({
     standard: new FormControl('', Validators.required),
     section: new FormControl('', Validators.required),
     subject: new FormControl('', Validators.required),
     unit: new FormControl('', Validators.required),
-  })
+  });
 
   constructor(private classService: ClassService,
     private teacherService: TeacherService,
@@ -48,23 +48,19 @@ export class ViewUnitStatusComponent implements OnInit {
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
   }
   getSections() {
     this.classService.getClassesByStandard(this.standard?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classList = responseBody.data;
-      console.log(this.classList);
     }, error => {
       window.alert(error.error.message);
     })
   }
   getTopics() {
-    console.log(this.subject?.value.split("-").shift());
     this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
-      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -72,20 +68,16 @@ export class ViewUnitStatusComponent implements OnInit {
   getSubjects() {
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody);
       this.assignIdList = responseBody.data;
       this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
         let responseBody: Response = response;
         this.classRoomNo = responseBody.data;
-        console.log(this.classRoomNo);
         this.subjectService.getSubjectCodeList(this.assignIdList, this.classRoomNo).subscribe(response => {
           let responseBody: Response = response;
           this.subjectCodeList = responseBody.data;
-          console.log(this.subjectCodeList);
           this.subjectService.getSubjectList(this.subjectCodeList).subscribe(response => {
             let responseBody: Response = response;
             this.subjectList = responseBody.data;
-            console.log(this.subjectList);
           }, error => {
             window.alert(error.error.message);
           })
@@ -103,11 +95,9 @@ export class ViewUnitStatusComponent implements OnInit {
     this.classService.getClassRoomNo(this.standard?.value, this.section?.value).subscribe(response => {
       let responseBody: Response = response;
       this.classRoomNo = responseBody.data;
-      console.log(this.classRoomNo);
       this.unitStatusService.getUnitstatusByUnitNo(this.unit?.value.split("-").shift(), this.staffId, this.classRoomNo).subscribe(response => {
         let responseBody: Response = response;
         this.unitStatus = responseBody.data;
-        console.log(this.unitStatus);
         this.isHidden = false;
       }, error => {
         this.errorMessage = error.error.messsage;
@@ -132,22 +122,21 @@ export class ViewUnitStatusComponent implements OnInit {
   }
   updateStatus() {
     localStorage.setItem('topicStatus', JSON.stringify(this.unitStatus));
-    console.log(this.unitStatus.id);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     this.dialog.open(UpdateUnitStatusComponent, dialogConfig)
   }
   get standard() {
-    return this.ViewTopicStatusForm.get('standard');
+    return this.ViewUnitStatusForm.get('standard');
   }
   get section() {
-    return this.ViewTopicStatusForm.get('section');
+    return this.ViewUnitStatusForm.get('section');
   }
   get subject() {
-    return this.ViewTopicStatusForm.get('subject');
+    return this.ViewUnitStatusForm.get('subject');
   }
   get unit() {
-    return this.ViewTopicStatusForm.get('unit');
+    return this.ViewUnitStatusForm.get('unit');
   }
 }

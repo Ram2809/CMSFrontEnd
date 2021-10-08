@@ -18,9 +18,11 @@
                 <th>Month</th>
                 <td>{{topicList[0].unit?.month}}</td>
             </tr>
-            <tr  >
+            <tr>
                 <th>Topics</th>
-                <td><div *ngFor="let topic of topicList">{{topic.name}}</div></td>
+                <td>
+                    <div *ngFor="let topic of topicList">{{topic.name}}</div>
+                </td>
             </tr>
         </table>
         <button id="closeButton" class="btn btn-info" type="submit" (click)="close()">Close</button>

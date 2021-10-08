@@ -24,15 +24,12 @@ export class StaffUpdateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
     this.teacherService.getStaff(this.staffId).subscribe(response => {
       let responseBody: Response = response;
       this.teacher = responseBody.data;
-      console.log(this.teacher);
       this.addressService.getAddress(Number(this.teacher.id)).subscribe(response => {
         let responseBody: Response = response;
         this.address = responseBody.data;
-        console.log(this.address);
       }, error => {
         window.alert(error.error.message);
       });

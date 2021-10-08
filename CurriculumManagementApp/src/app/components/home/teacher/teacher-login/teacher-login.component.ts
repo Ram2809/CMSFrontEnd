@@ -19,6 +19,7 @@ export class TeacherLoginComponent implements OnInit {
   public password: string = "";
   public teacher: Teacher = new Teacher();
   public login: Login = new Login();
+
   constructor(private teacherService: TeacherService,
     private loginService: LoginService,
     private router: Router,
@@ -27,16 +28,12 @@ export class TeacherLoginComponent implements OnInit {
   ngOnInit(): void {
   }
   checkUser() {
-    console.log(this.username);
-    console.log(this.password);
     this.teacherService.getStaffByEmail(this.username).subscribe(response => {
       let responseBody: Response = response;
       this.teacher = responseBody.data;
-      console.log(this.teacher);
       this.loginService.getLogin(Number(this.teacher.id)).subscribe(response => {
         let responseBody: Response = response;
         this.login = responseBody.data;
-        console.log(this.login);
         if (this.username != this.teacher.email || this.password != this.login.password) {
           window.alert("Invalid login credentials! Enter the valid username and password!");
         }

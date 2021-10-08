@@ -43,7 +43,6 @@ export class ViewTopicsComponent implements OnInit {
       classList = responseBody.data;
       this.subjectService.getSubjets(Number(classList[0].roomNo)).subscribe(response => {
         responseBody = response;
-        console.log(response.data);
         this.subjectAssignList = responseBody.data;
       }, error => {
         window.alert(error.error.message);
@@ -53,11 +52,9 @@ export class ViewTopicsComponent implements OnInit {
     });
   }
   getUnits() {
-    console.log(this.subject?.value.split("-").shift());
     this.unitService.getUnits(this.subject?.value.split("-").shift()).subscribe(response => {
       let responseBody: Response = response;
       this.unitList = responseBody.data;
-      console.log(this.unitList);
     }, error => {
       window.alert(error.error.message);
     });
@@ -66,7 +63,6 @@ export class ViewTopicsComponent implements OnInit {
     this.topicService.getTopics(this.unit?.value.split("-").shift()).subscribe(response=>{
       let responseBody:Response=response;
       this.topicList=responseBody.data;
-      console.log(this.topicList);
       this.isHidden=false;
     },error=>{
       this.isHidden=true;
@@ -82,7 +78,6 @@ export class ViewTopicsComponent implements OnInit {
     this.dialog.open(UpdateTopicComponent, dialogConfig);
   }
   deleteTopic(topic:Topic){
-    console.log(topic.id);
     let response:boolean=window.confirm("Are you sure want to continue?");
     if(response){
       this.topicService.deleteTopic(Number(topic.id)).subscribe(response=>{

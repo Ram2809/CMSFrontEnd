@@ -14,12 +14,13 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AddLoginDataComponent implements OnInit {
   public staffId: number = 0;
-  public response: Response = new Response();
+
   CreateLoginForm = new FormGroup({
     id: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     confirmPassword: new FormControl('', Validators.required),
   });
+
   constructor(private route: ActivatedRoute,
     private loginService: LoginService,
     public dialogRef: MatDialogRef<AddLoginDataComponent>) { }
@@ -38,10 +39,9 @@ export class AddLoginDataComponent implements OnInit {
       const teacher: Teacher = new Teacher();
       teacher.id = this.staffId;
       login.teacher = teacher;
-      this.loginService.addLogin(login).subscribe(data => {
-        this.response = data;
-        console.log(this.response);
-        window.alert(this.response.message);
+      this.loginService.addLogin(login).subscribe(response => {
+        let responseBody: Response = response;
+        window.alert(responseBody.message);
         this.close();
       }, error => {
         window.alert(error.error.message);

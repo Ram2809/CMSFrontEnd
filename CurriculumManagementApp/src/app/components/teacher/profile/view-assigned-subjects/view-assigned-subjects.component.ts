@@ -15,7 +15,7 @@ export class ViewAssignedSubjectsComponent implements OnInit {
   public assignIdList: Number[] = [];
   public classList: Class[] = [];
   public subjectList: Subject[] = [];
-  public roomNoList: Number[]=[];
+  public roomNoList: Number[] = [];
 
   constructor(private teacherService: TeacherService,
     private subjectService: SubjectService,
@@ -23,37 +23,31 @@ export class ViewAssignedSubjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('staffId'));
-    console.log(this.staffId);
     this.teacherService.getSubjectAssignIds(this.staffId).subscribe(response => {
       let responseBody: Response = response;
       this.assignIdList = responseBody.data;
-      console.log(this.assignIdList);
-      this.subjectService.getRoomNoList(this.assignIdList).subscribe(response=>{
-        let responseBody:Response=response;
-        this.roomNoList=responseBody.data;
-        console.log(this.roomNoList);
-        this.classService.getClassList(this.roomNoList).subscribe(response=>{
-          let responseBody:Response=response;
-          this.classList=responseBody.data;
-          console.log(this.classList);
-          this.subjectService.getAllSubjectCodeList(this.assignIdList).subscribe(response=>{
-            let responseBody:Response=response;
-            let subjectCodeList:String[]=responseBody.data;
-            console.log(subjectCodeList);
-            this.subjectService.getSubjectList(subjectCodeList).subscribe(response=>{
-              let responseBody:Response=response;
-              this.subjectList=responseBody.data;
-              console.log(this.subjectList);
-            },error=>{
+      this.subjectService.getRoomNoList(this.assignIdList).subscribe(response => {
+        let responseBody: Response = response;
+        this.roomNoList = responseBody.data;
+        this.classService.getClassList(this.roomNoList).subscribe(response => {
+          let responseBody: Response = response;
+          this.classList = responseBody.data;
+          this.subjectService.getAllSubjectCodeList(this.assignIdList).subscribe(response => {
+            let responseBody: Response = response;
+            let subjectCodeList: String[] = responseBody.data;
+            this.subjectService.getSubjectList(subjectCodeList).subscribe(response => {
+              let responseBody: Response = response;
+              this.subjectList = responseBody.data;
+            }, error => {
               window.alert(error.error.message);
             });
-          },error=>{
+          }, error => {
             window.alert(error.error.message);
           });
-        },error=>{
+        }, error => {
           window.alert(error.error.message);
         });
-      },error=>{
+      }, error => {
         window.alert(error.error.message);
       });
     }, error => {

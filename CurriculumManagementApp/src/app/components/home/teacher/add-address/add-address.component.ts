@@ -17,6 +17,7 @@ export class AddAddressComponent implements OnInit {
   public districtList: String[] = ['Chennai', 'Coimbatore', 'Madurai', 'Krishnagiri', 'Villupuram', 'Trichy', 'Thiruvannamalai', 'Dharamapuri', 'Salem', 'Namakal', 'Erode', 'Chengalpet', 'Thiruvallur', 'Tindivanam', 'Velankanni', 'Thanjur', 'Ramanathapuram', 'Thirunelveli']
   public sortedDistrictList: String[] = [];
   public isHidden: boolean = false;
+
   constructor(private route: ActivatedRoute,
     private addressService: AddressService,
     private dialog: MatDialog,
@@ -29,10 +30,10 @@ export class AddAddressComponent implements OnInit {
     state: new FormControl('Tamil Nadu', Validators.required),
     country: new FormControl('India', Validators.required),
     pinCode: new FormControl('', [Validators.required, Validators.pattern("[0-9]{6}")])
-  })
+  });
+
   ngOnInit(): void {
     this.staffId = Number(localStorage.getItem('teacherId'));
-    console.log(this.staffId);
     this.sortedDistrictList = this.districtList.sort();
   }
   addAddress() {
@@ -48,10 +49,8 @@ export class AddAddressComponent implements OnInit {
     address.teacher = teacher;
     this.addressService.addAddress(address).subscribe(response => {
       let responseBody: Response = response;
-      console.log(responseBody.message);
       this.isHidden = true;
       window.alert(responseBody.message);
-      //this.router.navigate(['teacher/addlogin', this.staffId]);
     });
   }
   addLoginCredentials() {
