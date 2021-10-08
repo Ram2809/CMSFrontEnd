@@ -70,8 +70,8 @@ export class ViewTopicsComponent implements OnInit {
       this.isHidden=false;
     },error=>{
       this.isHidden=true;
-      this.errorMessage=error.error.message;
-      window.alert(error.error.message);
+      this.errorMessage="No topics found!";
+      window.alert("No topics found!");
     })
   }
   updateTopic(topic:Topic){

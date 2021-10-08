@@ -20,8 +20,9 @@
             </tr>
             <tr  >
                 <th>Topics</th>
-                <td *ngFor="let topic of topicList"><span>{{topic.name}}</span></td>
+                <td><div *ngFor="let topic of topicList">{{topic.name}}</div></td>
             </tr>
         </table>
+        <button id="closeButton" class="btn btn-info" type="submit" (click)="close()">Close</button>
     </div>
 </div>

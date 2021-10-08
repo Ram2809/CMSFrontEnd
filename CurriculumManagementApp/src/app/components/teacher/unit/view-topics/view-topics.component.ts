@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Topic } from 'src/app/model/topic';
 
 @Component({
@@ -8,18 +9,15 @@ import { Topic } from 'src/app/model/topic';
 })
 export class ViewTopicComponent implements OnInit {
   public topicList:Topic[]=[];
-  public topicNameList:String[]=[];
-  public listLength:number=0;
-  constructor() { }
+  constructor(private dialogRef:MatDialogRef<ViewTopicComponent>) { }
 
   ngOnInit(): void {
     let topics:string=String(localStorage.getItem('topicList'));
     this.topicList=JSON.parse(topics);
     console.log(this.topicList);
-    this.listLength=this.topicList.length;
-    for(let i in this.topicList){
-      this.topicNameList.push(String(this.topicList[i].name));
-    }
+  }
+  close(){
+    this.dialogRef.close();
   }
 
 }

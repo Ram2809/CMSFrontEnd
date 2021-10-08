@@ -42,3 +42,7 @@ table{
 #topicTable{
     margin-left: 6cm;
 }
+.notFound{
+    color: red;
+    margin-left: 12cm;
+}

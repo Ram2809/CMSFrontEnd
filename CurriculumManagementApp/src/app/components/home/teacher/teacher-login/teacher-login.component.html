@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label class="required">Password</label>
                 <input type="password" class="form-control" #pwd="ngModel" name="password" ngModel
-                    [(ngModel)]="password" placeholder="Enter the password and password contains atleast 8 characters"
+                    [(ngModel)]="password" placeholder="Enter the password which contains atleast 8 characters"
                     required minlength="8">
                 <span class="info">Password must contains atleast 8 characters</span>
                 <div *ngIf="pwd.touched">
