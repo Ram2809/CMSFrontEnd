@@ -7,6 +7,7 @@ import { SubjectAssign } from 'src/app/model/subject-assign';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { Teacher } from 'src/app/model/teacher';
 import { Subject } from 'src/app/model/subject';
+import { TSMap } from 'typescript-map';
 
 @Component({
   selector: 'app-viewstaffs',
@@ -28,6 +29,8 @@ export class ViewstaffsComponent implements OnInit {
   public subjectList: Subject[] = [];
   public teacherList: Teacher[] = [];
   public assignIdList: Number[] = [];
+  public teacherAssignMap:TSMap<Subject,Teacher>=new TSMap();
+  public countOfAssignIds:number=0;
 
   constructor(private classService: ClassService,
     private subjectService: SubjectService,
@@ -49,6 +52,11 @@ export class ViewstaffsComponent implements OnInit {
     this.classService.getClassRoomNo(this.standard, this.section).subscribe(response => {
       let responseBody: Response = response;
       this.roomNo = responseBody.data;
+      this.subjectService.countOfAssignIds(this.roomNo).subscribe(response=>{
+        let responseBody:Response=response;
+        this.countOfAssignIds=responseBody.data;
+        console.log(this.countOfAssignIds);
+      
       this.subjectService.getSubjets(this.roomNo).subscribe(response => {
         let responseBody: Response = response;
         this.subjectAssignList = responseBody.data;
@@ -63,18 +71,26 @@ export class ViewstaffsComponent implements OnInit {
         this.teacherService.getStaffIdList(this.assignIdList).subscribe(response => {
           let responseBody: Response = response;
           let staffIdList: Number[] = responseBody.data;
+          if(this.countOfAssignIds==staffIdList.length){
           this.teacherService.getStaffList(staffIdList).subscribe(response => {
             let responseBody: Response = response;
             this.teacherList = responseBody.data;
           }, error => {
             window.alert(error.error.message);
           });
+        }
+        else{
+          window.alert("You need to assign staff for subjects");
+        }
         }, error => {
           window.alert(error.error.message);
         });
       }, error => {
         window.alert(error.error.message);
       });
+    },error=>{
+      window.alert(error.error.message);
+    });
     }, error => {
       window.alert(error.error.message);
     });

@@ -50,17 +50,17 @@ export class ViewSubjectsComponent implements OnInit {
       window.alert(error.error.message);
     });
   }
-  deleteSubject() {
-    let response: boolean = window.confirm("Are you sure want to continue?");
-    if (response) {
-      this.subjectService.deleteSubject(this.option?.value).subscribe(response => {
-        let responseBody: Response = response;
-        window.alert(responseBody.message);
-      }, error => {
-        window.alert(error.error.message);
-      });
-    }
-  }
+  // deleteSubject() {
+  //   let response: boolean = window.confirm("Are you sure want to continue?");
+  //   if (response) {
+  //     this.subjectService.deleteSubject(this.option?.value).subscribe(response => {
+  //       let responseBody: Response = response;
+  //       window.alert(responseBody.message);
+  //     }, error => {
+  //       window.alert(error.error.message);
+  //     });
+  //   }
+  // }
   updateSubject() {
     localStorage.setItem('subjectCode', this.option?.value);
     const dialogConfig = new MatDialogConfig();

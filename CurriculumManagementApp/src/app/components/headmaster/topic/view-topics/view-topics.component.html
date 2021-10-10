@@ -57,7 +57,9 @@
                     <tr *ngFor="let topic of topicList;let i=index">
                         <td>{{i+1}}</td>
                         <td>{{topic.name}}</td>
-                        <td><button class="btn btn-success" type="submit" (click)="updateTopic(topic)">Update</button><button id="deleteButton" class="btn btn-success" type="submit" (click)="deleteTopic(topic)">Delete</button></td>
+                        <td><button class="btn btn-success" type="submit" (click)="updateTopic(topic)">Update</button>
+                            <!-- <button id="deleteButton" class="btn btn-success" type="submit" (click)="deleteTopic(topic)">Delete</button> -->
+                        </td>
                     </tr>
                 </tbody>
             </table>

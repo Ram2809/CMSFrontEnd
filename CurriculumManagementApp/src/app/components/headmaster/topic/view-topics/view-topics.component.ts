@@ -77,18 +77,18 @@ export class ViewTopicsComponent implements OnInit {
     dialogConfig.autoFocus = true;
     this.dialog.open(UpdateTopicComponent, dialogConfig);
   }
-  deleteTopic(topic:Topic){
-    let response:boolean=window.confirm("Are you sure want to continue?");
-    if(response){
-      this.topicService.deleteTopic(Number(topic.id)).subscribe(response=>{
-        let responseBody:Response=response;
-        window.alert(responseBody.message);
-        this.viewTopics();
-      },error=>{
-        window.alert(error.error.message);
-      });
-    }
-  }
+  // deleteTopic(topic:Topic){
+  //   let response:boolean=window.confirm("Are you sure want to continue?");
+  //   if(response){
+  //     this.topicService.deleteTopic(Number(topic.id)).subscribe(response=>{
+  //       let responseBody:Response=response;
+  //       window.alert(responseBody.message);
+  //       this.viewTopics();
+  //     },error=>{
+  //       window.alert(error.error.message);
+  //     });
+  //   }
+  // }
   ngOnInit(): void {
   }
   get standard(){

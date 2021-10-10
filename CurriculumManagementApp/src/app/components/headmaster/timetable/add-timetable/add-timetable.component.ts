@@ -82,6 +82,9 @@ export class AddTimetableComponent implements OnInit {
       });
     }
   }
+  updateStatus(){
+    this.isHidden=true;
+  }
   cancel() {
     this.periodsMap.clear();
   }

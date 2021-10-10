@@ -71,18 +71,18 @@ export class ViewUnitsComponent implements OnInit {
     dialogConfig.autoFocus = true;
     this.dialog.open(UpdateUnitComponent, dialogConfig);
   }
-  deleteUnit() {
-    let response: boolean = window.confirm("Are you sure want to continue?");
-    if (response) {
-      this.unitService.deleteUnit(this.option?.value).subscribe(response => {
-        let responseBody: Response = response;
-        window.alert(responseBody.message);
-        this.getUnits();
-      }, error => {
-        window.alert(error.error.message);
-      });
-    }
-  }
+  // deleteUnit() {
+  //   let response: boolean = window.confirm("Are you sure want to continue?");
+  //   if (response) {
+  //     this.unitService.deleteUnit(this.option?.value).subscribe(response => {
+  //       let responseBody: Response = response;
+  //       window.alert(responseBody.message);
+  //       this.getUnits();
+  //     }, error => {
+  //       window.alert(error.error.message);
+  //     });
+  //   }
+  // }
   get standard() {
     return this.ViewUnitsForm.get('standard');
   }
