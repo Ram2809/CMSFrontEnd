@@ -8,7 +8,7 @@
                     placeholder="Enter the standard">
                 <div *ngIf="standard?.invalid && (standard?.dirty||standard?.touched)" class="error">
                     <div *ngIf="standard?.errors?.required">Standard is required!</div>
-                    <div *ngIf="standard?.errors?.maxlength">Standard must contain only 4 letters</div>
+                    <div *ngIf="standard?.errors?.maxlength">Standard must contain only 3 letters</div>
                 </div>
             </div>
             <div class="form-group">
@@ -17,6 +17,7 @@
                     placeholder="Enter the section">
                 <div *ngIf="section?.invalid && (section?.dirty||section?.touched)" class="error">
                     <div *ngIf="section?.errors?.required">Section is required!</div>
+                    <div *ngIf="section?.errors?.maxlength">It allows only 2 characters!</div>
                 </div>
             </div>
             <div class="form-group">
@@ -25,6 +26,7 @@
                     placeholder="Enter the room number">
                 <div *ngIf="roomNo?.invalid && (roomNo?.dirty||roomNo?.touched)" class="error">
                     <div *ngIf="roomNo?.errors?.required">Class Room Number is required!</div>
+                    <div *ngIf="roomNo?.errors?.min">It doesn't supports zero or negative numbers</div>
                 </div>
             </div>
             <button id="submitButton" class="btn btn-info" type="submit" (click)="addClass()"

@@ -5,7 +5,10 @@ import { AddClassComponent } from './components/headmaster/class/add-class/add-c
 import { UpdateClassComponent } from './components/headmaster/class/update-class/update-class.component';
 import { ViewClassComponent } from './components/headmaster/class/view-class/view-class.component';
 import { ViewDiscussionsComponent } from './components/headmaster/discussion/view-discussions/view-discussions.component';
+import { AddMajorComponent } from './components/headmaster/major/add-major/add-major.component';
+import { ViewMajorsComponent } from './components/headmaster/major/view-majors/view-majors.component';
 import { AdminViewProfileComponent } from './components/headmaster/profile/admin-view-profile/admin-view-profile.component';
+import { ViewQualificationsComponent } from './components/headmaster/qualification/view-qualifications/view-qualifications.component';
 import { StaffAssignComponent } from './components/headmaster/staff/staff-assign/staff-assign.component';
 import { UpdateStaffAssignComponent } from './components/headmaster/staff/update-staff-assign/update-staff-assign.component';
 import { ViewTeachersComponent } from './components/headmaster/staff/view-teachers/view-teachers.component';
@@ -72,6 +75,9 @@ const routes: Routes = [
       { path: 'updatestaffassign', component: UpdateStaffAssignComponent },
       { path: 'addtopic', component: AddTopicComponent },
       { path: 'viewtopics', component: ViewTopicsComponent },
+      { path: 'addmajor', component: AddMajorComponent },
+      { path: 'viewmajors', component: ViewMajorsComponent },
+      { path: 'viewqualifications', component: ViewQualificationsComponent },
     ]
   },
   {

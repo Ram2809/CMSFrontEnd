@@ -1,0 +1,24 @@
+<div id="main" class="container-fluid mb-3">
+    <h3 class="title"><b><i>Major List</i></b></h3>
+    <div id="viewMajors">
+        <form>
+            <button id="addButton" class="btn btn-primary" type="submit" (click)="addMajor()">Create New</button><br><br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let major of majorList;let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{major.name}}</td>
+                        <td><button class="btn btn-success" type="submit" (click)="deleteMajor(major)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

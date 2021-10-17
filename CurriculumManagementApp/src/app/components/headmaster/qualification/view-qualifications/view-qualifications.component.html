@@ -1,0 +1,24 @@
+<div id="main" class="container-fluid mb-3">
+    <h3 class="title"><b><i>Qualification List</i></b></h3>
+    <div id="viewQualifications">
+        <form>
+            <button id="addButton" class="btn btn-primary" type="submit" (click)="addQualification()">Create New</button><br><br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let qualification of qualificationList;let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{qualification.name}}</td>
+                        <td><button class="btn btn-success" type="submit" (click)="deleteQualification(qualification)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

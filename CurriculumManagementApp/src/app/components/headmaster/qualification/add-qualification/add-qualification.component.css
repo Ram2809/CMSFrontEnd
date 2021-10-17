@@ -1,0 +1,37 @@
+.error
+{
+    color: red;
+}
+.info{
+    color:blue;
+}
+.title
+{
+    text-align: center;
+    color:rgb(22, 77, 160)  
+}
+.required:after {
+    content:" *";
+    color: red;
+  }
+label{
+    font-weight:bold;
+}
+#submitButton{
+    margin-left: 1cm;
+}
+#resetButton
+{
+    margin-left: 0.5cm;
+}
+.notFound
+{
+    margin-left: 14cm;
+    color: crimson;
+}
+/* #main{
+    margin-top: 50px;
+} */
+/* #majorForm{
+    margin-left: 8cm;
+} */

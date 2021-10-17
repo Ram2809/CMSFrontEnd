@@ -30,6 +30,7 @@ export class ViewClassComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     this.dialog.open(UpdateClassComponent, dialogConfig);
+    this.ngOnInit();
   }
   // deleteClass()
   // {

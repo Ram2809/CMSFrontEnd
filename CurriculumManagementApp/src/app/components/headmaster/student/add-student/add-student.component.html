@@ -73,11 +73,19 @@
             </div><br>
             <div class="row">
                 <div class="col">
+                    <label class="required">Academic Year</label>
+                    <input type="text" class="form-control" name="academicYear" formControlName="academicYear"
+                        placeholder="Enter the academic year">
+                    <div *ngIf="academicYear?.invalid &&(academicYear?.dirty||academicYear?.touched)">
+                        <div class="error" *ngIf="academicYear?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
+                <div class="col">
                     <label class="required">Standard</label>
                     <select class="custom-select" class="form-control" (change)="getSections()" name="standard"
                         formControlName="standard">
                         <option value="" selected>Select the standard</option>
-                        <option [value]="standard" *ngFor="let standard of standardList">{{standard}}</option>
+                        <option *ngFor="let class of classRoomNoList">{{class.standard}}</option>
                     </select>
                     <div *ngIf="standard?.invalid &&(standard?.touched||standard?.dirty)">
                         <div class="error" *ngIf="standard?.errors?.required">* This field is required</div>

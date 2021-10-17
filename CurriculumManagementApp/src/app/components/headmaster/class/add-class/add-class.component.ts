@@ -6,6 +6,7 @@ import { Response } from 'src/app/model/response';
 import { Subject } from 'src/app/model/subject';
 import { SubjectAssign } from 'src/app/model/subject-assign';
 import { SubjectService } from 'src/app/services/subject.service';
+import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-add-class',
   templateUrl: './add-class.component.html',
@@ -16,13 +17,14 @@ export class AddClassComponent implements OnInit {
   public subjectAssignList: SubjectAssign[] = [];
   public subject: Subject = new Subject();
   AddClassForm = new FormGroup({
-    standard: new FormControl('', [Validators.required, Validators.maxLength(4)]),
-    section: new FormControl('', Validators.required),
-    roomNo: new FormControl('', Validators.required),
+    standard: new FormControl('', [Validators.required, Validators.maxLength(3)]),
+    section: new FormControl('', [Validators.required,Validators.maxLength(2)]),
+    roomNo: new FormControl('', [Validators.required,Validators.min(1)]),
   });
 
   constructor(private classService: ClassService,
-    private subjectService: SubjectService) { }
+    private subjectService: SubjectService,
+    private notificationService:NotificationService) { }
 
   ngOnInit(): void {
   }
@@ -36,7 +38,7 @@ export class AddClassComponent implements OnInit {
     if (response) {
       this.classService.addClass(classDetail).subscribe(response => {
         let responseBody: Response = response;
-        window.alert(responseBody.message);
+        this.notificationService.successMessage(responseBody.message!);
         this.AddClassForm.reset();
         this.classList = [];
         this.classService.getClassesByStandard(String(classDetail.standard)).subscribe(response => {
@@ -53,7 +55,7 @@ export class AddClassComponent implements OnInit {
           }
         });
       }, error => {
-        window.alert(error.error.message);
+       this.notificationService.errorMessage(error.error.message);
       });
     }
   }

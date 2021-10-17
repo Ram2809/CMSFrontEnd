@@ -59,6 +59,11 @@ import { ViewTopicsComponent } from './components/headmaster/topic/view-topics/v
 import { UpdateTopicComponent } from './components/headmaster/topic/update-topic/update-topic.component';
 import { CommonModule } from '@angular/common';
 import { ViewTopicComponent } from './components/teacher/unit/view-topics/view-topics.component';
+import { AddMajorComponent } from './components/headmaster/major/add-major/add-major.component';
+import { AddQualificationComponent } from './components/headmaster/qualification/add-qualification/add-qualification.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ViewMajorsComponent } from './components/headmaster/major/view-majors/view-majors.component';
+import { ViewQualificationsComponent } from './components/headmaster/qualification/view-qualifications/view-qualifications.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +117,11 @@ import { ViewTopicComponent } from './components/teacher/unit/view-topics/view-t
     AddTopicComponent,
     ViewTopicsComponent,
     UpdateTopicComponent,
-    ViewTopicComponent
+    ViewTopicComponent,
+    AddMajorComponent,
+    AddQualificationComponent,
+    ViewMajorsComponent,
+    ViewQualificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +133,8 @@ import { ViewTopicComponent } from './components/teacher/unit/view-topics/view-t
     BrowserAnimationsModule,
     MatDialogModule,
     NgxPaginationModule,
-    CommonModule
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

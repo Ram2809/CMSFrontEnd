@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Student } from '../model/student';
 import { Response } from '../model/response';
 import { UrlUtil } from '../model/url-util';
+import { StudentAssign } from '../model/student-assign';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,5 +26,8 @@ export class StudentService {
   }
   updateStudent(rollNo: number, student: Student): Observable<Response> {
     return this.http.put(`${this.baseUrl}/${rollNo}`, student);
+  }
+  addStudentAssign(studentAssign: StudentAssign): Observable<Response> {
+    return this.http.post(`${this.urlUtil.baseUrl}studentassign`, studentAssign);
   }
 }

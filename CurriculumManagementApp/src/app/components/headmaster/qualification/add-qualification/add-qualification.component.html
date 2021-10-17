@@ -1,0 +1,17 @@
+<div id="main" class="container-fluid mb-3">
+    <h3 class="title"><b><i>Add Qualification Form</i></b></h3>
+    <form #qualificationForm="ngForm">
+        <div id="qualificationForm">
+            <div class="form-group">
+                <label class="required">Name</label>
+                 <input type="text" class="form-control" name="name" ngModel required #qualificationName="ngModel" placeholder="Enter the qualification">
+                <div *ngIf="qualificationName.touched">
+                    <div class="error" *ngIf="qualificationName.errors?.required">* This field is required</div>
+                </div>
+            </div>
+            <button id="submitButton" class="btn btn-primary" type="submit" (click)="qualificationForm.form.valid && addQualification(qualificationForm.value)">Add</button>
+            <button id="resetButton" class="btn btn-primary" type="reset">Clear</button>
+        </div>
+    </form>
+</div>
+
