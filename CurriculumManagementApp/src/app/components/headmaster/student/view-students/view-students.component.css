@@ -24,12 +24,12 @@ label{
 {
     color: red;
 }
-#deleteButton
+/* #deleteButton
 {
     margin-left: 14cm;
-}
+} */
 #backButton{
-    margin-left: 1cm;
+    margin-left: 0.5cm;
 }
 #viewStudent{
     margin-left: 6cm;

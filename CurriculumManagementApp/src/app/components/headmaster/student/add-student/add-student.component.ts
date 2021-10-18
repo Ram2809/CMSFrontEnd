@@ -17,7 +17,6 @@ export class AddStudentComponent implements OnInit {
   public classList: Class[] = [];
   public roomNo: number = 0;
   public classRoomNoList: Class[] = [];
-//public standardSet=new Set();
 
   AddStudentForm = new FormGroup({
     rollNo: new FormControl('', Validators.required),
@@ -42,10 +41,6 @@ export class AddStudentComponent implements OnInit {
     }, error => {
       this.notificationService.errorMessage(error.error.message);
     });
-    // for(let i in this.classRoomNoList){
-    //   this.standardSet.add(this.classRoomNoList[i]);
-    // }
-    // console.log(this.standardSet);
   }
   addStudent() {
     let response: boolean = window.confirm("Are you sure want to continue?");

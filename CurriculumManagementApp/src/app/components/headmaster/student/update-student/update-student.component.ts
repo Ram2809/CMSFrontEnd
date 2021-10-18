@@ -5,6 +5,8 @@ import { Response } from 'src/app/model/response';
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from 'src/app/model/student';
 import { MatDialogRef } from '@angular/material/dialog';
+import { StudentAssign } from 'src/app/model/student-assign';
+import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-update-student',
   templateUrl: './update-student.component.html',
@@ -16,29 +18,27 @@ export class UpdateStudentComponent implements OnInit {
   public roomNo: number = 0;
   public standard: string = "";
   public section: string = "";
-  public rollNo: number = 0;
+  public studentAssign: StudentAssign = new StudentAssign();
   public student: Student = new Student();
   public classDetail: Class = new Class();
 
   constructor(private classService: ClassService,
     private studentService: StudentService,
-    private dialogRef: MatDialogRef<UpdateStudentComponent>) { }
+    private dialogRef: MatDialogRef<UpdateStudentComponent>,
+    private notificationService:NotificationService) { }
 
   ngOnInit(): void {
-    this.rollNo = Number(localStorage.getItem('rollNo'));
-    this.studentService.getStudent(this.rollNo).subscribe(response => {
-      let responseBody: Response = response;
-      this.student = responseBody.data;
-      this.classDetail = this.student.classDetail!;
+    let studentAssignEntity:string=localStorage.getItem('studentAssign')!;
+    this.studentAssign = JSON.parse(studentAssignEntity);
+    console.log(this.studentAssign)
+    this.student=this.studentAssign.student!;
+    this.classDetail=this.studentAssign.classDetail!;
       this.classService.getClassesByStandard(String(this.classDetail.standard)).subscribe(response => {
         let responseBody: Response = response;
         this.classList = responseBody.data;
       }, error => {
         window.alert(error.error.message);
       });
-    }, error => {
-      window.alert(error.error.message);
-    })
   }
 
   updateStudent() {
@@ -46,15 +46,32 @@ export class UpdateStudentComponent implements OnInit {
     if (response) {
       const classEntity: Class = this.classDetail;
       const studentDetail: Student = this.student;
-      studentDetail.classDetail = classEntity;
-      this.studentService.updateStudent(this.rollNo, studentDetail).subscribe(response => {
+      this.studentService.updateStudent(Number(this.student.rollNo), studentDetail).subscribe(response => {
         let responseBody: Response = response;
-        window.alert(responseBody.message);
+        this.updateStudentAssign();
+        this.notificationService.successMessage(String(responseBody.message));
         this.close();
       }, error => {
-        window.alert(error.error.message);
+        this.notificationService.errorMessage(error.error.message);
       });
     }
+  }
+  updateStudentAssign(){
+    this.classService.getClassRoomNo(String(this.classDetail.standard),String(this.classDetail.section)).subscribe(response=>{
+      let responseBody:Response=response;
+      this.roomNo=responseBody.data;
+    this.classDetail.roomNo=this.roomNo;
+    this.studentAssign.classDetail=this.classDetail;
+    this.studentAssign.student=this.student;
+    this.studentService.addStudentAssign(this.studentAssign).subscribe(response=>{
+      let responseBody:Response=response;
+      this.notificationService.successMessage(String(responseBody.message));
+    },error=>{
+      this.notificationService.errorMessage(error.error.message);
+    });
+  },error=>{
+    this.notificationService.errorMessage(error.error.message);
+  });
   }
   close() {
     this.dialogRef.close();

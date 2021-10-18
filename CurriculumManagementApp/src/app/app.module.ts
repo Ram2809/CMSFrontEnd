@@ -42,7 +42,6 @@ import { AddLoginDataComponent } from './components/home/teacher/add-login-data/
 import { TeacherSignupComponent } from './components/home/teacher/teacher-signup/teacher-signup.component';
 import { StaffViewProfileComponent } from './components/teacher/profile/staff-view-profile/staff-view-profile.component';
 import { StaffUpdateProfileComponent } from './components/teacher/profile/staff-update-profile/staff-update-profile.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { ViewAssignedSubjectsComponent } from './components/teacher/profile/view-assigned-subjects/view-assigned-subjects.component';
 import { UpdateStudentComponent } from './components/headmaster/student/update-student/update-student.component';
 import { UpdateStaffAssignComponent } from './components/headmaster/staff/update-staff-assign/update-staff-assign.component';
@@ -132,9 +131,9 @@ import { ViewQualificationsComponent } from './components/headmaster/qualificati
     DropdownListModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    NgxPaginationModule,
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    //JwPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent],

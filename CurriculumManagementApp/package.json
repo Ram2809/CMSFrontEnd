@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "bootstrap": "^4.1.1",
     "jquery": "^3.6.0",
+    "jw-paginate": "^1.0.4",
     "ngx-bootstrap": "^7.1.0",
     "ngx-dropdown-list": "^1.1.2",
     "ngx-pagination": "^5.1.1",

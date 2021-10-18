@@ -52,6 +52,10 @@
             </div><br>
             <div class="row">
                 <div class="col">
+                    <label class="required">Academic Year</label>
+                    <input type="text" class="form-control" name="academicYear" [(ngModel)]="studentAssign.academicYear">
+                </div>
+                <div class="col">
                     <label class="required">Standard</label>
                     <select class="custom-select" class="form-control" name="standard"
                         [(ngModel)]="classDetail.standard">

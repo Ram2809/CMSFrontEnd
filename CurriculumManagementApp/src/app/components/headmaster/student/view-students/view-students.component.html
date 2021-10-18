@@ -24,6 +24,13 @@
                         <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
                     </div>
                 </div>
+                <div class="col">
+                    <label class="required">Academic Year</label>
+                    <input type="text" class="form-control" name="academicYear" formControlName="academicYear" placeholder="Enter the academic year">
+                    <div *ngIf="section?.invalid &&(section?.touched||section?.dirty)">
+                        <div class="error" *ngIf="section?.errors?.required">* This field is required</div>
+                    </div>
+                </div>
             </div><br>
             <button id="submitButton" class="btn btn-info" type="submit" (click)="getStudents()">Get Students</button>
             <button id="resetButton" class="btn btn-info" type="reset">Reset</button>
@@ -35,7 +42,6 @@
             <table class="table table-bordered" [hidden]="isHidden">
                 <thead>
                     <tr>
-                        <th>Select</th>
                         <th>Register Number</th>
                         <th>First Name</th>
                         <th>Last Name</th>
@@ -43,25 +49,27 @@
                         <th>Gender</th>
                         <th>Contact Number</th>
                         <th>Address</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let student of studentsList">
-                        <td><input type="radio" name="option" value="{{student.rollNo}}" formControlName="option"></td>
-                        <td>{{student.rollNo}}</td>
-                        <td>{{student.firstName}}</td>
-                        <td>{{student.lastName}}</td>
-                        <td>{{student.dateOfBirth}}</td>
-                        <td>{{student.gender}}</td>
-                        <td>{{student.contactNo}}</td>
-                        <td>{{student.address}}</td>
+                    <tr *ngFor="let studentAssign of studentsList">
+                        <td>{{studentAssign.student?.rollNo}}</td>
+                        <td>{{studentAssign.student?.firstName}}</td>
+                        <td>{{studentAssign.student?.lastName}}</td>
+                        <td>{{studentAssign.student?.dateOfBirth}}</td>
+                        <td>{{studentAssign.student?.gender}}</td>
+                        <td>{{studentAssign.student?.contactNo}}</td>
+                        <td>{{studentAssign.student?.address}}</td>
+                        <td>
+                            <!-- <button id="deleteButton" (click)="deleteStudent(studentAssign.student?.rollNo!)" class="btn btn-info" type="submit"
+                           >Delete</button> -->
+                        <button id="backButton" class="btn btn-info" (click)="updateStudent(studentAssign)" type="submit"
+                            >Update</button></td>
                     </tr>
                 </tbody>
             </table>
-            <button id="deleteButton" (click)="deleteStudent()" class="btn btn-info" type="submit"
-                [disabled]="option?.value==0" [hidden]="isHidden">Delete</button>
-            <button id="backButton" class="btn btn-info" (click)="updateStudent()" type="submit"
-                [disabled]="option?.value==0" [hidden]="isHidden">Update</button>
+            
         </div>
     </form>
 </div>

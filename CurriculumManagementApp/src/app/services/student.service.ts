@@ -30,4 +30,10 @@ export class StudentService {
   addStudentAssign(studentAssign: StudentAssign): Observable<Response> {
     return this.http.post(`${this.urlUtil.baseUrl}studentassign`, studentAssign);
   }
+  getStudentClassDetails(roomNo: number, academicYear: string): Observable<Response> {
+    return this.http.get(`${this.urlUtil.baseUrl}studentassign/${roomNo}/${academicYear}`);
+  }
+  updateStudentAssign(assignId: number, studentAssign: StudentAssign): Observable<Response> {
+    return this.http.put(`${this.urlUtil.baseUrl}studentassign/${assignId}`, studentAssign);
+  }
 }
